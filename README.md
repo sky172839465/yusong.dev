@@ -7,6 +7,7 @@ Welcome to Yusong blog! 🚀 This project is a Single Page Application (SPA) bui
 ---
 
 ## 🌟 Features
+
 - 📝 **Dynamic Articles**: Each article is rendered dynamically with SEO-optimized meta tags.
 - 🌈 **Beautiful Design**: Simple and clean UI for a better reading experience.
 - ⚡ **Lightning-Fast**: Powered by React for smooth navigation and performance.
@@ -15,11 +16,13 @@ Welcome to Yusong blog! 🚀 This project is a Single Page Application (SPA) bui
 ---
 
 ## 🚀 Deployment
+
 This blog is continuously deployed to GitHub Pages via GitHub Actions. The deployment process ensures the blog is always up-to-date with the latest changes.
 
 ---
 
 ## 🛠️ Setup and Run on `stackblitz`
+
 To run the project on stackblitz, follow these steps:
 
 1. Visit url: https://stackblitz.com/~/github.com/sky172839465/yusong.tw
@@ -28,6 +31,7 @@ To run the project on stackblitz, follow these steps:
 ---
 
 ## 🔧 Tech Stack
+
 - **Frontend**: React, Tailwind CSS
 - **Hosting**: GitHub Pages
 - **SEO Optimization**: react-helmet
@@ -36,13 +40,16 @@ To run the project on stackblitz, follow these steps:
 ---
 
 ## 📚 Blog Articles
+
 Check out some of the popular articles:
+
 - [Article 1](https://yourdomain.com/article/article-1)
 - [Article 2](https://yourdomain.com/article/article-2)
 
 ---
 
 ## 🌐 Connect
+
 - **Website**: https://yusong.tw
 - **Facebook**: https://www.facebook.com/sky172839465/
 
