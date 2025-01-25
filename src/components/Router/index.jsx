@@ -44,8 +44,7 @@ const withErrorElement = (routes) => routes.map((item) => {
 
 
 const Router = (props) => {
-  const { routes, basename = '/' } = props
-  const appBaseName = `${window.APP_BASENAME}${basename}`
+  const { routes } = props
   const totalRoutes = [
     {
       element: <Root />,
@@ -64,8 +63,8 @@ const Router = (props) => {
       ]
     }
   ]
-  console.log(totalRoutes, appBaseName)
-  const router = createBrowserRouter(totalRoutes, { basename: appBaseName })
+  console.log(totalRoutes)
+  const router = createBrowserRouter(totalRoutes)
   return (
     <RouterProvider
       router={router}
