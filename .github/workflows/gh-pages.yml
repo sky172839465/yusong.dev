@@ -1,0 +1,73 @@
+name: gh-pages
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  bump-version:
+    name: "Bump Version"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check needs
+        # see https://stackoverflow.com/a/67532120/4907315
+        if: >-
+          ${{
+               contains(needs.*.result, 'failure')
+            || contains(needs.*.result, 'cancelled')
+          }}
+        run: echo "Check needs"
+      - name: "Checkout source code"
+        uses: "actions/checkout@v4"
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.VITE_SPA_STARTER_ACTION }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.VITE_SPA_STARTER_ACTION }}
+        with:
+          version-type: "minor"
+          target-branch: "main"
+          tag-prefix: "v"
+          commit-message: "ci: bumps version to {{version}} [skip ci]"
+  deploy:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build:gh
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "./dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
