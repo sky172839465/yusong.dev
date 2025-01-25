@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run gen:data && vite build",
-    "build:gh": "BASENAME=1 npm run build && npm run build:404",
+    "build:gh": "npm run build && npm run build:404",
     "build:404": "cp dist/index.html dist/404.html",
     "gen:data": "node scripts/generateFrontMattersData.js",
     "lint": "eslint .",

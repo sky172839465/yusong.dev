@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom'
 const links = flow(
   () => keys(import.meta.glob('./*/index.jsx')),
   (filteredPaths) => filteredPaths.map((path) => {
-    if (window.APP_BASENAME === '') {
-      return path.replace('index.jsx', '')
-    }
-
-    return path.replace('./', '/').replace('index.jsx', '')
+    return path.replace('index.jsx', '')
   }),
   (endpoints) => endpoints.map((endpoint) => {
     const path = endpoint.replace(/\.\/|\//g, '')
