@@ -124,7 +124,7 @@ export default {
     console.log(fontCss)
 
     // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
-    const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.tff)\)/)
+    const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.ttf)\)/)
     if (!fontFileMatch) {
       return new Response('Font file URL not found in Google Fonts CSS', {
         status: 500
