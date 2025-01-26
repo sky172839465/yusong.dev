@@ -4,32 +4,17 @@ export default {
   async fetch (request) {
     const { searchParams } = new URL(request.url)
 
-    // Extract query params for the OG image content
-    const title = searchParams.get('title') || 'Default Title'
-    const description = searchParams.get('description') || 'Default Description'
+    const title = searchParams.get('title') || 'Lorem ipsum'
 
-    return new ImageResponse((
-      <div
-        style={{
-          display: 'flex',
-          height: '100%',
-          width: '100%',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#282c34',
-          color: 'white',
-          fontFamily: 'Arial, sans-serif'
-        }}
-      >
-        <h1 style={{ fontSize: '50px', margin: 0 }}>
-          {title}
-        </h1>
-        <p style={{ fontSize: '20px', margin: 0 }}>
-          {description}
-        </p>
+    const html = `
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; font-family: sans-serif; background: #160f29">
+      <div style="display: flex; width: 100vw; padding: 40px; color: white;">
+        <h1 style="font-size: 60px; font-weight: 600; margin: 0; font-family: 'Bitter'; font-weight: 500">${title}</h1>
       </div>
-    ), {
+    </div>
+   `
+
+    return new ImageResponse(html, {
       width: 1200,
       height: 630
     })
