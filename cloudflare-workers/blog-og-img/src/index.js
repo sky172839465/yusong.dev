@@ -67,6 +67,8 @@ export default {
       component = (
         <div
           style={{
+            fontFamily: 'Noto Sans TC',
+            fontWeight: 400,
             backgroundImage: `linear-gradient(
               to bottom,
               #ffffff 5%,
@@ -79,9 +81,6 @@ export default {
           <h1 style={twj('text-4xl font-bold text-white drop-shadow-lg')}>
             {`${title}  ${subtitle}`}
           </h1>
-          <p>
-            aaa
-          </p>
         </div>
       )
     } catch (e) {
@@ -92,6 +91,8 @@ export default {
         </div>
       )
     }
+    const fontData = await fetchFont()
+    console.log(fontData)
 
     return new ImageResponse(
       component,
@@ -100,8 +101,8 @@ export default {
         height,
         fonts: [
           {
-            name: 'Inter',
-            data: await fetchFont(), // Optional: Fetch and include a custom font
+            name: 'Noto Sans TC',
+            data: fontData, // Optional: Fetch and include a custom font
             style: 'normal'
           }
         ]
@@ -129,6 +130,5 @@ const fetchFont = async () => {
 
   // Step 3: Download the font file
   const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
-  console.log(fontData)
   return fontData
 }
