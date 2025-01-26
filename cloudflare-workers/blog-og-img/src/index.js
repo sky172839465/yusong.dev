@@ -62,13 +62,12 @@ export default {
       <div
         // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
         style={{
-          backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)',
-          ...twj('text-white')
+          backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
         }}
       >
         {`${title} ${subtitle}`}
         <br />
-        <pre>
+        <pre style={twj('text-white')}>
           {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
         </pre>
       </div>,
