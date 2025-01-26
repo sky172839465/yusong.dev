@@ -69,10 +69,9 @@ export default {
           style={{
             backgroundImage: `linear-gradient(
               to bottom,
-              #ffffff 20%,
-              #f3e9dc 30%,
-              #d7bea8 80%,
-              #a68b68 100%
+              #ffffff 5%,
+              #e17100 40%,
+              #000000 100%
             )`,
             ...twj('flex text-white w-full h-full items-center justify-center')
           }}
@@ -98,15 +97,15 @@ export default {
       component,
       {
         width,
-        height
-        // fonts: [
-        //   {
-        //     name: 'Inter',
-        //     data: await fetchFont(), // Optional: Fetch and include a custom font
-        //     weight: 400,
-        //     style: 'normal'
-        //   }
-        // ],
+        height,
+        fonts: [
+          {
+            name: 'Inter',
+            data: await fetchFont(), // Optional: Fetch and include a custom font
+            weight: 400,
+            style: 'normal'
+          }
+        ]
         // debug: true
       }
     )
@@ -114,9 +113,9 @@ export default {
 }
 
 // Optional: Fetch a custom font
-// async function fetchFont () {
-//   const res = await fetch(
-//     'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-//   )
-//   return res.arrayBuffer()
-// }
+async function fetchFont () {
+  const res = await fetch(
+    'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+  )
+  return res.arrayBuffer()
+}
