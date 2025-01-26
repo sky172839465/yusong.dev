@@ -1,7 +1,7 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import { twj } from 'tw-to-css'
+// import { twj } from 'tw-to-css'
 
 export default {
   async fetch (request) {
@@ -15,17 +15,24 @@ export default {
   
     return new ImageResponse(
       (
-        <div
-          style={twj`
-            flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white
-          `}
-        >
-          <h1 style={twj`text-6xl font-bold`}>
-            {title}
-          </h1>
-          <p className={twj`mt-4 text-2xl`}>
-            {subtitle}
-          </p>
+        // <div
+        //   style={twj`
+        //     flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white
+        //   `}
+        // >
+        //   <h1 style={twj`text-6xl font-bold`}>
+        //     {title}
+        //   </h1>
+        //   <p className={twj`mt-4 text-2xl`}>
+        //     {subtitle}
+        //   </p>
+        // </div>
+        <div style={{ display: 'flex' }}>
+          Hello, world!
+          <br />
+          {title}
+          <br />
+          {subtitle}
         </div>
       ),
       {
@@ -34,7 +41,7 @@ export default {
         fonts: [
           {
             name: 'Inter',
-            data: await fetchFont(), // Optional: Fetch and include a custom font
+            // data: await fetchFont(), // Optional: Fetch and include a custom font
             weight: 400,
             style: 'normal'
           }
@@ -45,9 +52,9 @@ export default {
 }
 
 // Optional: Fetch a custom font
-async function fetchFont() {
-  const res = await fetch(
-    'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-  )
-  return res.arrayBuffer()
-}
+// async function fetchFont() {
+//   const res = await fetch(
+//     'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+//   )
+//   return res.arrayBuffer()
+// }
