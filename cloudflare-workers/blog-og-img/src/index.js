@@ -64,7 +64,7 @@ export default {
     try {
       component = (
         <div
-          style={twj('bg-gradient-to-r from-blue-500 to-purple-600 text-purple')}
+          style={twj('flex bg-gradient-to-r from-blue-500 to-purple-600 text-purple')}
         >
           <p style={twj('text-6xl font-bold')}>
             {`${title}  ${subtitle}`}
