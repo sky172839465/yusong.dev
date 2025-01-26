@@ -1,17 +1,10 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // import { twj } from 'tw-to-css'
-// import React from 'react'
-
-export const config = {
-  runtime: 'edge'
-}
+// eslint-disable-next-line no-unused-vars
+import React from 'react'
 
 // Load the generated TailwindCSS styles as a string
 const tailwindCSS = `
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
   body {
     font-family: Inter, sans-serif;
   }
@@ -122,7 +115,7 @@ export default {
           style={{
             fontFamily: 'Inter'
           }}
-          className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
+          // className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
         >
           <style dangerouslySetInnerHTML={{ __html: tailwindCSS }} />
           <h1 className='text-6xl font-bold'>
