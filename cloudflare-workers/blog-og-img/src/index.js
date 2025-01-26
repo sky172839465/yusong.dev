@@ -59,8 +59,12 @@ export default {
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
     return new ImageResponse(
-      <div style={{ display: 'flex', ...twj('bg-gradient-to-r from-blue-500 to-purple-600') }}>
+      <div style={{ display: 'flex' }}>
         {`${title} ${subtitle}`}
+        <br />
+        <pre>
+          {JSON.stringify(twj('bg-gradient-to-r from-blue-500 to-purple-600'), null, 2)}
+        </pre>
       </div>,
       {
         width: 1200,
