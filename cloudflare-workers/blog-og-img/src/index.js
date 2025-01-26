@@ -60,16 +60,23 @@ export default {
     // Get dynamic query parameters (e.g., title and subtitle)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
+    const width = searchParams.get('width') || 1200
+    const height = searchParams.get('height') || 630
     let component
     try {
       component = (
         <div
-          style={twj('flex bg-gradient-to-r from-blue-500 to-purple-600 text-purple')}
+          style={{
+            backgroundImage: 'linear-gradient(to bottom, #d7bea8, #f3e9dc, #c5a88e, #a68b68)',
+            ...twj('flex text-white w-full h-full')
+          }}
         >
-          <p style={twj('text-6xl font-bold')}>
+          <p style={twj('text-6xl font-bold text-green text-center')}>
             {`${title}  ${subtitle}`}
           </p>
-          {`${title}  ${subtitle}`}
+          <p>
+            aaa
+          </p>
         </div>
       )
     } catch (e) {
@@ -84,8 +91,8 @@ export default {
     return new ImageResponse(
       component,
       {
-        width: 1200,
-        height: 630,
+        width,
+        height
         // fonts: [
         //   {
         //     name: 'Inter',
@@ -94,7 +101,7 @@ export default {
         //     style: 'normal'
         //   }
         // ],
-        debug: true
+        // debug: true
       }
     )
   }

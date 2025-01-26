@@ -6,16 +6,10 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"test": "vitest",
-		"build": "npm run build:css && npm run build:js",
-		"build:css": "tailwindcss -i ./src/index.css -o ./src/generated.css",
-		"build:js": "node ./genCSS.js"
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.6.4",
-		"autoprefixer": "^10.4.20",
-		"postcss": "^8.5.1",
-		"tailwindcss": "^3.4.17",
 		"vitest": "2.1.8",
 		"wrangler": "^3.105.1"
 	},
