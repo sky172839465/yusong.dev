@@ -67,7 +67,7 @@ export default {
       component = (
         <div
           style={{
-            fontFamily: 'Noto Sans TC',
+            fontFamily: 'Roboto',
             fontWeight: 400,
             backgroundImage: `linear-gradient(
               to bottom,
@@ -78,7 +78,12 @@ export default {
             ...twj('flex text-white w-full h-full items-center justify-center')
           }}
         >
-          <h1 style={twj('text-4xl font-bold text-white drop-shadow-lg')}>
+          <h1
+            style={{
+              fontSize: 32,
+              ...twj('font-bold text-white drop-shadow-lg')
+            }}
+          >
             {`${title}  ${subtitle}`}
           </h1>
         </div>
@@ -91,8 +96,44 @@ export default {
         </div>
       )
     }
-    const fontData = await fetchFont()
-    console.log(fontData)
+    // Optional: Fetch a custom font
+    // const fetchFont = async () => {
+    //   // Step 1: Fetch the Google Font CSS
+    //   const fontCssUrl =
+    //       'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
+    //   const fontCss = await fetch(fontCssUrl).then((res) => res.text())
+
+    //   // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
+    //   const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.woff2)\)/)
+    //   if (!fontFileMatch) {
+    //     return new Response('Font file URL not found in Google Fonts CSS', {
+    //       status: 500
+    //     })
+    //   }
+    //   const fontFileUrl = fontFileMatch[1]
+
+    //   // Step 3: Download the font file
+    //   const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
+    //   return fontData
+    // }
+    // const fontData = await fetchFont()
+    // Step 1: Fetch the Google Font CSS
+    const fontCssUrl =
+      'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
+    const fontCss = await fetch(fontCssUrl).then((res) => res.text())
+
+    // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
+    const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.woff2)\)/)
+    if (!fontFileMatch) {
+      return new Response('Font file URL not found in Google Fonts CSS', {
+        status: 500
+      })
+    }
+    const fontFileUrl = fontFileMatch[1]
+
+    // Step 3: Download the font file
+    const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
+    console.log(fontData.byteLength, typeof fontData)
 
     return new ImageResponse(
       component,
@@ -101,7 +142,7 @@ export default {
         height,
         fonts: [
           {
-            name: 'Noto Sans TC',
+            name: 'Roboto',
             data: fontData, // Optional: Fetch and include a custom font
             style: 'normal'
           }
@@ -110,25 +151,4 @@ export default {
       }
     )
   }
-}
-
-// Optional: Fetch a custom font
-const fetchFont = async () => {
-  // Step 1: Fetch the Google Font CSS
-  const fontCssUrl =
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
-  const fontCss = await fetch(fontCssUrl).then((res) => res.text())
-
-  // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
-  const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.woff2)\)/)
-  if (!fontFileMatch) {
-    return new Response('Font file URL not found in Google Fonts CSS', {
-      status: 500
-    })
-  }
-  const fontFileUrl = fontFileMatch[1]
-
-  // Step 3: Download the font file
-  const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
-  return fontData
 }
