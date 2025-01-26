@@ -28,35 +28,37 @@ const OgImage = (props) => {
   )
 }
 
-export default function handler(req) {
-  const { searchParams } = new URL(req.url)
-
-  // Get dynamic query parameters (e.g., title and subtitle)
-  const title = searchParams.get('title') || 'Hello, World!'
-  const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
-  const width = searchParams.get('width') || 1200
-  const height = searchParams.get('height') || 630
-
-  return new ImageResponse(
-    (
-      <OgImage
-        title={title}
-        subtitle={subtitle}
-      />
-    ),
-    {
-      width,
-      height,
-      fonts: [
-        {
-          name: 'Inter',
-          data: fetchFont(), // Optional: Fetch and include a custom font
-          weight: 400,
-          style: 'normal'
-        }
-      ]
-    }
-  )
+export default {
+  async fetch (request) {
+    const { searchParams } = new URL(request.url)
+  
+    // Get dynamic query parameters (e.g., title and subtitle)
+    const title = searchParams.get('title') || 'Hello, World!'
+    const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
+    const width = searchParams.get('width') || 1200
+    const height = searchParams.get('height') || 630
+  
+    return new ImageResponse(
+      (
+        <OgImage
+          title={title}
+          subtitle={subtitle}
+        />
+      ),
+      {
+        width,
+        height,
+        fonts: [
+          {
+            name: 'Inter',
+            data: await fetchFont(), // Optional: Fetch and include a custom font
+            weight: 400,
+            style: 'normal'
+          }
+        ]
+      }
+    )
+  }
 }
 
 // Optional: Fetch a custom font
