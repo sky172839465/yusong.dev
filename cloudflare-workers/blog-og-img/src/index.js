@@ -1,9 +1,7 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
-// import { twj } from 'tw-to-css'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-
-import css from './generated'
+import { twj } from 'tw-to-css'
 
 // Load the generated TailwindCSS styles as a string
 
@@ -57,7 +55,6 @@ import css from './generated'
 
 export default {
   async fetch (request) {
-    console.log(css.slice(0, 100))
     const { searchParams } = new URL(request.url)
   
     // Get dynamic query parameters (e.g., title and subtitle)
@@ -67,13 +64,9 @@ export default {
     try {
       component = (
         <div
-          style={{
-            color: 'green'
-          }}
-          className='bg-gradient-to-r from-blue-500 to-purple-600'
+          style={twj('bg-gradient-to-r from-blue-500 to-purple-600 text-purple')}
         >
-          <style dangerouslySetInnerHTML={{ __html: css }} />
-          <p className='text-6xl font-bold'>
+          <p style={twj('text-6xl font-bold')}>
             {`${title}  ${subtitle}`}
           </p>
           {`${title}  ${subtitle}`}
