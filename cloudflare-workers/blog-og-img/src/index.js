@@ -1,8 +1,5 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // import { twj } from 'tw-to-css'
-import fs from 'fs'
-import path from 'path'
- 
 // import React from 'react'
 
 export const config = {
@@ -10,10 +7,15 @@ export const config = {
 }
 
 // Load the generated TailwindCSS styles as a string
-const tailwindStyles = fs.readFileSync(
-  path.resolve('./src/generated.css'),
-  'utf8'
-)
+const tailwindCSS = `
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  body {
+    font-family: Inter, sans-serif;
+  }
+`
 
 // export default {
 //   async fetch (request) {
@@ -121,7 +123,7 @@ export default function handler(req) {
         }}
         className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
       >
-        <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} />
+        <style dangerouslySetInnerHTML={{ __html: tailwindCSS }} />
         <h1 className='text-6xl font-bold'>
           {title}
         </h1>
