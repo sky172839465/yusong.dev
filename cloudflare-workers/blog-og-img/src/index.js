@@ -51,77 +51,47 @@ import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 //   }
 // }
 
-// export default {
-//   async fetch (request) {
-//     const { searchParams } = new URL(request.url)
-  
-//     // Get dynamic query parameters (e.g., title and subtitle)
-//     const title = searchParams.get('title') || 'Hello, World!'
-//     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
-//     return new ImageResponse(
-//       <div
-//         // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
-//         // style={twj('text-white bg-black')}
-//         // style={{
-//         //   backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
-//         // }}
-//         style={{
-//           fontFamily: 'Inter'
-//         }}
-//       >
-//         <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} />
-//         <p className='text-6xl font-bold'>
-//           {`${title}  ${subtitle}`}
-//         </p>
-//         {/* <br />
-//         <pre>
-//           {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
-//         </pre> */}
-//       </div>,
-//       {
-//         width: 1200,
-//         height: 630,
-//         // fonts: [
-//         //   {
-//         //     name: 'Inter',
-//         //     data: await fetchFont(), // Optional: Fetch and include a custom font
-//         //     weight: 400,
-//         //     style: 'normal'
-//         //   }
-//         // ],
-//         debug: true
-//       }
-//     )
-//   }
-// }
-
 export default {
   async fetch (request) {
     const { searchParams } = new URL(request.url)
-
+  
+    // Get dynamic query parameters (e.g., title and subtitle)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
-
     return new ImageResponse(
-      (
-        <div
-          style={{
-            fontFamily: 'Inter',
-            color: 'blue'
-          }}
-          // className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
-        >
-          <h1>
-            {title}
-          </h1>
-          <p>
-            {subtitle}
-          </p>
-        </div>
-      ),
+      <div
+        // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
+        // style={twj('text-white bg-black')}
+        // style={{
+        //   backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
+        // }}
+        style={{
+          // fontFamily: 'Inter'
+          color: 'green'
+        }}
+      >
+        {/* <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} /> */}
+        {/* <p className='text-6xl font-bold'>
+          {`${title}  ${subtitle}`}
+        </p> */}
+        {`${title}  ${subtitle}`}
+        {/* <br />
+        <pre>
+          {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
+        </pre> */}
+      </div>,
       {
         width: 1200,
-        height: 630
+        height: 630,
+        // fonts: [
+        //   {
+        //     name: 'Inter',
+        //     data: await fetchFont(), // Optional: Fetch and include a custom font
+        //     weight: 400,
+        //     style: 'normal'
+        //   }
+        // ],
+        debug: true
       }
     )
   }
