@@ -67,7 +67,7 @@ export default {
       >
         {`${title} ${subtitle}`}
         <br />
-        <pre style={twj('text-white')}>
+        <pre>
           {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
         </pre>
       </div>,
