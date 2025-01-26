@@ -3,61 +3,9 @@ import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 import React from 'react'
 import { twj } from 'tw-to-css'
 
-// Load the generated TailwindCSS styles as a string
-
-// export default {
-//   async fetch (request) {
-//     const { searchParams } = new URL(request.url)
-  
-//     // Get dynamic query parameters (e.g., title and subtitle)
-//     const title = searchParams.get('title') || 'Hello, World!'
-//     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
-//     const width = searchParams.get('width') || 1200
-//     const height = searchParams.get('height') || 630
-  
-//     return new ImageResponse(
-//       (
-//         // <div
-//         //   style={twj`
-//         //     flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white
-//         //   `}
-//         // >
-//         //   <h1 style={twj`text-6xl font-bold`}>
-//         //     {title}
-//         //   </h1>
-//         //   <p className={twj`mt-4 text-2xl`}>
-//         //     {subtitle}
-//         //   </p>
-//         // </div>
-//         <div style={{ display: 'flex' }}>
-//           Hello, world!
-//           <br />
-//           {title}
-//           <br />
-//           {subtitle}
-//         </div>
-//       ),
-//       {
-//         width,
-//         height,
-//         fonts: [
-//           {
-//             name: 'Inter',
-//             // data: await fetchFont(), // Optional: Fetch and include a custom font
-//             weight: 400,
-//             style: 'normal'
-//           }
-//         ]
-//       }
-//     )
-//   }
-// }
-
 export default {
   async fetch (request) {
     const { searchParams } = new URL(request.url)
-  
-    // Get dynamic query parameters (e.g., title and subtitle)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
     const width = searchParams.get('width') || 1200
@@ -67,7 +15,7 @@ export default {
       component = (
         <div
           style={{
-            fontFamily: 'Roboto',
+            fontFamily: 'Noto Sans TC',
             fontWeight: 400,
             backgroundImage: `linear-gradient(
               to bottom,
@@ -80,11 +28,11 @@ export default {
         >
           <h1
             style={{
-              fontSize: 32,
+              fontSize: 64,
               ...twj('font-bold text-white drop-shadow-lg')
             }}
           >
-            {`${title}  ${subtitle}`}
+            {`${title}  ${subtitle} 好喔`}
           </h1>
         </div>
       )
@@ -96,45 +44,6 @@ export default {
         </div>
       )
     }
-    // Optional: Fetch a custom font
-    // const fetchFont = async () => {
-    //   // Step 1: Fetch the Google Font CSS
-    const fontCssUrl =
-        'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
-    //   const fontCss = await fetch(fontCssUrl).then((res) => res.text())
-
-    //   // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
-    //   const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.woff2)\)/)
-    //   if (!fontFileMatch) {
-    //     return new Response('Font file URL not found in Google Fonts CSS', {
-    //       status: 500
-    //     })
-    //   }
-    //   const fontFileUrl = fontFileMatch[1]
-
-    //   // Step 3: Download the font file
-    //   const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
-    //   return fontData
-    // }
-    // const fontData = await fetchFont()
-    // Step 1: Fetch the Google Font CSS
-    // const fontCssUrl =
-    // 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
-    const fontCss = await fetch(fontCssUrl).then((res) => res.text())
-    console.log(fontCss)
-
-    // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
-    const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.ttf)\)/)
-    if (!fontFileMatch) {
-      return new Response('Font file URL not found in Google Fonts CSS', {
-        status: 500
-      })
-    }
-    const fontFileUrl = fontFileMatch[1]
-
-    // Step 3: Download the font file
-    const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
-    console.log(fontData.byteLength, typeof fontData)
 
     return new ImageResponse(
       component,
@@ -143,8 +52,8 @@ export default {
         height,
         fonts: [
           {
-            name: 'Roboto',
-            data: fontData, // Optional: Fetch and include a custom font
+            name: 'Noto Sans TC',
+            data: await fetchFont(), // Optional: Fetch and include a custom font
             style: 'normal'
           }
         ]
@@ -152,4 +61,24 @@ export default {
       }
     )
   }
+}
+
+// Optional: Fetch a custom font
+const fetchFont = async () => {
+  // Step 1: Fetch the Google Font CSS
+  const fontCssUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
+  const fontCss = await fetch(fontCssUrl).then((res) => res.text())
+
+  // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
+  const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.ttf)\)/)
+  if (!fontFileMatch) {
+    return new Response('Font file URL not found in Google Fonts CSS', {
+      status: 500
+    })
+  }
+  const fontFileUrl = fontFileMatch[1]
+
+  // Step 3: Download the font file
+  const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
+  return fontData
 }
