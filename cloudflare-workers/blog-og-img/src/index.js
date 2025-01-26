@@ -28,12 +28,18 @@ export default {
         >
           <h1
             style={{
-              fontSize: 64,
+              fontSize: 40,
               ...twj('font-bold text-white drop-shadow-lg')
             }}
           >
             {`${title}  ${subtitle} 好喔`}
           </h1>
+          <img
+            src='./public/pwa-192x192.png'
+            width={192}
+            height={192}
+            style={twj('w-1/2 h-1/2 rounded-3xl')}
+          />
         </div>
       )
     } catch (e) {
