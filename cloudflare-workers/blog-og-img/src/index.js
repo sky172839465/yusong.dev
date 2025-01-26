@@ -2,31 +2,6 @@ import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { twj } from 'tw-to-css'
-export const config = {
-  runtime: 'edge'
-}
-
-const style = twj`
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-`
-
-const OgImage = (props) => {
-  const { title, subtitle } = props
-  return (
-    <div style={style}>
-      <div className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'>
-        <h1 className='text-6xl font-bold'>
-          {title}
-        </h1>
-        <p className='mt-4 text-2xl'>
-          {subtitle}
-        </p>
-      </div>
-    </div>
-  )
-}
 
 export default {
   async fetch (request) {
@@ -40,10 +15,18 @@ export default {
   
     return new ImageResponse(
       (
-        <OgImage
-          title={title}
-          subtitle={subtitle}
-        />
+        <div
+          style={twj`
+            flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white
+          `}
+        >
+          <h1 style={twj`text-6xl font-bold`}>
+            {title}
+          </h1>
+          <p className={twj`mt-4 text-2xl`}>
+            {subtitle}
+          </p>
+        </div>
       ),
       {
         width,
