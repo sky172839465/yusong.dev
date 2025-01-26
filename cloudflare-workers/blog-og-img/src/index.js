@@ -51,16 +51,23 @@ import React from 'react'
 //   }
 // }
 
-export const onRequest = async () => {
-  return new ImageResponse(
-    <div style={{ display: 'flex' }}>
-      Hello, world!
-    </div>,
-    {
-      width: 1200,
-      height: 630
-    }
-  )
+export default {
+  async fetch (request) {
+    const { searchParams } = new URL(request.url)
+  
+    // Get dynamic query parameters (e.g., title and subtitle)
+    const title = searchParams.get('title') || 'Hello, World!'
+    const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
+    return new ImageResponse(
+      <div style={{ display: 'flex' }}>
+        {`${title} ${subtitle}`}
+      </div>,
+      {
+        width: 1200,
+        height: 630
+      }
+    )
+  }
 }
 
 // Optional: Fetch a custom font
