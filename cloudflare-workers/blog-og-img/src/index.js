@@ -1,7 +1,7 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-// import { twj } from 'tw-to-css'
+import { twj } from 'tw-to-css'
 
 // export default {
 //   async fetch (request) {
@@ -59,7 +59,7 @@ export default {
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
     return new ImageResponse(
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', ...twj('bg-gradient-to-r from-blue-500 to-purple-600') }}>
         {`${title} ${subtitle}`}
       </div>,
       {
