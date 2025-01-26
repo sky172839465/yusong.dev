@@ -1,7 +1,7 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import { twj } from 'tw-to-css'
+// import { twj } from 'tw-to-css'
 
 // export default {
 //   async fetch (request) {
@@ -68,10 +68,10 @@ export default {
         name='test'
       >
         {`${title} ${subtitle}`}
-        <br />
+        {/* <br />
         <pre>
           {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
-        </pre>
+        </pre> */}
       </div>,
       {
         width: 1200,
