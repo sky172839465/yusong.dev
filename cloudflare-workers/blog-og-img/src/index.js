@@ -57,33 +57,39 @@ import css from './generated'
 
 export default {
   async fetch (request) {
+    console.log(css.slice(0, 100))
     const { searchParams } = new URL(request.url)
   
     // Get dynamic query parameters (e.g., title and subtitle)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
-    return new ImageResponse(
-      <div
-        // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
-        // style={twj('text-white bg-black')}
-        // style={{
-        //   backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
-        // }}
-        style={{
-          // fontFamily: 'Inter'
-          color: 'green'
-        }}
-      >
-        <style dangerouslySetInnerHTML={{ __html: css }} />
-        {/* <p className='text-6xl font-bold'>
+    let component
+    try {
+      component = (
+        <div
+          style={{
+            color: 'green'
+          }}
+          className='bg-gradient-to-r from-blue-500 to-purple-600'
+        >
+          <style dangerouslySetInnerHTML={{ __html: css }} />
+          <p className='text-6xl font-bold'>
+            {`${title}  ${subtitle}`}
+          </p>
           {`${title}  ${subtitle}`}
-        </p> */}
-        {`${title}  ${subtitle}`}
-        {/* <br />
-        <pre>
-          {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
-        </pre> */}
-      </div>,
+        </div>
+      )
+    } catch (e) {
+      console.log(e)
+      component = (
+        <div style={{ color: 'green' }}>
+          {`${title} ${subtitle}`}
+        </div>
+      )
+    }
+
+    return new ImageResponse(
+      component,
       {
         width: 1200,
         height: 630,
