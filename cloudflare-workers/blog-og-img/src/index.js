@@ -79,7 +79,7 @@ export default {
       >
         <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} />
         <p className='text-6xl font-bold'>
-          {`${title} aa ${subtitle}`}
+          {`${title}  ${subtitle}`}
         </p>
         {/* <br />
         <pre>
