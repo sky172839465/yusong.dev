@@ -109,34 +109,36 @@ const tailwindCSS = `
 //   }
 // }
 
-export default function handler(req) {
-  const { searchParams } = new URL(req.url)
+export default {
+  async fetch (request) {
+    const { searchParams } = new URL(request.url)
 
-  const title = searchParams.get('title') || 'Hello, World!'
-  const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
+    const title = searchParams.get('title') || 'Hello, World!'
+    const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          fontFamily: 'Inter'
-        }}
-        className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
-      >
-        <style dangerouslySetInnerHTML={{ __html: tailwindCSS }} />
-        <h1 className='text-6xl font-bold'>
-          {title}
-        </h1>
-        <p className='mt-4 text-2xl'>
-          {subtitle}
-        </p>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630
-    }
-  )
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            fontFamily: 'Inter'
+          }}
+          className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
+        >
+          <style dangerouslySetInnerHTML={{ __html: tailwindCSS }} />
+          <h1 className='text-6xl font-bold'>
+            {title}
+          </h1>
+          <p className='mt-4 text-2xl'>
+            {subtitle}
+          </p>
+        </div>
+      ),
+      {
+        width: 1200,
+        height: 630
+      }
+    )
+  }
 }
 
 // Optional: Fetch a custom font
