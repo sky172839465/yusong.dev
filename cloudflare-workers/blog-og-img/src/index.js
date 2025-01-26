@@ -3,6 +3,8 @@ import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 
+import css from './generated'
+
 // Load the generated TailwindCSS styles as a string
 
 // export default {
@@ -72,7 +74,7 @@ export default {
           color: 'green'
         }}
       >
-        {/* <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} /> */}
+        <style dangerouslySetInnerHTML={{ __html: css }} />
         {/* <p className='text-6xl font-bold'>
           {`${title}  ${subtitle}`}
         </p> */}

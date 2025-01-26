@@ -21,4 +21,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: cloudflare-workers/blog-og-img
           preCommands: |
-            npm run build:css
+            npm run build

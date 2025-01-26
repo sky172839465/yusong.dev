@@ -7,7 +7,9 @@
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
 		"test": "vitest",
-		"build:css": "npx tailwindcss -i ./src/index.css -o ./src/generated.css"
+		"build": "npm run build:css && npm run build:js",
+		"build:css": "tailwindcss -i ./src/index.css -o ./src/generated.css",
+		"build:js": "node ./genCSS.js"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.6.4",
