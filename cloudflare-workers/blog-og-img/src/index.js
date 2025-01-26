@@ -62,9 +62,10 @@ export default {
       <div
         // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
         // style={twj('text-white bg-black')}
-        style={{
-          backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
-        }}
+        // style={{
+        //   backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
+        // }}
+        name='test'
       >
         {`${title} ${subtitle}`}
         <br />
