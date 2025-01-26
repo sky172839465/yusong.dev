@@ -102,7 +102,6 @@ export default {
           {
             name: 'Inter',
             data: await fetchFont(), // Optional: Fetch and include a custom font
-            weight: 400,
             style: 'normal'
           }
         ]
@@ -113,7 +112,7 @@ export default {
 }
 
 // Optional: Fetch a custom font
-async function fetchFont () {
+const fetchFont = async () => {
   // Step 1: Fetch the Google Font CSS
   const fontCssUrl =
       'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
@@ -130,5 +129,6 @@ async function fetchFont () {
 
   // Step 3: Download the font file
   const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
+  console.log(fontData)
   return fontData
 }
