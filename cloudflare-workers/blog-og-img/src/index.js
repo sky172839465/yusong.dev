@@ -121,6 +121,7 @@ export default {
     // const fontCssUrl =
     // 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
     const fontCss = await fetch(fontCssUrl).then((res) => res.text())
+    console.log(fontCss)
 
     // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
     const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.woff2)\)/)
