@@ -1,5 +1,7 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 // import { twj } from 'tw-to-css'
+// eslint-disable-next-line no-unused-vars
+import React from 'react'
 
 // Load the generated TailwindCSS styles as a string
 
