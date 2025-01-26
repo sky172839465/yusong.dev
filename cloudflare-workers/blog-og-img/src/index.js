@@ -63,7 +63,7 @@ export default {
         {`${title} ${subtitle}`}
         <br />
         <pre>
-          {JSON.stringify(twj('bg-gradient-to-r from-blue-500 to-purple-600'), null, 2)}
+          {JSON.stringify(twj('bg-gradient-to-r from-blue-500 to-purple-600 flex size-full flex-col items-center justify-center'), null, 2)}
         </pre>
       </div>,
       {
