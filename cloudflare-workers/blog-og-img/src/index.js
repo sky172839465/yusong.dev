@@ -59,25 +59,37 @@ export default {
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
     return new ImageResponse(
-      <div style={{ display: 'flex' }}>
+      <div
+        // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
+        style={{
+          backgroundColor: 'green',
+          ...twj(`
+            flex size-full flex-col items-center justify-center p-8 text-white bg-blue-600
+          `)
+        }}
+      >
         {`${title} ${subtitle}`}
-        <br />
-        <pre>
-          {JSON.stringify(twj('bg-gradient-to-r from-blue-500 to-purple-600 flex size-full flex-col items-center justify-center'), null, 2)}
-        </pre>
       </div>,
       {
         width: 1200,
-        height: 630
+        height: 630,
+        fonts: [
+          {
+            name: 'Inter',
+            data: await fetchFont(), // Optional: Fetch and include a custom font
+            weight: 400,
+            style: 'normal'
+          }
+        ]
       }
     )
   }
 }
 
 // Optional: Fetch a custom font
-// async function fetchFont() {
-//   const res = await fetch(
-//     'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-//   )
-//   return res.arrayBuffer()
-// }
+async function fetchFont() {
+  const res = await fetch(
+    'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+  )
+  return res.arrayBuffer()
+}
