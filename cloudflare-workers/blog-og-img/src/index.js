@@ -79,11 +79,12 @@ export default {
         fonts: [
           {
             name: 'Inter',
-            data: fetchFont(), // Optional: Fetch and include a custom font
+            data: await fetchFont(), // Optional: Fetch and include a custom font
             weight: 400,
             style: 'normal'
           }
-        ]
+        ],
+        debug: true
       }
     )
   }
