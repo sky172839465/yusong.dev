@@ -59,7 +59,7 @@ export default {
         fonts: [
           {
             name: 'Noto Sans TC',
-            data: await fetchFont(), // Optional: Fetch and include a custom font
+            data: await fetchFont(`${title}${subtitle}`), // Optional: Fetch and include a custom font
             style: 'normal'
           }
         ]
@@ -70,9 +70,9 @@ export default {
 }
 
 // Optional: Fetch a custom font
-const fetchFont = async () => {
+const fetchFont = async (text) => {
   // Step 1: Fetch the Google Font CSS
-  const fontCssUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
+  const fontCssUrl = `https://fonts.googleapis.com/css2?family=Noto+Sans+TC&text=${encodeURIComponent(text)}`
   const fontCss = await fetch(fontCssUrl).then((res) => res.text())
 
   // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
