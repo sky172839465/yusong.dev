@@ -106,7 +106,8 @@ export default {
       (
         <div
           style={{
-            fontFamily: 'Inter'
+            fontFamily: 'Inter',
+            color: 'blue'
           }}
           // className='flex size-full flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white'
         >
