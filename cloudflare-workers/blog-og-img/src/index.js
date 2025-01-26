@@ -67,13 +67,19 @@ export default {
       component = (
         <div
           style={{
-            backgroundImage: 'linear-gradient(to bottom, #d7bea8, #f3e9dc, #c5a88e, #a68b68)',
-            ...twj('flex text-white w-full h-full')
+            backgroundImage: `linear-gradient(
+              to bottom,
+              #ffffff 20%,
+              #f3e9dc 30%,
+              #d7bea8 80%,
+              #a68b68 100%
+            )`,
+            ...twj('flex text-white w-full h-full items-center justify-center')
           }}
         >
-          <p style={twj('text-6xl font-bold text-green text-center')}>
+          <h1 style={twj('text-4xl font-bold text-white drop-shadow-lg')}>
             {`${title}  ${subtitle}`}
-          </p>
+          </h1>
           <p>
             aaa
           </p>
