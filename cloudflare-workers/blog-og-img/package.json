@@ -14,7 +14,7 @@
 		"wrangler": "^3.105.1"
 	},
 	"dependencies": {
-		"@vercel/og": "^0.6.5",
+		"@cloudflare/pages-plugin-vercel-og": "^0.1.2",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"tailwindcss": "^4.0.0",

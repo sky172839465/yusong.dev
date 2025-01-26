@@ -1,11 +1,5 @@
-import { ImageResponse } from '@vercel/og'
-import { init } from 'satori/wasm'
+import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
 import { twj } from 'tw-to-css'
-import initYoga from 'yoga-wasm-web'
-
-const yoga = initYoga(await fetch('/yoga.wasm').then(res => res.arrayBuffer()))
-init(yoga)
-
 export const config = {
   runtime: 'edge'
 }
