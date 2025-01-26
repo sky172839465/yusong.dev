@@ -99,8 +99,8 @@ export default {
     // Optional: Fetch a custom font
     // const fetchFont = async () => {
     //   // Step 1: Fetch the Google Font CSS
-    //   const fontCssUrl =
-    //       'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
+    const fontCssUrl =
+        'https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap'
     //   const fontCss = await fetch(fontCssUrl).then((res) => res.text())
 
     //   // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
@@ -118,8 +118,8 @@ export default {
     // }
     // const fontData = await fetchFont()
     // Step 1: Fetch the Google Font CSS
-    const fontCssUrl =
-      'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
+    // const fontCssUrl =
+    // 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
     const fontCss = await fetch(fontCssUrl).then((res) => res.text())
 
     // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
