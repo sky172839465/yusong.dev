@@ -63,9 +63,7 @@ export default {
         // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
         style={{
           backgroundColor: 'green',
-          ...twj(`
-            flex size-full flex-col items-center justify-center p-8 text-white bg-blue-600
-          `)
+          ...twj('flex size-full flex-col items-center justify-center p-8 text-white bg-black')
         }}
       >
         {`${title} ${subtitle}`}
