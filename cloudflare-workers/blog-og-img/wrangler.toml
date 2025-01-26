@@ -2,5 +2,7 @@
 name = "blog-og-img"
 main = "src/index.js"
 compatibility_date = "2025-01-24"
-compatibility_flags = ["nodejs_compat"]
-minify = true
+
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true
