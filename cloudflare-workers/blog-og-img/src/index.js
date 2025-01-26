@@ -5,6 +5,10 @@ import path from 'path'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 
+export const config = {
+  runtime: 'edge'
+}
+
 // Load the generated TailwindCSS styles as a string
 const tailwindStyles = fs.readFileSync(
   path.resolve('./src/generated.css'),
