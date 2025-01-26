@@ -1,7 +1,15 @@
 import { ImageResponse } from '@cloudflare/pages-plugin-vercel-og/api'
+// import { twj } from 'tw-to-css'
+import fs from 'fs'
+import path from 'path'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-// import { twj } from 'tw-to-css'
+
+// Load the generated TailwindCSS styles as a string
+const tailwindStyles = fs.readFileSync(
+  path.resolve('./src/generated.css'),
+  'utf8'
+)
 
 // export default {
 //   async fetch (request) {
@@ -65,9 +73,14 @@ export default {
         // style={{
         //   backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
         // }}
-        name='test'
+        style={{
+          fontFamily: 'Inter'
+        }}
       >
-        {`${title} ${subtitle}`}
+        <style dangerouslySetInnerHTML={{ __html: tailwindStyles }} />
+        <p className='text-6xl font-bold'>
+          {`${title} ${subtitle}`}
+        </p>
         {/* <br />
         <pre>
           {JSON.stringify(twj('flex size-full flex-col items-center justify-center p-8'), null, 2)}
@@ -76,14 +89,14 @@ export default {
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: 'Inter',
-            data: await fetchFont(), // Optional: Fetch and include a custom font
-            weight: 400,
-            style: 'normal'
-          }
-        ],
+        // fonts: [
+        //   {
+        //     name: 'Inter',
+        //     data: await fetchFont(), // Optional: Fetch and include a custom font
+        //     weight: 400,
+        //     style: 'normal'
+        //   }
+        // ],
         debug: true
       }
     )
@@ -91,9 +104,9 @@ export default {
 }
 
 // Optional: Fetch a custom font
-async function fetchFont() {
-  const res = await fetch(
-    'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-  )
-  return res.arrayBuffer()
-}
+// async function fetchFont() {
+//   const res = await fetch(
+//     'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+//   )
+//   return res.arrayBuffer()
+// }
