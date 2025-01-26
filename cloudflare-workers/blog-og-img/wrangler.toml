@@ -2,3 +2,4 @@
 name = "blog-og-img"
 main = "src/index.js"
 compatibility_date = "2025-01-24"
+minify = true
