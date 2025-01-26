@@ -75,24 +75,24 @@ export default {
       </div>,
       {
         width: 1200,
-        height: 630
-        // fonts: [
-        //   {
-        //     name: 'Inter',
-        //     data: fetchFont(), // Optional: Fetch and include a custom font
-        //     weight: 400,
-        //     style: 'normal'
-        //   }
-        // ]
+        height: 630,
+        fonts: [
+          {
+            name: 'Inter',
+            data: fetchFont(), // Optional: Fetch and include a custom font
+            weight: 400,
+            style: 'normal'
+          }
+        ]
       }
     )
   }
 }
 
 // Optional: Fetch a custom font
-// async function fetchFont() {
-//   const res = await fetch(
-//     'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-//   )
-//   return res.arrayBuffer()
-// }
+async function fetchFont() {
+  const res = await fetch(
+    'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+  )
+  return res.arrayBuffer()
+}
