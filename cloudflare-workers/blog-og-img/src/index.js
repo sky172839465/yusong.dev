@@ -61,9 +61,8 @@ export default {
     return new ImageResponse(
       <div
         // className='bg-gradient-to-r from-blue-500 to-purple-600 bg-blue-600'
-        style={{
-          backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
-        }}
+        // backgroundImage: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(67, 56, 202) 100%)'
+        style={twj('text-white bg-black')}
       >
         {`${title} ${subtitle}`}
         <br />
