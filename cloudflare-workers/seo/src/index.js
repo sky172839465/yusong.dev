@@ -43,6 +43,11 @@ export default {
 
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
+    const isAssetRoute = /\.\D+$/.test(path)
+    if (isAssetRoute) {
+      return request
+    }
+
     const articleSlug = path.split('/').filter(Boolean).pop()
 
     // Fetch the original HTML
