@@ -5,18 +5,14 @@
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
-		"start": "wrangler dev",
-		"test": "vitest"
+		"start": "wrangler dev"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.6.4",
-		"vitest": "2.1.8",
 		"wrangler": "^3.105.1"
 	},
 	"dependencies": {
 		"@cloudflare/pages-plugin-vercel-og": "^0.1.2",
-		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"tw-to-css": "^0.0.12"
+		"lodash-es": "^4.17.21"
 	}
 }

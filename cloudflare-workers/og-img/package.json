@@ -1,0 +1,20 @@
+{
+	"name": "blog-og-img",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.6.4",
+		"wrangler": "^3.105.1"
+	},
+	"dependencies": {
+		"@cloudflare/pages-plugin-vercel-og": "^0.1.2",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"tw-to-css": "^0.0.12"
+	}
+}
