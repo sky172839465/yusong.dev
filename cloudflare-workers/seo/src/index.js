@@ -45,7 +45,7 @@ export default {
     const path = url.pathname
     const isAssetRoute = /\.\D+$/.test(path)
     if (isAssetRoute) {
-      return request
+      return fetch(request)
     }
 
     const articleSlug = path.split('/').filter(Boolean).pop()

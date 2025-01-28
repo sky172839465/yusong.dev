@@ -7,11 +7,6 @@ routes = [
   "yusong.tw/*"
 ]
 
-# Exclude common static file paths using wrangler's ignore rules
-[[rules]]
-globs = ["**/*.js", "**/*.css", "**/*.png", "**/*.jpg", "**/*.svg", "**/*.ico", "**/*.txt"]
-type = "static"
-
 # wrangler.toml (wrangler v3.88.0^)
 [observability.logs]
 enabled = true
