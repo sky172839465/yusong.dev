@@ -5,7 +5,15 @@ import { twj } from 'tw-to-css'
 
 export default {
   async fetch (request, env, ctx) {
-    const { searchParams } = new URL(request.url)
+    const requestUrl = request.url
+    const cache = await caches.open('response')
+    const cached = await cache.match(requestUrl)
+    if (cached) {
+      console.log('response cache hit')
+      return cached
+    }
+
+    const { searchParams } = new URL(requestUrl)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
     const width = searchParams.get('width') || 1200
@@ -68,7 +76,7 @@ export default {
       )
     }
 
-    return new ImageResponse(
+    const response = new ImageResponse(
       component,
       {
         width,
@@ -83,6 +91,8 @@ export default {
         // debug: true
       }
     )
+    ctx.waitUntil(cache.put(requestUrl, response.clone()))
+    return response
   }
 }
 
