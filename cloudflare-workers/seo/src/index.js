@@ -44,14 +44,14 @@ export default {
     const path = url.pathname
     const articleSlug = path.split('/').filter(Boolean).pop()
 
+    // Fetch the original HTML
+    const response = await fetch(request)
+    const html = await response.text()
     // 如果路徑匹配文章，動態生成 meta tags
     const { type, title, description, image, twitterImage } = META[articleSlug] || DEFAULT_META
-    return new Response(
+    const modifiedHtml = html.replace(
+      '</head>',
       `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-          <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="author" content="${AUTHOR}">
           <meta property="og:title" content="${title}" />
@@ -92,7 +92,10 @@ export default {
           </script>
         </body>
         </html>
-      `,
+      `
+    )
+    return new Response(
+      modifiedHtml,
       { headers: { 'Content-Type': 'text/html' } }
     )
   }
