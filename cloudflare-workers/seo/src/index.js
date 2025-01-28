@@ -52,7 +52,6 @@ export default {
     const modifiedHtml = html.replace(
       '</head>',
       `
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta name="author" content="${AUTHOR}">
           <meta property="og:title" content="${title}" />
           <meta property="og:description" content="${description}" />
