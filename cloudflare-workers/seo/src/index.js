@@ -9,8 +9,8 @@ const DEFAULT_META = {
   type: 'website',
   title: TITLE,
   description: 'This is Yusong\'s blog',
-  image: `${OG_IMG_URL}?title=${decodeURIComponent(TITLE)}`,
-  twitterImage: `${OG_IMG_URL}?title=${decodeURIComponent(TITLE)}&width=1200&height=628`
+  image: `${OG_IMG_URL}?title=${encodeURIComponent(TITLE)}`,
+  twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(TITLE)}&width=1200&height=628`
 }
 const META = keyBy(
   [
@@ -28,8 +28,8 @@ const META = keyBy(
     return {
       ...item,
       type: 'article',
-      image: `${OG_IMG_URL}?title=${decodeURIComponent(title)}`,
-      twitterImage: `${OG_IMG_URL}?title=${decodeURIComponent(title)}&width=1200&height=628`
+      image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}`,
+      twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&width=1200&height=628`
     }
   }),
   'key'
