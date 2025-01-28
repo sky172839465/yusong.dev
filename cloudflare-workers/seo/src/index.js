@@ -27,6 +27,7 @@ const META = keyBy(
   ].map(({ title, ...item }) => {
     return {
       ...item,
+      title,
       type: 'article',
       image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}`,
       twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&width=1200&height=628`
