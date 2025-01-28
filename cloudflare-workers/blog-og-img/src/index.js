@@ -4,7 +4,7 @@ import React from 'react'
 import { twj } from 'tw-to-css'
 
 export default {
-  async fetch (request) {
+  async fetch (request, env, ctx) {
     const { searchParams } = new URL(request.url)
     const title = searchParams.get('title') || 'Hello, World!'
     const subtitle = searchParams.get('subtitle') || 'Dynamic OG Image Generation'
@@ -76,7 +76,7 @@ export default {
         fonts: [
           {
             name: 'Noto Sans TC',
-            data: await fetchFont(`${title}${subtitle}`), // Optional: Fetch and include a custom font
+            data: await fetchFont(ctx), // Optional: Fetch and include a custom font
             style: 'normal'
           }
         ]
@@ -87,10 +87,17 @@ export default {
 }
 
 // Optional: Fetch a custom font
-const fetchFont = async () => {
+const fetchFont = async (ctx) => {
   // Step 1: Fetch the Google Font CSS
-  const fontCssUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
-  const fontCss = await fetch(fontCssUrl).then((res) => res.text())
+  const fontUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+  const cache = await caches.open('fonts')
+  const cached = await cache.match(fontUrl)
+  if (cached) {
+    console.log('font cache hit')
+    return cached.arrayBuffer()
+  }
+
+  const fontCss = await fetch(fontUrl).then((res) => res.text())
 
   // Step 2: Extract the font file URL (e.g., .woff2) from the CSS
   const fontFileMatch = fontCss.match(/url\((https:\/\/[^)]+\.ttf)\)/)
@@ -102,6 +109,8 @@ const fetchFont = async () => {
   const fontFileUrl = fontFileMatch[1]
 
   // Step 3: Download the font file
-  const fontData = await fetch(fontFileUrl).then((res) => res.arrayBuffer())
+  const response = await fetch(fontFileUrl)
+  ctx.waitUntil(cache.put(fontUrl, response.clone()))
+  const fontData = await response.arrayBuffer()
   return fontData
 }
