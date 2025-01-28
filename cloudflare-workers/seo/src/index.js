@@ -85,13 +85,6 @@ export default {
           }
           </script>
         </head>
-        <body>
-          <h1>Redirecting...</h1>
-          <script>
-            window.location.href = "https://${BLOG_HOST}${path}";
-          </script>
-        </body>
-        </html>
       `
     )
     return new Response(
