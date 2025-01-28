@@ -1,0 +1,12 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "seo"
+main = "src/index.js"
+compatibility_date = "2025-01-24"
+
+routes = [
+  "yusong.tw/*"
+]
+
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true

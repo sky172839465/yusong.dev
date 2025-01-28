@@ -1,9 +1,12 @@
-name: Deploy Worker
+name: deploy-worker
 
 on:
   push:
     branches:
       - main
+# on:
+#   pull_request:
+#     types: [opened, reopened, synchronize]
 
 jobs:
   deploy:
@@ -11,9 +14,15 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-      - name: Build & Deploy Worker
+      - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: cloudflare-workers/blog-og-img
+          workingDirectory: cloudflare-workers/seo
+      - name: Build & Deploy OG Image Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: cloudflare-workers/og-img
