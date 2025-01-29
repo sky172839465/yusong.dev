@@ -33,7 +33,12 @@ export default {
             ...twj('relative flex text-white w-full h-full items-center justify-center')
           }}
         >
-          <div style={twj('absolute left-10 top-10 flex gap-2 items-center bg-white/30 backdrop-blur-sm rounded-xl p-2')}>
+          <div
+            style={{
+              backgroundColor: 'rgb(255 255 255 / 0.3)',
+              ...twj('absolute left-10 top-10 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
+            }}
+          >
             <div style={twj('flex rounded-xl')}>
               <img
                 style={twj('rounded-md')}
@@ -76,7 +81,10 @@ export default {
           >
             {tags.map((tag, index) => (
               <div
-                style={twj('p-2 flex bg-white/30 backdrop-blur-sm rounded-md')}
+                style={{
+                  backgroundColor: 'rgb(255 255 255 / 0.3)',
+                  ...twj('p-2 flex backdrop-blur-sm rounded-md')
+                }}
                 key={index}
               >
                 {tag}
