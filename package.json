@@ -9,7 +9,7 @@
     "build": "npm run gen:data && vite build",
     "build:gh": "npm run build && npm run build:404",
     "build:404": "cp dist/index.html dist/404.html",
-    "gen:data": "node scripts/generateFrontMattersData.js",
+    "gen:data": "node scripts/generateData.js",
     "gen:icons": "pwa-assets-generator",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
