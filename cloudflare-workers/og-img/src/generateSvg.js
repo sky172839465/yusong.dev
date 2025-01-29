@@ -24,7 +24,7 @@ const generateSvg = async (data, ctx) => {
         <div
           style={{
             backgroundColor: 'rgb(255 255 255 / 0.3)',
-            ...twj('absolute left-8 top-8 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
+            ...twj('absolute left-10 top-10 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
           }}
         >
           <div style={twj('flex rounded-xl')}>
@@ -43,7 +43,7 @@ const generateSvg = async (data, ctx) => {
           style={{
             fontSize: 50,
             fontWeight: 'bold',
-            ...twj('font-bold text-white text-center drop-shadow-lg p-10')
+            ...twj('font-bold text-white text-center drop-shadow-lg p-12')
           }}
         >
           {title}
@@ -51,7 +51,7 @@ const generateSvg = async (data, ctx) => {
         <div
           style={{
             fontWeight: 'bold',
-            ...twj('absolute left-8 bottom-8 flex text-black gap-2')
+            ...twj('absolute left-10 text-white bottom-10 flex text-black gap-2')
           }}
         >
           {tags.map((tag, index) => (
