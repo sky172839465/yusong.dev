@@ -13,7 +13,6 @@ const generateSvg = async (data, ctx) => {
       <div
         style={{
           fontFamily: 'Noto Sans TC',
-          fontWeight: 400,
           backgroundImage: `linear-gradient(
             to right top,
             #e17100,
@@ -25,7 +24,7 @@ const generateSvg = async (data, ctx) => {
         <div
           style={{
             backgroundColor: 'rgb(255 255 255 / 0.3)',
-            ...twj('absolute left-10 top-10 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
+            ...twj('absolute left-8 top-8 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
           }}
         >
           <div style={twj('flex rounded-xl')}>
@@ -36,23 +35,23 @@ const generateSvg = async (data, ctx) => {
               height={50}
             />
           </div>
-          <span style={{ fontSize: 30, fontWeight: 700 }}>
+          <span style={{ fontSize: 30, fontWeight: 'bold' }}>
             YUSONG.TW
           </span>
         </div>
         <h1
           style={{
             fontSize: 50,
-            fontWeight: 700,
-            ...twj('font-bold text-white drop-shadow-lg p-12')
+            fontWeight: 'bold',
+            ...twj('font-bold text-white text-center drop-shadow-lg p-10')
           }}
         >
           {title}
         </h1>
         <div
           style={{
-            fontWeight: 700,
-            ...twj('absolute left-10 bottom-10 flex text-black gap-2')
+            fontWeight: 'bold',
+            ...twj('absolute left-8 bottom-8 flex text-black gap-2')
           }}
         >
           {tags.map((tag, index) => (
