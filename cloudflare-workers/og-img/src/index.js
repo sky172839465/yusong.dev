@@ -42,7 +42,7 @@ export default {
             <div style={twj('flex rounded-xl')}>
               <img
                 style={twj('rounded-md')}
-                src={`<?xml version="1.0" encoding="UTF-8"?>
+                src={`data:image/svg+xml,<?xml version="1.0" encoding="UTF-8"?>
                 <!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 20010904//EN'  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
                 <svg version="1.0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                 <metadata>Created by Svg.la</metadata>
@@ -54,8 +54,7 @@ export default {
                 <path d="m4071 2867c-6-29-20-67-31-84l-19-32 81 39c110 54 142 78 45 35-65-29-78-32-73-18 8 30 19 113 14 113-3 0-10-24-17-53z"/>
                 <path d="m3990 2754c0-17-7-39-15-50-17-23-19-38-3-28 6 4 37 7 67 7l56-1-46 10c-45 9-47 11-47 45 0 19-3 37-6 40-3 4-6-7-6-23z"/>
                 </g>
-                </svg>
-                `}
+                </svg>`.replace(/\n/g, '')}
                 width={50}
                 height={50}
               />
