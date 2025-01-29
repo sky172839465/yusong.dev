@@ -8,12 +8,14 @@ const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'
 const TITLE = BLOG_HOST.toUpperCase()
 const ROUTE_MAP = keyBy(
-  routes.map(({ title, ...item }) => {
+  routes.map(({ data = {}, ...item }) => {
+    const { title, tags = [] } = data
+    const strTags = encodeURIComponent(tags.join(','))
     return {
       ...item,
-      title,
-      image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}`,
-      twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&width=1200&height=628`
+      data,
+      image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&tags=${strTags}`,
+      twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&tags=${strTags}&width=1200&height=628`
     }
   }),
   'path'
@@ -37,7 +39,8 @@ export default {
     const response = await fetch(request)
     const html = await response.text()
     // 如果路徑匹配文章，動態生成 meta tags
-    const { type, title, description, image, twitterImage } = targetRoute
+    const { type, data, image, twitterImage } = targetRoute
+    const { title, description } = data
     const modifiedHtml = html.replace(
       '</head>',
       `
