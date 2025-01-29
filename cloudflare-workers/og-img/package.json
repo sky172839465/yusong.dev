@@ -6,7 +6,7 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"build": "rm -f src/favicon.svg && cat ../../public/favicon.svg >> src/favicon.svg && node ./generateFavData.js"
+		"build": "node ./generateFavData.js"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.6.4",

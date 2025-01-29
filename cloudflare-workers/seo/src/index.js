@@ -1,39 +1,22 @@
 import { keyBy } from 'lodash-es'
 
+import routes from './routes.json'
+
 const OG_IMG_URL = 'https://og-img.sky172839465.workers.dev/og-img'
 const AUTHOR = 'YuSong Hsu'
 const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'
 const TITLE = BLOG_HOST.toUpperCase()
-const DEFAULT_META = {
-  type: 'website',
-  title: TITLE,
-  description: 'This is Yusong\'s blog',
-  image: `${OG_IMG_URL}?title=${encodeURIComponent(TITLE)}`,
-  twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(TITLE)}&width=1200&height=628`
-}
-const META = keyBy(
-  [
-    {
-      title: 'Lazy Article',
-      description: 'This is an awesome article about lazy things.',
-      key: 'lazy'
-    },
-    {
-      title: 'Hello World Article',
-      description: 'This is an awesome article about hello world things.',
-      key: 'hello-world'
-    }
-  ].map(({ title, ...item }) => {
+const ROUTE_MAP = keyBy(
+  routes.map(({ title, ...item }) => {
     return {
       ...item,
       title,
-      type: 'article',
       image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}`,
       twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&width=1200&height=628`
     }
   }),
-  'key'
+  'path'
 )
 
 export default {
@@ -44,17 +27,17 @@ export default {
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
     const isAssetRoute = /\.\D+$/.test(path)
-    if (isAssetRoute) {
+    const convertedPath = path.endsWith('/') ? path : `${path}/`
+    const targetRoute = ROUTE_MAP[convertedPath]
+    if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
-
-    const articleSlug = path.split('/').filter(Boolean).pop()
 
     // Fetch the original HTML
     const response = await fetch(request)
     const html = await response.text()
     // 如果路徑匹配文章，動態生成 meta tags
-    const { type, title, description, image, twitterImage } = META[articleSlug] || DEFAULT_META
+    const { type, title, description, image, twitterImage } = targetRoute
     const modifiedHtml = html.replace(
       '</head>',
       `

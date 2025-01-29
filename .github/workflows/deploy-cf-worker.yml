@@ -14,6 +14,9 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+      - name: Generate routes data
+        run: |
+          npm run gen:data
       - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
         with:
