@@ -29,6 +29,7 @@ export default {
     const isAssetRoute = /\.\D+$/.test(path)
     const convertedPath = path.endsWith('/') ? path : `${path}/`
     const targetRoute = ROUTE_MAP[convertedPath]
+    console.log(path, convertedPath, targetRoute)
     if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
