@@ -1,5 +1,5 @@
 const meta = {
-  title: 'YUSONG.IO',
+  title: 'YUSONG.TW',
   description: 'This is Yusong\'s blog'
 }
 export default meta
