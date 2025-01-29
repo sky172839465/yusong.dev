@@ -14,15 +14,28 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Generate routes data
-        run: |
-          npm run gen:data
+        run: npm run gen:data
+
       - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: cloudflare-workers/seo
+          preCommands: npm run build
+
       - name: Build & Deploy OG Image Worker
         uses: cloudflare/wrangler-action@v3
         with:
