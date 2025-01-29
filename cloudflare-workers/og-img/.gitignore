@@ -170,3 +170,7 @@ dist
 
 .dev.vars
 .wrangler/
+
+# runtime generate
+src/favicon.svg
+src/favicon.js
