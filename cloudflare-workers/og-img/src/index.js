@@ -82,7 +82,7 @@ export default {
               <div
                 style={{
                   backgroundColor: 'rgb(255 255 255 / 0.3)',
-                  ...twj('p-2 flex backdrop-blur-sm rounded-md')
+                  ...twj('p-2 flex text-white backdrop-blur-sm rounded-md')
                 }}
                 key={index}
               >
