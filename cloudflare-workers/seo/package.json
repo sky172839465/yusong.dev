@@ -6,7 +6,7 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"build": "cp ../../src/data/routes.json >> src/routes.json"
+		"build": "cp ../../src/data/routes.json ./src/routes.json"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.6.4",
