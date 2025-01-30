@@ -27,7 +27,11 @@ export default function ArticlesSection() {
                 <p className='mb-4 text-muted-foreground'>
                   {description}
                 </p>
-                <Link to={path} className='text-primary hover:underline'>
+                <Link
+                  to={path}
+                  className='text-primary hover:underline'
+                  viewTransition
+                >
                   Read more
                 </Link>
               </div>
