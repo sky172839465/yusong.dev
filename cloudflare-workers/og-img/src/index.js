@@ -60,7 +60,7 @@ export default {
             </div>
             <div
               style={{
-                fontSize: '20px',
+                fontSize: '40px',
                 ...twj(`flex gap-2 ${isNoTags ? 'hidden' : ''}`)
               }}
             >
