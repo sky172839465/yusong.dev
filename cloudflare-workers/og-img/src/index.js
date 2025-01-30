@@ -5,11 +5,6 @@ import { twj } from 'tw-to-css'
 
 import favicon from './favicon'
 
-const TYPE = {
-  WEBSITE: 'website',
-  ARTICLE: 'article'
-}
-
 export default {
   async fetch (request, env, ctx) {
     const requestUrl = request.url
@@ -21,7 +16,6 @@ export default {
     }
 
     const { searchParams } = new URL(requestUrl)
-    const type = searchParams.get('type') || TYPE.ARTICLE
     const title = searchParams.get('title') || 'Hello, World!'
     const width = searchParams.get('width') || 1200
     const height = searchParams.get('height') || 630
@@ -29,95 +23,52 @@ export default {
     const isNoTags = tags[0] === 'false'
     let component
     try {
-      switch (type) {
-      case TYPE.WEBSITE: {
-        component = (
+      component = (
+        <div
+          style={{
+            fontFamily: 'Noto Sans TC',
+            fontWeight: 700,
+            ...twj('flex flex-col w-full')
+          }}
+        >
           <div
             style={{
-              fontFamily: 'Noto Sans TC',
-              fontWeight: 400,
-              backgroundImage: `linear-gradient(
-                  to right top,
-                  #e17100,
-                  #fb2c36
-                )`,
-              ...twj('flex text-white w-full h-full items-center justify-center')
+              fontSize: '80px',
+              ...twj('flex h-[84%] items-center justify-center px-10')
             }}
           >
-            <div
-              style={{
-                backgroundColor: 'rgb(255 255 255 / 0.3)',
-                ...twj('flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
-              }}
-            >
-              <div style={twj('flex rounded-xl')}>
-                <img
-                  style={twj('rounded-md')}
-                  src={favicon}
-                  width={100}
-                  height={100}
-                />
-              </div>
-              <span style={{ fontSize: 80, fontWeight: 700 }}>
-                YUSONG.TW
-              </span>
-            </div>
+            {title}
           </div>
-        )
-        break
-      }
-      default: {
-        component = (
-          <div
-            style={{
-              fontFamily: 'Noto Sans TC',
-              fontWeight: 400,
-              backgroundImage: `linear-gradient(
-                  to right top,
-                  #e17100,
-                  #fb2c36
-                )`,
-              ...twj('relative flex text-white w-full h-full items-center justify-center')
-            }}
-          >
-            <div
-              style={{
-                backgroundColor: 'rgb(255 255 255 / 0.3)',
-                ...twj('absolute left-10 top-10 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
-              }}
-            >
-              <div style={twj('flex rounded-xl')}>
+          <div style={twj('flex h-[16%] w-full items-center justify-between bg-black px-8 text-white')}>
+            <div style={twj('flex items-center gap-2')}>
+              <div style={twj('flex rounded-md bg-white p-2')}>
                 <img
-                  style={twj('rounded-md')}
+                  style={twj('rounded-sm')}
                   src={favicon}
                   width={50}
                   height={50}
                 />
               </div>
-              <span style={{ fontSize: 30, fontWeight: 700 }}>
+              <span
+                style={{
+                  fontSize: '30px',
+                  ...twj('flex')
+                }}
+              >
                 YUSONG.TW
               </span>
             </div>
-            <h1
-              style={{
-                fontSize: 70,
-                fontWeight: 700,
-                ...twj('font-bold text-white drop-shadow-lg p-12')
-              }}
-            >
-              {title}
-            </h1>
             <div
               style={{
-                fontWeight: 700,
-                ...twj(`absolute left-10 bottom-10 flex gap-2 ${isNoTags ? 'hidden' : ''}`)
+                fontSize: '20px',
+                ...twj(`flex gap-2 ${isNoTags ? 'hidden' : ''}`)
               }}
             >
               {tags.map((tag, index) => (
                 <div
                   style={{
-                    backgroundColor: 'rgb(255 255 255 / 0.3)',
-                    ...twj('p-2 flex text-white backdrop-blur-sm rounded-md')
+                    border: '4px solid white',
+                    ...twj('flex rounded-md p-2')
                   }}
                   key={index}
                 >
@@ -126,10 +77,8 @@ export default {
               ))}
             </div>
           </div>
-        )
-        break
-      }
-      }
+        </div>
+      )
     } catch (e) {
       console.log(e)
     }
@@ -157,7 +106,7 @@ export default {
 // Optional: Fetch a custom font
 const fetchFont = async (ctx) => {
   // Step 1: Fetch the Google Font CSS
-  const fontUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap'
+  const fontUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap'
   const cache = await caches.open('fonts')
   const cached = await cache.match(fontUrl)
   if (cached) {
