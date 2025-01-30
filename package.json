@@ -12,7 +12,7 @@
     "gen:data": "node scripts/generateData.js",
     "gen:icons": "pwa-assets-generator",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix --ignore-pattern package-lock.json",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "prepare": "husky && mkdir -p src/data && npm run gen:data",
     "prettier": "prettier . -c",
