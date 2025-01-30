@@ -72,7 +72,7 @@ const Article = (props) => {
           </div>
           <div>
             <a
-              href={`https://github.com/sky172839465/yusong.tw/blob/main/src/${filePath.replace('./', '')}`}
+              href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
               target='_blank'
             >
               <Button>
