@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "prepare": "husky && mkdir -p src/data",
+    "prepare": "husky && mkdir -p src/data && npm run gen:data",
     "prettier": "prettier . -c",
     "prettier:fix": "prettier . --write"
   },
