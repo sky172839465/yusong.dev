@@ -45,7 +45,11 @@ const getConvertedPosts = (posts) => {
   const convertedPosts = reduce(posts, (collect, post, postKey) => {
     const result = (async () => {
       const { html: originHtml, attributes } = await post()
-      const html = unescape(originHtml)
+      const html = unescape(
+        originHtml.replace(/<table[\s\S]*?<\/table>/g, (match) => {
+          return `<div data-table>${match}</div>`
+        })
+      )
       const matches = [...html.matchAll(/<pre><code class="language-(.*)">([\s\S]*?)<\/code><\/pre>/g)].map((matches) => {
         const [replacement, lang, code] = matches
         return { replacement, lang, code }
