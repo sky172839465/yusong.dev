@@ -60,30 +60,35 @@ It showed a lady fitted out with a fur hat and fur boa who sat upright, raising 
     <th>Nationality</th>
     <th>Genre</th>
     <th>Most famous book</th>
+    <th>GHVD JKBHHFKJ</th>
   </tr>
   <tr>
     <td>Franz Kafka</td>
     <td>Leo Tolstoy</td>
     <td>F. Scott Fitzgerald</td>
     <td>H.G. Wells</td>
+    <td>WaFIJFI KFJN Worlds</td>
   </tr>
   <tr>
     <td>Austrian</td>
     <td>Russia</td>
     <td>American</td>
     <td>British</td>
+    <td>WaFIJFI KFJN Worlds</td>
   </tr>
   <tr>
     <td>Literature & Fiction, Philosophy, Short Stories</td>
     <td>Literature & Fiction, Philosophy</td>
     <td>Literature & Fiction, Short Stories</td>
     <td>Science Fiction</td>
+    <td>WaFIJFI KFJN Worlds</td>
   </tr>
-    <tr>
+  <tr>
     <td>The Metamorphosis</td>
     <td>War & Piece</td>
     <td>The Great Gatsby</td>
     <td>War of the Worlds</td>
+    <td>WaFIJFI KFJN Worlds</td>
   </tr>
   </table>
 
