@@ -52,7 +52,7 @@ const Article = (props) => {
         <meta property='og:title' content={title} />
         <meta property='og:description' content={description} />
       </Helmet>
-      <div className='flex flex-col gap-2'>
+      <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
         <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
@@ -74,7 +74,6 @@ const Article = (props) => {
             <a
               href={`https://github.com/sky172839465/yusong.tw/blob/main/src/${filePath.replace('./', '')}`}
               target='_blank'
-              // className='btn btn-primary'
             >
               <Button>
                 Edit on GitHub
@@ -84,7 +83,7 @@ const Article = (props) => {
         </div>
         <div
           ref={articleRef}
-          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert'
+          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert [&_[data-table]]:overflow-x-auto'
         >
           <div dangerouslySetInnerHTML={{ __html }} />
         </div>
