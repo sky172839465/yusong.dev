@@ -35,7 +35,7 @@ jobs:
 
       - name: Run linters fix
         run: |
-          # npm run prettier:fix
+          npm run prettier:fix
           npm run lint:fix
 
       - name: Check for changes
