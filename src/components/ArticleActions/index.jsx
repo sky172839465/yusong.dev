@@ -20,7 +20,7 @@ const ArticleActions = (props) => {
       return
     }
 
-    target.scrollIntoView({ behavior: 'smooth' })
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   const sharePost = () => {
