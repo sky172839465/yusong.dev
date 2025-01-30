@@ -12,7 +12,6 @@ const Comments = () => {
       category='Announcements'
       categoryId='DIC_kwDONva8T84Cmdvk'
       mapping='pathname'
-      term='Welcome to @giscus/react component!'
       reactionsEnabled='1'
       emitMetadata='0'
       inputPosition='top'
