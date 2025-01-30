@@ -12,7 +12,6 @@ import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
-const LazyMarkdown = lazy(() => import('@/components/Markdown/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
 
 const DefaultLayout = (props) => props.children
