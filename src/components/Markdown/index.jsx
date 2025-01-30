@@ -72,7 +72,10 @@ const Markdown = (props) => {
           </div>
         </div>
         {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-        <article ref={articleRef} className='markdown-body !bg-background !text-foreground [&_a[href^="#"]]:text-inherit'>
+        <article
+          ref={articleRef}
+          className='markdown-body !bg-background !text-foreground [&_a[href^="#"]]:text-inherit'
+        >
           <div
             dangerouslySetInnerHTML={{ __html }}
           />

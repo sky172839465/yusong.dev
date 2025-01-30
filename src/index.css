@@ -6,9 +6,10 @@
   --animation-btn: 0;
 }
 
-.shiki,
-.shiki span {
+html.light .shiki,
+html.light .shiki span {
   color: var(--shiki-light) !important;
+  background-color: #f6f8fa !important;
 }
 
 html.dark .shiki,
