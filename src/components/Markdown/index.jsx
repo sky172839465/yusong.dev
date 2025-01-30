@@ -1,6 +1,5 @@
-import 'github-markdown-css/github-markdown.css'
-
 import { flow, map } from 'lodash-es'
+import { lazy } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import useSWR from 'swr'
@@ -11,6 +10,8 @@ import BottomActions from '../BottomActions'
 import Dropdown from '../BottomActions/Dropdown'
 import ScrollToTop from '../BottomActions/ScrollToTop'
 import Shared from '../BottomActions/Share'
+
+const LazyComment = lazy(() => import('@/components/Comments'))
 
 const Markdown = (props) => {
   const { filePath, markdown } = props
@@ -116,6 +117,7 @@ const Markdown = (props) => {
           <Shared shareData={shareData} />
           <ScrollToTop topRef={topRef} />
         </BottomActions>
+        <LazyComment />
       </div>
     </>
   )
