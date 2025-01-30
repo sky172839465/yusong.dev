@@ -4,12 +4,16 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import Root from '../Root/index.jsx'
-import SkeletonHome from '../SkeletonHome/index.jsx'
+import Root from '@/components/Root/index.jsx'
+import SkeletonHome from '@/components/SkeletonHome/index.jsx'
+
 import ErrorElement from './ErrorElement.jsx'
+import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
-const LazyArticle = lazy(() => import('../Article/index.jsx'))
+const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
+const LazyMarkdown = lazy(() => import('@/components/Markdown/index.jsx'))
+const LazyMeta = lazy(() => import('@/components/Meta'))
 
 const DefaultLayout = (props) => props.children
 
@@ -18,6 +22,7 @@ const withErrorElement = (routes) => routes.map((item) => {
     element: Comp,
     isMarkdown,
     layout: Layout = DefaultLayout,
+    meta,
     ...route
   } = item
   return {
@@ -33,7 +38,10 @@ const withErrorElement = (routes) => routes.map((item) => {
             <LazyArticle {...item} />
           )}
           {!isMarkdown && (
-            <Comp />
+            <>
+              <Comp />
+              <LazyMeta fetchMetaData={meta} />
+            </>
           )}
         </Layout>
       </Suspense>
@@ -42,9 +50,9 @@ const withErrorElement = (routes) => routes.map((item) => {
   }
 })
 
+const routes = getRoutes()
 
-const Router = (props) => {
-  const { routes } = props
+const Router = () => {
   const totalRoutes = [
     {
       element: <Root />,
@@ -63,7 +71,7 @@ const Router = (props) => {
       ]
     }
   ]
-  console.log(totalRoutes)
+
   const router = createBrowserRouter(totalRoutes)
   return (
     <RouterProvider

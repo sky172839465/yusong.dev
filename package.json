@@ -2,7 +2,7 @@
   "name": "yusong.tw",
   "homepage": "https://yusong.tw",
   "private": true,
-  "version": "0.47.0",
+  "version": "0.48.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,7 @@
     "gen:data": "node scripts/generateData.js",
     "gen:icons": "pwa-assets-generator",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix --ignore-pattern package-lock.json",
     "preview": "vite preview",
     "prepare": "husky && mkdir -p src/data && npm run gen:data",
     "prettier": "prettier . -c",
