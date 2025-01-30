@@ -6,14 +6,11 @@ import useSWR from 'swr'
 
 import { Button } from '@/components/ui/button'
 
-import BottomActions from '../BottomActions'
-import Dropdown from '../BottomActions/Dropdown'
-import ScrollToTop from '../BottomActions/ScrollToTop'
-import Shared from '../BottomActions/Share'
+import ArticleActions from '../ArticleActions'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
 
-const Markdown = (props) => {
+const Article = (props) => {
   const { filePath, markdown } = props
   const articleRef = useRef()
   const topRef = useRef()
@@ -26,7 +23,6 @@ const Markdown = (props) => {
     text: description,
     url: window.location.href
   }
-  // console.log(props, attributes)
 
   useEffect(() => {
     if (!articleRef.current) {
@@ -55,25 +51,8 @@ const Markdown = (props) => {
         <meta property='og:url' content={shareData.url} />
         <meta property='og:title' content={title} />
         <meta property='og:description' content={description} />
-        <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='@sky172839465' />
-        <meta name='twitter:creator' content='@sky172839465' />
       </Helmet>
       <div className='flex flex-col gap-2'>
-        {/* <div className='flex flex-row items-center justify-between'>
-          <h2  className='text-xl'>
-            {title}
-          </h2>
-          <div>
-            <a
-              href={`https://github.com/sky172839465/vite-spa-starter/blob/main/src/${filePath.replace('./', '')}`}
-              target='_blank'
-              className='btn btn-primary'
-            >
-              Edit this page on GitHub
-            </a>
-          </div>
-        </div> */}
         <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
@@ -109,18 +88,15 @@ const Markdown = (props) => {
         >
           <div dangerouslySetInnerHTML={{ __html }} />
         </div>
-        <BottomActions>
-          <Dropdown
-            title='章節'
-            sections={sections}
-          />
-          <Shared shareData={shareData} />
-          <ScrollToTop topRef={topRef} />
-        </BottomActions>
+        <ArticleActions
+          topRef={topRef}
+          shareData={shareData}
+          sections={sections}
+        />
         <LazyComment />
       </div>
     </>
   )
 }
 
-export default Markdown
+export default Article

@@ -11,7 +11,7 @@ import ErrorElement from './ErrorElement.jsx'
 import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
-const LazyMarkdown = lazy(() => import('@/components/Markdown/index.jsx'))
+const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
 
 const DefaultLayout = (props) => props.children
@@ -34,7 +34,7 @@ const withErrorElement = (routes) => routes.map((item) => {
       >
         <Layout>
           {isMarkdown && (
-            <LazyMarkdown {...item} />
+            <LazyArticle {...item} />
           )}
           {!isMarkdown && (
             <>
