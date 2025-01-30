@@ -8,13 +8,13 @@ import useTheme from '@/hooks/useTheme'
 
 
 const Header = () => {
-  const { setTheme, theme } = useTheme()
+  const { toggle } = useTheme()
   const [, setLanguage] = useState('en')
 
   return (
-    <header className='border-b bg-background'>
+    <header className='sticky top-0 border-b bg-background'>
       <div className='container mx-auto flex items-center justify-between p-4'>
-        <Link href='/' className='flex items-center gap-2'>
+        <Link to='/' className='flex items-center gap-2'>
           <div className='rounded-md border-black bg-white p-[2px]'>
             <img
               src='/favicon.svg'
@@ -45,7 +45,7 @@ const Header = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant='outline' size='icon' onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+          <Button variant='outline' size='icon' onClick={toggle}>
             <Sun className='size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
             <Moon className='absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
             <span className='sr-only'>
