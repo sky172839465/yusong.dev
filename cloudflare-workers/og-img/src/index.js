@@ -51,8 +51,8 @@ export default {
               </div>
               <span
                 style={{
-                  fontSize: '50px',
-                  ...twj('flex text-xl')
+                  fontSize: '30px',
+                  ...twj('flex')
                 }}
               >
                 YUSONG.TW
@@ -60,13 +60,16 @@ export default {
             </div>
             <div
               style={{
-                fontSize: '40px',
+                fontSize: '20px',
                 ...twj(`flex gap-2 ${isNoTags ? 'hidden' : ''}`)
               }}
             >
               {tags.map((tag, index) => (
                 <div
-                  style={twj('flex rounded-md border-2 p-2')}
+                  style={{
+                    border: '4px solid white',
+                    ...twj('flex rounded-md p-2')
+                  }}
                   key={index}
                 >
                   {tag}
