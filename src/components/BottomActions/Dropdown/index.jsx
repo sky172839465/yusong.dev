@@ -41,8 +41,8 @@ const Dropdown = (props) => {
           className={`
             menu dropdown-content
             !fixed !bottom-24 left-2 m-0 w-[calc(100dvw-1rem)] rounded-box bg-black p-2
-            text-white shadow md:left-[25dvw] md:w-[50dvw]
-            dark:bg-slate-700 [&_a]:whitespace-nowrap
+            text-white shadow dark:bg-slate-700 md:left-[25dvw]
+            md:w-[50dvw] [&_a]:whitespace-nowrap
           `}
         >
           {map(sections, (section, index) => {
