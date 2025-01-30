@@ -1,4 +1,4 @@
-import { Globe,Moon, Sun } from 'lucide-react'
+import { Globe, Moon, Search,Sun } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -31,6 +31,17 @@ const Header = () => {
           </span>
         </Link>
         <div className='flex items-center space-x-4'>
+          <Link
+            to='/search'
+            viewTransition
+          >
+            <Button variant='outline' size='icon'>
+              <Search className='size-[1.2rem]' />
+              <span className='sr-only'>
+                Search website
+              </span>
+            </Button>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='outline' size='icon'>
