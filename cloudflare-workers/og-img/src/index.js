@@ -28,13 +28,13 @@ export default {
           style={{
             fontFamily: 'Noto Sans TC',
             fontWeight: 700,
-            ...twj('flex flex-col')
+            ...twj('flex flex-col w-full')
           }}
         >
           <div
             style={{
               fontSize: '80px',
-              ...twj('flex h-[84%] items-center justify-center')
+              ...twj('flex h-[84%] items-center justify-center px-10')
             }}
           >
             {title}
