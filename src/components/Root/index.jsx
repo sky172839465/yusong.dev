@@ -27,7 +27,7 @@ const Root = () => {
   }
 
   return (
-    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+    <ThemeProvider>
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
