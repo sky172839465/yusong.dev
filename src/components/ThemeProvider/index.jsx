@@ -26,6 +26,7 @@ export function ThemeProvider({ children, ...props }) {
   }, [isDarkMode])
 
   const value = {
+    isDarkMode,
     theme: isDarkMode ? 'dark' : 'light',
     toggle
   }
