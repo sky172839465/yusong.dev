@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react'
+import path from 'path'
 import tailwindcss from 'tailwindcss'
 import { defineConfig } from 'vite'
 import mdPlugin from 'vite-plugin-markdown'
@@ -30,6 +31,11 @@ export default ({ mode }) => {
     },
     define: {
       'window.IS_PROD': `${isProd}`
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src')
+      }
     }
   })
 }
