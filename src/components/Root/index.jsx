@@ -7,6 +7,7 @@ import { SWRConfig } from 'swr'
 
 import fetcher from '../../utils/fetcher'
 import CustomSwipe from '../CustomSwipe'
+import { ThemeProvider } from '../ThemeProvider'
 
 const Root = () => {
   const errorToastIdRef = useRef()
@@ -26,7 +27,7 @@ const Root = () => {
   }
 
   return (
-    <div className='bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-100'>
+    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -45,7 +46,7 @@ const Root = () => {
       </SWRConfig>
       <Toaster />
       <CustomSwipe />
-    </div>
+    </ThemeProvider>
   )
 }
 
