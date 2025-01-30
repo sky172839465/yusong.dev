@@ -9,7 +9,7 @@ import SkeletonHome from '../SkeletonHome/index.jsx'
 import ErrorElement from './ErrorElement.jsx'
 import loader from './index.loader'
 
-const LazyMarkdown = lazy(() => import('../Markdown/index.jsx'))
+const LazyArticle = lazy(() => import('../Article/index.jsx'))
 
 const DefaultLayout = (props) => props.children
 
@@ -30,7 +30,7 @@ const withErrorElement = (routes) => routes.map((item) => {
       >
         <Layout>
           {isMarkdown && (
-            <LazyMarkdown {...item} />
+            <LazyArticle {...item} />
           )}
           {!isMarkdown && (
             <Comp />
