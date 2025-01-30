@@ -14,7 +14,11 @@ const Header = () => {
   return (
     <header className='sticky top-0 border-b bg-background'>
       <div className='container mx-auto flex items-center justify-between p-4'>
-        <Link to='/' className='flex items-center gap-2'>
+        <Link
+          to='/'
+          className='flex items-center gap-2'
+          viewTransition
+        >
           <div className='rounded-md border-black bg-white p-[2px]'>
             <img
               src='/favicon.svg'
