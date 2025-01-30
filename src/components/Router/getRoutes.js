@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import { codeToHtml } from 'shiki'
 
 const pages = import.meta.glob('/src/pages/**/index.jsx')
+const metaes = import.meta.glob('/src/pages/**/index.meta.js')
 const loaders = import.meta.glob('/src/pages/**/index.loader.js')
 const layouts = import.meta.glob('/src/pages/**/index.layout.jsx')
 const posts = import.meta.glob(['/src/pages/**/*.md', '!/src/pages/**/*.draft.md'])
@@ -10,7 +11,8 @@ const posts = import.meta.glob(['/src/pages/**/*.md', '!/src/pages/**/*.draft.md
 const FILE_NAME = {
   MAIN: 'index.jsx',
   LOADER: 'index.loader.js',
-  LAYOUT: 'index.layout.jsx'
+  LAYOUT: 'index.layout.jsx',
+  META: 'index.meta.js'
 }
 
 const getClosestLayout = (layouts) => {
@@ -90,6 +92,7 @@ const getRoutes = () => {
       const fileName = filePath.replace('/src/pages', '').replace('.jsx', '').replace('.md', '')
       const path = filePath.replace('.md', '.jsx')
       const loaderPath = path.replace(FILE_NAME.MAIN, FILE_NAME.LOADER)
+      const metaPath = path.replace(FILE_NAME.MAIN, FILE_NAME.META)
       if (!fileName) {
         return collect
       }
@@ -103,6 +106,7 @@ const getRoutes = () => {
 
       const isIndex = fileName === '/index'
       const pageLoader = get(loaders, loaderPath)
+      const pageMeta = get(metaes, metaPath)
       const layout = getClosestLayoutFromGlob(path)
       const isMarkdown = filePath.endsWith('.md')
       collect.push({
@@ -112,6 +116,9 @@ const getRoutes = () => {
         path: isIndex ? '/' : `${normalizedPathName}/`,
         element: isMarkdown ? undefined : lazy(page),
         layout: layout ? lazy(layout) : undefined,
+        meta: (isMarkdown || !pageMeta)
+          ? undefined
+          : () => pageMeta().then((module) => module.default),
         loader: pageLoader
           ? (...args) => pageLoader().then((module) => module.default(...args))
           : null
@@ -119,7 +126,6 @@ const getRoutes = () => {
       return collect
     }, [])
   )()
-  console.log({ routes })
   return routes
 }
 
