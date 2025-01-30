@@ -82,7 +82,7 @@ const Markdown = (props) => {
           className='w-full rounded-lg'
         />
         <div className='flex flex-row items-center justify-between'>
-          <div className='text-gray-600 dark:text-gray-400 my-2'>
+          <div className='my-2 text-gray-600 dark:text-gray-400'>
             {createdAt === modifiedAt && (
               `Created: ${new Date(createdAt).toLocaleDateString()}`
             )}
