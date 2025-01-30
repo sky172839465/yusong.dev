@@ -1,5 +1,5 @@
 import { useIsSupported } from '@react-hooks-library/core'
-import { map } from 'lodash-es'
+import { isEmpty, map } from 'lodash-es'
 import { ArrowUpToLine,Hash,List, Share } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -36,7 +36,7 @@ const ArticleActions = (props) => {
       <div className='inline-flex'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='rounded-l-lg rounded-r-none'>
+            <Button variant='outline' className='rounded-l-lg rounded-r-none' disabled={isEmpty(sections)}>
               <List className='size-[1.2rem]' />
               章節
             </Button>
@@ -57,7 +57,7 @@ const ArticleActions = (props) => {
             })}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant='outline' className={`rounded-none border-x-background ${isShareSupported ? '' : 'disabled pointer-events-none'}`} onClick={sharePost}>
+        <Button variant='outline' className='rounded-none border-x-background' onClick={sharePost} disabled={!isShareSupported}>
           <Share className='size-[1.2rem]' />
           分享
         </Button>
