@@ -23,6 +23,8 @@ export function ThemeProvider({ children, ...props }) {
     const root = window.document.documentElement
     root.classList.remove('light', 'dark')
     root.classList.add(isDarkMode ? 'dark' : 'light')
+    const theme = window.document.querySelector('meta[name="theme-color"]')
+    theme.setAttribute('content', isDarkMode ? '#09090b' : '#fff')
   }, [isDarkMode])
 
   const value = {

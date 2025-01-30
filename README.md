@@ -32,7 +32,7 @@ To run the project on stackblitz, follow these steps:
 
 ## 🔧 Tech Stack
 
-- **Frontend**: React, Tailwind CSS
+- **Frontend**: React, Tailwind CSS, Shadcn
 - **Hosting**: GitHub Pages
 - **SEO Optimization**: react-helmet
 - **CDN**: Cloudflare Workers (for meta tag rewriting)
