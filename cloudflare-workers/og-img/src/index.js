@@ -28,7 +28,7 @@ export default {
           style={{
             fontFamily: 'Noto Sans TC',
             fontWeight: 700,
-            ...twj('flex flex-col w-full')
+            ...twj('flex flex-col w-full bg-white')
           }}
         >
           <div
