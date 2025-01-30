@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import useSWR from 'swr'
 
+import { Button } from '@/components/ui/button'
+
 import BottomActions from '../BottomActions'
 import Dropdown from '../BottomActions/Dropdown'
 import ScrollToTop from '../BottomActions/ScrollToTop'
@@ -17,7 +19,7 @@ const Markdown = (props) => {
   const [sections, setSections] = useState([])
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { html: __html, attributes } = data
-  const { title, description } = attributes
+  const { title, description, createdAt, modifiedAt, tags } = attributes
   const shareData = {
     title,
     text: description,
@@ -56,9 +58,9 @@ const Markdown = (props) => {
         <meta name='twitter:site' content='@sky172839465' />
         <meta name='twitter:creator' content='@sky172839465' />
       </Helmet>
-      <div className='space-y-2'>
-        <div className='flex flex-row items-center justify-between'>
-          <h2 ref={topRef} className='text-xl'>
+      <div className='flex flex-col gap-2'>
+        {/* <div className='flex flex-row items-center justify-between'>
+          <h2  className='text-xl'>
             {title}
           </h2>
           <div>
@@ -70,22 +72,51 @@ const Markdown = (props) => {
               Edit this page on GitHub
             </a>
           </div>
-        </div>
-        {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-        <article ref={articleRef} className='markdown-body !bg-background !text-foreground [&_a[href^="#"]]:text-inherit'>
-          <div
-            dangerouslySetInnerHTML={{ __html }}
-          />
-        </article>
-      </div>
-      <BottomActions>
-        <Dropdown
-          title='章節'
-          sections={sections}
+        </div> */}
+        <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
+          {title}
+        </h1>
+        <img
+          src={`https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`}
+          alt={title}
+          className='w-full rounded-lg'
         />
-        <Shared shareData={shareData} />
-        <ScrollToTop topRef={topRef} />
-      </BottomActions>
+        <div className='flex flex-row items-center justify-between'>
+          <div className='text-gray-600 dark:text-gray-400 my-2'>
+            {createdAt === modifiedAt && (
+              `Created: ${new Date(createdAt).toLocaleDateString()}`
+            )}
+            {createdAt !== modifiedAt && (
+              `Modified: ${new Date(modifiedAt).toLocaleDateString()}`
+            )}
+          </div>
+          <div>
+            <a
+              href={`https://github.com/sky172839465/yusong.tw/blob/main/src/${filePath.replace('./', '')}`}
+              target='_blank'
+              // className='btn btn-primary'
+            >
+              <Button>
+                Edit on GitHub
+              </Button>
+            </a>
+          </div>
+        </div>
+        <div
+          ref={articleRef}
+          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert'
+        >
+          <div dangerouslySetInnerHTML={{ __html }} />
+        </div>
+        <BottomActions>
+          <Dropdown
+            title='章節'
+            sections={sections}
+          />
+          <Shared shareData={shareData} />
+          <ScrollToTop topRef={topRef} />
+        </BottomActions>
+      </div>
     </>
   )
 }
