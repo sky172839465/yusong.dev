@@ -7,6 +7,7 @@ import {
 import Root from '../Root/index.jsx'
 import SkeletonHome from '../SkeletonHome/index.jsx'
 import ErrorElement from './ErrorElement.jsx'
+import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
 const LazyMarkdown = lazy(() => import('../Markdown/index.jsx'))
@@ -42,9 +43,9 @@ const withErrorElement = (routes) => routes.map((item) => {
   }
 })
 
+const routes = getRoutes()
 
-const Router = (props) => {
-  const { routes } = props
+const Router = () => {
   const totalRoutes = [
     {
       element: <Root />,
@@ -63,7 +64,7 @@ const Router = (props) => {
       ]
     }
   ]
-  console.log(totalRoutes)
+
   const router = createBrowserRouter(totalRoutes)
   return (
     <RouterProvider

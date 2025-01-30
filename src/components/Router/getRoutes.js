@@ -2,7 +2,10 @@ import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size, unescape } 
 import { lazy } from 'react'
 import { codeToHtml } from 'shiki'
 
-import getRootPagesEntries from './getRootPagesEntries.js'
+const pages = import.meta.glob('/src/pages/**/index.jsx')
+const loaders = import.meta.glob('/src/pages/**/index.loader.js')
+const layouts = import.meta.glob('/src/pages/**/index.layout.jsx')
+const posts = import.meta.glob(['/src/pages/**/*.md', '!/src/pages/**/*.draft.md'])
 
 const FILE_NAME = {
   MAIN: 'index.jsx',
@@ -71,7 +74,7 @@ const getConvertedPosts = (posts) => {
   return convertedPosts
 }
 
-const getRoutes = (pages, loaders, layouts, posts, isRoot = false) => {
+const getRoutes = () => {
   const convertedPosts = getConvertedPosts(posts)
   const getClosestLayoutFromGlob = getClosestLayout(layouts)
   const routes = flow(
@@ -80,16 +83,12 @@ const getRoutes = (pages, loaders, layouts, posts, isRoot = false) => {
         ...pages,
         ...convertedPosts
       }
-      return isRoot ? getRootPagesEntries(entires) : Object.entries(entires)
+      return entires
     },
-    (pagesEntries) => pagesEntries.reduce((collect, pagesEntry) => {
-      const [originPath, page, rootPath] = pagesEntry
-      const convertedPath = (isRoot ? rootPath : originPath).match(/.*\/pages(.*)/)[1]
-      const fileName = (
-        `./pages/${convertedPath}`.match(/\.{1,2}\/pages\/(.*)\.jsx$/)?.[1] ||
-        `./pages/${convertedPath}`.match(/\.{1,2}\/pages\/(.*)\.md$/)?.[1]
-      )
-      const path = originPath.replace('.md', '.jsx')
+    (pagesEntries) => Object.keys(pagesEntries).reduce((collect, filePath) => {
+      const page = pagesEntries[filePath]
+      const fileName = filePath.replace('/src/pages', '').replace('.jsx', '').replace('.md', '')
+      const path = filePath.replace('.md', '.jsx')
       const loaderPath = path.replace(FILE_NAME.MAIN, FILE_NAME.LOADER)
       if (!fileName) {
         return collect
@@ -105,11 +104,11 @@ const getRoutes = (pages, loaders, layouts, posts, isRoot = false) => {
       const isIndex = fileName === '/index'
       const pageLoader = get(loaders, loaderPath)
       const layout = getClosestLayoutFromGlob(path)
-      const isMarkdown = originPath.endsWith('.md')
+      const isMarkdown = filePath.endsWith('.md')
       collect.push({
         isMarkdown,
         markdown: isMarkdown ? page : undefined,
-        filePath: originPath,
+        filePath,
         path: isIndex ? '/' : `${normalizedPathName}/`,
         element: isMarkdown ? undefined : lazy(page),
         layout: layout ? lazy(layout) : undefined,
@@ -120,6 +119,7 @@ const getRoutes = (pages, loaders, layouts, posts, isRoot = false) => {
       return collect
     }, [])
   )()
+  console.log({ routes })
   return routes
 }
 
