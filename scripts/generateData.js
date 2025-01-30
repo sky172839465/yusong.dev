@@ -52,4 +52,4 @@ const articles = await Promise.all(
 
 const DATA_FOLDER = 'src/data'
 fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...articles], null, 2), { encoding: 'utf-8' })
-fs.writeFileSync(`${DATA_FOLDER}/frontMatters.json`, JSON.stringify(articles, null, 2), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles, null, 2), { encoding: 'utf-8' })

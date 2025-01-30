@@ -1,12 +1,12 @@
 import { Form, FormProvider, useForm, useWatch } from 'react-hook-form'
 
-import { useFrontMatters } from '../../apis/useFrontMatters'
+import { useArticles } from '../../apis/useArticles'
 
 const defaultValues = { title: 'Lazy' }
 
 const Result = () => {
   const { title } = useWatch('title')
-  const { isLoading, data } = useFrontMatters({ title })
+  const { isLoading, data } = useArticles({ title })
 
   return (
     <div className='mockup-code grow'>
