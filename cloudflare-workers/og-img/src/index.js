@@ -79,61 +79,6 @@ export default {
           </div>
         </div>
       )
-      // component = (
-      //   <div
-      //     style={{
-      //       fontFamily: 'Noto Sans TC',
-      //       fontWeight: 400,
-      //       ...twj('relative flex w-full h-full items-center justify-center')
-      //     }}
-      //   >
-      //     <div
-      //       style={{
-      //         backgroundColor: 'rgb(255 255 255 / 0.3)',
-      //         ...twj('absolute left-10 top-10 flex gap-2 items-center backdrop-blur-sm rounded-xl p-2')
-      //       }}
-      //     >
-      //       <div style={twj('flex rounded-xl')}>
-      //         <img
-      //           style={twj('rounded-md')}
-      //           src={favicon}
-      //           width={50}
-      //           height={50}
-      //         />
-      //       </div>
-      //       <span style={{ fontSize: 30, fontWeight: 700 }}>
-      //         YUSONG.TW
-      //       </span>
-      //     </div>
-      //     <h1
-      //       style={{
-      //         fontSize: 70,
-      //         fontWeight: 700,
-      //         ...twj('font-bold text-white drop-shadow-lg p-12')
-      //       }}
-      //     >
-      //       {title}
-      //     </h1>
-      //     <div
-      //       style={{
-      //         fontWeight: 700,
-      //         ...twj(`absolute left-10 bottom-10 flex gap-2 ${isNoTags ? 'hidden' : ''}`)
-      //       }}
-      //     >
-      //       {tags.map((tag, index) => (
-      //         <div
-      //           style={{
-      //             backgroundColor: 'rgb(255 255 255 / 0.3)',
-      //             ...twj('p-2 flex text-white backdrop-blur-sm rounded-md')
-      //           }}
-      //           key={index}
-      //         >
-      //           {tag}
-      //         </div>
-      //       ))}
-      //     </div>
-      //   </div>
-      // )
     } catch (e) {
       console.log(e)
     }
