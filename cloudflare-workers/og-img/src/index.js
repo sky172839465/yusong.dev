@@ -51,7 +51,7 @@ export default {
               </div>
               <span
                 style={{
-                  fontSize: '30px',
+                  fontSize: '50px',
                   ...twj('flex text-xl')
                 }}
               >
