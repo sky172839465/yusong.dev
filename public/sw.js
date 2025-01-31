@@ -1,7 +1,12 @@
-import { precacheAndRoute } from 'workbox-precaching'
+import { clientsClaim } from 'workbox-core'
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
 
-// Precache assets (Workbox will replace __WB_MANIFEST at build time)
-precacheAndRoute(self.__WB_MANIFEST || [])
+cleanupOutdatedCaches()
+
+self.skipWaiting()
+clientsClaim()
+
+precacheAndRoute(self.__WB_MANIFEST)
 
 self.addEventListener('install', () => {
   console.log('[SW] Installed')
