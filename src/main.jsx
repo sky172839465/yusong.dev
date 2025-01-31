@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
   const registerSW = async () => {
     const [error, registration] = await tryit(
       () => navigator.serviceWorker.register('/custom-sw.js')
-    )
+    )()
     if (error) {
       console.log('Service Worker registration failed:', error)
       return
