@@ -1,12 +1,21 @@
 const SkeletonHome = () => {
-
   return (
     <div className='hero min-h-dvh w-full bg-background'>
       <div className='hero-content text-center'>
-        <div className='max-w-md'>
+        <div className='max-w-md space-y-4'>
           <h1 className='text-5xl font-bold'>
-            loading
+            YUSONG.TW
           </h1>
+          <div className='flex items-center justify-center space-x-2 text-xl'>
+            {['Loading', '...'].map((word, index) => (
+              <span
+                key={index}
+                className='animate-pulse text-lg font-medium'
+              >
+                {word}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

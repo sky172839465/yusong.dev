@@ -61,7 +61,7 @@ const Router = () => {
         ...withErrorElement(routes),
         {
           path: '/test',
-          element: SkeletonHome
+          element: <SkeletonHome />
         },
         {
           path: '*',
