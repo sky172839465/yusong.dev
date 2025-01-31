@@ -9,7 +9,7 @@ import Router from '@/components/Router'
 if ('serviceWorker' in navigator) {
   const registerSW = async () => {
     const [error, registration] = await tryit(
-      () => navigator.serviceWorker.register('/custom-sw.js')
+      () => navigator.serviceWorker.register('/sw.js')
     )()
     if (error) {
       console.log('Service Worker registration failed:', error)
