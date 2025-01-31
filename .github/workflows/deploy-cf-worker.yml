@@ -14,6 +14,24 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for Worker Code Changes
+        id: check_changes
+        run: |
+          if git diff --quiet HEAD^ -- ./cloudflare-workers/seo; then
+            echo "[seo] No changes detected in Worker code. Skipping deployment."
+            echo "[seo] SKIP_SEO_WORKER_DEPLOY=true" >> $GITHUB_OUTPUT
+          else
+            echo "[seo] Changes detected. Proceeding with deployment."
+          fi
+          if git diff --quiet HEAD^ -- ./cloudflare-workers/og-img; then
+            echo "[og-img] No changes detected in Worker code. Skipping deployment."
+            echo "[og-img] SKIP_OG_IMG_WORKER_DEPLOY=true" >> $GITHUB_OUTPUT
+          else
+            echo "[og-img] Changes detected. Proceeding with deployment."
+          fi
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -30,6 +48,7 @@ jobs:
 
       - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
+        if: ${{ steps.check_changes.outputs.SKIP_SEO_WORKER_DEPLOY != 'true' }}
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -38,6 +57,7 @@ jobs:
 
       - name: Build & Deploy OG Image Worker
         uses: cloudflare/wrangler-action@v3
+        if: ${{ steps.check_changes.outputs.SKIP_OG_IMG_WORKER_DEPLOY != 'true' }}
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
