@@ -50,9 +50,10 @@ const getConvertedPosts = (posts) => {
           .replace(/<table[\s\S]*?<\/table>/g, (match) => {
             return `<div data-table>${match}</div>`
           })
-          .replace(/\[([^\]]+)\]\((https?:\/\/[^\s<)]+)\)|\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
-            return `<a href="${match}" target="_blank" referrerpolicy="no-referrer">${match}</a>`
+          .replace(/(?<!\]\()(?<!href=")(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g, (match) => {
+            return `<a href="${match}">${match}</a>`
           })
+          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
       )
       const matches = [...html.matchAll(/<pre><code class="language-(.*)">([\s\S]*?)<\/code><\/pre>/g)].map((matches) => {
         const [replacement, lang, code] = matches
