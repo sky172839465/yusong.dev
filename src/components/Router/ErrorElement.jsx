@@ -1,4 +1,4 @@
-import { FaRoadCircleXmark } from 'react-icons/fa6'
+import { RouteOff } from 'lucide-react'
 import { Link, useRouteError } from 'react-router-dom'
 
 const ErrorElement = () => {
@@ -11,12 +11,11 @@ const ErrorElement = () => {
 
   return (
     <div className='hero h-dvh w-full'>
-      <div className='hero-content text-center'>
+      <div className='hero-content text-center text-foreground'>
         <div className='max-w-md'>
           <h1 className='text-5xl font-bold'>
-            <FaRoadCircleXmark
-              size='2em'
-              className='mx-auto'
+            <RouteOff
+              className='mx-auto size-12'
             />
             Oops!
           </h1>

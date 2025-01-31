@@ -1,8 +1,8 @@
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import useSwipeHandler from '../../hooks/useSwipeHandler'
 
-const ICONS = [FaArrowLeft, FaArrowRight]
+const ICONS = [ArrowLeft, ArrowRight]
 const DEFAULT_X_POSITION = [-8, 10]
 
 const CustomSwipe = () => {
@@ -31,7 +31,7 @@ const CustomSwipe = () => {
         return (
           <div
             key={index}
-            className='btn btn-circle border-none bg-black p-4'
+            className='btn btn-circle border-none bg-foreground p-4 text-background'
             style={{
               opacity: (
                 (isLeftArrow && opacityPercent) ||
@@ -45,7 +45,7 @@ const CustomSwipe = () => {
               )}dvw)`
             }}
           >
-            <Icon className='!fill-white' />
+            <Icon className='size-[1.2rem]' />
           </div>
         )
       })}

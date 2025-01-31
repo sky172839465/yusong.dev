@@ -6,6 +6,7 @@ import mdPlugin from 'vite-plugin-markdown'
 import sitemapPlugin from 'vite-plugin-sitemap'
 
 import { homepage } from './package.json'
+import pwaPluginConfig from './pwa.config'
 import routes from './src/data/routes.json'
 
 const routePaths = routes.map(route => route.path)
@@ -18,6 +19,7 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [
       react(),
+      pwaPluginConfig,
       mdPlugin.plugin({ mode: 'html' }),
       sitemapPlugin({
         hostname: homepage,
