@@ -16,7 +16,7 @@ export default function ArticlesSection() {
             loading
           </p>
         )}
-        {!isLoading && data.map(({ data = {}, path }) => {
+        {!isLoading && data.slice(0, 3).map(({ data = {}, path }) => {
           const { title, description } = data
           return (
             <div key={path} className='overflow-hidden rounded-lg bg-card text-card-foreground shadow-md'>

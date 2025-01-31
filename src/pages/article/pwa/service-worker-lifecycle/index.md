@@ -5,7 +5,7 @@ createdAt: 2025-01-31
 modifiedAt: 2025-01-31
 tags:
   - "PWA"
-  - "LIFE CYCLE"
+  - "LIFECYCLE"
 index: 1
 ---
 

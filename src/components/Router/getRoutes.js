@@ -1,6 +1,5 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size, unescape } from 'lodash-es'
 import { lazy } from 'react'
-import { codeToHtml } from 'shiki'
 
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
@@ -44,6 +43,7 @@ const getClosestLayout = (layouts) => {
 const getConvertedPosts = (posts) => {
   const convertedPosts = reduce(posts, (collect, post, postKey) => {
     const result = (async () => {
+      const { codeToHtml } = await import('shiki')
       const { html: originHtml, attributes } = await post()
       const html = unescape(
         originHtml
