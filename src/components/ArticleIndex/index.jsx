@@ -25,11 +25,20 @@ const ArticleIndex = (props) => {
             } = {}
           } = article
           return (
-            <li key={index}>
-              <div className='flex items-center space-x-2'>
+            <li className='space-y-2' key={index}>
+              <div className='space-x-2'>
                 <Link to={path}>
                   {title}
                 </Link>
+                <span className='text-sm text-gray-600 dark:text-gray-400'>
+                  {`${
+                    modifiedAt === createdAt
+                      ? `建立時間：${new Date(createdAt).toLocaleDateString()}`
+                      : `修改時間：${new Date(modifiedAt).toLocaleDateString()}`}
+                  `}
+                </span>
+              </div>
+              <div className='flex flex-wrap gap-2'>
                 {tags.map((tag, index) => {
                   return (
                     <div className='badge badge-outline' key={index}>
@@ -37,13 +46,6 @@ const ArticleIndex = (props) => {
                     </div>
                   )
                 })}
-              </div>
-              <div className='my-2 text-gray-600 dark:text-gray-400'>
-                {`${
-                  modifiedAt === createdAt
-                    ? `建立時間：${new Date(createdAt).toLocaleDateString()}`
-                    : `修改時間：${new Date(modifiedAt).toLocaleDateString()}`}
-                `}
               </div>
               <p>
                 {description}
