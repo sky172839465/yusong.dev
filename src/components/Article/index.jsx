@@ -1,23 +1,41 @@
-import { flow, map } from 'lodash-es'
-import { lazy } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { filter, flow, map } from 'lodash-es'
+import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
+import { useArticles } from '@/apis/useArticles'
 import { Button } from '@/components/ui/button'
 
 import ArticleActions from '../ArticleActions'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
 
+const getSections = (html) => {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(html, 'text/html')
+
+  const result = flow(
+    () => [...(doc.querySelectorAll('a') || [])],
+    (links) => filter(links, (link) => link.href.includes('#')),
+    (hashLinks) => map(hashLinks, (hashLink) => ({
+      hash: hashLink.getAttribute('href'),
+      label: hashLink.textContent
+    }))
+  )()
+  return result
+}
+
 const Article = (props) => {
   const { filePath, markdown } = props
   const articleRef = useRef()
   const topRef = useRef()
-  const [sections, setSections] = useState([])
+  const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { html: __html, attributes } = data
-  const { title, description, createdAt, modifiedAt, tags, image } = attributes
+  const { title, description, createdAt, modifiedAt, tags, image, series } = attributes
+  const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
+  const sections = useMemo(() => getSections(__html), [__html])
   const shareData = {
     title,
     text: description,
@@ -27,22 +45,6 @@ const Article = (props) => {
     image ||
     `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
   )
-
-  useEffect(() => {
-    if (!articleRef.current) {
-      return
-    }
-
-    const articleSections = flow(
-      () => [...articleRef.current.querySelectorAll('a[href^="#"]')],
-      (titleLinkElements) => map(titleLinkElements, (titleLinkElement) => {
-        const hash = (new URL(titleLinkElement.href)).hash
-        const label = titleLinkElement.innerText
-        return { hash, label }
-      })
-    )()
-    setSections(articleSections)
-  }, [])
 
   return (
     <>
@@ -87,6 +89,7 @@ const Article = (props) => {
           </div>
         </div>
         <div
+          key={pathname}
           ref={articleRef}
           className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert [&_[data-table]]:overflow-x-auto'
         >
@@ -96,6 +99,7 @@ const Article = (props) => {
           topRef={topRef}
           shareData={shareData}
           sections={sections}
+          series={seriesArticles}
         />
         <LazyComment />
       </div>

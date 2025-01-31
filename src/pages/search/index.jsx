@@ -6,7 +6,7 @@ const defaultValues = { title: 'Lazy' }
 
 const Result = () => {
   const { title } = useWatch('title')
-  const { isLoading, data } = useArticles({ title })
+  const { isLoading, data } = useArticles({ data: { title } })
 
   return (
     <div className='mockup-code grow'>

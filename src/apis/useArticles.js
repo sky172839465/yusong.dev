@@ -3,11 +3,11 @@ import useSWR from 'swr'
 
 export const fetcher = async (query) => {
   const data = (await import('../data/articles.json')).default
-  return filter(data, item => JSON.stringify(item).includes(query.title))
+  return filter(data, query)
 }
 
-export const useArticles = (query = {}, options = {}) => {
-  const result = useSWR(query, fetcher, options)
+export const useArticles = (query, options = {}) => {
+  const result = useSWR(query ? query : null, fetcher, options)
   return result
 }
 
