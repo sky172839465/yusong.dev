@@ -22,13 +22,13 @@ jobs:
         run: |
           if git diff --quiet HEAD^ -- ./cloudflare-workers/seo; then
             echo "[seo] No changes detected in Worker code. Skipping deployment."
-            echo "[seo] SKIP_SEO_WORKER_DEPLOY=true" >> $GITHUB_ENV
+            echo "SKIP_SEO_WORKER_DEPLOY=true" >> $GITHUB_ENV
           else
             echo "[seo] Changes detected. Proceeding with deployment."
           fi
           if git diff --quiet HEAD^ -- ./cloudflare-workers/og-img; then
             echo "[og-img] No changes detected in Worker code. Skipping deployment."
-            echo "[og-img] SKIP_OG_IMG_WORKER_DEPLOY=true" >> $GITHUB_ENV
+            echo "SKIP_OG_IMG_WORKER_DEPLOY=true" >> $GITHUB_ENV
           else
             echo "[og-img] Changes detected. Proceeding with deployment."
           fi
