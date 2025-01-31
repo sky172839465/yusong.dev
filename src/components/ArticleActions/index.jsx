@@ -38,7 +38,7 @@ const ArticleActions = (props) => {
           <DropdownMenuTrigger asChild>
             <Button variant='outline' className='rounded-l-lg rounded-r-none' disabled={isEmpty(sections)}>
               <List className='size-[1.2rem]' />
-              章節
+              段落
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
