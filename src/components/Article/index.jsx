@@ -17,12 +17,16 @@ const Article = (props) => {
   const [sections, setSections] = useState([])
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { html: __html, attributes } = data
-  const { title, description, createdAt, modifiedAt, tags } = attributes
+  const { title, description, createdAt, modifiedAt, tags, image } = attributes
   const shareData = {
     title,
     text: description,
     url: window.location.href
   }
+  const mainImage = (
+    image ||
+    `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
+  )
 
   useEffect(() => {
     if (!articleRef.current) {
@@ -57,9 +61,10 @@ const Article = (props) => {
           {title}
         </h1>
         <img
-          src={`https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`}
+          src={mainImage}
           alt={title}
           className='w-full rounded-lg'
+          loading='lazy'
         />
         <div className='flex flex-row items-center justify-between'>
           <div className='my-2 text-gray-600 dark:text-gray-400'>
