@@ -61,7 +61,7 @@ export default {
             <div
               style={{
                 fontSize: '20px',
-                ...twj(`flex gap-2 ${isNoTags ? 'hidden' : ''}`)
+                ...twj(`flex gap-6 ${isNoTags ? 'hidden' : ''}`)
               }}
             >
               {tags.map((tag, index) => (
