@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useArticles } from '@/apis/useArticles'
 
 export default function ArticlesSection() {
-  const { isLoading, data } = useArticles({ title: 'md' })
+  const { isLoading, data } = useArticles({ type: 'article' })
 
   return (
     <section id='articles' className='my-12'>
