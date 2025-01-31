@@ -1,13 +1,13 @@
 import ArticlesSection from './ArticlesSection'
-import FitnessSection from './FitnessSection'
-import ToolsSection from './ToolsSection'
+import SeriesSection from './SeriesSection'
+// import FitnessSection from './FitnessSection'
+// import ToolsSection from './ToolsSection'
 
 function App() {
   return (
     <>
       <ArticlesSection />
-      <ToolsSection />
-      <FitnessSection />
+      <SeriesSection />
     </>
   )
 }

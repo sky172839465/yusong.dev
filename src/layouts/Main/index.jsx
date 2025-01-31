@@ -4,9 +4,9 @@ import Header from '../Header'
 const MainLayout = (props) => {
   const { children } = props
   return (
-    <div className='min-h-dvh bg-background'>
+    <div className='flex min-h-dvh flex-col bg-background'>
       <Header />
-      <main className='container mx-auto px-4 py-8'>
+      <main className='container mx-auto grow px-4 py-8'>
         {children}
       </main>
       <Footer />
