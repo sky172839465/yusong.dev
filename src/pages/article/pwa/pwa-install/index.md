@@ -6,6 +6,7 @@ modifiedAt: 2025-01-31
 tags:
   - "PWA"
   - "WEB APP"
+index: 3
 ---
 
 只要設定好 Web App Manifest，加上一些條件，瀏覽器就會跳出「安裝」按鈕，讓網站變成像 App 一樣的存在。

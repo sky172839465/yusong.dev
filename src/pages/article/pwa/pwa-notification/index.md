@@ -6,6 +6,7 @@ modifiedAt: 2025-01-31
 tags:
   - "PWA"
   - "NOTIFICATION"
+index: 4
 ---
 
 PWA 也能透過 Notification API 推播訊息，就算使用者關掉網站，還是能收到更新提醒。
