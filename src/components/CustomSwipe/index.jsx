@@ -31,7 +31,7 @@ const CustomSwipe = () => {
         return (
           <div
             key={index}
-            className='btn btn-circle border-none bg-foreground text-background p-4'
+            className='btn btn-circle border-none bg-foreground p-4 text-background'
             style={{
               opacity: (
                 (isLeftArrow && opacityPercent) ||

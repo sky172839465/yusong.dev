@@ -15,7 +15,7 @@ const ErrorElement = () => {
         <div className='max-w-md'>
           <h1 className='text-5xl font-bold'>
             <RouteOff
-              className='size-[3rem] mx-auto'
+              className='mx-auto size-12'
             />
             Oops!
           </h1>
