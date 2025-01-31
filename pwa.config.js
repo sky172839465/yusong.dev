@@ -2,6 +2,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default VitePWA({
   registerType: 'autoUpdate',
+  strategies: 'injectManifest',
+  srcDir: 'src',
+  filename: 'sw.js',
   manifest: {
     name: 'yusong.tw',
     short_name: 'yusong.tw',
