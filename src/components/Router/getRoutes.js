@@ -46,9 +46,14 @@ const getConvertedPosts = (posts) => {
     const result = (async () => {
       const { html: originHtml, attributes } = await post()
       const html = unescape(
-        originHtml.replace(/<table[\s\S]*?<\/table>/g, (match) => {
-          return `<div data-table>${match}</div>`
-        })
+        originHtml
+          .replace(/<table[\s\S]*?<\/table>/g, (match) => {
+            return `<div data-table>${match}</div>`
+          })
+          .replace(/(?<!\]\()(?<!href=")(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g, (match) => {
+            return `<a href="${match}">${match}</a>`
+          })
+          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
       )
       const matches = [...html.matchAll(/<pre><code class="language-(.*)">([\s\S]*?)<\/code><\/pre>/g)].map((matches) => {
         const [replacement, lang, code] = matches

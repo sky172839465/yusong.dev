@@ -9,11 +9,11 @@ index: 0
 image: https://github.com/user-attachments/assets/1975746d-1c97-4bda-ad5d-b2329fc2d913
 ---
 
-### 起源
+### [起源](#come-from)
 
 > Progressive Web App (PWA) 最早由 Google 在 2015 年提出，目標是讓 Web 應用具備與原生 App 相似的體驗，同時保留 Web 的開放性與易維護性。從技術角度來看，PWA 並不是一種新的框架或技術，而是對 Web 應用的一組標準與最佳實踐，使其在現代瀏覽器中能夠具備更強的能力。
 
-### 核心技術
+### [主要技術](#core-tech)
 
 主要圍繞以下幾點技術要素：
 
@@ -27,7 +27,7 @@ image: https://github.com/user-attachments/assets/1975746d-1c97-4bda-ad5d-b2329f
 - HTTPS (限制)
   - PWA 必須 在 HTTPS 環境下執行，以確保 Service Worker 不能被中間人攻擊（MITM Attack）。
 
-### 抽象情境
+### [抽象情境](#story)
 
 想像你第一次當老闆在巷子裡開了一間咖啡店 ☕，顧客必須來到現場才能買咖啡。但隨著工作越來越熟悉，你希望生意越來越好、能提供更好的消費體驗，於是你開始做出一些改善(漸進式)！
 
