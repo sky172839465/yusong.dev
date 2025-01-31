@@ -1,6 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { keyBy } from 'lodash-es'
+import { keyBy, orderBy } from 'lodash-es'
 import { globSync } from 'tinyglobby'
 
 const TYPE = {
@@ -59,7 +59,11 @@ const series = pages.filter((page) => {
 })
 fs.writeFileSync(`${DATA_FOLDER}/series.json`, JSON.stringify(series, null, 2), { encoding: 'utf-8' })
 
-const pwaArticles = articles.filter((article) => {
-  return article.path.startsWith('/article/pwa')
-})
+const pwaArticles = orderBy(
+  articles.filter((article) => {
+    return article.path.startsWith('/article/pwa')
+  }),
+  'data.index',
+  'asc'
+)
 fs.writeFileSync(`${DATA_FOLDER}/pwaArticles.json`, JSON.stringify(pwaArticles, null, 2), { encoding: 'utf-8' })
