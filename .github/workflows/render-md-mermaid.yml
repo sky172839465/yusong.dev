@@ -16,7 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
@@ -25,7 +24,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
-          ls -l src/pages/article/tech/lazy/index.md
+          ls -l src/pages/article/tech/lazy
           git diff --exit-code || echo "changed=1" >> $GITHUB_OUTPUT
 
       - name: Commit if mermaid diagrams generated
