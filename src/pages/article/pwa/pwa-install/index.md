@@ -7,6 +7,7 @@ tags:
   - "PWA"
   - "WEB APP"
 index: 3
+image: true
 series: "PWA"
 ---
 
