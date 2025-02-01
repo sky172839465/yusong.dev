@@ -9,19 +9,23 @@ on:
 jobs:
   render-md-mermaid:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+          ref: ${{ github.head_ref }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
         uses: nielsvaneck/render-md-mermaid@v3
 
-      - name: Git diff
-        run: ls -l ./src/pages/article/tech/lazy
-
       - name: Commit rendered png and svg files
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: "*[.svg,.png]"
-          commit_message: automatically rendered mermaid diagrams
+          commit_user_name: "${GITHUB_ACTOR}"
+          commit_user_email: "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
+          commit_message: "chore: automatically rendered mermaid diagrams"
