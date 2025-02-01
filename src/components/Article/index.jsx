@@ -8,6 +8,7 @@ import { useArticles } from '@/apis/useArticles'
 import { Button } from '@/components/ui/button'
 
 import ArticleActions from '../ArticleActions'
+import LazyImage from '../LazyImage'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
 
@@ -26,6 +27,20 @@ const getSections = (html) => {
   return result
 }
 
+const useMainImage = (attributes = {}) => {
+  const { pathname } = useLocation()
+  const mainImage = useMemo(() => {
+    const { title, tags, image } = attributes
+    if (!image) {
+      return `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
+    }
+  
+    const imagePathFromSrc = `/src${pathname}main.png`
+    return `https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main${imagePathFromSrc}`
+  }, [attributes, pathname])
+  return mainImage
+}
+
 const Article = (props) => {
   const { filePath, markdown } = props
   const articleRef = useRef()
@@ -33,18 +48,15 @@ const Article = (props) => {
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { html: __html, attributes } = data
-  const { title, description, createdAt, modifiedAt, tags, image, series } = attributes
+  const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
+  const mainImage = useMainImage(attributes)
   const sections = useMemo(() => getSections(__html), [__html])
   const shareData = {
     title,
     text: description,
     url: window.location.href
   }
-  const mainImage = (
-    image ||
-    `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
-  )
 
   return (
     <>
@@ -62,7 +74,7 @@ const Article = (props) => {
         <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
-        <img
+        <LazyImage
           src={mainImage}
           alt={title}
           className='w-full rounded-lg'
