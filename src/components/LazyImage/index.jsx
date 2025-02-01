@@ -26,20 +26,23 @@ const Fallback = () => {
 const Image = ({ src, alt, className }) => {
   const { src: loadedSrc } = useImage({ srcList: src })
   return (
-    <img
-      src={loadedSrc}
-      alt={alt}
-      className={`${className || ''} aspect-video w-full rounded-lg`}
-      loading='lazy'
-    />
+    <div>
+      <img
+        src={loadedSrc}
+        alt={alt}
+        className={`${className || ''} rounded-lg`}
+        loading='lazy'
+      />
+    </div>
   )
 }
 
 const ImageWithSkeleton = (props) => {
+  const { className } = props
   return (
     <Suspense
       fallback={(
-        <Skeleton className='aspect-video w-full rounded-lg' />
+        <Skeleton className={`${className || ''} rounded-lg`} />
       )}
     >
       <Image {...props} />
