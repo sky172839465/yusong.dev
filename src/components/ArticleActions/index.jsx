@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger} from '@/components/ui/dropdown-menu'
+  DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
 const ArticleActions = (props) => {
   const { shareData, topRef, sections = [], series = [] } = props

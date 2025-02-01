@@ -53,6 +53,7 @@ export default [
       semi: ['error', 'never'],
       'indent': ['error', 2],
       'default-param-last': ['error'],
+      'object-curly-spacing': ['error', 'always'],
       'no-unused-expressions': [
         'error',
         { 'allowShortCircuit': true, 'allowTernary': true }
