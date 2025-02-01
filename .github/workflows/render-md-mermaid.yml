@@ -25,6 +25,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
+          ls -l src/pages/article/tech/lazy/index.md
           git diff --exit-code || echo "changed=1" >> $GITHUB_OUTPUT
 
       - name: Commit if mermaid diagrams generated
