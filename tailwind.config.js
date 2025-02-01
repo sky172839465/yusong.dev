@@ -6,11 +6,13 @@ import daisyui from 'daisyui'
 export default {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{html,js,jsx}'],
-  corePlugins: {
-    aspectRatio: false
-  },
   theme: {
   	extend: {
+      aspectRatio: {
+        auto: 'auto',
+        square: '1 / 1',
+        video: '16 / 9'
+      },
   		height: {
   			'screen-fill': '-webkit-fill-available'
   		},
