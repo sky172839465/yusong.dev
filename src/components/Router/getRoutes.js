@@ -1,6 +1,8 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size, unescape } from 'lodash-es'
 import { lazy } from 'react'
 
+import getFileUrl from '@/lib/getFileUrl'
+
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
 const loaders = import.meta.glob('/src/pages/**/index.loader.js')
@@ -42,19 +44,29 @@ const getClosestLayout = (layouts) => {
 
 const getConvertedPosts = (posts) => {
   const convertedPosts = reduce(posts, (collect, post, postKey) => {
+    const postFolder = postKey.replace('/index.md', '')
     const result = (async () => {
       const { codeToHtml } = await import('shiki')
       const { html: originHtml, attributes } = await post()
       const html = unescape(
         originHtml
+          // RWD table
           .replace(/<table[\s\S]*?<\/table>/g, (match) => {
             return `<div data-table>${match}</div>`
           })
+          // Format links
           .replace(/(?<!\]\()(?<!href=")(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g, (match) => {
             return `<a href="${match}">${match}</a>`
           })
+          // Outside links need to open new tab
           .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
+          // Same folder image
+          .replace(/<img src="([^"]+)"/g, (_, mermaidFileName) => {
+            const fileUrl = getFileUrl(`${postFolder}/${mermaidFileName}`)
+            return `<img src="${fileUrl}"`
+          })
       )
+
       const matches = [...html.matchAll(/<pre><code class="language-(.*)">([\s\S]*?)<\/code><\/pre>/g)].map((matches) => {
         const [replacement, lang, code] = matches
         return { replacement, lang, code }
