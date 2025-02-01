@@ -1,5 +1,5 @@
 import { useEventListener } from '@react-hooks-library/core'
-import {min } from 'lodash-es'
+import { min } from 'lodash-es'
 import { useRef, useState } from 'react'
 
 const MAXIMUM_TRIGGER_PX = 40
