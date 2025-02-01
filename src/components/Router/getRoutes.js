@@ -63,7 +63,7 @@ const getConvertedPosts = (posts) => {
           // Same folder image
           .replace(/<img src="([^"]+)"/g, (_, mermaidFileName) => {
             const fileUrl = getFileUrl(`${postFolder}/${mermaidFileName}`)
-            return `<img src="${fileUrl}"`
+            return `<img src="${fileUrl}" loading="lazy"`
           })
       )
 
