@@ -36,11 +36,22 @@ self.addEventListener('fetch', (event) => {
 
           return response // Or you could return a fallback if needed
         }
+        return response
       })
       .catch((error) => {
         // Handle fetch errors, like network issues
         console.error('Fetch failed:', error)
-        return caches.match(event.request) // Optional: try from cache
+        return caches.match(event.request).then((response) => {
+          if (!response) {
+            // If the requested resource is not cached and fails to fetch, force a page refresh
+            self.clients.matchAll().then((clients) => {
+              clients.forEach((client) => {
+                client.postMessage({ action: 'refresh' })
+              })
+            })
+          }
+          return response
+        })
       })
   )
 })
