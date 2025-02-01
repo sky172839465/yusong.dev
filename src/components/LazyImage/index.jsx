@@ -26,12 +26,14 @@ const Fallback = () => {
 const Image = ({ src, alt, className }) => {
   const { src: loadedSrc } = useImage({ srcList: src })
   return (
-    <img
-      src={loadedSrc}
-      alt={alt}
-      className={`${className || ''} rounded-lg`}
-      loading='lazy'
-    />
+    <div>
+      <img
+        src={loadedSrc}
+        alt={alt}
+        className={`${className || ''} rounded-lg`}
+        loading='lazy'
+      />
+    </div>
   )
 }
 
