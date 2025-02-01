@@ -35,8 +35,12 @@ const useMainImage = (attributes = {}) => {
       return `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
     }
   
-    const imagePathFromSrc = `/src${pathname}main.png`
-    return `https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main${imagePathFromSrc}`
+    const imagePathFromSrc = `/src/pages${pathname}main.png`
+    if (import.meta.env.PROD) {
+      return `https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main${imagePathFromSrc}`
+    }
+
+    return new URL(imagePathFromSrc, import.meta.url).href
   }, [attributes, pathname])
   return mainImage
 }
