@@ -16,6 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
@@ -26,7 +27,7 @@ jobs:
         run: |
           git diff --exit-code || echo "changed=1" >> $GITHUB_OUTPUT
 
-      - name: Commit if code changed by linter
+      - name: Commit if mermaid diagrams generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
         env:
           GH_TOKEN: ${{ github.token }}
