@@ -16,6 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
