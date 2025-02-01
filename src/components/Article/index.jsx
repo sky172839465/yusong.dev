@@ -81,7 +81,7 @@ const Article = (props) => {
         <LazyImage
           src={mainImage}
           alt={title}
-          className='w-full rounded-lg'
+          className='aspect-video w-full rounded-lg'
           loading='lazy'
         />
         <div className='flex flex-row items-center justify-between'>

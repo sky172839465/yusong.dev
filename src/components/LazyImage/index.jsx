@@ -29,17 +29,18 @@ const Image = ({ src, alt, className }) => {
     <img
       src={loadedSrc}
       alt={alt}
-      className={`${className || ''} aspect-video w-full rounded-lg`}
+      className={`${className || ''} rounded-lg`}
       loading='lazy'
     />
   )
 }
 
 const ImageWithSkeleton = (props) => {
+  const { className } = props
   return (
     <Suspense
       fallback={(
-        <Skeleton className='aspect-video w-full rounded-lg' />
+        <Skeleton className={`${className || ''} rounded-lg`} />
       )}
     >
       <Image {...props} />
