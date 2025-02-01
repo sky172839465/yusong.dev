@@ -18,7 +18,7 @@ jobs:
         uses: nielsvaneck/render-md-mermaid@v3
 
       - name: Git diff
-        run: git diff
+        run: ls -l /pages/article/tech/lazy
 
       - name: Commit rendered png and svg files
         uses: stefanzweifel/git-auto-commit-action@v4
