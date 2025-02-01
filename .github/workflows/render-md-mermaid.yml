@@ -1,0 +1,45 @@
+name: render-md-mermaid
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "**.md"
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+  actions: write
+
+jobs:
+  render-md-mermaid:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.REPO_TOKEN }}
+
+      - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
+        uses: nielsvaneck/render-md-mermaid@v3
+
+      - name: Check for changes
+        id: git_diff
+        run: |
+          git status --porcelain | grep . && echo "changed=1" || echo "changed=0" >> $GITHUB_OUTPUT
+
+      - name: Commit if mermaid diagrams generated
+        if: ${{ steps.git_diff.outputs.changed == 1 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "chore: automatically rendered mermaid diagrams"
+          git push
+          gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate mermaid diagrams, commit: $(git rev-parse --short HEAD)."

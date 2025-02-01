@@ -6,6 +6,7 @@ import useSWR from 'swr'
 
 import { useArticles } from '@/apis/useArticles'
 import { Button } from '@/components/ui/button'
+import getFileUrl from '@/lib/getFileUrl'
 
 import ArticleActions from '../ArticleActions'
 import LazyImage from '../LazyImage'
@@ -36,11 +37,7 @@ const useMainImage = (attributes = {}) => {
     }
   
     const imagePathFromSrc = `/src/pages${pathname}index.png`
-    if (import.meta.env.PROD) {
-      return `https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main${imagePathFromSrc}`
-    }
-
-    return new URL(imagePathFromSrc, import.meta.url).href
+    return getFileUrl(imagePathFromSrc)
   }, [attributes, pathname])
   return mainImage
 }

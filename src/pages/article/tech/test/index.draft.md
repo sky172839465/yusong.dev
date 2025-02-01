@@ -7,6 +7,8 @@ tags:
   - "Draft"
   - "awesome"
   - "rad"
+series: "TEST"
+index: 2
 ---
 
 # This is Draft

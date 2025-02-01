@@ -7,6 +7,8 @@ tags:
   - "hello-world"
   - "awesome"
   - "rad"
+series: "TEST"
+index: 1
 ---
 
 # This is hello-world
