@@ -18,4 +18,7 @@ jobs:
         uses: nielsvaneck/render-md-mermaid@v3
 
       - name: Commit rendered png and svg files
-        run: ls -l src/pages/article/tech/lazy
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: "*[.svg,.png]"
+          commit_message: automatically rendered mermaid diagrams
