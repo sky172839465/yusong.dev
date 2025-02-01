@@ -24,8 +24,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
-          ls -l src/pages/article/tech/lazy
-          git diff --exit-code || echo "changed=1" >> $GITHUB_OUTPUT
+          git ls-files --others --exclude-standard | grep . && echo "changed=1" >> $GITHUB_OUTPUT
 
       - name: Commit if mermaid diagrams generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
