@@ -8,7 +8,7 @@ import Router from '@/components/Router'
 
 if ('serviceWorker' in navigator) {
   const registerSW = async () => {
-    const [error] = await tryit(
+    const [error, result] = await tryit(
       () => navigator.serviceWorker.register('/sw.js')
     )()
     if (error) {
@@ -16,7 +16,7 @@ if ('serviceWorker' in navigator) {
       return
     }
 
-    console.log('Service Worker registered:')
+    console.log('Service Worker registered', result)
   }
   registerSW()
 
@@ -25,6 +25,7 @@ if ('serviceWorker' in navigator) {
       return
     }
 
+    console.log('refresh from message')
     window.location.reload()
   })
 }
