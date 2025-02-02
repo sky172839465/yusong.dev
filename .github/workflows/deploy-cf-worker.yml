@@ -38,7 +38,7 @@ jobs:
         run: npm install
 
       - name: Generate routes data
-        run: npm run create:data
+        run: npm run gen:data
 
       - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
