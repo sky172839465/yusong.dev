@@ -32,7 +32,7 @@ jobs:
           git status --porcelain | grep . && echo "changed=1" || echo "changed=0" >> $GITHUB_OUTPUT
 
       - name: Commit if mermaid diagrams generated
-        if: ${{ steps.git_diff.outputs.changed == 1 }}
+        # if: ${{ steps.git_diff.outputs.changed == 1 }}
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
