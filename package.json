@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run gen:routeData && vite build",
-    "build:gh": "npm run build && npm run build:404",
+    "build": "run-s gen:routeData gen:imageData && vite build",
+    "build:gh": "run-s build build:404",
     "build:404": "cp dist/index.html dist/404.html",
     "gen:data": "run-s gen:routeData gen:imageData gen:ogImageData",
     "gen:routeData": "mkdir -p src/data && node scripts/generateRouteData.js",
