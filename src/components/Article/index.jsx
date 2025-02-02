@@ -29,6 +29,21 @@ const getSections = (html) => {
   return result
 }
 
+const getPageImageAttr = (pageImage) => {
+  if (!pageImage) {
+    const dimensions = { width: '1200', height: '720' }
+    return { srcSet: null, dimensions }
+  }
+
+  const srcSet = flow(
+    () => get(pageImage, 'sizes', []),
+    sizes => map(sizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
+    srcSetList => join(srcSetList, ', ')
+  )()
+  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  return { srcSet, dimensions }
+}
+
 const useMainImage = (attributes = {}, pageImages = {}) => {
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
@@ -46,18 +61,31 @@ const useMainImage = (attributes = {}, pageImages = {}) => {
 
   const mainImage = getFileUrl(imagePathFromSrc)
   const pageImage = pageImages[imagePathFromSrc.replace('/', '')]
-  if (!pageImage) {
-    const dimensions = { width: '1200', height: '720' }
-    return { mainImage, srcSet: null, dimensions }
-  }
-
-  const srcSet = flow(
-    () => get(pageImage, 'sizes', []),
-    sizes => map(sizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
-    srcSetList => join(srcSetList, ', ')
-  )()
-  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  const { srcSet, dimensions } = getPageImageAttr(pageImage)
   return { mainImage, srcSet, dimensions }
+}
+
+const useArticleHtml = (html, pageImages) => {
+  const sections = useMemo(() => getSections(html), [html])
+  const articleHtml = useMemo(() => {
+    if (!pageImages) {
+      return html
+    }
+
+    const convertedHtml = html.replace(/<img src="([^"]+)"/g, (_, fileUrl) => {
+      const { pathname } = new URL(fileUrl)
+      const pageImage = pageImages[pathname.replace('/', '')]
+      const { srcSet, dimensions } = getPageImageAttr(pageImage)
+      if (!pageImage || !srcSet) {
+        return `<img src="${fileUrl}"`
+      }
+
+      const { width, height } = dimensions
+      return `<img src="${fileUrl}" srcset="${srcSet}" width="${width}" height="${height}" data-loaded="false" onload="this.setAttribute('data-loaded', 'true')"`
+    })
+    return convertedHtml
+  }, [html, pageImages])
+  return { sections, html: articleHtml }
 }
 
 const Article = (props) => {
@@ -67,11 +95,12 @@ const Article = (props) => {
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { data: pageImages } = usePageImages()
-  const { html: __html, attributes } = data
+  const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
   const { mainImage, srcSet, dimensions } = useMainImage(attributes, pageImages)
-  const sections = useMemo(() => getSections(__html), [__html])
+  const { sections, html: __html } = useArticleHtml(html, pageImages)
+  
   const shareData = {
     title,
     text: description,
