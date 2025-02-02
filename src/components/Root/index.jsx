@@ -1,5 +1,5 @@
 import { get } from 'lodash-es'
-import { useRef } from 'react'
+import { lazy, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
@@ -8,6 +8,8 @@ import { SWRConfig } from 'swr'
 import fetcher from '../../utils/fetcher'
 import CustomSwipe from '../CustomSwipe'
 import { ThemeProvider } from '../ThemeProvider'
+
+const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 
 const Root = () => {
   const errorToastIdRef = useRef()
@@ -46,6 +48,7 @@ const Root = () => {
       </SWRConfig>
       <Toaster />
       <CustomSwipe />
+      <LazyReloadPrompt />
     </ThemeProvider>
   )
 }
