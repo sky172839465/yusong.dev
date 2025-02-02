@@ -7,7 +7,7 @@ console.log(pwaInfo)
 import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 
-const INTERVAL_MS = 5 * 60 * 1000
+const INTERVAL_MS = 10 * 60 * 1000
 
 const ReloadPrompt = () => {
   const {
@@ -16,20 +16,17 @@ const ReloadPrompt = () => {
     updateServiceWorker
   } = useRegisterSW({
     onRegistered(r) {
-      // if (!r) {
-      //   return
-      // }
+      if (!r) {
+        return
+      }
 
-      setInterval(() => {
-        console.log('Checking for sw update', r)
-        // r.update()
-      }, INTERVAL_MS)
-      console.log('SW Registered', r)
+      setInterval(() => r.update(), INTERVAL_MS)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
     }
   })
+  console.log({ offlineReady, needRefresh })
 
   const close = () => {
     setOfflineReady(false)
