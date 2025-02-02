@@ -8,12 +8,10 @@ const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'
 const TITLE = BLOG_HOST.toUpperCase()
 const ROUTE_MAP = keyBy(
-  routes.map(({ data = {}, ...item }) => {
-    const { file } = data
+  routes.map(({ file, ...item }) => {
     const imageFolder = `${IMG_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
     return {
       ...item,
-      data,
       image: `${imageFolder}/og.svg`,
       twitterImage: `${imageFolder}/x.svg`
     }
