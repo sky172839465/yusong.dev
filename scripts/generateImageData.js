@@ -1,6 +1,9 @@
+import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
+
+import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const inputFolder = 'src'  // Folder where the original images are
 const sizes = {
@@ -22,7 +25,7 @@ async function getImageDimensions(filePath) {
 
 // Process images: Resize & Get dimensions
 async function processImages() {
-  const imagePaths = await glob(`${inputFolder}/**/*.{jpg,jpeg,png,webp,gif}`)
+  const imagePaths = await glob([`${inputFolder}/**/*.{jpg,jpeg,png}`], { ignore: [`${inputFolder}/**/*.gen.{jpg,jpeg,png}`] })
 
   let results = []
 
@@ -36,7 +39,8 @@ async function processImages() {
 
     let imageInfo = {
       original: {
-        path: path.resolve(filePath),
+        path: filePath,
+        route: outputDir,
         width: originalDimensions.width,
         height: originalDimensions.height
       },
@@ -45,7 +49,7 @@ async function processImages() {
 
     // Resize and save images in multiple sizes
     for (const [label, width] of Object.entries(sizes)) {
-      const outputFilePath = path.join(outputDir, `${fileName}-${label}${path.extname(filePath)}`)
+      const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
 
       await sharp(filePath)
         .resize({ width })
@@ -56,7 +60,7 @@ async function processImages() {
 
       imageInfo.sizes.push({
         size: label,
-        path: path.resolve(outputFilePath),
+        path: outputFilePath,
         width: resizedDimensions.width,
         height: resizedDimensions.height
       })
@@ -69,6 +73,16 @@ async function processImages() {
 }
 
 // Run the script
-processImages()
-  .then(images => console.log(JSON.stringify(images, null, 2)))
-  .catch(err => console.error(err))
+const images = await processImages()
+
+fs.writeFileSync(`${DATA_FOLDER}/images.json`, JSON.stringify(images, null, 2), { encoding: 'utf-8' })
+for (const image of images) {
+  const {
+    original: { route }
+  } = image
+  fs.writeFileSync(
+    `${PUBLIC_DATA_FOLDER}/${route.replace(ROUTE_FOLDER, '').replaceAll('/', '_')}_images.json`,
+    JSON.stringify(image, null, 2),
+    { encoding: 'utf-8' }
+  )
+}

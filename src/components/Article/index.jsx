@@ -36,7 +36,7 @@ const useMainImage = (attributes = {}) => {
       return `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
     }
   
-    const imagePathFromSrc = `/src/pages${pathname}index.png`
+    const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
     return getFileUrl(imagePathFromSrc)
   }, [attributes, pathname])
   return mainImage
