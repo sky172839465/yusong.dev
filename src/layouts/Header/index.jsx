@@ -56,7 +56,7 @@ const Header = () => {
                 English
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage('zh-tw')}>
-                Chinese
+                Traditional Chinese
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
