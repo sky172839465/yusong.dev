@@ -6,10 +6,10 @@ const defaultValues = { title: 'Lazy' }
 
 const Result = () => {
   const { title } = useWatch('title')
-  const { isLoading, data } = useArticles({ data: { title } })
+  const { isLoading, data } = useArticles(title)
 
   return (
-    <div className='mockup-code grow'>
+    <div className='mockup-code grow bg-foreground text-background'>
       <div className='h-full overflow-y-scroll'>
         {isLoading && (
           <pre>
@@ -36,7 +36,7 @@ const Demo = () => {
   const methods = useForm({ defaultValues })
 
   return (
-    <div className='mt-4 flex h-[calc(100dvh-11rem)] flex-col gap-4'>
+    <div className='flex h-[calc(100dvh-11rem)] flex-col gap-2'>
       <FormProvider {...methods}>
         <Form>
           <div className='form-control'>
