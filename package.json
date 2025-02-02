@@ -12,7 +12,7 @@
     "gen:data": "run-s gen:routeData gen:imageData gen:ogImageData",
     "gen:routeData": "mkdir -p src/data && node scripts/generateRouteData.js",
     "gen:imageData": "mkdir -p public/data && node scripts/generateImageData.js",
-    "gen:ogImageData": "node scripts/generateOgImageData.jsx",
+    "gen:ogImageData": "vite-node -c vite-node.config.js scripts/generateOgImageData.jsx",
     "icons": "pwa-assets-generator",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
