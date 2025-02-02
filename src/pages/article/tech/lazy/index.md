@@ -7,6 +7,7 @@ tags:
   - "Lazy"
   - "awesome"
   - "rad"
+image: true
 series: "TEST"
 index: 0
 ---
