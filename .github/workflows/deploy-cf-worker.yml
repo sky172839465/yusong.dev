@@ -1,9 +1,11 @@
 name: deploy-worker
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    paths:
+      - "src/pages/**/index.md"
+      - "src/pages/**/index.meta.js"
 # on:
 #   pull_request:
 #     types: [opened, reopened, synchronize]
@@ -11,21 +13,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Check for Worker Code Changes
-        id: check_changes
-        run: |
-          if git diff --quiet HEAD^ -- ./cloudflare-workers/og-img; then
-            echo "[og-img] No changes detected in Worker code. Skipping deployment."
-            echo "SKIP_OG_IMG_WORKER_DEPLOY=true" >> $GITHUB_ENV
-          else
-            echo "[og-img] Changes detected. Proceeding with deployment."
-          fi
 
       - name: Cache node_modules
         id: cache-node-modules
@@ -38,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Generate routes data
-        run: npm run create:data
+        run: npm run gen:data
 
       - name: Build & Deploy SEO Worker
         uses: cloudflare/wrangler-action@v3
@@ -46,13 +35,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: cloudflare-workers/seo
-          preCommands: npm run build
-
-      - name: Build & Deploy OG Image Worker
-        uses: cloudflare/wrangler-action@v3
-        if: env.SKIP_OG_IMG_WORKER_DEPLOY != 'true'
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: cloudflare-workers/og-img
           preCommands: npm run build

@@ -2,20 +2,20 @@ import { keyBy } from 'lodash-es'
 
 import routes from './routes.json'
 
-const OG_IMG_URL = 'https://og-img.sky172839465.workers.dev/og-img'
+const IMG_HOST = 'https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main'
 const AUTHOR = 'YuSong Hsu'
 const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'
 const TITLE = BLOG_HOST.toUpperCase()
 const ROUTE_MAP = keyBy(
   routes.map(({ data = {}, ...item }) => {
-    const { title, tags = [] } = data
-    const strTags = encodeURIComponent(tags.join(','))
+    const { file } = data
+    const imageFolder = `${IMG_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
     return {
       ...item,
       data,
-      image: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&tags=${strTags}`,
-      twitterImage: `${OG_IMG_URL}?title=${encodeURIComponent(title)}&tags=${strTags}&width=1200&height=628`
+      image: `${imageFolder}/og.svg`,
+      twitterImage: `${imageFolder}/x.svg`
     }
   }),
   'path'
