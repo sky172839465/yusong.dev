@@ -6,7 +6,7 @@ modifiedAt: 2025-01-12
 tags:
   - "Lazy"
   - "awesome"
-  - "rad"
+  - "redbull"
 image: true
 series: "TEST"
 index: 0
