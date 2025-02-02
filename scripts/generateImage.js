@@ -1,0 +1,74 @@
+import path from 'path'
+import sharp from 'sharp'
+import { glob } from 'tinyglobby'
+
+const inputFolder = 'src'  // Folder where the original images are
+const sizes = {
+  small: 320,   // Small size for mobile
+  medium: 768,  // Medium size for tablets
+  large: 1200   // Large size for desktops
+}
+
+// Get dimensions of an image
+async function getImageDimensions(filePath) {
+  try {
+    const metadata = await sharp(filePath).metadata()
+    return { width: metadata.width, height: metadata.height }
+  } catch (error) {
+    console.error(`Error processing ${filePath}:`, error)
+    return null
+  }
+}
+
+// Process images: Resize & Get dimensions
+async function processImages() {
+  const imagePaths = await glob(`${inputFolder}/**/*.{jpg,jpeg,png,webp,gif}`)
+
+  let results = []
+
+  for (const filePath of imagePaths) {
+    const fileName = path.basename(filePath, path.extname(filePath))
+    const outputDir = path.dirname(filePath)
+
+    // Get original image dimensions
+    const originalDimensions = await getImageDimensions(filePath)
+    if (!originalDimensions) continue
+
+    let imageInfo = {
+      original: {
+        path: path.resolve(filePath),
+        width: originalDimensions.width,
+        height: originalDimensions.height
+      },
+      sizes: []
+    }
+
+    // Resize and save images in multiple sizes
+    for (const [label, width] of Object.entries(sizes)) {
+      const outputFilePath = path.join(outputDir, `${fileName}-${label}${path.extname(filePath)}`)
+
+      await sharp(filePath)
+        .resize({ width })
+        .toFile(outputFilePath)
+
+      // Get dimensions of resized image
+      const resizedDimensions = await getImageDimensions(outputFilePath)
+
+      imageInfo.sizes.push({
+        size: label,
+        path: path.resolve(outputFilePath),
+        width: resizedDimensions.width,
+        height: resizedDimensions.height
+      })
+    }
+
+    results.push(imageInfo)
+  }
+
+  return results
+}
+
+// Run the script
+processImages()
+  .then(images => console.log(JSON.stringify(images, null, 2)))
+  .catch(err => console.error(err))

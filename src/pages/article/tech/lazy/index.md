@@ -106,7 +106,7 @@ function metamorphose(protagonist, author) {
 
 It was very easy to throw aside the blanket. He needed only to push himself up a little, and it fell by itself. But to continue was difficult, particularly because he was so unusually wide. He needed arms and hands to push himself upright. Instead of these, however, he had only many small limbs which were incessantly moving with very different motions and which, in addition, he was unable to control. If he wanted to bend one of them, then it was the first to extend itself, and if he finally succeeded doing with this limb what he wanted, in the meantime all the others, as if left free, moved around in an excessively painful agitation. "But I must not stay in bed uselessly," said Gregor to himself.
 
-![rendered image description](rendered_image.svg)
+![rendered image description](rendered_image.png)
 
 <details>
   <summary>diagram source</summary>
