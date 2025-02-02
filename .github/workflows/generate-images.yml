@@ -25,7 +25,7 @@ jobs:
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
         uses: nielsvaneck/render-md-mermaid@v3
 
-      - name: Generate OG & Twitter image
+      - name: Generate RWD / OG / Twitter image
         run: |
           npm install
           npm run gen:data
