@@ -4,6 +4,9 @@ export default VitePWA({
   // registerType: 'autoUpdate',
   // https://vite-pwa-org.netlify.app/guide/inject-manifest.html
   strategies: 'injectManifest',
+  injectManifest: {
+    globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'] // Cache only necessary files
+  },
   manifest: {
     name: 'yusong.tw',
     short_name: 'yusong.tw',
