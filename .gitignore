@@ -15,6 +15,7 @@ dev-dist
 
 # runtime generate data folder
 src/data/*
+public/data/*
 
 # Editor directories and files
 .idea

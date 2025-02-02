@@ -1,10 +1,11 @@
-import { filter, flow, map } from 'lodash-es'
+import { filter, flow, get, join, map, pick } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { useArticles } from '@/apis/useArticles'
+import { usePageImages } from '@/apis/usePageImages'
 import { Button } from '@/components/ui/button'
 import getFileUrl from '@/lib/getFileUrl'
 
@@ -28,18 +29,63 @@ const getSections = (html) => {
   return result
 }
 
-const useMainImage = (attributes = {}) => {
+const getPageImageAttr = (pageImage) => {
+  if (!pageImage) {
+    const dimensions = { width: '1200', height: '720' }
+    return { srcSet: null, dimensions }
+  }
+
+  const srcSet = flow(
+    () => get(pageImage, 'sizes', []),
+    sizes => map(sizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
+    srcSetList => join(srcSetList, ', ')
+  )()
+  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  return { srcSet, dimensions }
+}
+
+const useMainImage = (attributes = {}, pageImages = {}) => {
   const { pathname } = useLocation()
-  const mainImage = useMemo(() => {
-    const { title, tags, image } = attributes
+  const imagePathFromSrc = useMemo(() => {
+    const { image } = attributes
     if (!image) {
-      return `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
+      return null
     }
   
-    const imagePathFromSrc = `/src/pages${pathname}index.png`
-    return getFileUrl(imagePathFromSrc)
+    const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
+    return imagePathFromSrc
   }, [attributes, pathname])
-  return mainImage
+  if (!imagePathFromSrc) {
+    return { mainImage: null, srcSet: null, dimensions: {} }
+  }
+
+  const mainImage = getFileUrl(imagePathFromSrc)
+  const pageImage = pageImages[imagePathFromSrc.replace('/', '')]
+  const { srcSet, dimensions } = getPageImageAttr(pageImage)
+  return { mainImage, srcSet, dimensions }
+}
+
+const useArticleHtml = (html, pageImages) => {
+  const sections = useMemo(() => getSections(html), [html])
+  const articleHtml = useMemo(() => {
+    if (!pageImages) {
+      return html
+    }
+
+    const convertedHtml = html.replace(/<img src="([^"]+)"/g, (_, fileUrl) => {
+      const { pathname } = new URL(fileUrl)
+      const pageImage = pageImages[pathname.replace('/', '')]
+      const { srcSet, dimensions } = getPageImageAttr(pageImage)
+      if (!pageImage || !srcSet) {
+        return `<img src="${fileUrl}"`
+      }
+
+      const { width, height } = dimensions
+      return `<img src="${fileUrl}" srcset="${srcSet}" width="${width}" height="${height}" data-loaded="false" onload="this.setAttribute('data-loaded', 'true')"`
+    })
+    return convertedHtml
+  }, [html, pageImages])
+  return { sections, html: articleHtml }
 }
 
 const Article = (props) => {
@@ -48,11 +94,13 @@ const Article = (props) => {
   const topRef = useRef()
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
-  const { html: __html, attributes } = data
+  const { data: pageImages } = usePageImages()
+  const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
-  const mainImage = useMainImage(attributes)
-  const sections = useMemo(() => getSections(__html), [__html])
+  const { mainImage, srcSet, dimensions } = useMainImage(attributes, pageImages)
+  const { sections, html: __html } = useArticleHtml(html, pageImages)
+  
   const shareData = {
     title,
     text: description,
@@ -76,10 +124,12 @@ const Article = (props) => {
           {title}
         </h1>
         <LazyImage
+          srcSet={srcSet}
           src={mainImage}
+          sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
           alt={title}
           className='aspect-video w-full rounded-lg'
-          loading='lazy'
+          {...dimensions}
         />
         <div className='flex flex-row items-center justify-between'>
           <div className='my-2 text-gray-600 dark:text-gray-400'>

@@ -29,7 +29,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
-          git status --porcelain | grep . && echo "changed=1" || echo "changed=0" >> $GITHUB_OUTPUT
+          git status --porcelain | grep . && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit if mermaid diagrams generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}

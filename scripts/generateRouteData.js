@@ -3,14 +3,13 @@ import matter from 'gray-matter'
 import { keyBy, orderBy } from 'lodash-es'
 import { globSync } from 'tinyglobby'
 
+import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME,PAGE_FILE_NAME, PAGE_META_FILE_NAME, ROUTE_FOLDER } from './constants.js'
+
 const TYPE = {
   WEBSITE: 'website',
   ARTICLE: 'article'
 }
 
-const ROUTE_FOLDER = 'src/pages'
-const PAGE_FILE_NAME = 'index.jsx'
-const PAGE_META_FILE_NAME = 'index.meta.js'
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
 const pageMetaFilePathMap = keyBy(globSync(`${ROUTE_FOLDER}/**/${PAGE_META_FILE_NAME}`))
 const pages = await Promise.all(
@@ -31,8 +30,6 @@ const pages = await Promise.all(
     })
 )
 
-const ARTICLE_PATH_NAME = 'index.md'
-const DRAFT_ARTICLE_PATH_NAME = 'index.draft.md'
 const articleFilePaths = globSync([
   `${ROUTE_FOLDER}/**/${ARTICLE_PATH_NAME}`,
   `!${ROUTE_FOLDER}/**/${DRAFT_ARTICLE_PATH_NAME}`
@@ -50,7 +47,6 @@ const articles = await Promise.all(
     })
 )
 
-const DATA_FOLDER = 'src/data'
 fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...articles], null, 2), { encoding: 'utf-8' })
 fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles, null, 2), { encoding: 'utf-8' })
 

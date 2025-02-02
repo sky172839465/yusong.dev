@@ -22,8 +22,7 @@ const Fallback = () => {
   )
 }
 
-
-const Image = ({ src, alt, className }) => {
+const Image = ({ src, alt, className, ...props }) => {
   const { src: loadedSrc } = useImage({ srcList: src })
   return (
     <div>
@@ -32,6 +31,7 @@ const Image = ({ src, alt, className }) => {
         alt={alt}
         className={`${className || ''} rounded-lg`}
         loading='lazy'
+        {...props}
       />
     </div>
   )
