@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { useArticles } from '@/apis/useArticles'
+import { usePageImages } from '@/apis/usePageImages'
 import { Button } from '@/components/ui/button'
 import getFileUrl from '@/lib/getFileUrl'
 
@@ -48,6 +49,7 @@ const Article = (props) => {
   const topRef = useRef()
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
+  const { data: pageImages } = usePageImages()
   const { html: __html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
@@ -58,6 +60,7 @@ const Article = (props) => {
     text: description,
     url: window.location.href
   }
+  console.log(pageImages)
 
   return (
     <>

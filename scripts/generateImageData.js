@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { groupBy, keys } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
@@ -76,12 +77,12 @@ async function processImages() {
 const images = await processImages()
 
 fs.writeFileSync(`${DATA_FOLDER}/images.json`, JSON.stringify(images, null, 2), { encoding: 'utf-8' })
-for (const image of images) {
-  const {
-    original: { route }
-  } = image
+
+const routeImageMap = groupBy(images, 'original.route')
+for (const route of keys(routeImageMap)) {
+  const image = routeImageMap[route]
   fs.writeFileSync(
-    `${PUBLIC_DATA_FOLDER}/${route.replace(ROUTE_FOLDER, '').replaceAll('/', '_')}_images.json`,
+    `${PUBLIC_DATA_FOLDER}/${route.replace(ROUTE_FOLDER, '').replaceAll('/', '_')}.json`,
     JSON.stringify(image, null, 2),
     { encoding: 'utf-8' }
   )
