@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run gen:data && vite build",
+    "build": "npm run gen:routeData && vite build",
     "build:gh": "npm run build && npm run build:404",
     "build:404": "cp dist/index.html dist/404.html",
     "gen:data": "run-s gen:routeData gen:imageData gen:ogImageData",
@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "prepare": "husky && npm run gen:data",
+    "prepare": "husky",
     "prettier": "prettier . -c",
     "prettier:fix": "prettier . --write"
   },

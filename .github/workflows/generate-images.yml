@@ -1,10 +1,9 @@
-name: render-md-mermaid
+name: generate-images
 
 on:
   workflow_dispatch:
   pull_request:
-    paths:
-      - "**.md"
+    types: [opened, reopened, synchronize]
 
 permissions:
   contents: write
@@ -13,7 +12,7 @@ permissions:
   actions: write
 
 jobs:
-  render-md-mermaid:
+  generate-images:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,12 +25,17 @@ jobs:
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
         uses: nielsvaneck/render-md-mermaid@v3
 
+      - name: Generate OG & Twitter image
+        run: |
+          npm install
+          npm run gen:data
+
       - name: Check for changes
         id: git_diff
         run: |
-          git status --porcelain | grep . && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
+          git status --porcelain | grep grep -E '\.(jpg|jpeg|png|gif|svg)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
-      - name: Commit if mermaid diagrams generated
+      - name: Commit if images generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
         env:
           GH_TOKEN: ${{ github.token }}
@@ -40,6 +44,6 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
           git add .
-          git commit -m "chore: automatically rendered mermaid diagrams"
+          git commit -m "chore: automatically generate images"
           git push
-          gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate mermaid diagrams, commit: $(git rev-parse --short HEAD)."
+          gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate images, commit: $(git rev-parse --short HEAD)."
