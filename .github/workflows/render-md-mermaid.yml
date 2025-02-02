@@ -37,9 +37,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
         run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
-          git add .
-          git commit -m "chore: automatically rendered mermaid diagrams"
-          git push
-          gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate mermaid diagrams, commit: $(git rev-parse --short HEAD)."
+          echo ${{ steps.git_diff.outputs.changed == 1 }}
+          echo ${{ steps.git_diff.outputs.changed }}
+          # git config --global user.name "${GITHUB_ACTOR}"
+          # git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
+          # git add .
+          # git commit -m "chore: automatically rendered mermaid diagrams"
+          # git push
+          # gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate mermaid diagrams, commit: $(git rev-parse --short HEAD)."
