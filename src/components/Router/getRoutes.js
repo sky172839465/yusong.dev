@@ -1,8 +1,6 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size, unescape } from 'lodash-es'
 import { lazy } from 'react'
 
-import getFileUrl from '@/lib/getFileUrl'
-
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
 const loaders = import.meta.glob('/src/pages/**/index.loader.js')
@@ -61,8 +59,8 @@ const getConvertedPosts = (posts) => {
           // Outside links need to open new tab
           .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
           // Same folder image
-          .replace(/<img src="([^"]+)"/g, (_, mermaidFileName) => {
-            const fileUrl = getFileUrl(`${postFolder}/${mermaidFileName}`)
+          .replace(/<img src="([^"]+)"/g, (_, imageFileName) => {
+            const fileUrl = `${postFolder}/${imageFileName}`
             return `<img src="${fileUrl}" loading="lazy" class="rounded-lg"`
           })
       )
