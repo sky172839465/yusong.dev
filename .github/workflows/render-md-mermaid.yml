@@ -32,13 +32,11 @@ jobs:
           git status --porcelain | grep . && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit if mermaid diagrams generated
-        # if: ${{ steps.git_diff.outputs.changed == 1 }}
+        if: ${{ steps.git_diff.outputs.changed == 1 }}
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
         run: |
-          echo ${{ steps.git_diff.outputs.changed == 1 }}
-          echo ${{ steps.git_diff.outputs.changed }}
           # git config --global user.name "${GITHUB_ACTOR}"
           # git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
           # git add .
