@@ -1,4 +1,4 @@
-import { filter, flow, map } from 'lodash-es'
+import { filter, flow, get, join, map, pick } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -29,18 +29,35 @@ const getSections = (html) => {
   return result
 }
 
-const useMainImage = (attributes = {}) => {
+const useMainImage = (attributes = {}, pageImages = {}) => {
   const { pathname } = useLocation()
-  const mainImage = useMemo(() => {
-    const { title, tags, image } = attributes
+  const imagePathFromSrc = useMemo(() => {
+    const { image } = attributes
     if (!image) {
-      return `https://og-img.sky172839465.workers.dev/og-img?title=${title}&tags=${tags.join(',')}`
+      return null
     }
   
     const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
-    return getFileUrl(imagePathFromSrc)
+    return imagePathFromSrc
   }, [attributes, pathname])
-  return mainImage
+  if (!imagePathFromSrc) {
+    return { mainImage: null, srcSet: null, dimensions: {} }
+  }
+
+  const mainImage = getFileUrl(imagePathFromSrc)
+  const pageImage = pageImages[imagePathFromSrc.replace('/', '')]
+  if (!pageImage) {
+    const dimensions = { width: '1200', height: '720' }
+    return { mainImage, srcSet: null, dimensions }
+  }
+
+  const srcSet = flow(
+    () => get(pageImage, 'sizes', []),
+    sizes => map(sizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
+    srcSetList => join(srcSetList, ', ')
+  )()
+  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  return { mainImage, srcSet, dimensions }
 }
 
 const Article = (props) => {
@@ -53,14 +70,13 @@ const Article = (props) => {
   const { html: __html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
-  const mainImage = useMainImage(attributes)
+  const { mainImage, srcSet, dimensions } = useMainImage(attributes, pageImages)
   const sections = useMemo(() => getSections(__html), [__html])
   const shareData = {
     title,
     text: description,
     url: window.location.href
   }
-  console.log(pageImages)
 
   return (
     <>
@@ -79,10 +95,12 @@ const Article = (props) => {
           {title}
         </h1>
         <LazyImage
+          srcSet={srcSet}
           src={mainImage}
+          sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
           alt={title}
           className='aspect-video w-full rounded-lg'
-          loading='lazy'
+          {...dimensions}
         />
         <div className='flex flex-row items-center justify-between'>
           <div className='my-2 text-gray-600 dark:text-gray-400'>

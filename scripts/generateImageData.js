@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { groupBy, keys } from 'lodash-es'
+import { groupBy, keyBy, keys } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
@@ -83,7 +83,7 @@ for (const route of keys(routeImageMap)) {
   const image = routeImageMap[route]
   fs.writeFileSync(
     `${PUBLIC_DATA_FOLDER}/${route.replace(ROUTE_FOLDER, '').replaceAll('/', '_')}.json`,
-    JSON.stringify(image, null, 2),
+    JSON.stringify(keyBy(image, 'original.path'), null, 2),
     { encoding: 'utf-8' }
   )
 }
