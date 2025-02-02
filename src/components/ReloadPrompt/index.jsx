@@ -1,17 +1,29 @@
 import { MousePointerClick, X } from 'lucide-react'
+import { pwaInfo } from 'virtual:pwa-info'
 import { useRegisterSW } from 'virtual:pwa-register/react'
+
+console.log(pwaInfo)
 
 import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 
-export default function ReloadPrompt() {
+const INTERVAL_MS = 30 * 60 * 1000
+
+const ReloadPrompt = () => {
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker
   } = useRegisterSW({
     onRegistered(r) {
-      console.log('SW Registered: ' + r)
+      if (!r) {
+        return
+      }
+
+      setInterval(() => {
+        console.log('Checking for sw update')
+        r.update()
+      }, INTERVAL_MS)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
@@ -54,3 +66,5 @@ export default function ReloadPrompt() {
     )
   )
 }
+
+export default ReloadPrompt
