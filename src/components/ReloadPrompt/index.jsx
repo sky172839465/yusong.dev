@@ -20,7 +20,10 @@ const ReloadPrompt = () => {
         return
       }
 
-      setInterval(() => r.update(), INTERVAL_MS)
+      setInterval(() => {
+        console.log('Checking for sw update', r)
+        r.update()
+      }, INTERVAL_MS)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
