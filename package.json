@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview",
-    "prepare": "husky",
+    "prepare": "husky && run-s gen:routeData",
     "prettier": "prettier . -c",
     "prettier:fix": "prettier . --write"
   },
