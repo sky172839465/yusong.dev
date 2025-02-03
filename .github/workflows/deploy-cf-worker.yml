@@ -3,6 +3,7 @@ name: deploy-worker
 on:
   workflow_dispatch:
   push:
+    branches: ["main"]
     paths:
       - "src/pages/**/index.md"
       - "src/pages/**/index.meta.js"
