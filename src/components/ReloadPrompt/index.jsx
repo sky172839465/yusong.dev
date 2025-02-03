@@ -1,10 +1,6 @@
 import { Download,MousePointerClick, X } from 'lucide-react'
 import { useState } from 'react'
-import { pwaInfo } from 'virtual:pwa-info'
 import { useRegisterSW } from 'virtual:pwa-register/react'
-
-console.log(pwaInfo)
-
 
 import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
