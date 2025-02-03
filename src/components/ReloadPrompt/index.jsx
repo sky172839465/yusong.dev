@@ -20,9 +20,10 @@ const ReloadPrompt = () => {
         return
       }
 
+      r.update().then(console.log)
       setInterval(() => {
         console.log('Checking for sw update', r)
-        r.update()
+        r.update().then(console.log)
       }, INTERVAL_MS)
     },
     onRegisterError(error) {
