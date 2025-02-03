@@ -1,10 +1,6 @@
 import { Download,MousePointerClick, X } from 'lucide-react'
 import { useState } from 'react'
-import { pwaInfo } from 'virtual:pwa-info'
 import { useRegisterSW } from 'virtual:pwa-register/react'
-
-console.log(pwaInfo)
-
 
 import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
@@ -23,17 +19,13 @@ const ReloadPrompt = () => {
         return
       }
 
-      r.update().then(console.log)
-      setInterval(() => {
-        console.log('Checking for sw update', r)
-        r.update().then(console.log)
-      }, INTERVAL_MS)
+      r.update()
+      setInterval(() => r.update(), INTERVAL_MS)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
     }
   })
-  console.log({ offlineReady, needRefresh })
 
   const onClose = () => {
     setOfflineReady(false)
