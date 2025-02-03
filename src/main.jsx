@@ -22,6 +22,10 @@ if ('serviceWorker' in navigator) {
   registerSW()
 }
 
+window.addEventListener('beforeunload', function () {
+  console.warn('Page reload detected!', new Error().stack)
+})
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router />

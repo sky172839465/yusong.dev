@@ -14,8 +14,8 @@ self.addEventListener('install', () => {
 
 // Claim clients immediately after activation
 self.addEventListener('activate', (event) => {
-  console.log('[SW] Activated', event)
-  // event.waitUntil(self.clients.claim())
+  console.log('[SW] Activated')
+  event.waitUntil(self.clients.claim())
 })
 
 registerRoute(
