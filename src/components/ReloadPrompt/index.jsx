@@ -15,6 +15,8 @@ const ReloadPrompt = () => {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker
   } = useRegisterSW({
+    // https://github.com/vite-pwa/vite-plugin-pwa/blob/v0.21.1/src/client/build/react.ts#L9
+    immediate: false,
     onRegistered(r) {
       if (!r) {
         return
