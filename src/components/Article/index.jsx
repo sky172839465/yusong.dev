@@ -90,7 +90,7 @@ const useArticleHtml = (html, pageImages) => {
           height="${height}"
         >
           <div
-            class="absolute h-auto w-full aspect-video rounded-lg animate-pulse bg-foreground/30"
+            class="absolute h-auto w-full rounded-lg animate-pulse bg-foreground/30"
             data-visible="true"
             width="${width}"
           ></div>
@@ -101,7 +101,7 @@ const useArticleHtml = (html, pageImages) => {
             height="${height}"
             data-loaded="false"
             onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
-            class="aspect-video w-full rounded-lg relative"
+            class="w-full rounded-lg relative"
             loading="lazy"
           `)}
         </div>
