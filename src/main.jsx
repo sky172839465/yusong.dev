@@ -20,15 +20,6 @@ if ('serviceWorker' in navigator) {
     result.update()
   }
   registerSW()
-
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (event.data.action !== 'refresh') {
-      return
-    }
-
-    console.log('refresh from message')
-    window.location.reload()
-  })
 }
 
 createRoot(document.getElementById('root')).render(
