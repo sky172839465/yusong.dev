@@ -20,10 +20,10 @@ precacheAndRoute(self.__WB_MANIFEST)
 // })
 
 // Claim clients immediately after activation
-// self.addEventListener('activate', (event) => {
-//   console.log('[SW] Activated', event)
-//   event.waitUntil(self.clients.claim())
-// })
+self.addEventListener('activate', (event) => {
+  console.log('[SW] Activated', event)
+  event.waitUntil(self.clients.claim())
+})
 
 registerRoute(
   ({ request }) => request.destination === 'script' || request.destination === 'style',
