@@ -12,7 +12,7 @@ const Header = () => {
   const [, setLanguage] = useState('en')
 
   return (
-    <header className='sticky top-0 flex-none border-b bg-background/50 backdrop-blur-md'>
+    <header className='sticky top-0 flex-none border-b bg-background/50 backdrop-blur-md z-10'>
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
           to='/'
