@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { Suspense } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
@@ -22,13 +23,12 @@ const Fallback = () => {
   )
 }
 
-const Image = ({ src, alt, className, ...props }) => {
-  const { src: loadedSrc } = useImage({ srcList: src })
+const Image = ({ srcList, className, ...props }) => {
+  const { src: loadedSrc } = useImage({ srcList })
   return (
     <div>
       <img
         src={loadedSrc}
-        alt={alt}
         className={`${className || ''} rounded-lg`}
         loading='lazy'
         {...props}
@@ -38,7 +38,13 @@ const Image = ({ src, alt, className, ...props }) => {
 }
 
 const ImageWithSkeleton = (props) => {
-  const { className } = props
+  const { className, srcList } = props
+  if (isEmpty(srcList)) {
+    return (
+      <Skeleton className={`${className || ''} rounded-lg`} />
+    )
+  }
+
   return (
     <Suspense
       fallback={(
