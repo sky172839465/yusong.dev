@@ -2,7 +2,7 @@
   "name": "yusong.tw",
   "homepage": "https://yusong.tw",
   "private": true,
-  "version": "0.99.0",
+  "version": "0.100.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
