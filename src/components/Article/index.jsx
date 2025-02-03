@@ -75,12 +75,13 @@ const useArticleHtml = (html, pageImages) => {
     const convertedHtml = html.replace(/<img src="([^"]+)"/g, (_, relativeFileUrl) => {
       const pageImage = pageImages[relativeFileUrl.replace('/', '')]
       const { srcSet, dimensions } = getPageImageAttr(pageImage)
+      const mainImage = getFileUrl(relativeFileUrl)
       if (!pageImage || !srcSet) {
-        return `<img src="${getFileUrl(relativeFileUrl)}"`
+        return `<img src="${mainImage}"`
       }
 
       const { width, height } = dimensions
-      return `<img src="${relativeFileUrl}" srcset="${srcSet}" width="${width}" height="${height}" data-loaded="false" onload="this.setAttribute('data-loaded', 'true')"`
+      return `<img src="${mainImage}" srcset="${srcSet}" width="${width}" height="${height}" data-loaded="false" onload="this.setAttribute('data-loaded', 'true')"`
     })
     return convertedHtml
   }, [html, pageImages])
