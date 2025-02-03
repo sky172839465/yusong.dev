@@ -15,8 +15,6 @@ const ReloadPrompt = () => {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker
   } = useRegisterSW({
-    // https://github.com/vite-pwa/vite-plugin-pwa/blob/v0.21.1/src/client/build/react.ts#L9
-    immediate: false,
     onRegistered(r) {
       if (!r) {
         return
@@ -34,9 +32,17 @@ const ReloadPrompt = () => {
   })
   console.log({ offlineReady, needRefresh })
 
-  const close = () => {
+  const onClose = () => {
     setOfflineReady(false)
     setNeedRefresh(false)
+  }
+
+  const opUpdate = () => {
+    if (!needRefresh) {
+      return
+    }
+
+    updateServiceWorker(true)
   }
 
   return (
@@ -44,7 +50,7 @@ const ReloadPrompt = () => {
       <div className='fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2'>
         <Alert className='flex items-center justify-between gap-2 rounded-xl border border-foreground bg-background/50 p-4 text-foreground shadow-xl backdrop-blur-md'>
           <div
-            onClick={() => needRefresh && updateServiceWorker(true)}
+            onClick={opUpdate}
           >
             <AlertTitle className='flex items-center gap-2'>
               {!offlineReady && (
@@ -61,7 +67,7 @@ const ReloadPrompt = () => {
             </AlertDescription>
           </div>
           <div className='flex'>
-            <Button size='icon' variant='ghost' onClick={close}>
+            <Button size='icon' variant='ghost' onClick={onClose}>
               <X className='size-4' />
             </Button>
           </div>

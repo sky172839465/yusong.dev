@@ -1,7 +1,7 @@
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default VitePWA({
-  // registerType: 'autoUpdate',
+  registerType: 'prompt',
   // https://vite-pwa-org.netlify.app/guide/inject-manifest.html
   strategies: 'injectManifest',
   injectManifest: {
