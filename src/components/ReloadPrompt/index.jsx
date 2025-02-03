@@ -10,7 +10,6 @@ const INTERVAL_MS = 10 * 60 * 1000
 const ReloadPrompt = () => {
   const [isUpdating, setIsUpdating] = useState(false)
   const {
-    offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker
   } = useRegisterSW({
@@ -28,7 +27,6 @@ const ReloadPrompt = () => {
   })
 
   const onClose = () => {
-    setOfflineReady(false)
     setNeedRefresh(false)
   }
 
@@ -42,26 +40,26 @@ const ReloadPrompt = () => {
   }
 
   return (
-    (offlineReady || needRefresh) && (
+    needRefresh && (
       <div className='fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2'>
-        <Alert className='flex cursor-pointer items-center justify-between gap-2 rounded-xl border border-foreground bg-background/50 p-4 text-foreground shadow-xl backdrop-blur-md'>
+        <Alert
+          className={`
+            flex items-center justify-between gap-2
+            rounded-xl border border-foreground bg-background/50 p-4 text-foreground shadow-xl backdrop-blur-md
+            ${needRefresh && 'cursor-pointer'}
+          `}
+        >
           {!isUpdating && (
             <>
-              <div
-                onClick={opUpdate}
-              >
+              <div onClick={opUpdate}>
                 <AlertTitle className='flex items-center gap-2'>
-                  {!offlineReady && (
-                    <MousePointerClick className='size-5' />
-                  )}
+                  <MousePointerClick className='size-5' />
                   <span>
-                    {offlineReady ? 'Offline Ready' : 'Update Available'}
+                    Update Available
                   </span>
                 </AlertTitle>
                 <AlertDescription>
-                  {offlineReady
-                    ? 'App is ready to work offline.'
-                    : 'New content available, click to update.'}
+                  New content available, click to update.
                 </AlertDescription>
               </div>
               <div className='flex'>
@@ -74,9 +72,7 @@ const ReloadPrompt = () => {
           {isUpdating && (
             <div>
               <AlertTitle className='flex items-center gap-2'>
-                {!offlineReady && (
-                  <Download className='size-5' />
-                )}
+                <Download className='size-5' />
                 <span>
                   Downloading
                 </span>
