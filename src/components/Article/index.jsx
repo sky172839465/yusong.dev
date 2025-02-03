@@ -1,4 +1,4 @@
-import { filter, flow, get, join, map, orderBy,pick } from 'lodash-es'
+import { filter, flow, get, join, last, map, orderBy,pick } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -44,7 +44,7 @@ const getPageImageAttr = (pageImage) => {
     () => orderBy(sizes, 'width', 'desc'),
     (reverseSizes) => map(reverseSizes, ({ path }) => getFileUrl(`/${path}`))
   )()
-  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  const dimensions = pick(last(sizes, '2'), ['width', 'height'])
   return { srcList, srcSet, dimensions }
 }
 
