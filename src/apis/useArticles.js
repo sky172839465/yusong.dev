@@ -1,9 +1,13 @@
-import { filter } from 'lodash-es'
+import { filter, isString } from 'lodash-es'
 import useSWR from 'swr'
 
 export const fetcher = async (query) => {
   const data = (await import('../data/articles.json')).default
-  return filter(data, (item) => JSON.stringify(item).includes(query))
+  if (isString(query)) {
+    return filter(data, (item) => JSON.stringify(item).includes(query))
+  }
+
+  return filter(data, query)
 }
 
 export const useArticles = (query, options = {}) => {
