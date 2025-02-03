@@ -1,4 +1,4 @@
-import { filter, flow, get, join, map, orderBy,pick } from 'lodash-es'
+import { filter, flow, get, join, last, map, orderBy,pick } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -44,7 +44,7 @@ const getPageImageAttr = (pageImage) => {
     () => orderBy(sizes, 'width', 'desc'),
     (reverseSizes) => map(reverseSizes, ({ path }) => getFileUrl(`/${path}`))
   )()
-  const dimensions = pick(get(pageImage, 'original'), ['width', 'height'])
+  const dimensions = pick(last(sizes, '2'), ['width', 'height'])
   return { srcList, srcSet, dimensions }
 }
 
@@ -90,7 +90,7 @@ const useArticleHtml = (html, pageImages) => {
           height="${height}"
         >
           <div
-            class="absolute h-auto w-full aspect-video rounded-lg animate-pulse bg-foreground/30"
+            class="absolute h-auto w-full rounded-lg animate-pulse bg-foreground/30"
             data-visible="true"
             width="${width}"
           ></div>
@@ -101,7 +101,7 @@ const useArticleHtml = (html, pageImages) => {
             height="${height}"
             data-loaded="false"
             onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
-            class="aspect-video w-full rounded-lg relative"
+            class="w-full rounded-lg relative"
             loading="lazy"
           `)}
         </div>
