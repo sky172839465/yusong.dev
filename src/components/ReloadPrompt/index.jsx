@@ -18,7 +18,8 @@ const ReloadPrompt = () => {
         return
       }
 
-      r.update()
+      // on page load check new sw, if exist trigger upload & refresh flow
+      r.update().then(() => updateServiceWorker(true))
       setInterval(() => r.update(), INTERVAL_MS)
     },
     onRegisterError(error) {

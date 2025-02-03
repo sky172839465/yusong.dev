@@ -1,4 +1,3 @@
-import { clientsClaim } from 'workbox-core'
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate } from 'workbox-strategies'
@@ -22,10 +21,10 @@ precacheAndRoute(self.__WB_MANIFEST)
 // })
 
 // Claim clients immediately after activation
-// self.addEventListener('activate', (event) => {
-//   console.log('[SW] Activated', event)
-//   event.waitUntil(self.clients.claim())
-// })
+self.addEventListener('activate', (event) => {
+  console.log('[SW] Activated', event)
+  event.waitUntil(self.clients.claim())
+})
 
 // Cache GitHub CDN images using StaleWhileRevalidate
 registerRoute(
@@ -34,6 +33,3 @@ registerRoute(
     cacheName: 'github-assets'
   })
 )
-
-self.skipWaiting()
-clientsClaim()
