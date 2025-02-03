@@ -16,15 +16,10 @@ if ('serviceWorker' in navigator) {
       return
     }
 
-    console.log('Service Worker registered', result)
     result.update()
   }
   registerSW()
 }
-
-window.addEventListener('beforeunload', function () {
-  console.warn('Page reload detected!', new Error().stack)
-})
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
