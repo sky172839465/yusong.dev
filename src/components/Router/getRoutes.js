@@ -61,7 +61,7 @@ const getConvertedPosts = (posts) => {
           // Same folder image
           .replace(/<img src="([^"]+)"/g, (_, imageFileName) => {
             const fileUrl = `${postFolder}/${imageFileName}`
-            return `<img src="${fileUrl}" loading="lazy" class="rounded-lg"`
+            return `<img src="${fileUrl}"`
           })
       )
 

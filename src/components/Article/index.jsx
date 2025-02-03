@@ -72,26 +72,39 @@ const useArticleHtml = (html, pageImages) => {
   const sections = useMemo(() => getSections(html), [html])
   const articleHtml = useMemo(() => {
     if (!pageImages) {
-      return html
+      return html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, '')
     }
 
-    const convertedHtml = html.replace(/<img src="([^"]+)"/g, (_, relativeFileUrl) => {
+    const convertedHtml = html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, (element, relativeFileUrl) => {
       const pageImage = pageImages[relativeFileUrl.replace('/', '')]
       const { srcList, srcSet, dimensions } = getPageImageAttr(pageImage)
-      const mainImage = getFileUrl(relativeFileUrl)
       if (!pageImage || !srcSet) {
-        return `<img src="${mainImage}"`
+        return ''
       }
 
       const { width, height } = dimensions
       return `
-        <img
-          src="${srcList[0]}"
-          srcset="${srcSet}"
+        <div
+          class="relative w-full block [&_div[data-visible='false']]:hidden [&_img[data-loaded='false']]:invisible"
           width="${width}"
           height="${height}"
-          data-loaded="false"
-          onload="this.setAttribute('data-loaded', 'true')"
+        >
+          <div
+            class="absolute h-auto w-full aspect-video rounded-lg animate-pulse bg-foreground/30"
+            data-visible="true"
+            width="${width}"
+          ></div>
+          ${element.replace(`src="${relativeFileUrl}"`, `        
+            src="${srcList[0]}"
+            srcset="${srcSet}"
+            width="${width}"
+            height="${height}"
+            data-loaded="false"
+            onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
+            class="aspect-video w-full rounded-lg relative"
+            loading="lazy"
+          `)}
+        </div>
       `
     })
     return convertedHtml
@@ -165,7 +178,10 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert [&_[data-table]]:overflow-x-auto'
+          className={`
+            prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert
+            [&_[data-table]]:overflow-x-auto
+          `}
         >
           <div dangerouslySetInnerHTML={{ __html }} />
         </div>
