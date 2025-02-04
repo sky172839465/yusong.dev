@@ -4,12 +4,13 @@ import { Suspense } from 'react'
 import { withErrorBoundary } from 'react-error-boundary'
 import { useImage } from 'react-image'
 
+import FadeIn from '@/components/FadeIn'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const Fallback = () => {
   return (
-    <div className='flex aspect-video w-full items-center'>
+    <FadeIn className='flex aspect-video w-full items-center'>
       <Alert variant='destructive'>
         <AlertCircle className='size-4' />
         <AlertTitle>
@@ -19,21 +20,21 @@ const Fallback = () => {
           載入圖片失敗
         </AlertDescription>
       </Alert>
-    </div>
+    </FadeIn>
   )
 }
 
 const Image = ({ srcList, className, ...props }) => {
   const { src: loadedSrc } = useImage({ srcList })
   return (
-    <div>
+    <FadeIn>
       <img
         src={loadedSrc}
         className={`${className || ''} rounded-lg`}
         loading='lazy'
         {...props}
       />
-    </div>
+    </FadeIn>
   )
 }
 

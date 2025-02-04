@@ -1,6 +1,8 @@
+import FadeIn from '@/components/FadeIn'
+
 const SkeletonHome = () => {
   return (
-    <div className='hero min-h-dvh w-full bg-background'>
+    <FadeIn className='hero min-h-dvh w-full bg-background'>
       <div className='hero-content text-center'>
         <div className='max-w-md space-y-4'>
           <h1 className='text-5xl font-bold'>
@@ -18,7 +20,7 @@ const SkeletonHome = () => {
           </div>
         </div>
       </div>
-    </div>
+    </FadeIn>
   )
 }
 

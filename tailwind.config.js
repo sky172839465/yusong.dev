@@ -1,6 +1,7 @@
 import aspectRatio from '@tailwindcss/aspect-ratio'
 import typography from '@tailwindcss/typography'
 import daisyui from 'daisyui'
+import plugin from 'tailwindcss/plugin'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -65,7 +66,15 @@ export default {
   		}
   	}
   },
-  plugins: [daisyui, typography, aspectRatio, require('tailwindcss-animate')],
+  plugins: [
+    daisyui,
+    typography,
+    aspectRatio,
+    require('tailwindcss-animate'),
+    plugin(function({ addVariant }) {
+      addVariant('standalone', '@media (display-mode: standalone)')
+    })
+  ],
   daisyui: {
     styled: true,
     themes: ['light'],
