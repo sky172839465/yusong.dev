@@ -1,6 +1,6 @@
 import { get } from 'lodash-es'
 import { LazyMotion } from 'motion/react'
-import { lazy, useRef, useEffect } from 'react'
+import { lazy, useEffect,useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
 import { Outlet, useLocation } from 'react-router-dom'
@@ -14,15 +14,15 @@ const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('./motionFeatures.js').then(res => res.default)
 
 const useScrollRestoration = () => {
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 50); // Adjust delay if needed
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 50) // Adjust delay if needed
 
-    return () => clearTimeout(timeout);
-  }, [pathname]);
+    return () => clearTimeout(timeout)
+  }, [pathname])
 }
 
 const Root = () => {
