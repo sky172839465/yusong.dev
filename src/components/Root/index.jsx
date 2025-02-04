@@ -1,4 +1,5 @@
 import { get } from 'lodash-es'
+import { LazyMotion } from 'motion/react'
 import { lazy, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
@@ -10,6 +11,7 @@ import CustomSwipe from '../CustomSwipe'
 import { ThemeProvider } from '../ThemeProvider'
 
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
+const loadFeatures = () => import('./motionFeatures.js').then(res => res.default)
 
 const Root = () => {
   const errorToastIdRef = useRef()
@@ -43,7 +45,12 @@ const Root = () => {
         }}
       >
         <HelmetProvider>
-          <Outlet />
+          <LazyMotion
+            features={loadFeatures}
+            strict
+          >
+            <Outlet />
+          </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
       <Toaster />
