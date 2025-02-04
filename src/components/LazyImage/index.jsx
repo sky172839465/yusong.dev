@@ -1,72 +1,104 @@
-import { isEmpty } from 'lodash-es'
+import { isEmpty, isUndefined } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
-import { Suspense } from 'react'
-import { withErrorBoundary } from 'react-error-boundary'
-import { useImage } from 'react-image'
+import { useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
+import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 
-const Fallback = () => {
-  return (
-    <FadeIn className='flex aspect-video w-full items-center'>
-      <Alert variant='destructive'>
-        <AlertCircle className='size-4' />
-        <AlertTitle>
-          錯誤
-        </AlertTitle>
-        <AlertDescription>
-          載入圖片失敗
-        </AlertDescription>
-      </Alert>
-    </FadeIn>
-  )
-}
-
-const Image = ({ src, srcList, ...props }) => {
-  const { src: loadedSrc } = useImage({ srcList: src || srcList })
-  return (
-    <FadeIn>
-      <img
-        src={loadedSrc}
-        loading='lazy'
-        {...props}
-      />
-    </FadeIn>
-  )
-}
-
-const ImageWithSkeleton = (props) => {
-  const { className, srcList, src } = props
-  if (isEmpty(srcList || src)) {
+const ImageStatus = (props) => {
+  const { isLoading, isLoaded, isIcon, src, className, error } = props
+  if (isLoading || (!isLoaded && !isEmpty(src))) {
     return (
-      <FadeIn>
-        <Skeleton className={`${className || ''} flex items-center justify-center text-4xl text-foreground`}>
-          <p>
-            NO IMAGE
-          </p>
-        </Skeleton>
-      </FadeIn>
+      <Skeleton className={className} />
     )
   }
 
-  return (
-    <Suspense
-      fallback={(
-        <FadeIn>
-          <Skeleton className={className} />
-        </FadeIn>
-      )}
-    >
-      <Image {...props} />
-    </Suspense>
-  )
+  if (error) {
+    if (isIcon) {
+      return (
+        <p className='text-destructive'>
+          錯誤
+        </p>
+      )
+    }
+
+    return (
+      <div className='flex aspect-video w-full items-center'>
+        <Alert variant='destructive'>
+          <AlertCircle className='size-4' />
+          <AlertTitle>
+            錯誤
+          </AlertTitle>
+          <AlertDescription>
+            載入圖片失敗
+          </AlertDescription>
+        </Alert>
+      </div>
+    )
+  }
+
+  if (isEmpty(src)) {
+    return (
+      <Skeleton className={`${className || ''} flex items-center justify-center text-4xl text-foreground`}>
+        <p>
+          NO IMAGE
+        </p>
+      </Skeleton>
+    )
+  }
+
+  return null
 }
 
-const LazyImage = withErrorBoundary(ImageWithSkeleton, {
-  FallbackComponent: Fallback,
-  onError: console.log
-})
+
+const LazyImage = (props) => {
+  const { isLoading, isIcon, ...restProps } = props
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const imageAttributes = useMemo(() => {
+    const { imageData, ...imageProps } = restProps
+    const rwdImageAttributes = getRwdImageAttributes(imageData)
+    return { ...rwdImageAttributes, ...imageProps }
+  }, [restProps])
+  const { src, className } = imageAttributes
+
+  const onLoad = () => setIsLoaded(true)
+
+  const onError = (e) => {
+    onLoad()
+    setError(e)
+  }
+
+  return (
+    <FadeIn className='relative size-full'>
+      {((isLoading|| !isLoaded || error)) && (
+        <div className='absolute flex size-full grow items-center'>
+          <ImageStatus
+            src={src}
+            className={className}
+            isLoading={isLoading}
+            isLoaded={isLoaded}
+            isIcon={isIcon}
+            error={error}
+          />
+        </div>
+      )}
+      {isUndefined(src) && (
+        <div className='my-8 aspect-video w-full' />
+      )}
+      {!isUndefined(src) && (
+        <img
+          loading='lazy'
+          onLoad={onLoad}
+          onError={onError}
+          className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
+          {...imageAttributes}
+        />
+      )}
+    </FadeIn>
+  )
+}
 
 export default LazyImage

@@ -27,6 +27,7 @@ const Header = () => {
               className='h-8 w-auto rounded-sm'
               width={32}
               height={32}
+              isIcon
             />
           </div>
           <span className='font-bold'>

@@ -1,4 +1,4 @@
-import { filter, flow, get, isEmpty, join, last, map, orderBy,pick } from 'lodash-es'
+import { filter, flow, isEmpty, map } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -6,11 +6,10 @@ import useSWR from 'swr'
 
 import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
+import ArticleActions from '@/components/ArticleActions'
+import LazyImage from '@/components/LazyImage'
+import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
 import { Button } from '@/components/ui/button'
-import getFileUrl from '@/lib/getFileUrl'
-
-import ArticleActions from '../ArticleActions'
-import LazyImage from '../LazyImage'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
 
@@ -29,26 +28,7 @@ const getSections = (html) => {
   return result
 }
 
-const getPageImageAttr = (pageImage) => {
-  if (!pageImage) {
-    const dimensions = { width: '1200', height: '720' }
-    return { srcSet: null, dimensions }
-  }
-
-  const sizes = get(pageImage, 'sizes', [])
-  const srcSet = flow(
-    () => map(sizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
-    srcSetList => join(srcSetList, ', ')
-  )()
-  const srcList = flow(
-    () => orderBy(sizes, 'width', 'desc'),
-    (reverseSizes) => map(reverseSizes, ({ path }) => getFileUrl(`/${path}`))
-  )()
-  const dimensions = pick(last(sizes, '2'), ['width', 'height'])
-  return { srcList, srcSet, dimensions }
-}
-
-const useMainImage = (attributes = {}, pageImages = {}) => {
+const useMainImageData = (attributes = {}, pageImages = {}) => {
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
     const { image } = attributes
@@ -60,12 +40,11 @@ const useMainImage = (attributes = {}, pageImages = {}) => {
     return imagePathFromSrc
   }, [attributes, pathname])
   if (!imagePathFromSrc) {
-    return { srcList: [], srcSet: null, dimensions: {} }
+    return null
   }
 
-  const pageImage = pageImages[imagePathFromSrc.replace('/', '')]
-  const { srcList, srcSet, dimensions } = getPageImageAttr(pageImage)
-  return { srcList, srcSet, dimensions }
+  const imageData = pageImages[imagePathFromSrc.replace('/', '')]
+  return imageData
 }
 
 const useArticleHtml = (html, pageImages) => {
@@ -76,9 +55,8 @@ const useArticleHtml = (html, pageImages) => {
     }
 
     const convertedHtml = html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, (element, relativeFileUrl) => {
-      const pageImage = pageImages[relativeFileUrl.replace('/', '')]
-      const { srcList = [], srcSet, dimensions } = getPageImageAttr(pageImage)
-      const { width, height } = dimensions
+      const pageImageData = pageImages[relativeFileUrl.replace('/', '')]
+      const { src, srcSet, width, height } = getRwdImageAttributes(pageImageData)
       return `
         <div
           class="relative w-full block [&_div[data-visible='false']]:hidden [&_img[data-loaded='false']]:invisible"
@@ -90,11 +68,12 @@ const useArticleHtml = (html, pageImages) => {
             data-visible="true"
           ></div>
           ${element.replace(`src="${relativeFileUrl}"`, `        
-            src="${srcList[0]}"
+            src="${src}"
             srcset="${srcSet}"
             width="${width}"
             height="${height}"
             data-loaded="false"
+            sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
             onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
             class="w-full rounded-lg relative"
             loading="lazy"
@@ -113,11 +92,11 @@ const Article = (props) => {
   const topRef = useRef()
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
-  const { data: pageImages } = usePageImages()
+  const { isLoading, data: pageImages } = usePageImages()
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
-  const { srcList, srcSet, dimensions } = useMainImage(attributes, pageImages)
+  const mainImageData = useMainImageData(attributes, pageImages)
   const { sections, html: __html } = useArticleHtml(html, pageImages)
   
   const shareData = {
@@ -143,12 +122,11 @@ const Article = (props) => {
           {title}
         </h1>
         <LazyImage
-          srcSet={srcSet}
-          srcList={srcList}
+          imageData={mainImageData}
           sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
           alt={title}
-          className={`aspect-video w-full rounded-lg ${isEmpty(srcList) && 'my-8'}`}
-          {...dimensions}
+          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) && 'my-8'}`}
+          isLoading={isLoading}
         />
         <div className='flex flex-row items-center justify-between'>
           <div className='my-2 text-gray-600 dark:text-gray-400'>
