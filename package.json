@@ -5,6 +5,7 @@
   "version": "0.137.0",
   "type": "module",
   "scripts": {
+    "analyze": "analyze -c vite.config.js",
     "dev": "vite",
     "build": "run-s gen:routeData gen:imageData && vite build",
     "build:gh": "run-s build build:404",
@@ -91,6 +92,7 @@
     "sharp": "^0.33.5",
     "tw-to-css": "^0.0.12",
     "vite": "^6.0.11",
+    "vite-bundle-analyzer": "^0.16.2",
     "vite-node": "^3.0.4",
     "vite-plugin-markdown": "^2.2.0",
     "vite-plugin-pwa": "^0.21.1",
