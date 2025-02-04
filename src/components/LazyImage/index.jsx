@@ -42,18 +42,22 @@ const ImageWithSkeleton = (props) => {
   const { className, srcList } = props
   if (isEmpty(srcList)) {
     return (
-      <Skeleton className={`${className || ''} flex items-center justify-center rounded-lg text-4xl text-foreground`}>
-        <p>
-          NO IMAGE
-        </p>
-      </Skeleton>
+      <FadeIn>
+        <Skeleton className={`${className || ''} flex items-center justify-center rounded-lg text-4xl text-foreground`}>
+          <p>
+            NO IMAGE
+          </p>
+        </Skeleton>
+      </FadeIn>
     )
   }
 
   return (
     <Suspense
       fallback={(
-        <Skeleton className={`${className || ''} rounded-lg`} />
+        <FadeIn>
+          <Skeleton className={`${className || ''} rounded-lg`} />
+        </FadeIn>
       )}
     >
       <Image {...props} />
