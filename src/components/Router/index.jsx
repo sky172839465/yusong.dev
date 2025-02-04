@@ -1,4 +1,3 @@
-import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
 import { lazy, Suspense } from 'react'
 import {
@@ -15,6 +14,7 @@ import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
+const LazyAnimatePresence = lazy(() => import('./AnimatePresence.jsx'))
 
 const DefaultLayout = (props) => props.children
 
@@ -29,7 +29,7 @@ const withErrorElement = (routes) => routes.map((item) => {
   return {
     ...route,
     element: (
-      <AnimatePresence>
+      <LazyAnimatePresence>
         <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -54,7 +54,7 @@ const withErrorElement = (routes) => routes.map((item) => {
             </Layout>
           </Suspense>
         </m.div>
-      </AnimatePresence>
+      </LazyAnimatePresence>
     ),
     errorElement: <ErrorElement />
   }
