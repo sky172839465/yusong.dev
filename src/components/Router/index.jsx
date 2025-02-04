@@ -1,10 +1,10 @@
-import * as m from 'motion/react-m'
 import { lazy, Suspense } from 'react'
 import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom'
 
+import FadeIn from '@/components/FadeIn/index.jsx'
 import Root from '@/components/Root/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
@@ -30,7 +30,7 @@ const withErrorElement = (routes) => routes.map((item) => {
     ...route,
     element: (
       <LazyAnimatePresence>
-        <m.div
+        <FadeIn
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -53,7 +53,7 @@ const withErrorElement = (routes) => routes.map((item) => {
               )}
             </Layout>
           </Suspense>
-        </m.div>
+        </FadeIn>
       </LazyAnimatePresence>
     ),
     errorElement: <ErrorElement />
