@@ -90,7 +90,7 @@ const useArticleHtml = (html, pageImages) => {
           height="${height}"
         >
           <div
-            class="absolute h-full rounded-lg animate-pulse bg-foreground/30"
+            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/30"
             data-visible="true"
           ></div>
           ${element.replace(`src="${relativeFileUrl}"`, `        
