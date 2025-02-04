@@ -1,3 +1,4 @@
+import { delay } from 'lodash-es'
 import { Download,MousePointerClick, X } from 'lucide-react'
 import { useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
@@ -5,7 +6,8 @@ import { useRegisterSW } from 'virtual:pwa-register/react'
 import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 
-const INTERVAL_MS = 10 * 60 * 1000
+const SEC = 1000
+const INTERVAL_MS = 10 * 60 * SEC
 
 const ReloadPrompt = () => {
   const [isUpdating, setIsUpdating] = useState(false)
@@ -38,6 +40,7 @@ const ReloadPrompt = () => {
 
     setIsUpdating(true)
     updateServiceWorker(true)
+    delay(() => window.location.reload(), SEC * 10)
   }
 
   return (
