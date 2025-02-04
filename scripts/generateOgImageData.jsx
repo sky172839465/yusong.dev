@@ -78,15 +78,9 @@ const IMAGE_TYPE = {
   X: 'x'
 }
 
-const IMAGE_SVG_FILE = {
-  [IMAGE_TYPE.OG]: 'og.svg',
-  [IMAGE_TYPE.X]: 'x.svg'
-}
-
-
-const IMAGE_PNG_FILE = {
-  [IMAGE_TYPE.OG]: 'og.png',
-  [IMAGE_TYPE.X]: 'x.png'
+const IMAGE_FILE = {
+  [IMAGE_TYPE.OG]: 'og.jpg',
+  [IMAGE_TYPE.X]: 'x.jpg'
 }
 
  
@@ -100,10 +94,8 @@ const fontData = fs.readFileSync('scripts/fonts/NotoSansTC-Regular.ttf')
 
 const generateSVG = async (route, imageType) => {
   const { file } = route
-  const imageSvgFile = IMAGE_SVG_FILE[imageType]
-  const imagePngFile = IMAGE_PNG_FILE[imageType]
-  const ogSvgImgPath = file.replace(/index.jsx|index.md/, `images/${imageSvgFile}`)
-  const ogPngImgPath = file.replace(/index.jsx|index.md/, `images/${imagePngFile}`)
+  const imageFile = IMAGE_FILE[imageType]
+  const ogImgPath = file.replace(/index.jsx|index.md/, `images/${imageFile}`)
   const Component = getOgImgComponent(route)
   const svg = await satori(Component, {
     fonts: [
@@ -116,15 +108,14 @@ const generateSVG = async (route, imageType) => {
     ...DIMENSIONS[imageType]
   })
 
-  const outputDir = ogPngImgPath.replace(imagePngFile, '')
+  const outputDir = ogImgPath.replace(imageFile, '')
   const [error] = await tryit(() => fs.promises.access(outputDir))()
   if (error) {
     await fs.promises.mkdir(outputDir, { recursive: true })
   }
   
-  // await fs.promises.writeFile(ogSvgImgPath, svg)
-  // const svgContent = await fs.promises.readFile(ogSvgImgPath, 'utf-8')
-  return sharp(Buffer.from(svg)).png().toFile(ogSvgImgPath).then(console.log)
+  const jpg = await sharp(Buffer.from(svg)).jpeg().toBuffer()
+  return fs.promises.writeFile(ogImgPath, jpg).then(console.log)
 }
 
 const [error] = await tryit(() => {
