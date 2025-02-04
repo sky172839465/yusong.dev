@@ -77,11 +77,7 @@ const useArticleHtml = (html, pageImages) => {
 
     const convertedHtml = html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, (element, relativeFileUrl) => {
       const pageImage = pageImages[relativeFileUrl.replace('/', '')]
-      const { srcList, srcSet, dimensions } = getPageImageAttr(pageImage)
-      if (!pageImage || !srcSet) {
-        return ''
-      }
-
+      const { srcList = [], srcSet, dimensions } = getPageImageAttr(pageImage)
       const { width, height } = dimensions
       return `
         <div
@@ -90,7 +86,7 @@ const useArticleHtml = (html, pageImages) => {
           height="${height}"
         >
           <div
-            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/30"
+            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10"
             data-visible="true"
           ></div>
           ${element.replace(`src="${relativeFileUrl}"`, `        
