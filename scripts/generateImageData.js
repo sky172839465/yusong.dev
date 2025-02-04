@@ -27,7 +27,7 @@ async function getImageDimensions(filePath) {
 // Process images: Resize & Get dimensions
 async function processImages() {
   const imagePaths = await glob([`${inputFolder}/**/*.{jpg,jpeg,png}`], {
-    ignore: ['**/*.gen.{jpg,jpeg,png}', '**/og.svg', '**/x.svg']
+    ignore: ['**/*.gen.{jpg,jpeg,png}', '**/og.jpg', '**/x.jpg']
   })
 
   let results = []

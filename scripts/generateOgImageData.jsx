@@ -4,6 +4,7 @@ import { tryit } from 'radash'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import satori from 'satori'
+import sharp from 'sharp'
 import { twj } from 'tw-to-css'
 
 const routes = JSON.parse(fs.readFileSync('src/data/routes.json', 'utf-8'))
@@ -78,10 +79,11 @@ const IMAGE_TYPE = {
 }
 
 const IMAGE_FILE = {
-  [IMAGE_TYPE.OG]: 'og.svg',
-  [IMAGE_TYPE.X]: 'x.svg'
+  [IMAGE_TYPE.OG]: 'og.jpg',
+  [IMAGE_TYPE.X]: 'x.jpg'
 }
 
+ 
  
 const DIMENSIONS = {
   [IMAGE_TYPE.OG]: { width: 1200, height: 630 },
@@ -112,7 +114,8 @@ const generateSVG = async (route, imageType) => {
     await fs.promises.mkdir(outputDir, { recursive: true })
   }
   
-  return fs.promises.writeFile(ogImgPath, svg)
+  const jpg = await sharp(Buffer.from(svg)).jpeg().toBuffer()
+  return fs.promises.writeFile(ogImgPath, jpg)
 }
 
 const [error] = await tryit(() => {
