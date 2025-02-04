@@ -58,7 +58,7 @@ export default {
           <meta name="twitter:image" content="${twitterImage}">
           <meta name="twitter:site" content="@${ACCOUNT}">
           <meta name="twitter:creator" content="@${ACCOUNT}">
-          <title>${title}</title>
+          <title>${title} | ${TITLE}</title>
           <script type="application/ld+json">
           {
             "@context": "https://schema.org",
