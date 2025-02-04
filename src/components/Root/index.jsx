@@ -3,7 +3,7 @@ import { LazyMotion } from 'motion/react'
 import { lazy, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
-import { Outlet } from 'react-router-dom'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import fetcher from '../../utils/fetcher'
@@ -55,6 +55,7 @@ const Root = () => {
       </SWRConfig>
       <Toaster />
       <CustomSwipe />
+      <ScrollRestoration />
       <LazyReloadPrompt />
     </ThemeProvider>
   )
