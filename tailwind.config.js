@@ -64,6 +64,7 @@ export default {
   			}
   		},
       screens: {
+        // https://github.com/tailwindlabs/tailwindcss/discussions/6755
         pwa: { raw: '(display-mode: standalone)' }
       }
   	}

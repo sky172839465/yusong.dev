@@ -24,13 +24,12 @@ const Fallback = () => {
   )
 }
 
-const Image = ({ srcList, className, ...props }) => {
-  const { src: loadedSrc } = useImage({ srcList })
+const Image = ({ src, srcList, ...props }) => {
+  const { src: loadedSrc } = useImage({ srcList: src || srcList })
   return (
     <FadeIn>
       <img
         src={loadedSrc}
-        className={`${className || ''} rounded-lg`}
         loading='lazy'
         {...props}
       />
@@ -39,21 +38,25 @@ const Image = ({ srcList, className, ...props }) => {
 }
 
 const ImageWithSkeleton = (props) => {
-  const { className, srcList } = props
-  if (isEmpty(srcList)) {
+  const { className, srcList, src } = props
+  if (isEmpty(srcList || src)) {
     return (
-      <Skeleton className={`${className || ''} flex items-center justify-center rounded-lg text-4xl text-foreground`}>
-        <p>
-          NO IMAGE
-        </p>
-      </Skeleton>
+      <FadeIn>
+        <Skeleton className={`${className || ''} flex items-center justify-center text-4xl text-foreground`}>
+          <p>
+            NO IMAGE
+          </p>
+        </Skeleton>
+      </FadeIn>
     )
   }
 
   return (
     <Suspense
       fallback={(
-        <Skeleton className={`${className || ''} rounded-lg`} />
+        <FadeIn>
+          <Skeleton className={className} />
+        </FadeIn>
       )}
     >
       <Image {...props} />

@@ -2,6 +2,7 @@ import { Globe, Moon, Search,Sun } from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import LazyImage from '@/components/LazyImage'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import useTheme from '@/hooks/useTheme'
@@ -20,10 +21,12 @@ const Header = () => {
           viewTransition
         >
           <div className='rounded-md border-black bg-white p-[2px]'>
-            <img
+            <LazyImage
               src='/favicon.svg'
               alt='Site Logo'
               className='h-8 w-auto rounded-sm'
+              width={32}
+              height={32}
             />
           </div>
           <span className='font-bold'>
