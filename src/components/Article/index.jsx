@@ -1,4 +1,4 @@
-import { filter, flow, get, join, last, map, orderBy,pick } from 'lodash-es'
+import { filter, flow, get, isEmpty, join, last, map, orderBy,pick } from 'lodash-es'
 import { lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -151,7 +151,7 @@ const Article = (props) => {
           srcList={srcList}
           sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
           alt={title}
-          className='aspect-video w-full rounded-lg'
+          className={`aspect-video w-full rounded-lg ${isEmpty(srcList) && 'my-8'}`}
           {...dimensions}
         />
         <div className='flex flex-row items-center justify-between'>
