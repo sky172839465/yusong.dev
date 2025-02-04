@@ -42,7 +42,7 @@ const ReloadPrompt = () => {
 
   return (
     needRefresh && (
-      <div className='fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 standalone:bottom-8'>
+      <div className='fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 pwa:bottom-8'>
         <Alert
           className={`
             flex items-center justify-between gap-2
