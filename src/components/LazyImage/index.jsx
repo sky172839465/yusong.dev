@@ -1,4 +1,4 @@
-import { isEmpty, isUndefined } from 'lodash-es'
+import { isEmpty } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
@@ -8,8 +8,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const ImageStatus = (props) => {
-  const { isLoading, isLoaded, isIcon, src, className, error } = props
-  if (isLoading || (!isLoaded && !isEmpty(src))) {
+  const { isLoading, isLoaded, isIcon, isSrcEmpty, className, error } = props
+  if (isLoading || (!isLoaded && !isSrcEmpty)) {
     return (
       <Skeleton className={className} />
     )
@@ -39,7 +39,7 @@ const ImageStatus = (props) => {
     )
   }
 
-  if (isEmpty(src)) {
+  if (isSrcEmpty) {
     return (
       <Skeleton className={`${className || ''} flex items-center justify-center text-4xl text-foreground`}>
         <p>
@@ -63,6 +63,7 @@ const LazyImage = (props) => {
     return { ...rwdImageAttributes, ...imageProps }
   }, [restProps])
   const { src, className } = imageAttributes
+  const isSrcEmpty = isEmpty(src)
 
   const onLoad = () => setIsLoaded(true)
 
@@ -73,11 +74,11 @@ const LazyImage = (props) => {
 
   return (
     <FadeIn className='relative size-full'>
-      {((isLoading|| !isLoaded || error)) && (
+      {((isSrcEmpty || isLoading|| !isLoaded || error)) && (
         <div className='absolute flex size-full grow items-center'>
           <ImageStatus
-            src={src}
             className={className}
+            isSrcEmpty={isSrcEmpty}
             isLoading={isLoading}
             isLoaded={isLoaded}
             isIcon={isIcon}
@@ -85,10 +86,10 @@ const LazyImage = (props) => {
           />
         </div>
       )}
-      {isUndefined(src) && (
+      {isSrcEmpty && (
         <div className='my-8 aspect-video w-full' />
       )}
-      {!isUndefined(src) && (
+      {!isSrcEmpty && (
         <img
           loading='lazy'
           onLoad={onLoad}
