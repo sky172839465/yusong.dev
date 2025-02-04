@@ -115,12 +115,12 @@ const generateSVG = async (route, imageType) => {
   }
   
   const jpg = await sharp(Buffer.from(svg)).jpeg().toBuffer()
-  return fs.promises.writeFile(ogImgPath, jpg).then(console.log)
+  return fs.promises.writeFile(ogImgPath, jpg)
 }
 
 const [error] = await tryit(() => {
-  return Promise.all(concat(...[IMAGE_TYPE.OG].map((imageType) => {
-    return [routes[0]].map((route) => generateSVG(route, imageType))
+  return Promise.all(concat(...[IMAGE_TYPE.OG, IMAGE_TYPE.X].map((imageType) => {
+    return routes.map((route) => generateSVG(route, imageType))
   })))
 })()
 
