@@ -13,7 +13,7 @@ import { ThemeProvider } from '../ThemeProvider'
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('./motionFeatures.js').then(res => res.default)
 
-const useScrollRestoration() {
+const useScrollRestoration = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
