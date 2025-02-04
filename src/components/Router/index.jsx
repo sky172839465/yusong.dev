@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'motion/react'
+import * as m from 'motion/react-m'
 import { lazy, Suspense } from 'react'
 import {
   createBrowserRouter,
@@ -27,23 +29,32 @@ const withErrorElement = (routes) => routes.map((item) => {
   return {
     ...route,
     element: (
-      <Suspense
-        fallback={(
-          <SkeletonHome className='fixed top-0 z-0' />
-        )}
-      >
-        <Layout>
-          {isMarkdown && (
-            <LazyArticle {...item} />
-          )}
-          {!isMarkdown && (
-            <>
-              <Comp />
-              <LazyMeta fetchMetaData={meta} />
-            </>
-          )}
-        </Layout>
-      </Suspense>
+      <AnimatePresence>
+        <m.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Suspense
+            fallback={(
+              <SkeletonHome className='fixed top-0 z-0' />
+            )}
+          >
+            <Layout>
+              {isMarkdown && (
+                <LazyArticle {...item} />
+              )}
+              {!isMarkdown && (
+                <>
+                  <Comp />
+                  <LazyMeta fetchMetaData={meta} />
+                </>
+              )}
+            </Layout>
+          </Suspense>
+        </m.div>
+      </AnimatePresence>
     ),
     errorElement: <ErrorElement />
   }
