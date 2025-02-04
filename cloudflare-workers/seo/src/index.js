@@ -12,8 +12,8 @@ const ROUTE_MAP = keyBy(
     const imageFolder = `${IMG_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
     return {
       ...item,
-      image: `${imageFolder}/og.png`,
-      twitterImage: `${imageFolder}/x.png`
+      image: `${imageFolder}/og.jpg`,
+      twitterImage: `${imageFolder}/x.jpg`
     }
   }),
   'path'
