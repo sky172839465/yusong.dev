@@ -84,7 +84,7 @@ const IMAGE_FILE = {
 }
 
  
-// eslint-disable-next-line react-refresh/only-export-components
+ 
 const DIMENSIONS = {
   [IMAGE_TYPE.OG]: { width: 1200, height: 630 },
   [IMAGE_TYPE.X]: { width: 1200, height: 675 }
