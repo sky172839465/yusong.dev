@@ -41,7 +41,11 @@ const ImageWithSkeleton = (props) => {
   const { className, srcList } = props
   if (isEmpty(srcList)) {
     return (
-      <Skeleton className={`${className || ''} rounded-lg`} />
+      <Skeleton className={`${className || ''} flex items-center justify-center rounded-lg text-4xl text-foreground`}>
+        <p>
+          NO IMAGE
+        </p>
+      </Skeleton>
     )
   }
 
