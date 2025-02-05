@@ -1,8 +1,8 @@
 import { isUndefined } from 'lodash-es'
-import { createContext, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useLocalStorage,useMediaQuery } from 'usehooks-ts'
 
-export const ThemeProviderContext = createContext()
+import ThemeProviderContext from './context'
 
 const COLOR_SCHEME_QUERY = '(prefers-color-scheme: dark)'
 const LOCAL_STORAGE_KEY = 'dark-mode'
