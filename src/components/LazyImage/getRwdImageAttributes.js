@@ -2,6 +2,12 @@ import { flow, get, join, last, map, pick } from 'lodash-es'
 
 import getFileUrl from '@/lib/getFileUrl'
 
+// const SIZE_QUERY = [
+//   '(max-width: 768px) ',
+//   '(max-width: 1200px) ',
+//   ''
+// ]
+
 const getRwdImageAttributes = (imageData) => {
   if (!imageData) {
     const dimensions = { width: 1200, height: 675 }
@@ -15,6 +21,10 @@ const getRwdImageAttributes = (imageData) => {
     () => map(imageSizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
     srcSetList => join(srcSetList, ', ')
   )()
+  // const sizes = flow(
+  //   () => map(imageSizes, ({ width }, index) => `${SIZE_QUERY[index]}${width}px`),
+  //   (sizeList) => join(sizeList, ', ')
+  // )()
   const dimensions = pick(largeImage, ['width', 'height'])
   return { src, srcSet, ...dimensions }
 }

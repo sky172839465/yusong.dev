@@ -59,7 +59,7 @@ const useArticleHtml = (html, pageImages) => {
           height="${height}"
         >
           <div
-            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10 [&[data-visible='false']]:hidden"
+            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10 [&[data-visible='false']]:invisible"
             data-visible="true"
           ></div>
           ${element.replace(`src="${relativeFileUrl}"`, `        
@@ -68,7 +68,6 @@ const useArticleHtml = (html, pageImages) => {
             width="${width}"
             height="${height}"
             data-loaded="false"
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px'
             onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
             class="w-full rounded-lg relative [&[data-loaded='false']]:invisible"
             loading="lazy"
@@ -121,7 +120,6 @@ const Article = (props) => {
         </h1>
         <LazyImage
           imageData={mainImageData}
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px'
           alt={title}
           className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) && 'my-8'}`}
           isLoading={isLoading}
