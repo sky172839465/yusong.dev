@@ -1,6 +1,6 @@
 import { isEmpty, isUndefined } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
@@ -57,10 +57,12 @@ const LazyImage = (props) => {
   const { isLoading, isIcon, imageData, ...imageProps } = props
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
-  const imageAttributes = {
-    ...getRwdImageAttributes(imageData),
-    ...imageProps
-  }
+  const imageAttributes = useMemo(() => {
+    return {
+      ...getRwdImageAttributes(imageData),
+      ...imageProps
+    }
+  }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
   const onLoad = () => setIsLoaded(true)
