@@ -53,7 +53,7 @@ export default {
           <meta property="og:locale" content="zh_TW">
           <meta property="article:author" content="${AUTHOR}">
           <meta name="twitter:card" content="summary_large_image">
-          <meta name="twitter:title" content="${title}">
+          <meta name="twitter:title" content="${title} | ${TITLE}">
           <meta name="twitter:description" content="${description}">
           <meta name="twitter:image" content="${twitterImage}">
           <meta name="twitter:site" content="@${ACCOUNT}">
