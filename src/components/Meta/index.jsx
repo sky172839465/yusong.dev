@@ -17,15 +17,16 @@ const Meta = (props) => {
   }
 
   const { title, description } = data
+  const displayTitle = `${title}${title === DEFAULT_DATA.title ? '' : `| ${DEFAULT_DATA.title}`}`
   return (
     <Helmet>
       <title>
-        {title}
+        {displayTitle}
       </title>
       <meta name='description' content={description} />
       <meta property='og:type' content='article' />
       <meta property='og:url' content={window.location.href} />
-      <meta property='og:title' content={title} />
+      <meta property='og:title' content={displayTitle} />
       <meta property='og:description' content={description} />
     </Helmet>
   )
