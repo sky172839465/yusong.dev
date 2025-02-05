@@ -117,7 +117,6 @@ const Article = (props) => {
           {title}
         </h1>
         <LazyImage
-          key={pathname}
           imageData={mainImageData}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px'
           alt={title}
