@@ -81,6 +81,8 @@ const useArticleHtml = (html, pageImages) => {
   return { sections, html: articleHtml }
 }
 
+const DEFAULT_TITLE = 'YUSONG.TW'
+
 const Article = (props) => {
   const { filePath, markdown } = props
   const articleRef = useRef()
@@ -93,9 +95,10 @@ const Article = (props) => {
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
   const mainImageData = useMainImageData(pageImages)
   const { sections, html: __html } = useArticleHtml(html, pageImages)
+  const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
   
   const shareData = {
-    title,
+    title: displayTitle,
     text: description,
     url: window.location.href
   }
@@ -104,12 +107,12 @@ const Article = (props) => {
     <>
       <Helmet>
         <title>
-          {title}
+          {displayTitle}
         </title>
         <meta name='description' content={description} />
         <meta property='og:type' content='article' />
         <meta property='og:url' content={shareData.url} />
-        <meta property='og:title' content={title} />
+        <meta property='og:title' content={displayTitle} />
         <meta property='og:description' content={description} />
       </Helmet>
       <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
