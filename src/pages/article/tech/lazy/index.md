@@ -7,7 +7,6 @@ tags:
   - "Lazy"
   - "awesome"
   - "redbull"
-image: true
 series: "TEST"
 index: 0
 ---

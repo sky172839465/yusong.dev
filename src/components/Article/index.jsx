@@ -28,17 +28,12 @@ const getSections = (html) => {
   return result
 }
 
-const useMainImageData = (attributes = {}, pageImages = {}) => {
+const useMainImageData = (pageImages = {}) => {
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
-    const { image } = attributes
-    if (!image) {
-      return null
-    }
-  
     const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
     return imagePathFromSrc
-  }, [attributes, pathname])
+  }, [pathname])
   if (!imagePathFromSrc) {
     return null
   }
@@ -96,7 +91,7 @@ const Article = (props) => {
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
-  const mainImageData = useMainImageData(attributes, pageImages)
+  const mainImageData = useMainImageData(pageImages)
   const { sections, html: __html } = useArticleHtml(html, pageImages)
   
   const shareData = {
