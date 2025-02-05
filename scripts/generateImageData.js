@@ -8,9 +8,9 @@ import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const inputFolder = 'src'  // Folder where the original images are
 const sizes = {
-  small: 320,   // Small size for mobile
-  medium: 768,  // Medium size for tablets
-  large: 1200   // Large size for desktops
+  small: 768,   // Small size for mobile
+  medium: 1200,  // Medium size for tablets
+  large: 1920   // Large size for desktops
 }
 
 // Get dimensions of an image
@@ -55,7 +55,7 @@ async function processImages() {
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
 
       await sharp(filePath)
-        .resize({ width })
+        .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
         .toFile(outputFilePath)
 
       // Get dimensions of resized image
