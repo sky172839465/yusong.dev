@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash-es'
+import { isEmpty, isUndefined } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
@@ -8,10 +8,10 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const ImageStatus = (props) => {
-  const { isLoading, isLoaded, isIcon, isSrcEmpty, className, error } = props
-  if (isLoading || (!isLoaded && !isSrcEmpty)) {
+  const { isLoading, isLoaded, isIcon, src, className, error } = props
+  if (isLoading || (!isLoaded && !isEmpty(src))) {
     return (
-      <Skeleton className={className} />
+      <Skeleton className={className ? className : ''} />
     )
   }
 
@@ -39,9 +39,9 @@ const ImageStatus = (props) => {
     )
   }
 
-  if (isSrcEmpty) {
+  if (isEmpty(src)) {
     return (
-      <Skeleton className={`${className || ''} flex items-center justify-center text-4xl text-foreground`}>
+      <Skeleton className={`${className ? className : ''} flex items-center justify-center text-4xl text-foreground`}>
         <p>
           NO IMAGE
         </p>
@@ -63,7 +63,6 @@ const LazyImage = (props) => {
     return { ...rwdImageAttributes, ...imageProps }
   }, [restProps])
   const { src, className } = imageAttributes
-  const isSrcEmpty = isEmpty(src)
 
   const onLoad = () => setIsLoaded(true)
 
@@ -74,11 +73,11 @@ const LazyImage = (props) => {
 
   return (
     <FadeIn className='relative size-full'>
-      {((isSrcEmpty || isLoading|| !isLoaded || error)) && (
+      {((isLoading|| !isLoaded || error)) && (
         <div className='absolute flex size-full grow items-center'>
           <ImageStatus
+            src={src}
             className={className}
-            isSrcEmpty={isSrcEmpty}
             isLoading={isLoading}
             isLoaded={isLoaded}
             isIcon={isIcon}
@@ -86,10 +85,10 @@ const LazyImage = (props) => {
           />
         </div>
       )}
-      {isSrcEmpty && (
+      {isUndefined(src) && (
         <div className='my-8 aspect-video w-full' />
       )}
-      {!isSrcEmpty && (
+      {!isUndefined(src) && (
         <img
           loading='lazy'
           onLoad={onLoad}

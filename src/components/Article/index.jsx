@@ -59,12 +59,12 @@ const useArticleHtml = (html, pageImages) => {
       const { src, srcSet, width, height } = getRwdImageAttributes(pageImageData)
       return `
         <div
-          class="relative w-full block [&_div[data-visible='false']]:hidden [&_img[data-loaded='false']]:invisible"
+          class="relative w-full block"
           width="${width}"
           height="${height}"
         >
           <div
-            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10"
+            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10 [&[data-visible='false']]:hidden"
             data-visible="true"
           ></div>
           ${element.replace(`src="${relativeFileUrl}"`, `        
@@ -73,9 +73,9 @@ const useArticleHtml = (html, pageImages) => {
             width="${width}"
             height="${height}"
             data-loaded="false"
-            sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px'
             onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
-            class="w-full rounded-lg relative"
+            class="w-full rounded-lg relative [&[data-loaded='false']]:invisible"
             loading="lazy"
           `)}
         </div>
@@ -123,7 +123,7 @@ const Article = (props) => {
         </h1>
         <LazyImage
           imageData={mainImageData}
-          sizes='(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px'
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1200px'
           alt={title}
           className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) && 'my-8'}`}
           isLoading={isLoading}
@@ -151,10 +151,7 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className={`
-            prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert
-            [&_[data-table]]:overflow-x-auto
-          `}
+          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert'
         >
           <div dangerouslySetInnerHTML={{ __html }} />
         </div>

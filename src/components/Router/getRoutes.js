@@ -50,7 +50,7 @@ const getConvertedPosts = (posts) => {
         originHtml
           // RWD table
           .replace(/<table[\s\S]*?<\/table>/g, (match) => {
-            return `<div data-table>${match}</div>`
+            return `<div data-table class="[&[data-table]]:overflow-x-auto">${match}</div>`
           })
           // Format links
           .replace(/(?<!\]\()(?<!href=")(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g, (match) => {
