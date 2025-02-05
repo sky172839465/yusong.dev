@@ -17,7 +17,7 @@ const Meta = (props) => {
   }
 
   const { title, description } = data
-  const displayTitle = `${title}${title === DEFAULT_DATA.title ? '' : `| ${DEFAULT_DATA.title}`}`
+  const displayTitle = `${title}${title === DEFAULT_DATA.title ? '' : ` | ${DEFAULT_DATA.title}`}`
   return (
     <Helmet>
       <title>
