@@ -37,7 +37,6 @@ const Root = () => {
   }
 
   const onSuccess = (data, key) => {
-    toast.success('rrrrrr')
     if (key !== errorToastKeyRef.current) {
       return
     }
