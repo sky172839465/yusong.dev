@@ -8,9 +8,9 @@ import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const inputFolder = 'src'  // Folder where the original images are
 const sizes = {
-  small: 768,   // Small size for mobile
-  medium: 1200,  // Medium size for tablets
-  large: 1920   // Large size for desktops
+  small: 480,   // Small size for mobile
+  medium: 800,  // Medium size for tablets
+  large: 1200   // Large size for desktops
 }
 
 // Get dimensions of an image

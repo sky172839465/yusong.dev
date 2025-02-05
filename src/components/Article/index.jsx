@@ -51,7 +51,7 @@ const useArticleHtml = (html, pageImages) => {
 
     const convertedHtml = html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, (element, relativeFileUrl) => {
       const pageImageData = pageImages[relativeFileUrl.replace('/', '')]
-      const { src, srcSet, width, height } = getRwdImageAttributes(pageImageData)
+      const { src, srcSet, sizes, width, height } = getRwdImageAttributes(pageImageData)
       return `
         <div
           class="relative w-full block"
@@ -65,6 +65,7 @@ const useArticleHtml = (html, pageImages) => {
           ${element.replace(`src="${relativeFileUrl}"`, `        
             src="${src}"
             srcset="${srcSet}"
+            sizes="${sizes}"
             width="${width}"
             height="${height}"
             data-loaded="false"
