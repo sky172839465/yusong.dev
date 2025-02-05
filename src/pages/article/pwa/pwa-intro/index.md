@@ -6,7 +6,6 @@ modifiedAt: 2025-01-31
 tags:
   - "PWA"
 index: 0
-image: true
 series: "PWA"
 ---
 

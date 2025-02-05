@@ -7,7 +7,6 @@ tags:
   - "PWA"
   - "LIFECYCLE"
 index: 1
-image: true
 series: "PWA"
 ---
 
