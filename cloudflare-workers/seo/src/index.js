@@ -39,7 +39,7 @@ export default {
     // 如果路徑匹配文章，動態生成 meta tags
     const { type, data, image, twitterImage } = targetRoute
     const { title, description } = data
-		const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
+    const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',
       `
