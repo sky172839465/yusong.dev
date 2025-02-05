@@ -39,11 +39,12 @@ export default {
     // 如果路徑匹配文章，動態生成 meta tags
     const { type, data, image, twitterImage } = targetRoute
     const { title, description } = data
+		const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',
       `
           <meta name="author" content="${AUTHOR}">
-          <meta property="og:title" content="${title}" />
+          <meta property="og:title" content="${displayTitle}" />
           <meta property="og:description" content="${description}" />
           <meta property="og:url" content="${requestUrl}">
           <meta property="og:type" content="${type}">
@@ -53,17 +54,17 @@ export default {
           <meta property="og:locale" content="zh_TW">
           <meta property="article:author" content="${AUTHOR}">
           <meta name="twitter:card" content="summary_large_image">
-          <meta name="twitter:title" content="${title} | ${TITLE}">
+          <meta name="twitter:title" content="${displayTitle}">
           <meta name="twitter:description" content="${description}">
           <meta name="twitter:image" content="${twitterImage}">
           <meta name="twitter:site" content="@${ACCOUNT}">
           <meta name="twitter:creator" content="@${ACCOUNT}">
-          <title>${title} | ${TITLE}</title>
+          <title>${displayTitle}</title>
           <script type="application/ld+json">
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "${title}",
+            "name": "${displayTitle}",
             "description": "${description}",
             "url": "${requestUrl}",
             "image": "${image}",
