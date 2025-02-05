@@ -66,7 +66,11 @@ const Root = () => {
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: '!bg-background/50 !text-foreground !border-foreground !border !backdrop-blur-md'
+        }}
+      />
       <CustomSwipe />
       <LazyReloadPrompt />
     </ThemeProvider>
