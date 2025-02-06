@@ -4,11 +4,7 @@ import path from 'path'
 import { tryit } from 'radash'
 import { simpleGit } from 'simple-git'
 
-console.log(process.cwd())
-
 const updateArticleFrontmatter = async () => {
-  // const diff = await simpleGit().diff(['--name-status', 'origin/main'])
-  // console.log({ diff })
   const stdout = await simpleGit().raw(['diff', '--name-status', 'origin/main'])
   const lines = stdout.trim().split('\n')
 
@@ -21,7 +17,7 @@ const updateArticleFrontmatter = async () => {
   console.log(today, modifiedMarkdownFiles, process.cwd())
 
   await Promise.all(modifiedMarkdownFiles.map(async (file) => {
-    const filePath = path.join(process.cwd(), '..', file)
+    const filePath = path.join(process.cwd(), file)
     const [error] = await tryit(() => fs.promises.access(path.dirname(filePath)))()
     console.log({ error, filePath, path: path.dirname(filePath) })
     if (error) {
