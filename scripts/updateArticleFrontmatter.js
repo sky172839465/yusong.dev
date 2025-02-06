@@ -1,5 +1,6 @@
 import fs from 'fs'
 import yaml from 'js-yaml'
+import { get } from 'lodash-es'
 import path from 'path'
 import { tryit } from 'radash'
 import { simpleGit } from 'simple-git'
@@ -34,7 +35,8 @@ const updateArticleFrontmatter = async () => {
       return
     }
 
-    if (today.split('T')[0] === frontmatter.modifiedAt.split('T')[0]) {
+    console.log(frontmatter.modifiedAt)
+    if (today.split('T')[0] === get(frontmatter, 'modifiedAt').split('T')[0]) {
       return
     }
 
