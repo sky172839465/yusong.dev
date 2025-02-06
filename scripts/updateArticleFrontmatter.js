@@ -4,8 +4,10 @@ import path from 'path'
 import { simpleGit } from 'simple-git'
 
 const updateArticleFrontmatter = async () => {
-  const diff = await simpleGit().diff(['--name-status', 'origin/main'])
-  console.log({ diff })
+  // const diff = await simpleGit().diff(['--name-status', 'origin/main'])
+  // console.log({ diff })
+  const result = await simpleGit().diff(['diff', '--name-status', 'origin/main'])
+  console.log(result)
   const stdout = ''
   const lines = stdout.trim().split('\n')
 
