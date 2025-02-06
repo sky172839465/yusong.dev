@@ -3,6 +3,8 @@ import yaml from 'js-yaml'
 import path from 'path'
 import { simpleGit } from 'simple-git'
 
+console.log(process.cwd())
+
 const updateArticleFrontmatter = async () => {
   // const diff = await simpleGit().diff(['--name-status', 'origin/main'])
   // console.log({ diff })
@@ -15,10 +17,10 @@ const updateArticleFrontmatter = async () => {
     .map(([, file]) => file)
 
   const today = new Date().toISOString().split('T')[0]
-  console.log(today, modifiedMarkdownFiles)
+  console.log(today, modifiedMarkdownFiles, process.cwd())
 
   await modifiedMarkdownFiles.map(async (file) => {
-    const filePath = `./${file}`
+    const filePath = path.join(process.cwd(), '..', file)
     console.log({ filePath })
     if (!fs.existsSync(filePath)) {
       return
