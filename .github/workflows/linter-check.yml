@@ -1,9 +1,8 @@
 name: linter-check
+
 on:
-  workflow_run:
-    workflows: ["update-frontmatter"]
-    types:
-      - completed
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
