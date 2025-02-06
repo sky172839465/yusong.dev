@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  update-markdown:
+  update-frontmatter:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,6 +13,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }} # Ensures checkout on PR branch
+          repository: ${{ github.event.pull_request.head.repo.full_name }} # Ensures correct repo for forks
+          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -23,9 +26,15 @@ jobs:
         run: npm install
 
       - name: Update modifiedAt in Markdown files
-        run: node scripts/updateModifiedAt.js
+        run: node ./scripts/updateArticleFrontmatter.js
+
+      - name: Check for changes
+        id: git_diff
+        run: |
+          git status --porcelain | grep -E '\.(md)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit changes
+        if: ${{ steps.git_diff.outputs.changed == 1 }}
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"

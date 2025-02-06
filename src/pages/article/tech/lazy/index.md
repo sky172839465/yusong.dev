@@ -1,19 +1,19 @@
 ---
 title: Lazy Title
 description: Describe Lazy content
-createdAt: 2025-01-12
-modifiedAt: 2025-01-12
+createdAt: 2025-01-12T00:00:00.000Z
+modifiedAt: "2025-02-06T04:36:19.726Z"
 tags:
-  - "Lazy"
-  - "awesome"
-  - "redbull"
-series: "TEST"
+  - Lazy
+  - awesome
+  - redbull
+series: TEST
 index: 0
 ---
 
 # This is Lazy
 
-Lazy Vite SKIP WWW UPDATED! DONNNNEEEE GOOD FINIALLY ? WAITING PWAAA TRACEEEEE NEW AGAIN is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
+Lazy Vite SKIP WWW UPDATED!!! AGAIN OK DONNNNEEEE GOOD FINIALLY ? WAITING PWAAA TRACEEEEE NEW AGAIN is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
 
 ```js
 collect.push({
