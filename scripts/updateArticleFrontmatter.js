@@ -35,7 +35,6 @@ const updateArticleFrontmatter = async () => {
       return
     }
 
-    console.log(typeof frontmatter.modifiedAt)
     if (toString(frontmatter.modifiedAt).startsWith(today.split('T')[0])) {
       return
     }
