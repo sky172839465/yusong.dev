@@ -1,13 +1,13 @@
 ---
 title: Lazy Title
 description: Describe Lazy content
-createdAt: 2025-01-12
-modifiedAt: 2025-01-12
+createdAt: 2025-01-12T00:00:00.000Z
+modifiedAt: '2025-02-06'
 tags:
-  - "Lazy"
-  - "awesome"
-  - "redbull"
-series: "TEST"
+  - Lazy
+  - awesome
+  - redbull
+series: TEST
 index: 0
 ---
 
