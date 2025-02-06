@@ -20,7 +20,7 @@ const updateArticleFrontmatter = async () => {
   const today = new Date().toISOString().split('T')[0]
   console.log(today, modifiedMarkdownFiles, process.cwd())
 
-  await modifiedMarkdownFiles.map(async (file) => {
+  await Promise.all(modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), '..', file)
     const [error] = await tryit(() => fs.promises.access(filePath))()
     console.log({ error, filePath })
@@ -46,7 +46,7 @@ const updateArticleFrontmatter = async () => {
     const updatedFrontmatter = `---\n${yaml.dump(frontmatter)}---`
     content = content.replace(match[0], updatedFrontmatter)
     return fs.promises.writeFile(filePath, content, 'utf8')
-  })
+  }))
 
   process.exit(0)
 }
