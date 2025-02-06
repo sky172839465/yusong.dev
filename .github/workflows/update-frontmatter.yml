@@ -1,0 +1,35 @@
+name: update-frontmatter
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  update-markdown:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update modifiedAt in Markdown files
+        run: node scripts/updateModifiedAt.js
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "chore: automatically update articles modifiedAt"
+          git push
+          gh pr comment ${{ env.PR_NUMBER }} --body "🤖 update articles modifiedAt, commit: $(git rev-parse --short HEAD)."
