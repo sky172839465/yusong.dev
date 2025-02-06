@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Update modifiedAt in Markdown files
-        run: node ./scripts/updateModifiedAt.js
+        run: node ./scripts/updateArticleFrontmatter.js
 
       - name: Commit changes
         run: |
