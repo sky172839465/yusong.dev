@@ -13,4 +13,4 @@ index: 1
 
 # This is hello-world
 
-hello-world Vite is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
+hello-world AUTO test Vite is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
