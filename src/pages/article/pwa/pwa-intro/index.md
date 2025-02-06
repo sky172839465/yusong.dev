@@ -1,12 +1,12 @@
 ---
 title: PWA 介紹
 description: 介紹 PWA 漸進式應用程式
-createdAt: 2025-01-31
-modifiedAt: 2025-01-31
+createdAt: 2025-01-31T00:00:00.000Z
+modifiedAt: "2025-02-06"
 tags:
-  - "PWA"
+  - PWA
 index: 0
-series: "PWA"
+series: PWA
 ---
 
 ### [起源](#come-from)
