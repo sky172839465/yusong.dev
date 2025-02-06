@@ -13,6 +13,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }} # Ensures checkout on PR branch
+          repository: ${{ github.event.pull_request.head.repo.full_name }} # Ensures correct repo for forks
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
