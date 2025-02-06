@@ -13,7 +13,7 @@ index: 0
 
 # This is Lazy
 
-Lazy Vite SKIP WWW UPDATED!!! AGAIN OK DONNNNEEEE GOOD FINIALLY ? WAITING PWAAA TRACEEEEE NEW AGAIN is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
+Lazy Vite SKIP AUTO WWW UPDATED!!! AGAIN OK DONNNNEEEE GOOD FINIALLY ? WAITING PWAAA TRACEEEEE NEW AGAIN is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
 
 ```js
 collect.push({

@@ -35,6 +35,9 @@ jobs:
 
       - name: Commit changes
         if: ${{ steps.git_diff.outputs.changed == 1 }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.number }}
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
