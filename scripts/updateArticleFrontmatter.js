@@ -4,7 +4,7 @@ import path from 'path'
 import { simpleGit } from 'simple-git'
 
 (async function () {
-  const { stdout } = await simpleGit().raw(['diff', '--name-status', 'origin/main'])
+  const { stdout = '' } = await simpleGit().raw(['diff', '--name-status', 'origin/main'])
   console.log(stdout)
   const lines = stdout.trim().split('\n')
 
