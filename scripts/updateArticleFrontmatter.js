@@ -18,7 +18,7 @@ const updateArticleFrontmatter = async () => {
   console.log(today, modifiedMarkdownFiles)
 
   await modifiedMarkdownFiles.map(async (file) => {
-    const filePath = path.join(process.cwd(), file)
+    const filePath = `./${file}`
     console.log({ filePath })
     if (!fs.existsSync(filePath)) {
       return
