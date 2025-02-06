@@ -6,9 +6,7 @@ import { simpleGit } from 'simple-git'
 const updateArticleFrontmatter = async () => {
   // const diff = await simpleGit().diff(['--name-status', 'origin/main'])
   // console.log({ diff })
-  const result = await simpleGit().raw(['diff', '--name-status', 'origin/main'])
-  console.log(result)
-  const stdout = ''
+  const stdout = await simpleGit().raw(['diff', '--name-status', 'origin/main'])
   const lines = stdout.trim().split('\n')
 
   const modifiedMarkdownFiles = lines
