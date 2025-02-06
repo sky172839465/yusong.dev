@@ -1,13 +1,13 @@
 ---
 title: hello-world Title
 description: Describe hello-world content
-createdAt: 2025-01-05
-modifiedAt: 2025-01-20
+createdAt: 2025-01-05T00:00:00.000Z
+modifiedAt: "2025-02-06T05:04:28.073Z"
 tags:
-  - "hello-world"
-  - "awesome"
-  - "rad"
-series: "TEST"
+  - hello-world
+  - awesome
+  - rad
+series: TEST
 index: 1
 ---
 
