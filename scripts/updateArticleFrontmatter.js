@@ -1,11 +1,10 @@
-
-const fs = require('fs')
-const path = require('path')
-const yaml = require('js-yaml')
-const git = require('simple-git')();
+import fs from 'fs'
+import yaml from 'js-yaml'
+import path from 'path'
+import git from 'simple-git'
 
 (async function () {
-  const { stdout } = await git.raw(['diff', '--name-status', 'origin/main'])
+  const { stdout } = await git().raw(['diff', '--name-status', 'origin/main'])
   const lines = stdout.trim().split('\n')
 
   const modifiedMarkdownFiles = lines
