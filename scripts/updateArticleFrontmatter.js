@@ -22,8 +22,8 @@ const updateArticleFrontmatter = async () => {
 
   await Promise.all(modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), '..', file)
-    const [error] = await tryit(() => fs.promises.access(filePath))()
-    console.log({ error, filePath })
+    const [error] = await tryit(() => fs.promises.access(path.dirname(filePath)))()
+    console.log({ error, filePath, path: path.dirname(filePath) })
     if (error) {
       return
     }
