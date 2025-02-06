@@ -19,18 +19,21 @@ const updateArticleFrontmatter = async () => {
 
   await modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), file)
+    console.log({ filePath })
     if (!fs.existsSync(filePath)) {
       return
     }
 
     let content = await fs.promises.readFile(filePath, 'utf8')
     const match = content.match(/^---\n([\s\S]+?)\n---/)
+    console.log({ match })
 
     if (!match) {
       return
     }
 
     let frontmatter = yaml.load(match[1])
+    console.log({ frontmatter })
     if (!frontmatter.modifiedAt) {
       return
     }

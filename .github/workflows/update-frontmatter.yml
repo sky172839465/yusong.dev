@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  update-markdown:
+  update-frontmatter:
     runs-on: ubuntu-latest
 
     steps:
