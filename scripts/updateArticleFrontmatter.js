@@ -13,7 +13,7 @@ const updateArticleFrontmatter = async () => {
     .filter(([status, file]) => (status === 'M' || status === 'A') && file.endsWith('.md'))
     .map(([, file]) => file)
 
-  const today = new Date().toISOString()
+  const today = new Date().toISOString().split('T')[0]
 
   await Promise.all(modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), file)
@@ -31,6 +31,10 @@ const updateArticleFrontmatter = async () => {
 
     let frontmatter = yaml.load(match[1])
     if (!frontmatter.modifiedAt) {
+      return
+    }
+
+    if (today.split('T')[0] === frontmatter.modifiedAt.split('T')[0]) {
       return
     }
 
