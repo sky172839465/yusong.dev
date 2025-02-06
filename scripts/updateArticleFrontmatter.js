@@ -1,6 +1,7 @@
 import fs from 'fs'
 import yaml from 'js-yaml'
 import path from 'path'
+import { tryit } from 'radash'
 import { simpleGit } from 'simple-git'
 
 console.log(process.cwd())
@@ -21,8 +22,9 @@ const updateArticleFrontmatter = async () => {
 
   await modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), '..', file)
-    console.log({ filePath })
-    if (!fs.existsSync(filePath)) {
+    const [error] = await tryit(() => fs.promises.access(filePath))()
+    console.log({ error, filePath })
+    if (error) {
       return
     }
 
