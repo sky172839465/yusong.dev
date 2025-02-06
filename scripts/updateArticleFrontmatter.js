@@ -14,7 +14,7 @@ const updateArticleFrontmatter = async () => {
     .filter(([status, file]) => (status === 'M' || status === 'A') && file.endsWith('.md'))
     .map(([, file]) => file)
 
-  const today = new Date().toISOString().split('T')[0]
+  const today = new Date().toISOString()
 
   await Promise.all(modifiedMarkdownFiles.map(async (file) => {
     const filePath = path.join(process.cwd(), file)
