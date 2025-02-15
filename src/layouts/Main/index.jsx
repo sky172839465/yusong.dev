@@ -1,17 +1,19 @@
+import { lazy } from 'react'
+
 import FadeIn from '@/components/FadeIn'
 
-import Footer from '../Footer'
-import Header from '../Header'
+const LazyHeader = lazy(() => import('../Header'))
+const LazyFooter = lazy(() => import('../Footer'))
 
 const MainLayout = (props) => {
   const { children, isFullScreen } = props
   return (
     <FadeIn className='flex min-h-dvh flex-col bg-background'>
-      <Header />
+      <LazyHeader />
       <main className={`container mx-auto grow px-4 py-8 ${isFullScreen && 'flex items-center'}`}>
         {children}
       </main>
-      <Footer />
+      <LazyFooter />
     </FadeIn>
   )
 }

@@ -1,8 +1,10 @@
 import { RouteOff } from 'lucide-react'
+import { lazy } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
-import MainLayout from '@/layouts/Main'
+
+const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
 const ErrorElement = () => {
   const error = useRouteError() || {}
@@ -13,7 +15,7 @@ const ErrorElement = () => {
   console.error(error)
 
   return (
-    <MainLayout isFullScreen>
+    <LazyMainLayout isFullScreen>
       <div className='flex w-full justify-center text-center text-foreground'>
         <div className='max-w-md'>
           <h1 className='text-5xl font-bold'>
@@ -40,7 +42,7 @@ const ErrorElement = () => {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </LazyMainLayout>
   )
 }
 
