@@ -32,16 +32,10 @@ jobs:
 
   update-frontmatter:
     needs: pre-update-frontmatter
+    if: needs.pre-update-frontmatter.outputs.changed == "true"
+    outputs:
+      changed: ${{ steps.commit.outputs.done || steps.uncommit.outputs.done }}
     runs-on: ubuntu-latest
-    steps:
-      - name: Early exit if changed
-        id: check_exit
-        run: |
-          if [ "${{ needs.pre-update-frontmatter.outputs.changed }}" == "false" ]; then
-            echo "No changes."
-            exit 0
-          fi
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -61,8 +55,14 @@ jobs:
         run: |
           git status --porcelain | grep -E '\.(md)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
+      - name: Uncommit
+        if: ${{ steps.git_diff.outputs.changed == 0 }}
+        id: uncommit
+        run: echo "done=true" >> $GITHUB_OUTPUT
+
       - name: Commit changes
         if: ${{ steps.git_diff.outputs.changed == 1 }}
+        id: commit
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
@@ -73,3 +73,12 @@ jobs:
           git commit -m "chore: automatically update articles modifiedAt"
           git push
           gh pr comment ${{ env.PR_NUMBER }} --body "🤖 update articles modifiedAt, commit: $(git rev-parse --short HEAD)."
+          echo "done=true" >> $GITHUB_OUTPUT
+
+  post-update-frontmatter:
+    needs: [pre-update-frontmatter, update-frontmatter]
+    if: needs.pre-update-frontmatter.outputs.changed == 'false' || needs.update-frontmatter.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Done the job
+        run: echo "done"
