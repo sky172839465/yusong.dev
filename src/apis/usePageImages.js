@@ -16,6 +16,6 @@ export const fetcher = async (pathname) => {
 
 export const usePageImages = (options = {}) => {
   const { pathname } = useLocation()
-  const result = useSWR(pathname, fetcher, options)
-  return result
+  const { isLoading, isValidating, ...restProps } = useSWR(pathname, fetcher, options)
+  return { ...restProps, isLoading: isLoading || isValidating }
 }

@@ -12,7 +12,7 @@ const DEFAULT_QUERY = {
   }
 }
 export const usePwaArticles = (query = DEFAULT_QUERY, options = {}) => {
-  const result = useSWR(query, fetcher, options)
-  return result
+  const { isLoading, isValidating, ...restProps } = useSWR(query, fetcher, options)
+  return { ...restProps, isLoading: isLoading || isValidating }
 }
 
