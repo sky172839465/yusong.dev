@@ -1,5 +1,7 @@
 import { Form, FormProvider, useForm, useWatch } from 'react-hook-form'
 
+import { Input } from '@/components/ui/input'
+
 import { useArticles } from '../../apis/useArticles'
 
 const defaultValues = { title: 'Lazy' }
@@ -9,7 +11,7 @@ const Result = () => {
   const { isLoading, data } = useArticles(title)
 
   return (
-    <div className='mockup-code grow bg-foreground text-background'>
+    <div className='grow rounded-md bg-foreground p-2 text-background'>
       <div className='h-full overflow-y-scroll'>
         {isLoading && (
           <pre>
@@ -39,14 +41,12 @@ const Demo = () => {
     <div className='flex h-[calc(100dvh-11rem)] flex-col gap-2'>
       <FormProvider {...methods}>
         <Form>
-          <div className='form-control'>
-            <input
-              type='text'
-              placeholder='Type here'
-              className='input input-bordered w-full text-slate-900'
-              {...methods.register('title')}
-            />
-          </div>
+          <Input
+            type='text'
+            placeholder='Type here'
+            className='w-full'
+            {...methods.register('title')}
+          />
         </Form>
         <Result />
       </FormProvider>
