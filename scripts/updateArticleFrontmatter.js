@@ -36,7 +36,7 @@ const updateArticleFrontmatter = async () => {
     }
 
     console.log('modifiedAt', toString(frontmatter.modifiedAt), today)
-    if (toString(frontmatter.modifiedAt).startsWith(today.split('T')[0])) {
+    if (toString(frontmatter.modifiedAt).includes(today.split('T')[0])) {
       return
     }
 
