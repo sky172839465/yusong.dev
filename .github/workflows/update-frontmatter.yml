@@ -32,7 +32,7 @@ jobs:
 
   update-frontmatter:
     needs: pre-update-frontmatter
-    if: needs.pre-update-frontmatter.outputs.changed == "true"
+    if: needs.pre-update-frontmatter.outputs.changed == 'true'
     outputs:
       changed: ${{ steps.commit.outputs.done || steps.uncommit.outputs.done }}
     runs-on: ubuntu-latest
