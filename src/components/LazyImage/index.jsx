@@ -66,14 +66,16 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
-  const onLoad = async () => {
-    await sleep(1000)
-    setIsLoaded(true)
+  const onLoad = () => {
+    window.requestAnimationFrame(async () => {
+      await sleep(1000)
+      setIsLoaded(true)
+    })
   }
 
   const onError = (e) => {
-    onLoad()
     setError(e)
+    setIsLoaded(true)
   }
 
   useEffect(() => {
