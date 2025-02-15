@@ -60,8 +60,8 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
+          git add src/pages/*
           git status --porcelain
-          ls -l src/pages/article/spa/spa-intro/images/
           git status --porcelain | grep -E '^(A|M|\?\?)\s.*\.(jpg|jpeg|png|gif|svg|webp)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit if images generated
