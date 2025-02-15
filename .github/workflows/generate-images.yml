@@ -16,7 +16,7 @@ permissions:
   actions: write
 
 jobs:
-  check-changes:
+  pre-generate-images:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,17 +27,18 @@ jobs:
       - name: Check for changes in src/
         id: check_changes
         run: |
-          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|meta\.js)$'; then
+          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|jsx|meta\.js)$'; then
             echo "Changes detected in src/, continuing workflow."
-            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "fileChanged=true" >> $GITHUB_OUTPUT
           else
             echo "No changes in src/, stopping workflow."
+            echo "fileChanged=false" >> $GITHUB_OUTPUT
             exit 0
           fi
 
   generate-images:
-    needs: check-changes
-    if: needs.check-changes.outputs.changed == 'true'
+    needs: pre-generate-images
+    if: needs.pre-generate-images.outputs.fileChanged == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -71,3 +72,12 @@ jobs:
           git commit -m "chore: automatically generate images"
           git push
           gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate images, commit: $(git rev-parse --short HEAD)."
+          echo "fileChanged=true" >> $GITHUB_OUTPUT
+
+  post-generate-images:
+    needs: [pre-generate-images, generate-images]
+    if: needs.pre-generate-images.outputs.fileChanged == 'false' || needs.generate-images.outputs.fileChanged == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Done the job
+        run: echo "done"
