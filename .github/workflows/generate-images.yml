@@ -41,8 +41,6 @@ jobs:
     needs: pre-generate-images
     if: needs.pre-generate-images.outputs.changed == 'true'
     runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.commit.outputs.done || steps.uncommit.outputs.done }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -63,14 +61,8 @@ jobs:
         run: |
           git status --porcelain | grep -E '\.(jpg|jpeg|png|gif|svg|webp)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
-      - name: Uncommit
-        if: ${{ steps.git_diff.outputs.changed == 0 }}
-        id: uncommit
-        run: echo "done=true" >> $GITHUB_OUTPUT
-
       - name: Commit if images generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
-        id: commit
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
@@ -81,12 +73,3 @@ jobs:
           git commit -m "chore: automatically generate images"
           git push
           gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate images, commit: $(git rev-parse --short HEAD)."
-          echo "done=true" >> $GITHUB_OUTPUT
-
-  post-generate-images:
-    needs: [pre-generate-images, generate-images]
-    if: needs.pre-generate-images.outputs.changed == 'false' || needs.generate-images.outputs.changed == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Done the job
-        run: echo "done"
