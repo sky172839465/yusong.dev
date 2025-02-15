@@ -1,5 +1,5 @@
 import { filter, flow, get, isEmpty, map } from 'lodash-es'
-import { Fragment, lazy, useMemo,useRef } from 'react'
+import { Fragment, lazy, useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
