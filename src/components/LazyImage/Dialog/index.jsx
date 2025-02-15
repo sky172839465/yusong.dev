@@ -33,12 +33,12 @@ const LazyImagePreview = (props) => {
           {...restProps}
         />
       </DialogTrigger>
-      <DialogContent className='max-w-[90dvw] border-none bg-transparent p-0 shadow-none'>
+      <DialogContent className='max-w-[90dvw] border-none bg-transparent p-0 text-white shadow-none'>
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className='text-white'>
             Preview
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription className='text-white/80'>
             {alt}
           </DialogDescription>
         </DialogHeader>
