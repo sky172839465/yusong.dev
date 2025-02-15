@@ -53,7 +53,7 @@ const getConvertedPosts = (posts) => {
             return `<div data-table class="[&[data-table]]:overflow-x-auto">${match}</div>`
           })
           // Format links
-          .replace(/(?<!\]\()(?<!href=")(\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+)/g, (match) => {
+          .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
             return `<a href="${match}">${match}</a>`
           })
           // Outside links need to open new tab
