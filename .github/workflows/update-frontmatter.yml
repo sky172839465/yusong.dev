@@ -36,6 +36,7 @@ jobs:
     outputs:
       changed: ${{ steps.commit.outputs.done || steps.uncommit.outputs.done }}
     runs-on: ubuntu-latest
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
