@@ -18,6 +18,8 @@ permissions:
 jobs:
   pre-generate-images:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check_changes.outputs.changed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

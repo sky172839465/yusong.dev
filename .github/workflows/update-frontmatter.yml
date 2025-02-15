@@ -11,6 +11,8 @@ concurrency:
 jobs:
   pre-update-frontmatter:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check_changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
