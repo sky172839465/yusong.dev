@@ -4,6 +4,13 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, reopened, synchronize]
+    paths:
+      - "src/pages/**/index.md"
+      - "src/pages/**/index.meta.js"
+
+concurrency:
+  group: "generate-images"
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -21,6 +28,16 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
+
+      - name: Check for changes in src/
+        id: check_changes
+        run: |
+          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|meta\.js)$'; then
+            echo "Changes detected in src/, continuing workflow."
+          else
+            echo "No changes in src/, stopping workflow."
+            exit 0
+          fi
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
         uses: nielsvaneck/render-md-mermaid@v3

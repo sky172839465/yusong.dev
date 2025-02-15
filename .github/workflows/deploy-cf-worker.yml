@@ -12,6 +12,10 @@ on:
 #   pull_request:
 #     types: [opened, reopened, synchronize]
 
+concurrency:
+  group: "deploy-worker"
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
