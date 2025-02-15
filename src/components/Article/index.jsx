@@ -46,7 +46,14 @@ const useArticleHtml = (html) => {
   const { isLoading, data: pageImages } = usePageImages()
   const sections = useMemo(() => getSections(html), [html])
   const { htmlList, imageList } = useMemo(() => {
-    if (isLoading || isEmpty(pageImages)) {
+    if (isLoading) {
+      return {
+        htmlList: [],
+        imageList: []
+      }
+    }
+
+    if (isEmpty(pageImages)) {
       return {
         htmlList: [html],
         imageList: []
