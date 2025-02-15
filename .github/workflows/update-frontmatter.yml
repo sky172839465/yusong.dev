@@ -26,12 +26,14 @@ jobs:
         run: |
           if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.md$'; then
             echo "Changes detected in src/, continuing workflow."
+            echo "changed=true" >> $GITHUB_ENV
           else
             echo "No changes in src/, stopping workflow."
             exit 0
           fi
 
       - name: Setup Node.js
+        if: env.changed == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: 18
