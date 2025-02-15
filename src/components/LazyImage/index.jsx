@@ -1,6 +1,5 @@
 import { isEmpty, isUndefined } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
-import { sleep } from 'radash'
 import { useEffect, useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
@@ -67,8 +66,7 @@ const LazyImage = (props) => {
   const { src, className } = imageAttributes
 
   const onLoad = () => {
-    window.requestAnimationFrame(async () => {
-      await sleep(1000)
+    window.requestAnimationFrame(() => {
       setIsLoaded(true)
     })
   }
