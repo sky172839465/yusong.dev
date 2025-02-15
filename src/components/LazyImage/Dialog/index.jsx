@@ -42,14 +42,18 @@ const LazyImagePreview = (props) => {
             {alt}
           </DialogDescription>
         </DialogHeader>
-        <LazyImage
-          src={getFileUrl(`/${path}`)}
-          width={width}
-          height={height}
-          alt={alt}
-          className={className}
+        <div
+          className={`cursor-pointer bg-secondary ${className || ''}`}
           onClick={() => setOpen(false)}
-        />
+        >
+          <LazyImage
+            src={getFileUrl(`/${path}`)}
+            width={width}
+            height={height}
+            alt={alt}
+            className={className}
+          />
+        </div>
       </DialogContent>
     </Dialog>
   )
