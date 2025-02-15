@@ -1,9 +1,10 @@
+import { orderBy } from 'lodash-es'
 import { Link } from 'react-router-dom'
 
 import { useArticles } from '@/apis/useArticles'
 
 export default function ArticlesSection() {
-  const { isLoading, data } = useArticles({ type: 'article' })
+  const { isLoading, data: articles } = useArticles({ type: 'article' })
 
   return (
     <section id='articles' className='my-12'>
@@ -16,7 +17,7 @@ export default function ArticlesSection() {
             loading
           </p>
         )}
-        {!isLoading && data.slice(0, 3).map(({ data = {}, path }) => {
+        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 3).map(({ data = {}, path }) => {
           const { title, description } = data
           return (
             <div key={path} className='overflow-hidden rounded-lg bg-card text-card-foreground shadow-md'>
@@ -42,4 +43,3 @@ export default function ArticlesSection() {
     </section>
   )
 }
-
