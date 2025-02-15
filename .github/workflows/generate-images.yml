@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
     types: [opened, reopened, synchronize]
-    paths:
-      - "src/pages/**/index.md"
-      - "src/pages/**/index.meta.js"
 
 concurrency:
   group: "generate-images"
