@@ -33,7 +33,7 @@ jobs:
       - name: Check for changes
         id: git_diff
         run: |
-          git status --porcelain | grep -E '\.(jpg|jpeg|png|gif|svg)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
+          git status --porcelain | grep -E '\.(jpg|jpeg|png|gif|svg|webp)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit if images generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
