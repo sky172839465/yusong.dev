@@ -7,9 +7,10 @@ import useSWR from 'swr'
 import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
-import LazyImage from '@/components/LazyImage'
+import LazyImagePreview from '@/components/LazyImage/Dialog'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
 import { Button } from '@/components/ui/button'
+
 
 const LazyComment = lazy(() => import('@/components/Comments'))
 
@@ -119,10 +120,10 @@ const Article = (props) => {
         <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
-        <LazyImage
+        <LazyImagePreview
           imageData={mainImageData}
           alt={title}
-          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) && 'my-8'}`}
+          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
         />
         <div className='flex flex-row items-center justify-between'>
