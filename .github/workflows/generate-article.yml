@@ -55,6 +55,7 @@ jobs:
           INPUT_CONTENT: ${{ github.event.inputs.content }}
 
       - name: Commit and Push
+        id: branch
         run: |
           TIMESTAMP=$(date +"%Y%m%d%H%M%S")
           BRANCH_NAME="workflow-pr-${TIMESTAMP}"
@@ -66,9 +67,12 @@ jobs:
           git add .
           git commit -m "docs: generate article [${{ github.event.inputs.title }}]"
           git push origin "$BRANCH_NAME"
+          echo "branchName=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         uses: actions/github-script@v7
+        env:
+          BRANCH_NAME: ${{ steps.branch.outputs.branchName }}
         with:
           github-token: ${{ secrets.REPO_TOKEN }}
           script: |
