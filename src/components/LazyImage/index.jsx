@@ -64,7 +64,6 @@ const LazyImage = (props) => {
     }
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
-  console.log(props, imageAttributes)
 
   const onLoad = () => setIsLoaded(true)
 
