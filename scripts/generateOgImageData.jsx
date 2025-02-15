@@ -8,6 +8,7 @@ import sharp from 'sharp'
 import { twj } from 'tw-to-css'
 
 const routes = JSON.parse(fs.readFileSync('src/data/routes.json', 'utf-8'))
+console.log(routes)
 const favicon = fs.readFileSync('public/favicon.svg', 'utf-8').replace(/>\s+</g, '><')
 
 const getOgImgComponent = (route) => {
