@@ -34,7 +34,14 @@ export default ({ mode }) => {
     },
     build: {
       minify: 'esbuild',
-      cssCodeSplit: true
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'] // Move common libraries to a separate chunk
+          }
+        }
+      }
     },
     define: {
       'window.IS_PROD': `${isProd}`
