@@ -6,7 +6,7 @@ on:
       path:
         description: "File path"
         required: true
-        default: "/src/article"
+        default: "/src/pages/article"
         type: string
       title:
         description: "Article title"

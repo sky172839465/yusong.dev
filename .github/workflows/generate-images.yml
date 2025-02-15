@@ -5,6 +5,10 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
 
+concurrency:
+  group: "generate-images"
+  cancel-in-progress: true
+
 permissions:
   contents: write
   pull-requests: write
@@ -12,9 +16,33 @@ permissions:
   actions: write
 
 jobs:
-  generate-images:
+  pre-generate-images:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check_changes.outputs.changed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: Check for changes in src/
+        id: check_changes
+        run: |
+          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|jsx|meta\.js)$'; then
+            echo "Changes detected in src/, continuing workflow."
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes in src/, stopping workflow."
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+  generate-images:
+    needs: pre-generate-images
+    if: needs.pre-generate-images.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.done || steps.uncommit.outputs.done }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,8 +63,14 @@ jobs:
         run: |
           git status --porcelain | grep -E '\.(jpg|jpeg|png|gif|svg|webp)$' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
+      - name: Uncommit
+        if: ${{ steps.git_diff.outputs.changed == 0 }}
+        id: uncommit
+        run: echo "done=true" >> $GITHUB_OUTPUT
+
       - name: Commit if images generated
         if: ${{ steps.git_diff.outputs.changed == 1 }}
+        id: commit
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.number }}
@@ -47,3 +81,12 @@ jobs:
           git commit -m "chore: automatically generate images"
           git push
           gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Generate images, commit: $(git rev-parse --short HEAD)."
+          echo "done=true" >> $GITHUB_OUTPUT
+
+  post-generate-images:
+    needs: [pre-generate-images, generate-images]
+    if: needs.pre-generate-images.outputs.changed == 'false' || needs.generate-images.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Done the job
+        run: echo "done"
