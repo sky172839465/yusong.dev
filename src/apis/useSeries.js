@@ -10,7 +10,7 @@ const DEFAULT_QUERY = {
   type: 'website'
 }
 export const useSeries = (query = DEFAULT_QUERY, options = {}) => {
-  const result = useSWR(query, fetcher, options)
-  return result
+  const { isLoading, isValidating, ...restProps } = useSWR(query, fetcher, options)
+  return { ...restProps, isLoading: isLoading || isValidating }
 }
 

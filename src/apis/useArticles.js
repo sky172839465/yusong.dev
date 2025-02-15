@@ -11,7 +11,7 @@ export const fetcher = async (query) => {
 }
 
 export const useArticles = (query, options = {}) => {
-  const result = useSWR(query ? query : null, fetcher, options)
-  return result
+  const { isLoading, isValidating, ...restProps } = useSWR(query ? query : null, fetcher, options)
+  return { ...restProps, isLoading: isLoading || isValidating }
 }
 

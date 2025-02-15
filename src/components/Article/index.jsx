@@ -1,5 +1,5 @@
-import { filter, flow, isEmpty, map } from 'lodash-es'
-import { lazy, useMemo,useRef } from 'react'
+import { filter, flow, get, isEmpty, map } from 'lodash-es'
+import { Fragment, lazy, useMemo,useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
@@ -7,8 +7,7 @@ import useSWR from 'swr'
 import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
-import LazyImage from '@/components/LazyImage'
-import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
+import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Button } from '@/components/ui/button'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
@@ -28,13 +27,14 @@ const getSections = (html) => {
   return result
 }
 
-const useMainImageData = (pageImages = {}) => {
+const useMainImageData = () => {
+  const { isLoading, data: pageImages } = usePageImages()
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
     const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
     return imagePathFromSrc
   }, [pathname])
-  if (!imagePathFromSrc) {
+  if (isLoading || !imagePathFromSrc) {
     return null
   }
 
@@ -42,43 +42,41 @@ const useMainImageData = (pageImages = {}) => {
   return imageData
 }
 
-const useArticleHtml = (html, pageImages) => {
+const useArticleHtml = (html) => {
+  const { isLoading, data: pageImages } = usePageImages()
   const sections = useMemo(() => getSections(html), [html])
-  const articleHtml = useMemo(() => {
-    if (!pageImages) {
-      return html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, '')
+  const { htmlList, imageList } = useMemo(() => {
+    if (isLoading || isEmpty(pageImages)) {
+      return {
+        htmlList: [html],
+        imageList: []
+      }
     }
 
-    const convertedHtml = html.replace(/<img[^>]*src=["']([^"']+)["'][^>]*>/g, (element, relativeFileUrl) => {
+    const splitElements = []
+    const imageList = []
+    // find images in html
+    const convertedHtml = html.replace(/<p>\s*?<img[^>]*src=["']([^"']+)["'][^>]*>\s*<\/p>?/g, (element, relativeFileUrl) => {
       const pageImageData = pageImages[relativeFileUrl.replace('/', '')]
-      const { src, srcSet, sizes, width, height } = getRwdImageAttributes(pageImageData)
-      return `
-        <div
-          class="relative w-full block"
-          width="${width}"
-          height="${height}"
-        >
-          <div
-            class="absolute h-full w-full block rounded-lg animate-pulse bg-foreground/10 [&[data-visible='false']]:invisible"
-            data-visible="true"
-          ></div>
-          ${element.replace(`src="${relativeFileUrl}"`, `        
-            src="${src}"
-            srcset="${srcSet}"
-            sizes="${sizes}"
-            width="${width}"
-            height="${height}"
-            data-loaded="false"
-            onload="this.setAttribute('data-loaded', 'true'); this.previousElementSibling.setAttribute('data-visible', 'false');"
-            class="w-full rounded-lg relative [&[data-loaded='false']]:invisible"
-            loading="lazy"
-          `)}
-        </div>
-      `
+      // find image alt in image html
+      const altMatch = element.match(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/)
+      const alt = altMatch ? altMatch[1] : 'Article image'
+      splitElements.push(element)
+      imageList.push({ alt, imageData: pageImageData })
+      return element
     })
-    return convertedHtml
-  }, [html, pageImages])
-  return { sections, html: articleHtml }
+    if (isEmpty(splitElements)) {
+      return {
+        htmlList: [html],
+        imageList: []
+      }
+    }
+
+    const splitHtmlAndImagesRegexp = new RegExp(`(${splitElements.join('|')})`, 'g')
+    const htmlList = convertedHtml.split(splitHtmlAndImagesRegexp).filter((_, i) => i % 2 === 0)
+    return { htmlList, imageList }
+  }, [html, pageImages, isLoading])
+  return { sections, htmlList, imageList }
 }
 
 const DEFAULT_TITLE = 'YUSONG.TW'
@@ -89,12 +87,12 @@ const Article = (props) => {
   const topRef = useRef()
   const { pathname } = useLocation()
   const { data } = useSWR(filePath, markdown, { suspense: true })
-  const { isLoading, data: pageImages } = usePageImages()
+  const { isLoading } = usePageImages()
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
-  const mainImageData = useMainImageData(pageImages)
-  const { sections, html: __html } = useArticleHtml(html, pageImages)
+  const mainImageData = useMainImageData()
+  const { sections, htmlList, imageList } = useArticleHtml(html)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
   
   const shareData = {
@@ -119,10 +117,10 @@ const Article = (props) => {
         <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
-        <LazyImage
+        <LazyImagePreview
           imageData={mainImageData}
           alt={title}
-          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) && 'my-8'}`}
+          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
         />
         <div className='flex flex-row items-center justify-between'>
@@ -150,7 +148,24 @@ const Article = (props) => {
           ref={articleRef}
           className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert'
         >
-          <div dangerouslySetInnerHTML={{ __html }} />
+          {map(htmlList, (__html, index) => {
+            const { imageData, alt } = get(imageList, index, {})
+            // split html string by image tags
+            // image tags will replace to react lazy image with preview
+            return (
+              <Fragment key={index}>
+                <div dangerouslySetInnerHTML={{ __html }} />
+                {!isEmpty(imageData) && (
+                  <LazyImagePreview
+                    imageData={imageData}
+                    alt={alt}
+                    className='aspect-video w-full rounded-lg'
+                    isLoading={isLoading}
+                  />
+                )}
+              </Fragment>
+            )
+          })}
         </div>
         <ArticleActions
           topRef={topRef}
