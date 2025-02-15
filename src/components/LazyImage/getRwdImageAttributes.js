@@ -5,7 +5,7 @@ import getFileUrl from '@/lib/getFileUrl'
 const SIZE_QUERY = [
   '(max-width: 600px) ',
   '(max-width: 1024px) ',
-  ''
+  '(min-width: 1025px) '
 ]
 
 // const SIZE_QUERY = [
