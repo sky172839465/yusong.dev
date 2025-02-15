@@ -52,9 +52,11 @@ async function processImages() {
 
     // Resize and save images in multiple sizes
     for (const [label, width] of Object.entries(sizes)) {
-      const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
+      // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
+      const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
 
       await sharp(filePath)
+        .toFormat('webp')
         .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
         .toFile(outputFilePath)
 
