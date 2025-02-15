@@ -29,7 +29,7 @@ jobs:
       - name: Check for changes in src/
         id: check_changes
         run: |
-          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|jsx|meta\.js)$'; then
+          if git diff --name-only origin/main...HEAD --diff-filter=ACM | grep -q '^src/.*/index\.(md|jsx|meta\.js)$'; then
             echo "Changes detected in src/, continuing workflow."
             echo "changed=true" >> $GITHUB_OUTPUT
           else
