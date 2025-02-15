@@ -49,6 +49,7 @@ export default [
         { allowConstantExport: true }
       ],
       'comma-dangle': ['error', 'never'],
+      'comma-spacing': ['error', { 'before': false, 'after': true }],
       quotes: ['error', 'single'],
       semi: ['error', 'never'],
       'indent': ['error', 2],

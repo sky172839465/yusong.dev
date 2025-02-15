@@ -1,6 +1,6 @@
 import { get } from 'lodash-es'
 import { LazyMotion } from 'motion/react'
-import { lazy, useEffect,useRef } from 'react'
+import { lazy, useEffect, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
 import { Outlet, useLocation } from 'react-router-dom'

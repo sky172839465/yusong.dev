@@ -1,9 +1,9 @@
 import { delay } from 'lodash-es'
-import { Download,MousePointerClick, X } from 'lucide-react'
+import { Download, MousePointerClick, X } from 'lucide-react'
 import { useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
-import { Alert, AlertDescription,AlertTitle } from '@/components/ui/alert'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 
 const SEC = 1000

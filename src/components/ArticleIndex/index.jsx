@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 
+import { Badge } from '@/components/ui/badge'
+
 const ArticleIndex = (props) => {
   const {
     children,
@@ -41,9 +43,9 @@ const ArticleIndex = (props) => {
               <div className='flex flex-wrap gap-2'>
                 {tags.map((tag, index) => {
                   return (
-                    <div className='badge badge-outline' key={index}>
+                    <Badge ariant='secondary' key={index}>
                       {tag}
-                    </div>
+                    </Badge>
                   )
                 })}
               </div>

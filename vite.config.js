@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react'
+import autoprefixer from 'autoprefixer'
 import path from 'path'
 import tailwindcss from 'tailwindcss'
 import { defineConfig } from 'vite'
@@ -28,8 +29,12 @@ export default ({ mode }) => {
     ],
     css: {
       postcss: {
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss(), autoprefixer()]
       }
+    },
+    build: {
+      minify: 'esbuild',
+      cssCodeSplit: true
     },
     define: {
       'window.IS_PROD': `${isProd}`

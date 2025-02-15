@@ -1,6 +1,6 @@
 import { useIsSupported } from '@react-hooks-library/core'
 import { get, isEmpty, map, orderBy } from 'lodash-es'
-import { ArrowUpToLine, BookText,Hash, List, Share, SquareLibrary } from 'lucide-react'
+import { ArrowUpToLine, BookText, Hash, List, Share, SquareLibrary } from 'lucide-react'
 import { useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 

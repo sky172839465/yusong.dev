@@ -1,6 +1,6 @@
 import { isUndefined } from 'lodash-es'
 import { useEffect, useMemo } from 'react'
-import { useLocalStorage,useMediaQuery } from 'usehooks-ts'
+import { useLocalStorage, useMediaQuery } from 'usehooks-ts'
 
 import ThemeProviderContext from './context'
 

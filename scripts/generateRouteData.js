@@ -3,7 +3,7 @@ import matter from 'gray-matter'
 import { keyBy, orderBy } from 'lodash-es'
 import { globSync } from 'tinyglobby'
 
-import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME,PAGE_FILE_NAME, PAGE_META_FILE_NAME, ROUTE_FOLDER } from './constants.js'
+import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, ROUTE_FOLDER } from './constants.js'
 
 const TYPE = {
   WEBSITE: 'website',
