@@ -22,7 +22,7 @@ const LazyImagePreview = (props) => {
   }
 
 
-  const { path, width, height } = get(imageData, 'sizes[2]', {})
+  const { path, width, height } = get(imageData, 'original', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='cursor-pointer'>

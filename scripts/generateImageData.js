@@ -7,10 +7,20 @@ import { glob } from 'tinyglobby'
 import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const inputFolder = 'src'  // Folder where the original images are
+const SIZE = {
+  SMALL: 'small',   // Small size for mobile
+  MEDIUM: 'medium',  // Medium size for tablets
+  LARGE: 'large'   // Large size for desktops
+}
+const QUALITY = {
+  [SIZE.SMALL]: 100,
+  [SIZE.MEDIUM]: 90,
+  [SIZE.LARGE]: 80
+}
 const sizes = {
-  small: 480,   // Small size for mobile
-  medium: 800,  // Medium size for tablets
-  large: 1200   // Large size for desktops
+  [SIZE.SMALL]: 768,
+  [SIZE.MEDIUM]: 1024,
+  [SIZE.LARGE]: 1200
 }
 
 // Get dimensions of an image
@@ -56,7 +66,7 @@ async function processImages() {
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
 
       await sharp(filePath)
-        .toFormat('webp')
+        .webp({ quality: QUALITY[label] })
         .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
         .toFile(outputFilePath)
 
