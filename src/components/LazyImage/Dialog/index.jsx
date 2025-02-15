@@ -22,12 +22,12 @@ const LazyImagePreview = (props) => {
   }
 
 
-  const { path, width, height } = get(imageData, 'original', {})
+  const { path, width, height } = get(imageData, 'sizes[2]', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='cursor-pointer'>
         <LazyImage
-          className={`${className || ''} transition hover:scale-105`}
+          className={`${className || ''}`}
           imageData={imageData}
           alt={alt}
           {...restProps}
