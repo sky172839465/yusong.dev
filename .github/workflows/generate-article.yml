@@ -21,11 +21,11 @@ on:
         required: false
         type: string
       series:
-        description: "Article tags (comma separated)"
+        description: "Article series"
         required: false
         type: string
       index:
-        description: "Article tags (comma separated)"
+        description: "Article index (number, start 0)"
         required: false
         type: string
       content:
