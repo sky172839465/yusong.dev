@@ -9,34 +9,37 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  update-frontmatter:
+  check-changes:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }} # Ensures checkout on PR branch
-          repository: ${{ github.event.pull_request.head.repo.full_name }} # Ensures correct repo for forks
-          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Check for changes in src/
         id: check_changes
         run: |
           if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.md$'; then
             echo "Changes detected in src/, continuing workflow."
-            echo "changed=true" >> $GITHUB_ENV
+            echo "changed=true" >> $GITHUB_OUTPUT
           else
             echo "No changes in src/, stopping workflow."
             exit 0
           fi
 
-      - name: Setup Node.js
-        if: env.changed == 'true'
-        uses: actions/setup-node@v3
+  update-frontmatter:
+    needs: check-changes
+    if: needs.check-changes.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          node-version: 18
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ secrets.REPO_TOKEN }}
 
       - name: Install dependencies
         run: npm install

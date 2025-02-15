@@ -16,9 +16,29 @@ permissions:
   actions: write
 
 jobs:
-  generate-images:
+  check-changes:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
+      - name: Check for changes in src/
+        id: check_changes
+        run: |
+          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|meta\.js)$'; then
+            echo "Changes detected in src/, continuing workflow."
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes in src/, stopping workflow."
+            exit 0
+          fi
+
+  generate-images:
+    needs: check-changes
+    if: needs.check-changes.outputs.changed == 'true'
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,19 +46,7 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
 
-      - name: Check for changes in src/
-        id: check_changes
-        run: |
-          if git diff --name-only origin/main...HEAD | grep -q '^src/.*/index\.(md|meta\.js)$'; then
-            echo "Changes detected in src/, continuing workflow."
-            echo "changed=true" >> $GITHUB_ENV
-          else
-            echo "No changes in src/, stopping workflow."
-            exit 0
-          fi
-
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
-        if: env.changed == 'true'
         uses: nielsvaneck/render-md-mermaid@v3
 
       - name: Generate RWD / OG / Twitter image
