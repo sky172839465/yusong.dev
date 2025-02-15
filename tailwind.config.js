@@ -1,6 +1,5 @@
 import aspectRatio from '@tailwindcss/aspect-ratio'
 import typography from '@tailwindcss/typography'
-import daisyui from 'daisyui'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -70,19 +69,9 @@ export default {
   	}
   },
   plugins: [
-    daisyui,
     typography,
     aspectRatio,
     require('tailwindcss-animate')
-  ],
-  daisyui: {
-    styled: true,
-    themes: ['light'],
-    base: true,
-    utils: true,
-    logs: false,
-    rtl: false,
-    prefix: ''
-  }
+  ]
 }
 
