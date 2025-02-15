@@ -2,7 +2,7 @@ import FadeIn from '@/components/FadeIn'
 
 const SkeletonHome = () => {
   return (
-    <FadeIn className='flex min-h-dvh w-full items-center justify-center bg-background'>
+    <FadeIn className='flex min-h-dvh w-dvw items-center justify-center bg-background'>
       <div className='text-center'>
         <div className='max-w-md space-y-4'>
           <h1 className='text-5xl font-bold'>
