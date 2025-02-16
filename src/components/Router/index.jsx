@@ -13,6 +13,7 @@ import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
+const LazySkeletonArticle = lazy(() => import('@/components/SkeletonArticle/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
 const LazyAnimatePresence = lazy(() => import('./AnimatePresence.jsx'))
 
@@ -43,7 +44,9 @@ const withErrorElement = (routes) => routes.map((item) => {
           >
             <Layout>
               {isMarkdown && (
-                <LazyArticle {...item} />
+                <Suspense fallback={<LazySkeletonArticle />}>
+                  <LazyArticle {...item} />
+                </Suspense>
               )}
               {!isMarkdown && (
                 <>
