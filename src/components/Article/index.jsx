@@ -112,7 +112,7 @@ const Article = (props) => {
     url: window.location.href
   }
 
-  if (isMarkdownLoading) {
+  if (isMarkdownLoading || isEmpty(htmlList)) {
     return <SkeletonArticle />
   }
 
