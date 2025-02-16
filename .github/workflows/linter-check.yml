@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   linters:
-    if: github.event.pull_request.labels.*.name != 'skip ci'
+    if: contains(github.event.pull_request.labels.*.name, 'skip ci') == false
     runs-on: ubuntu-latest
 
     steps:
