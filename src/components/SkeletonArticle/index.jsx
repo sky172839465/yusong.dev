@@ -47,11 +47,11 @@ const SkeletonArticle = () => {
       >
         {times(random(2, 5)).map((index => {
           return (
-            <p key={index}>
+            <div key={index}>
               <Skeleton className='inline w-auto'>
                 {'This is skeleton content'.repeat(random(5, 15))}
               </Skeleton>
-            </p>
+            </div>
           )
         }))}
       </div>
