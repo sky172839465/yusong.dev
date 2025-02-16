@@ -1,11 +1,10 @@
 import { random, times } from 'lodash-es'
 import { Pencil } from 'lucide-react'
 
+import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-
-import LazyImage from '../LazyImage'
-import { Button } from '../ui/button'
 
 const SkeletonArticle = () => {
   return (
