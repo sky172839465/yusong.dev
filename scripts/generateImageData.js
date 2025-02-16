@@ -50,14 +50,15 @@ async function processImages() {
     const originalDimensions = await getImageDimensions(filePath)
     if (!originalDimensions) continue
     
-    const originWebpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
+    const webpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
     await sharp(filePath)
       .webp({ quality: 100 })
-      .toFile(originWebpFilePath)
+      .toFile(webpFilePath)
 
     let imageInfo = {
       original: {
-        path: originWebpFilePath,
+        path: filePath,
+        webp: webpFilePath,
         route: outputDir,
         width: originalDimensions.width,
         height: originalDimensions.height

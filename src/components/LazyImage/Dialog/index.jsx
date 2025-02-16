@@ -22,7 +22,7 @@ const LazyImagePreview = (props) => {
   }
 
 
-  const { path, width, height } = get(imageData, 'original', {})
+  const { webp, width, height } = get(imageData, 'original', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='cursor-pointer'>
@@ -47,7 +47,7 @@ const LazyImagePreview = (props) => {
           onClick={() => setOpen(false)}
         >
           <LazyImage
-            src={getFileUrl(`/${path}`)}
+            src={getFileUrl(`/${webp}`)}
             width={width}
             height={height}
             alt={alt}
