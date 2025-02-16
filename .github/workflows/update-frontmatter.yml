@@ -2,7 +2,7 @@ name: update-frontmatter
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, reopened, synchronize, labeled, unlabeled]
 
 concurrency:
   group: "update-frontmatter"
@@ -10,6 +10,7 @@ concurrency:
 
 jobs:
   pre-update-frontmatter:
+    if: contains(github.event.pull_request.labels.*.name, 'skip ci') == false
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.check_changes.outputs.changed }}
