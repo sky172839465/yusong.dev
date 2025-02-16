@@ -135,7 +135,7 @@ const Article = (props) => {
         <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
           {tags.map((tag, index) => {
             return (
-              <Badge ariant='secondary' key={index}>
+              <Badge variant='secondary' key={index}>
                 {tag}
               </Badge>
             )
