@@ -3,18 +3,27 @@ import { random, times } from 'lodash-es'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 
+const RANDOM = {
+  INDEX_TITLE: random(3, 6),
+  INDEX_DESC: random(10, 30),
+  ARTICLES: times(random(2, 6)),
+  ARTICLE_TITLE: random(1, 3),
+  ARTICLE_TAGS: times(random(2, 5)),
+  ARTICLE_DESC: random(5, 20)
+}
+
 const SkeletonArticleIndex = () => {
   return (
     <div className='container prose prose-lg max-w-none text-transparent dark:prose-invert'>
       <div>
         <h3 className='text-transparent'>
           <Skeleton className='inline'>
-            {'This is index title'.repeat(random(3, 6))}
+            {'This is index title'.repeat(RANDOM.INDEX_TITLE)}
           </Skeleton>
         </h3>
         <div>
           <Skeleton className='inline'>
-            {'this is index description'.repeat(random(10, 30))}
+            {'this is index description'.repeat(RANDOM.INDEX_DESC)}
           </Skeleton>
         </div>
       </div>
@@ -22,13 +31,13 @@ const SkeletonArticleIndex = () => {
         目錄：
       </p>
       <ul>
-        {times(random(2, 6)).map((index) => {
+        {RANDOM.ARTICLES.map((index) => {
           return (
             <li className='space-y-2' key={index}>
               <div className='space-x-2'>
                 <div className='inline cursor-pointer underline'>
                   <Skeleton className='inline'>
-                    {'this is article title'.repeat(random(1, 3))}
+                    {'this is article title'.repeat(RANDOM.ARTICLE_TITLE)}
                   </Skeleton>
                 </div>
                 <Skeleton className='inline text-sm'>
@@ -36,7 +45,7 @@ const SkeletonArticleIndex = () => {
                 </Skeleton>
               </div>
               <div className='flex flex-wrap gap-2'>
-                {times(random(2, 5)).map((tag, index) => {
+                {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
                     <Skeleton key={index}>
                       <Badge className='bg-transparent text-transparent'>
@@ -48,7 +57,7 @@ const SkeletonArticleIndex = () => {
               </div>
               <div>
                 <Skeleton className='inline'>
-                  {'this is article description'.repeat(random(5, 20))}
+                  {'this is article description'.repeat(RANDOM.ARTICLE_DESC)}
                 </Skeleton>
               </div>
             </li>

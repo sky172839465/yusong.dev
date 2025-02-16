@@ -6,6 +6,12 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 
+const RANDOM = {
+  TAGS: times(random(2, 5)),
+  PARAGRAPHS: times(random(2, 5)),
+  LINES: random(5, 15)
+}
+
 const SkeletonArticle = () => {
   return (
     <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
@@ -15,7 +21,7 @@ const SkeletonArticle = () => {
         </Skeleton>
       </h1>
       <div className='flex flex-wrap gap-2'>
-        {times(random(2, 5)).map((tag, index) => {
+        {RANDOM.TAGS.map((tag, index) => {
           return (
             <Skeleton key={index}>
               <Badge className='bg-transparent text-transparent'>
@@ -45,11 +51,11 @@ const SkeletonArticle = () => {
       <div
         className='prose prose-lg max-w-none !bg-background !text-transparent dark:prose-invert'
       >
-        {times(random(2, 5)).map((index => {
+        {RANDOM.PARAGRAPHS.map((index => {
           return (
             <div key={index}>
               <Skeleton className='inline w-auto'>
-                {'This is skeleton content'.repeat(random(5, 15))}
+                {'This is skeleton content'.repeat(RANDOM.LINES)}
               </Skeleton>
             </div>
           )
