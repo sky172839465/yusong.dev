@@ -24,7 +24,7 @@ const SkeletonArticle = () => {
         {RANDOM.TAGS.map((tag, index) => {
           return (
             <Skeleton className='flex' key={index}>
-              <Badge className='bg-transparent text-transparent'>
+              <Badge variant='secondary' className='bg-transparent text-transparent'>
                 {`tags ${index}`}
               </Badge>
             </Skeleton>
@@ -38,7 +38,7 @@ const SkeletonArticle = () => {
           </Skeleton>
         </div>
         <div>
-          <Button disabled>
+          <Button variant='outline'>
             <Pencil className='size-4' />
             Edit on GitHub
           </Button>

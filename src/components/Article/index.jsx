@@ -135,7 +135,7 @@ const Article = (props) => {
         <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
           {tags.map((tag, index) => {
             return (
-              <Badge ariant='secondary' key={index}>
+              <Badge variant='secondary' key={index}>
                 {tag}
               </Badge>
             )
@@ -155,7 +155,7 @@ const Article = (props) => {
               href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
               target='_blank'
             >
-              <Button>
+              <Button variant='outline'>
                 <Pencil className='size-4' />
                 Edit on GitHub
               </Button>

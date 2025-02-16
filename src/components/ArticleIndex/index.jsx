@@ -50,7 +50,7 @@ const ArticleIndex = (props) => {
               <div className='flex flex-wrap gap-2'>
                 {tags.map((tag, index) => {
                   return (
-                    <Badge ariant='secondary' key={index}>
+                    <Badge variant='secondary' key={index}>
                       {tag}
                     </Badge>
                   )
