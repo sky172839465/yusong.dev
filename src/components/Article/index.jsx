@@ -167,6 +167,7 @@ const Article = (props) => {
           alt={title}
           className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
+          loading='eager'
         />
         <div
           key={pathname}
