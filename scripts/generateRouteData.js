@@ -47,13 +47,13 @@ const articles = await Promise.all(
     })
 )
 
-fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...articles], null, 2), { encoding: 'utf-8' })
-fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles, null, 2), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...articles]), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles), { encoding: 'utf-8' })
 
 const series = pages.filter((page) => {
   return page.path.startsWith('/article') && page.file.endsWith('index.jsx')
 })
-fs.writeFileSync(`${DATA_FOLDER}/series.json`, JSON.stringify(series, null, 2), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/series.json`, JSON.stringify(series), { encoding: 'utf-8' })
 
 const pwaArticles = orderBy(
   articles.filter((article) => {
@@ -62,4 +62,4 @@ const pwaArticles = orderBy(
   'data.index',
   'asc'
 )
-fs.writeFileSync(`${DATA_FOLDER}/pwaArticles.json`, JSON.stringify(pwaArticles, null, 2), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/pwaArticles.json`, JSON.stringify(pwaArticles), { encoding: 'utf-8' })
