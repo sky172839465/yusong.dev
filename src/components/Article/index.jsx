@@ -155,7 +155,7 @@ const Article = (props) => {
               href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
               target='_blank'
             >
-              <Button variant="outline">
+              <Button variant='outline'>
                 <Pencil className='size-4' />
                 Edit on GitHub
               </Button>
