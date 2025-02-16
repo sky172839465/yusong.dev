@@ -96,14 +96,14 @@ async function processImages() {
 // Run the script
 const images = await processImages()
 
-fs.writeFileSync(`${DATA_FOLDER}/images.json`, JSON.stringify(images, null, 2), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/images.json`, JSON.stringify(images), { encoding: 'utf-8' })
 
 const routeImageMap = groupBy(images, 'original.route')
 for (const route of keys(routeImageMap)) {
   const image = routeImageMap[route]
   fs.writeFileSync(
     `${PUBLIC_DATA_FOLDER}/${route.replace(ROUTE_FOLDER, '').replaceAll('/', '_')}.json`,
-    JSON.stringify(keyBy(image, 'original.path'), null, 2),
+    JSON.stringify(keyBy(image, 'original.path')),
     { encoding: 'utf-8' }
   )
 }

@@ -1,3 +1,5 @@
 *.js
 *.jsx
 package-lock.json
+src/data/*
+pubilc/data/*
