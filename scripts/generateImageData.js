@@ -52,7 +52,7 @@ async function processImages() {
     
     const originWebpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
     await sharp(filePath)
-      .webp()
+      .webp({ quality: 100 })
       .toFile(originWebpFilePath)
 
     let imageInfo = {
