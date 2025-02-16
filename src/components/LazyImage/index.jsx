@@ -54,7 +54,7 @@ const ImageStatus = (props) => {
 
 
 const LazyImage = (props) => {
-  const { isLoading, isIcon, imageData, ...imageProps } = props
+  const { isLoading, isIcon, imageData, loading = 'lazy', ...imageProps } = props
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
   const imageAttributes = useMemo(() => {
@@ -100,10 +100,10 @@ const LazyImage = (props) => {
       )}
       {!isUndefined(src) && (
         <img
-          loading='lazy'
           onLoad={onLoad}
           onError={onError}
           className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
+          loading={loading}
           {...imageAttributes}
         />
       )}
