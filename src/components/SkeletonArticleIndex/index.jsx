@@ -48,7 +48,7 @@ const SkeletonArticleIndex = () => {
                 {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
                     <Skeleton className='flex' key={index}>
-                      <Badge className='bg-transparent text-transparent'>
+                      <Badge variant='secondary' className='bg-transparent text-transparent'>
                         {`tags ${index}`}
                       </Badge>
                     </Skeleton>
