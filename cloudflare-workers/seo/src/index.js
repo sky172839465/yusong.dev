@@ -2,7 +2,7 @@ import { keyBy } from 'lodash-es'
 
 import routes from './routes.json'
 
-const IMG_HOST = 'https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main'
+const IMG_HOST = 'https://cdn.yusong.tw'
 const AUTHOR = 'YuSong Hsu'
 const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'

@@ -1,6 +1,6 @@
 const getFileUrl = (relativeFile) => {
   if (import.meta.env.PROD) {
-    return `https://raw.githubusercontent.com/sky172839465/yusong.tw/refs/heads/main${relativeFile}`
+    return `https://cdn.yusong.tw${relativeFile}`
   }
 
   return new URL(relativeFile, import.meta.url).href
