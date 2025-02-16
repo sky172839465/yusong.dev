@@ -12,6 +12,8 @@ import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
+import SkeletonArticle from '../SkeletonArticle'
+
 const LazyComment = lazy(() => import('@/components/Comments'))
 
 const getSections = (html) => {
@@ -95,7 +97,7 @@ const Article = (props) => {
   const articleRef = useRef()
   const topRef = useRef()
   const { pathname } = useLocation()
-  const { data } = useSWR(filePath, markdown, { suspense: true })
+  const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown, { suspense: true })
   const { isLoading } = usePageImages()
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, series, tags } = attributes
@@ -108,6 +110,10 @@ const Article = (props) => {
     title: displayTitle,
     text: description,
     url: window.location.href
+  }
+
+  if (isMarkdownLoading) {
+    return <SkeletonArticle />
   }
 
   return (

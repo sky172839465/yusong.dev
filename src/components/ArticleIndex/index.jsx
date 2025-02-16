@@ -2,12 +2,19 @@ import { Link } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 
+import SkeletonArticleIndex from '../SkeletonArticleIndex'
+
+
 const ArticleIndex = (props) => {
   const {
     children,
     articles,
     isLoading
   } = props
+  if (isLoading) {
+    return <SkeletonArticleIndex />
+  }
+
   return (
     <div className='container prose prose-lg max-w-none text-foreground dark:prose-invert'>
       {children}
