@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom'
 import { useArticles } from '@/apis/useArticles'
 import { Skeleton } from '@/components/ui/skeleton'
 
+const RANDOM = {
+  ARTICLES: times(6),
+  ARTICLE_DESC: random(1, 5)
+}
+
 export default function ArticlesSection() {
   const { isLoading, data: articles } = useArticles({ type: 'article' })
 
@@ -13,7 +18,7 @@ export default function ArticlesSection() {
         Latest Articles
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-        {isLoading && times(6).map((index) => {
+        {isLoading && RANDOM.ARTICLES.map((index) => {
           return (
             <div key={index} className='overflow-hidden rounded-lg bg-card text-transparent shadow-md'>
               <div className='p-6'>
@@ -24,7 +29,7 @@ export default function ArticlesSection() {
                 </h3>
                 <div className='mb-4'>
                   <Skeleton className='inline'>
-                    {'skeleton description'.repeat(random(1, 5))}
+                    {'skeleton description'.repeat(RANDOM.ARTICLE_DESC)}
                   </Skeleton>
                 </div>
                 <span
