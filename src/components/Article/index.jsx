@@ -103,7 +103,6 @@ const Article = (props) => {
   const mainImageData = useMainImageData()
   const { sections, htmlList, imageList } = useArticleHtml(html)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
-  console.log(tags)
   
   const shareData = {
     title: displayTitle,
