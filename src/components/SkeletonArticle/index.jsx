@@ -22,13 +22,6 @@ const SkeletonArticle = () => {
       </h1>
       <div className='flex flex-wrap gap-2'>
         {RANDOM.TAGS.map((tag, index) => {
-          if (index === 2) {
-            return (
-              <Badge key={index} className='text-transparent'>
-                {`tags ${index}`}
-              </Badge>
-            )
-          }
           return (
             <Skeleton className='flex' key={index}>
               <Badge className='bg-transparent text-transparent'>
