@@ -29,7 +29,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 // Cache GitHub CDN images using StaleWhileRevalidate
 registerRoute(
   ({ url }) => (
-    url.href.startsWith('https://raw.githubusercontent.com/sky172839465/yusong.tw/') ||
+    url.href.startsWith('https://cdn.yusong.tw') ||
     url.href.startsWith('https://github.githubassets.com/images')
   ),
   new StaleWhileRevalidate({
