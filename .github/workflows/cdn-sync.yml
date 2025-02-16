@@ -1,0 +1,25 @@
+name: cdn-sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/**.png"
+      - "src/**.jpg"
+      - "src/**.jpeg"
+      - "src/**.gif"
+      - "src/**.webp"
+      - "src/**.svg"
+
+jobs:
+  trigger-cdn-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger CDN repo workflow
+        run: |
+          curl -X POST -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.CROSS_REPO_WORKFLOW }}" \
+          -H "Content-Type: application/json" \
+          --data '{"event_type": "trigger-build"}' \
+          https://api.github.com/repos/sky172839465/cdn.yusong.tw/dispatches
