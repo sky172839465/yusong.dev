@@ -8,4 +8,4 @@ tags:
   - VITE
 ---
 
-This is the first line of SPA intro
+This is the first line of SPA intro.
