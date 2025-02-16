@@ -1,4 +1,5 @@
 import { filter, flow, get, isEmpty, map } from 'lodash-es'
+import { Pencil } from 'lucide-react'
 import { Fragment, lazy, useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -8,6 +9,7 @@ import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
@@ -96,11 +98,12 @@ const Article = (props) => {
   const { data } = useSWR(filePath, markdown, { suspense: true })
   const { isLoading } = usePageImages()
   const { html, attributes } = data
-  const { title, description, createdAt, modifiedAt, series } = attributes
+  const { title, description, createdAt, modifiedAt, series, tags } = attributes
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
   const mainImageData = useMainImageData()
   const { sections, htmlList, imageList } = useArticleHtml(html)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
+  console.log(tags)
   
   const shareData = {
     title: displayTitle,
@@ -121,15 +124,18 @@ const Article = (props) => {
         <meta property='og:description' content={description} />
       </Helmet>
       <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
-        <h1 ref={topRef} className='text-4xl font-bold text-gray-900 dark:text-white'>
+        <h1 ref={topRef} className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
-        <LazyImagePreview
-          imageData={mainImageData}
-          alt={title}
-          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
-          isLoading={isLoading}
-        />
+        <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
+          {tags.map((tag, index) => {
+            return (
+              <Badge ariant='secondary' key={index}>
+                {tag}
+              </Badge>
+            )
+          })}
+        </div>
         <div className='flex flex-row items-center justify-between'>
           <div className='my-2 text-gray-600 dark:text-gray-400'>
             {createdAt === modifiedAt && (
@@ -145,11 +151,18 @@ const Article = (props) => {
               target='_blank'
             >
               <Button>
+                <Pencil className='size-4' />
                 Edit on GitHub
               </Button>
             </a>
           </div>
         </div>
+        <LazyImagePreview
+          imageData={mainImageData}
+          alt={title}
+          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+          isLoading={isLoading}
+        />
         <div
           key={pathname}
           ref={articleRef}
