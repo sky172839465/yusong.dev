@@ -47,11 +47,11 @@ const SkeletonArticleIndex = () => {
               <div className='flex flex-wrap gap-2'>
                 {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
-                    <Badge className='bg-transparent text-transparent' key={index}>
-                      <Skeleton className='inline'>
+                    <Skeleton className='flex' key={index}>
+                      <Badge className='bg-transparent text-transparent'>
                         {`tags ${index}`}
-                      </Skeleton>
-                    </Badge>
+                      </Badge>
+                    </Skeleton>
                   )
                 })}
               </div>
