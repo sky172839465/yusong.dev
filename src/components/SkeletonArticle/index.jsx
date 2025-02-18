@@ -2,7 +2,6 @@ import { random, times } from 'lodash-es'
 
 import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -21,7 +20,7 @@ const SkeletonArticle = () => {
         </Skeleton>
       </h1>
       <div className='flex flex-row items-center justify-between'>
-        <div className='flex h-6 flex-wrap gap-2'>
+        <div className='flex h-9 flex-wrap gap-2'>
           <Skeleton className='flex [&_*]:invisible'>
             <Badge variant='secondary'>
               <div className='mr-1 size-4' />
@@ -39,16 +38,7 @@ const SkeletonArticle = () => {
             )
           })}
         </div>
-        <div>
-          <Skeleton className='[&_*]:invisible'>
-            <Button disabled>
-              <div className='size-4' />
-              <span className='hidden md:inline'>
-                Edit on GitHub
-              </span>
-            </Button>
-          </Skeleton>
-        </div>
+        <div />
       </div>
       <LazyImage
         className='my-8 aspect-video w-full rounded-lg'
