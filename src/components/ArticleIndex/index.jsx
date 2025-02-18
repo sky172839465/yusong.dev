@@ -58,7 +58,7 @@ const ArticleIndex = (props) => {
                   )}
                 </Badge>
                 <div className='h-7'>
-                 <Separator orientation='vertical' />
+                  <Separator orientation='vertical' />
                 </div>
                 {tags.map((tag, index) => {
                   return (
