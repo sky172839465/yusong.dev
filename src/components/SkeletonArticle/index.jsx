@@ -20,7 +20,7 @@ const SkeletonArticle = () => {
         </Skeleton>
       </h1>
       <div className='flex flex-row items-center justify-between'>
-        <div className='flex h-9 flex-wrap gap-2'>
+        <div className='flex flex-wrap gap-2'>
           <Skeleton className='flex [&_*]:invisible'>
             <Badge variant='secondary' className='h-9'>
               <div className='mr-1 size-4' />
