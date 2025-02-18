@@ -30,13 +30,13 @@ const Comments = () => {
         {visible && (
           <>
             <ChevronsDownUp className='size-4' />
-            Hide comments
+            隱藏留言
           </>
         )}
         {!visible && (
           <>
             <ChevronsUpDown className='size-4' />
-            Show comments
+            顯示留言
           </>
         )}
         

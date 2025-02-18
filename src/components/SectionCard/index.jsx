@@ -22,7 +22,7 @@ const SectionCard = (props) => {
           className='text-primary hover:underline'
           viewTransition
         >
-          Read more
+          看更多
         </Link>
       </CardFooter>
     </Card>

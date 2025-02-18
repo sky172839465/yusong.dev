@@ -16,7 +16,7 @@ export default function ArticlesSection() {
   return (
     <section id='articles'>
       <h2 className='mb-6 text-3xl font-bold text-foreground'>
-        Latest Articles
+        新文章
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {isLoading && RANDOM.ARTICLES.map((index) => {

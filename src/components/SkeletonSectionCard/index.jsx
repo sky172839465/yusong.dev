@@ -23,7 +23,7 @@ const SkeletonSectionCard = (props) => {
         <span
           className='cursor-pointer text-primary hover:underline'
         >
-          Read more
+          看更多
         </span>
       </CardFooter>
     </Card>
