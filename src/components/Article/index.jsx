@@ -141,7 +141,7 @@ const Article = (props) => {
         </h1>
         <div className='flex flex-row items-center justify-between'>
           <div className={`flex h-9 flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
-            <Badge variant='secondary'>
+            <Badge variant='secondary' className='h-9'>
               {createdAt === modifiedAt && (
                 <>
                   <FilePlus2 className='mr-1 size-4' />
@@ -158,7 +158,7 @@ const Article = (props) => {
             <Separator orientation='vertical' />
             {tags.map((tag, index) => {
               return (
-                <Badge variant='secondary' key={index}>
+                <Badge variant='secondary' key={index} className='h-9'>
                   {tag}
                 </Badge>
               )
