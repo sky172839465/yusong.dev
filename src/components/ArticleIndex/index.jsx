@@ -13,7 +13,7 @@ const ArticleIndex = (props) => {
     articles,
     isLoading
   } = props
-  if (!isLoading) {
+  if (isLoading) {
     return <SkeletonArticleIndex />
   }
 
