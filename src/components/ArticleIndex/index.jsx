@@ -43,7 +43,7 @@ const ArticleIndex = (props) => {
                 </Link>
               </div>
               <div className='flex h-7 flex-wrap gap-2'>
-                <Badge variant='secondary'>
+                <Badge variant='secondary' className='h-7'>
                   {createdAt === modifiedAt && (
                     <>
                       <FilePlus2 className='mr-1 size-4' />
@@ -60,7 +60,7 @@ const ArticleIndex = (props) => {
                 <Separator orientation='vertical' />
                 {tags.map((tag, index) => {
                   return (
-                    <Badge variant='secondary' key={index}>
+                    <Badge variant='secondary' key={index} className='h-7'>
                       {tag}
                     </Badge>
                   )
