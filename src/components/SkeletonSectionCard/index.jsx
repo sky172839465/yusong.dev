@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -6,8 +7,8 @@ const SkeletonSectionCard = (props) => {
     title, description
   } = props
   return (
-    <Card>
-      <CardHeader className='[&_*]:text-transparent'>
+    <Card className='flex grow flex-col'>
+      <CardHeader className='grow [&_*]:text-transparent'>
         <CardTitle>
           <Skeleton>
             {title}
@@ -20,11 +21,11 @@ const SkeletonSectionCard = (props) => {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <span
-          className='cursor-pointer text-primary hover:underline'
-        >
-          看更多
-        </span>
+        <Skeleton>
+          <Button variant='secondary' className='invisible'>
+            看更多
+          </Button>
+        </Skeleton>
       </CardFooter>
     </Card>
   )
