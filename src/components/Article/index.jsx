@@ -1,5 +1,5 @@
 import { filter, flow, get, isEmpty, map } from 'lodash-es'
-import { Pencil } from 'lucide-react'
+import { Notebook, NotebookPen, Pencil } from 'lucide-react'
 import { Fragment, lazy, useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -11,6 +11,7 @@ import ArticleActions from '@/components/ArticleActions'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 
 import SkeletonArticle from '../SkeletonArticle'
 
@@ -132,35 +133,42 @@ const Article = (props) => {
         <h1 ref={topRef} className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'>
           {title}
         </h1>
-        <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
-          {tags.map((tag, index) => {
-            return (
-              <Badge ariant='secondary' key={index}>
-                {tag}
-              </Badge>
-            )
-          })}
-        </div>
         <div className='flex flex-row items-center justify-between'>
-          <div className='my-2 text-gray-600 dark:text-gray-400'>
-            {createdAt === modifiedAt && (
-              `Created: ${new Date(createdAt).toLocaleDateString()}`
-            )}
-            {createdAt !== modifiedAt && (
-              `Modified: ${new Date(modifiedAt).toLocaleDateString()}`
-            )}
+          <div className={`flex h-6 flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
+            <Badge variant='secondary'>
+              {createdAt === modifiedAt && (
+                <>
+                  <Notebook className='mr-1 size-4' />
+                  {new Date(createdAt).toLocaleDateString()}
+                </>
+              )}
+              {createdAt !== modifiedAt && (
+                <>
+                  <NotebookPen className='mr-1 size-4' />
+                  {new Date(modifiedAt).toLocaleDateString()}
+                </>
+              )}
+            </Badge>
+            <Separator orientation='vertical' />
+            {tags.map((tag, index) => {
+              return (
+                <Badge variant='secondary' key={index}>
+                  {tag}
+                </Badge>
+              )
+            })}
           </div>
-          <div>
-            <a
-              href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
-              target='_blank'
-            >
-              <Button>
-                <Pencil className='size-4' />
+          <a
+            href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
+            target='_blank'
+          >
+            <Button variant='outline'>
+              <Pencil className='size-4' />
+              <span className='hidden md:inline'>
                 Edit on GitHub
-              </Button>
-            </a>
-          </div>
+              </span>
+            </Button>
+          </a>
         </div>
         <LazyImagePreview
           imageData={mainImageData}

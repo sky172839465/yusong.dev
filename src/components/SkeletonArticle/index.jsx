@@ -1,13 +1,13 @@
 import { random, times } from 'lodash-es'
-import { Pencil } from 'lucide-react'
 
 import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const RANDOM = {
-  TAGS: times(random(2, 5)),
+  TAGS: times(random(1, 3)),
   PARAGRAPHS: times(random(2, 5)),
   LINES: random(5, 15)
 }
@@ -20,35 +20,34 @@ const SkeletonArticle = () => {
           This is a skeleton title
         </Skeleton>
       </h1>
-      <div className='flex flex-wrap gap-2'>
-        {RANDOM.TAGS.map((tag, index) => {
-          if (index === 2) {
-            return (
-              <Badge key={index} className='text-transparent'>
-                {`tags ${index}`}
-              </Badge>
-            )
-          }
-          return (
-            <Skeleton className='flex' key={index}>
-              <Badge className='bg-transparent text-transparent'>
-                {`tags ${index}`}
-              </Badge>
-            </Skeleton>
-          )
-        })}
-      </div>
       <div className='flex flex-row items-center justify-between'>
-        <div className='my-2 text-transparent'>
-          <Skeleton>
-            {`Created: ${new Date().toLocaleDateString()}`}
+        <div className='flex h-6 flex-wrap gap-2'>
+          <Skeleton className='flex [&_*]:invisible'>
+            <Badge variant='secondary'>
+              <div className='mr-1 size-4' />
+              {new Date().toLocaleDateString()}
+            </Badge>
           </Skeleton>
+          <Separator orientation='vertical' />
+          {RANDOM.TAGS.map((tag, index) => {
+            return (
+              <Skeleton className='flex [&_*]:invisible' key={index}>
+                <Badge>
+                  {`tags ${index}`}
+                </Badge>
+              </Skeleton>
+            )
+          })}
         </div>
         <div>
-          <Button disabled>
-            <Pencil className='size-4' />
-            Edit on GitHub
-          </Button>
+          <Skeleton className='[&_*]:invisible'>
+            <Button disabled>
+              <div className='size-4' />
+              <span className='hidden md:inline'>
+                Edit on GitHub
+              </span>
+            </Button>
+          </Skeleton>
         </div>
       </div>
       <LazyImage
