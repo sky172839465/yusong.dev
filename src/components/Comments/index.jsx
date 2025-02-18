@@ -26,7 +26,7 @@ const Comments = () => {
 
   return (
     <>
-      <Button className='my-4 p-6' onClick={toggleVisible}>
+      <Button className='my-4 p-6' variant='outline' onClick={toggleVisible}>
         {visible && (
           <>
             <ChevronsDownUp className='size-4' />
