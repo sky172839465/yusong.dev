@@ -140,7 +140,7 @@ const Article = (props) => {
           {title}
         </h1>
         <div className='flex flex-row items-center justify-between'>
-          <div className={`flex h-9 flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
+          <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
             <Badge variant='secondary' className='h-9'>
               {createdAt === modifiedAt && (
                 <>
