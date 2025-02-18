@@ -44,7 +44,7 @@ const SkeletonArticleIndex = () => {
               </div>
               <div className='flex h-7 flex-wrap gap-2'>
                 <Skeleton className='flex [&_*]:invisible' key={index}>
-                  <Badge variant='secondary'>
+                  <Badge variant='secondary' className='h-7'>
                     <div className='mr-1 size-4' />
                     {new Date().toLocaleDateString()}
                   </Badge>
@@ -52,8 +52,8 @@ const SkeletonArticleIndex = () => {
                 <Separator orientation='vertical' />
                 {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
-                    <Skeleton className='flex' key={index}>
-                      <Badge variant='secondary' className='bg-transparent text-transparent'>
+                    <Skeleton className='flex [&_*]:invisible' key={index}>
+                      <Badge variant='secondary' className='h-7'>
                         {`tags ${index}`}
                       </Badge>
                     </Skeleton>

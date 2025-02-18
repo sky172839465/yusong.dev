@@ -22,7 +22,7 @@ const SkeletonArticle = () => {
       <div className='flex flex-row items-center justify-between'>
         <div className='flex h-9 flex-wrap gap-2'>
           <Skeleton className='flex [&_*]:invisible'>
-            <Badge variant='secondary'>
+            <Badge variant='secondary' className='h-9'>
               <div className='mr-1 size-4' />
               {new Date().toLocaleDateString()}
             </Badge>
@@ -31,7 +31,7 @@ const SkeletonArticle = () => {
           {RANDOM.TAGS.map((tag, index) => {
             return (
               <Skeleton className='flex [&_*]:invisible' key={index}>
-                <Badge>
+                <Badge className='h-9'>
                   {`tags ${index}`}
                 </Badge>
               </Skeleton>
