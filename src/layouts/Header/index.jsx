@@ -42,7 +42,7 @@ const Header = () => {
             <Button variant='outline' size='icon'>
               <Search className='size-[1.2rem]' />
               <span className='sr-only'>
-                Search website
+                查詢網站
               </span>
             </Button>
           </Link>
@@ -51,16 +51,16 @@ const Header = () => {
               <Button variant='outline' size='icon'>
                 <Globe className='size-[1.2rem]' />
                 <span className='sr-only'>
-                  Toggle language
+                  切換語言
                 </span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <DropdownMenuItem onClick={() => setLanguage('en')}>
-                English
+                英文
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setLanguage('zh-tw')}>
-                Traditional Chinese
+                繁體中文
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -68,7 +68,7 @@ const Header = () => {
             <Sun className='size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />
             <Moon className='absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100' />
             <span className='sr-only'>
-              Toggle theme
+              切換黑暗模式
             </span>
           </Button>
         </div>

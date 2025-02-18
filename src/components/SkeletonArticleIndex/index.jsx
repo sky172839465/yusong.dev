@@ -1,6 +1,7 @@
 import { random, times } from 'lodash-es'
 
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const RANDOM = {
@@ -40,11 +41,15 @@ const SkeletonArticleIndex = () => {
                     {'this is article title'.repeat(RANDOM.ARTICLE_TITLE)}
                   </Skeleton>
                 </div>
-                <Skeleton className='inline text-sm'>
-                  {`建立時間：${new Date().toLocaleDateString()}`}
-                </Skeleton>
               </div>
-              <div className='flex flex-wrap gap-2'>
+              <div className='flex h-5 flex-wrap gap-2'>
+                <Skeleton className='flex [&_*]:invisible' key={index}>
+                  <Badge variant='secondary'>
+                    <div className='mr-1 size-4' />
+                    {new Date().toLocaleDateString()}
+                  </Badge>
+                </Skeleton>
+                <Separator orientation='vertical' />
                 {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
                     <Skeleton className='flex' key={index}>

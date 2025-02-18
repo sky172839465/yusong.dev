@@ -11,27 +11,9 @@ const Footer = () => {
             &copy;
             {currentYear}
             {' '}
-            YUSONG.TW All rights reserved.
+            {/* YUSONG.TW All rights reserved. */}
+            YUSONG.TW 保留所有權利。
           </p>
-          {/* <nav className='mt-4 md:mt-0'>
-            <ul className='flex space-x-4'>
-              <li>
-                <a href='/privacy' className='hover:text-primary'>
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href='/terms' className='hover:text-primary'>
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href='/contact' className='hover:text-primary'>
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </nav> */}
         </div>
       </div>
     </footer>
