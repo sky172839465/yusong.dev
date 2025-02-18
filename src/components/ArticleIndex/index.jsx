@@ -1,6 +1,8 @@
+import { FilePlus2, PencilLine } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 
 import SkeletonArticleIndex from '../SkeletonArticleIndex'
 
@@ -11,7 +13,7 @@ const ArticleIndex = (props) => {
     articles,
     isLoading
   } = props
-  if (isLoading) {
+  if (!isLoading) {
     return <SkeletonArticleIndex />
   }
 
@@ -39,18 +41,26 @@ const ArticleIndex = (props) => {
                 <Link to={path}>
                   {title}
                 </Link>
-                <span className='text-sm text-gray-600 dark:text-gray-400'>
-                  {`${
-                    modifiedAt === createdAt
-                      ? `建立時間：${new Date(createdAt).toLocaleDateString()}`
-                      : `修改時間：${new Date(modifiedAt).toLocaleDateString()}`}
-                  `}
-                </span>
               </div>
-              <div className='flex flex-wrap gap-2'>
+              <div className='flex h-5 flex-wrap gap-2'>
+                <Badge variant='secondary'>
+                  {createdAt === modifiedAt && (
+                    <>
+                      <FilePlus2 className='mr-1 size-4' />
+                      {new Date(createdAt).toLocaleDateString()}
+                    </>
+                  )}
+                  {createdAt !== modifiedAt && (
+                    <>
+                      <PencilLine className='mr-1 size-4' />
+                      {new Date(modifiedAt).toLocaleDateString()}
+                    </>
+                  )}
+                </Badge>
+                <Separator orientation='vertical' />
                 {tags.map((tag, index) => {
                   return (
-                    <Badge ariant='secondary' key={index}>
+                    <Badge variant='secondary' key={index}>
                       {tag}
                     </Badge>
                   )

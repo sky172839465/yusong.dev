@@ -1,5 +1,5 @@
 import { filter, flow, get, isEmpty, map } from 'lodash-es'
-import { Notebook, NotebookPen, Pencil } from 'lucide-react'
+import { FilePlus2, Pencil, PencilLine } from 'lucide-react'
 import { Fragment, lazy, useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -138,13 +138,13 @@ const Article = (props) => {
             <Badge variant='secondary'>
               {createdAt === modifiedAt && (
                 <>
-                  <Notebook className='mr-1 size-4' />
+                  <FilePlus2 className='mr-1 size-4' />
                   {new Date(createdAt).toLocaleDateString()}
                 </>
               )}
               {createdAt !== modifiedAt && (
                 <>
-                  <NotebookPen className='mr-1 size-4' />
+                  <PencilLine className='mr-1 size-4' />
                   {new Date(modifiedAt).toLocaleDateString()}
                 </>
               )}
