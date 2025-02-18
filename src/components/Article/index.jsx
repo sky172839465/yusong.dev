@@ -4,6 +4,7 @@ import { Fragment, lazy, useMemo, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
+import { useCounter } from 'usehooks-ts'
 
 import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
@@ -105,6 +106,7 @@ const Article = (props) => {
   const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
   const mainImageData = useMainImageData()
   const { sections, htmlList, imageList } = useArticleHtml(html)
+  const { count, increment } = useCounter(0)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
   
   const shareData = {
@@ -130,11 +132,15 @@ const Article = (props) => {
         <meta property='og:description' content={description} />
       </Helmet>
       <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
-        <h1 ref={topRef} className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'>
+        <h1
+          ref={topRef}
+          className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'
+          onClick={increment}
+        >
           {title}
         </h1>
         <div className='flex flex-row items-center justify-between'>
-          <div className={`flex h-6 flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
+          <div className={`flex h-9 flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
             <Badge variant='secondary'>
               {createdAt === modifiedAt && (
                 <>
@@ -161,9 +167,10 @@ const Article = (props) => {
           <a
             href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
             target='_blank'
+            className={count >= 10 ? 'inline' : 'hidden'}
           >
             <Button variant='outline'>
-              <Pencil className='size-4' />
+              <Pencil />
               <span className='hidden md:inline'>
                 Edit on GitHub
               </span>

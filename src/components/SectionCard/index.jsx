@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
 const SectionCard = (props) => {
@@ -7,8 +8,8 @@ const SectionCard = (props) => {
     path, title, description
   } = props
   return (
-    <Card key={path}>
-      <CardHeader>
+    <Card key={path} className='flex grow flex-col'>
+      <CardHeader className='grow'>
         <CardTitle>
           {title}
         </CardTitle>
@@ -19,10 +20,11 @@ const SectionCard = (props) => {
       <CardFooter>
         <Link
           to={path}
-          className='text-primary hover:underline'
           viewTransition
         >
-          看更多
+          <Button variant='secondary'>
+            看更多
+          </Button>
         </Link>
       </CardFooter>
     </Card>
