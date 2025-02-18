@@ -42,7 +42,7 @@ const SkeletonArticleIndex = () => {
                   </Skeleton>
                 </div>
               </div>
-              <div className='flex h-7 flex-wrap gap-2'>
+              <div className='flex flex-wrap gap-2'>
                 <Skeleton className='flex [&_*]:invisible' key={index}>
                   <Badge variant='secondary' className='h-7'>
                     <div className='mr-1 size-4' />

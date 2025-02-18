@@ -42,7 +42,7 @@ const ArticleIndex = (props) => {
                   {title}
                 </Link>
               </div>
-              <div className='flex h-7 flex-wrap gap-2'>
+              <div className='flex flex-wrap gap-2'>
                 <Badge variant='secondary' className='h-7'>
                   {createdAt === modifiedAt && (
                     <>
