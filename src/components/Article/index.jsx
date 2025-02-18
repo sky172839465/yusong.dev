@@ -155,7 +155,9 @@ const Article = (props) => {
                 </>
               )}
             </Badge>
-            <Separator orientation='vertical' />
+            <div className='h-9'>
+              <Separator orientation='vertical' />
+            </div>
             {tags.map((tag, index) => {
               return (
                 <Badge variant='secondary' key={index} className='h-9'>

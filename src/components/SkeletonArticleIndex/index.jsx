@@ -49,7 +49,9 @@ const SkeletonArticleIndex = () => {
                     {new Date().toLocaleDateString()}
                   </Badge>
                 </Skeleton>
-                <Separator orientation='vertical' />
+                <div className='h-7'>
+                  <Separator orientation='vertical' />
+                </div>
                 {RANDOM.ARTICLE_TAGS.map((tag, index) => {
                   return (
                     <Skeleton className='flex [&_*]:invisible' key={index}>
