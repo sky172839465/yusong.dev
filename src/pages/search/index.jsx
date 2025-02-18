@@ -11,8 +11,8 @@ const Result = () => {
   const { isLoading, data } = useArticles(title)
 
   return (
-    <div className='rounded-md bg-foreground p-2 text-background'>
-      <div className='max-h-[60dvh] overflow-y-scroll'>
+    <div className='grow rounded-md bg-foreground p-2 text-background'>
+      <div className='h-full overflow-y-scroll'>
         {isLoading && (
           <pre>
             <code>
