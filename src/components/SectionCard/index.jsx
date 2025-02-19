@@ -1,14 +1,27 @@
 import { isEmpty } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
+const LABEL = {
+  en: {
+    MORE: 'Read more'
+  },
+  'zh-tw': {
+    MORE: '看更多'
+  }
+}
+
 const SectionCard = (props) => {
   const { article: { path, data = {} } = {} } = props
+  const { pathname } = useLocation()
+  const isEN = pathname.startsWith('/en')
+  const lang = isEN ? 'en' : 'zh-tw'
+  const label = LABEL[lang]
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
@@ -49,7 +62,7 @@ const SectionCard = (props) => {
           viewTransition
         >
           <Button variant='outline'>
-            看更多
+            {label.MORE}
           </Button>
         </Link>
       </CardFooter>
