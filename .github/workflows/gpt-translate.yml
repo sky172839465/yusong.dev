@@ -2,12 +2,12 @@ name: gpt-translate
 
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited, deleted]
 
 jobs:
   gpt_translate:
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
