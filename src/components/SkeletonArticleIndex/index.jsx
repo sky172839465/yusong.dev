@@ -1,4 +1,4 @@
-import { random, times } from 'lodash-es'
+import { random, size, times } from 'lodash-es'
 
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -9,8 +9,8 @@ const RANDOM = {
   INDEX_DESC: random(10, 30),
   ARTICLES: times(random(2, 6)),
   ARTICLE_TITLE: random(1, 3),
-  ARTICLE_TAGS: times(random(2, 5)),
-  ARTICLE_DESC: random(5, 20)
+  ARTICLE_TAGS: times(random(1, 3)),
+  ARTICLE_DESC: random(3, 10)
 }
 
 const SkeletonArticleIndex = () => {
@@ -67,6 +67,9 @@ const SkeletonArticleIndex = () => {
                   {'this is article description'.repeat(RANDOM.ARTICLE_DESC)}
                 </Skeleton>
               </div>
+              {index !== size(RANDOM.ARTICLES) - 1 && (
+                <Separator />
+              )}
             </li>
           )
         })}

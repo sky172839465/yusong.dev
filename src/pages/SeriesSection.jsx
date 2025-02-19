@@ -20,22 +20,23 @@ export default function SeriesSection() {
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {isLoading && RANDOM.SERIES.map((index) => {
+          const data = {
+            title: 'skeleton title'.repeat(RANDOM.SERIES_TITLE),
+            description: 'skeleton description'.repeat(RANDOM.SERIES_DESC)
+          }
           return (
             <SkeletonSectionCard
               key={index}
-              title={'skeleton title'.repeat(RANDOM.SERIES_TITLE)}
-              description={'skeleton description'.repeat(RANDOM.SERIES_DESC)}
+              article={{ data }}
             />
           )
         })}
-        {!isLoading && data.slice(0, 6).map(({ data = {}, path }) => {
-          const { title, description } = data
+        {!isLoading && data.slice(0, 6).map((article) => {
+          const { path } = article
           return (
             <SectionCard
               key={path}
-              path={path}
-              title={title}
-              description={description}
+              article={article}
             />
           )
         })}
