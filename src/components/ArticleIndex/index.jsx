@@ -1,3 +1,4 @@
+import { size } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -37,11 +38,9 @@ const ArticleIndex = (props) => {
           } = article
           return (
             <li className='space-y-2' key={index}>
-              <div className='space-x-2'>
-                <Link to={path}>
-                  {title}
-                </Link>
-              </div>
+              <Link to={path}>
+                {title}
+              </Link>
               <div className='flex flex-wrap gap-2'>
                 <Badge variant='secondary' className='h-7'>
                   {createdAt === modifiedAt && (
@@ -71,6 +70,9 @@ const ArticleIndex = (props) => {
               <p>
                 {description}
               </p>
+              {index !== size(articles) - 1 && (
+                <Separator />
+              )}
             </li>
           )
         })}
