@@ -49,4 +49,3 @@ series: PWA
 
 1. https://zh.wikipedia.org/zh-tw/漸進式網路應用程式
 1. https://developer.mozilla.org/zh-TW/docs/Web/Progressive_web_apps
-1. 抽象情境參考 GPT 想的
