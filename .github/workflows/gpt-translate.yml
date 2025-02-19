@@ -1,7 +1,7 @@
 name: gpt-translate
 
 on:
-  issue_comment:                                     
+  issue_comment:
     types: [created, edited, deleted]
   pull_request:
     types: [opened, reopened, synchronize, labeled, unlabeled]
