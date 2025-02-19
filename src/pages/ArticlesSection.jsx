@@ -20,22 +20,24 @@ export default function ArticlesSection() {
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {isLoading && RANDOM.ARTICLES.map((index) => {
+          const data = {
+            title: 'skeleton title'.repeat(RANDOM.ARTICLE_TITLE),
+            description: 'skeleton description'.repeat(RANDOM.ARTICLE_DESC)
+          }
           return (
             <SkeletonSectionCard
               key={index}
-              title={'skeleton title'.repeat(RANDOM.ARTICLE_TITLE)}
-              description={'skeleton description'.repeat(RANDOM.ARTICLE_DESC)}
+              article={{ data }}
+              isContentExist
             />
           )
         })}
-        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map(({ data = {}, path }) => {
-          const { title, description } = data
+        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map((article) => {
+          const { path } = article
           return (
             <SectionCard
               key={path}
-              path={path}
-              title={title}
-              description={description}
+              article={article}
             />
           )
         })}
