@@ -1,5 +1,14 @@
 import { useLocation } from 'react-router-dom'
 
+const LABEL = {
+  en: {
+    COPYRIGHT: 'YUSONG.TW All rights reserved.'
+  },
+  'zh-tw': {
+    COPYRIGHT: 'YUSONG.TW 保留所有權利。'
+  }
+}
+
 const Footer = () => {
   const { pathname } = useLocation()
   const isEN = pathname.startsWith('/en')
@@ -17,8 +26,7 @@ const Footer = () => {
             &copy;
             {currentYear}
             {' '}
-            {isEN && 'YUSONG.TW All rights reserved.'}
-            {!isEN && 'YUSONG.TW 保留所有權利。'}
+            {label.COPYRIGHT}
           </p>
         </div>
       </div>
