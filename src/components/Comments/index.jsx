@@ -1,7 +1,7 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
 import { lazy, Suspense } from 'react'
-import { useLocalStorage } from 'usehooks-ts'
 import { useLocation } from 'react-router-dom'
+import { useLocalStorage } from 'usehooks-ts'
 
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
