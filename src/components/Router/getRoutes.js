@@ -57,7 +57,7 @@ const getConvertedPosts = (posts) => {
             return `<a href="${match}">${match}</a>`
           })
           // Outside links need to open new tab
-          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
+          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" class="break-all" referrerpolicy="no-referrer"')
           // Same folder image
           .replace(/<img src="([^"]+)"/g, (_, imageFileName) => {
             const fileUrl = `${postFolder}/${imageFileName}`
