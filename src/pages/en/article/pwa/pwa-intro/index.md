@@ -5,8 +5,8 @@ createdAt: 2025-01-31T00:00:00.000Z
 modifiedAt: "2025-02-19T12:18:19.386Z"
 tags:
   - PWA
+  - GPT
 index: 0
-series: PWA
 ---
 
 ### [Origin](#come-from)

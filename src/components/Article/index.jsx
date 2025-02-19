@@ -37,7 +37,7 @@ const useMainImageData = () => {
   const { isLoading, data: pageImages } = usePageImages()
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
-    const imagePathFromSrc = `/src/pages${pathname.replace(/^\/en/, '').endsWith('/') ? pathname : `${pathname}/`}images/index.png`
+    const imagePathFromSrc = `/src/pages${(pathname.endsWith('/') ? pathname : `${pathname}/`).replace(/^\/en/, '')}images/index.png`
     return imagePathFromSrc
   }, [pathname])
   if (isLoading || !imagePathFromSrc) {
