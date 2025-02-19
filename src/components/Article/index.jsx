@@ -37,7 +37,7 @@ const useMainImageData = () => {
   const { isLoading, data: pageImages } = usePageImages()
   const { pathname } = useLocation()
   const imagePathFromSrc = useMemo(() => {
-    const imagePathFromSrc = `/src/pages${pathname.endsWith('/') ? pathname : `${pathname}/`}images/index.png`
+    const imagePathFromSrc = `/src/pages${pathname.replace(/^\/en/, '').endsWith('/') ? pathname : `${pathname}/`}images/index.png`
     return imagePathFromSrc
   }, [pathname])
   if (isLoading || !imagePathFromSrc) {
@@ -118,16 +118,18 @@ const Article = (props) => {
   if (isMarkdownLoading || isEmpty(htmlList)) {
     return (
       <>
-        <Helmet>
-          <title>
-            {displayTitle}
-          </title>
-          <meta name='description' content={description} />
-          <meta property='og:type' content='article' />
-          <meta property='og:url' content={shareData.url} />
-          <meta property='og:title' content={displayTitle} />
-          <meta property='og:description' content={description} />
-        </Helmet>
+        {!isMarkdownLoading && (
+          <Helmet key={pathname}>
+            <title>
+              {displayTitle}
+            </title>
+            <meta name='description' content={description} />
+            <meta property='og:type' content='article' />
+            <meta property='og:url' content={shareData.url} />
+            <meta property='og:title' content={displayTitle} />
+            <meta property='og:description' content={description} />
+          </Helmet>
+        )}
         <SkeletonArticle />
       </>
     )
@@ -135,7 +137,7 @@ const Article = (props) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet key={pathname}>
         <title>
           {displayTitle}
         </title>
