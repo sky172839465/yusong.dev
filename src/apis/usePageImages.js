@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 export const fetcher = async (pathname) => {
   const convertedPathName = pathname.endsWith('/') ? pathname : `${pathname}/`
-  const endpoint = `/data/${convertedPathName.replaceAll('/', '_')}images.json`
+  const endpoint = `/data/${convertedPathName.replace(/^\/en/, '').replaceAll('/', '_')}images.json`
   const [error, response] = await tryit(() => fetch(endpoint).then((res => res.json())))()
   if (error) {
     console.log(error)
