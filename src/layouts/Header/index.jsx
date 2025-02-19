@@ -1,5 +1,4 @@
 import { Globe, Moon, Search, Sun } from 'lucide-react'
-import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import LazyImage from '@/components/LazyImage'
