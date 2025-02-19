@@ -12,6 +12,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
+const LABEL = {
+  en: {
+    SERIES_TITLE: 'Series',
+    SERIES_PREFIX: 'Series: ',
+    PHASE: 'Phase',
+    SHARE: 'Share',
+    TO_TOP: 'To top'
+  },
+  'zh-tw': {
+    SERIES_TITLE: '系列',
+    SERIES_PREFIX: '系列：',
+    PHASE: '段落',
+    SHARE: '分享',
+    TO_TOP: '置頂'
+  }
+}
+
 const ArticleActions = (props) => {
   const { shareData, topRef, sections = [], series = [] } = props
   const isShareSupported = useIsSupported(() => !!navigator?.share)
@@ -26,6 +43,9 @@ const ArticleActions = (props) => {
     const convertedPathName = pathname.endsWith('/') ? pathname : `${pathname}/`
     return convertedPathName.split('/').slice(0, -2).join('/')
   }, [pathname])
+  const isEN = pathname.startsWith('/en')
+  const lang = isEN ? 'en' : 'zh-tw'
+  const label = LABEL[lang]
 
   const scrollToSection = (e) => {
     const target = document.querySelector(`a[href="${e.target.dataset.hash}"]`)
@@ -60,7 +80,7 @@ const ArticleActions = (props) => {
             <DropdownMenuTrigger asChild>
               <Button variant='outline'>
                 <SquareLibrary className='size-[1.2rem]' />
-                系列
+                {label.SERIES_TITLE}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -69,7 +89,7 @@ const ArticleActions = (props) => {
                   to={seriesPathname}
                   viewTransition
                 >
-                  系列：
+                  {label.SERIES_PREFIX}
                   {seriesName}
                 </Link>
               </DropdownMenuItem>
@@ -102,7 +122,7 @@ const ArticleActions = (props) => {
             <DropdownMenuTrigger asChild>
               <Button variant='outline'>
                 <List className='size-[1.2rem]' />
-                段落
+                {label.PHASE}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -125,12 +145,12 @@ const ArticleActions = (props) => {
         {isShareSupported && (
           <Button variant='outline' onClick={sharePost} disabled={!isShareSupported}>
             <Share className='size-[1.2rem]' />
-            分享
+            {label.SHARE}
           </Button>
         )}
         <Button variant='outline' onClick={scrollToTop}>
           <ArrowUpToLine className='size-[1.2rem]' />
-          置頂
+          {label.TO_TOP}
         </Button>
       </div>
     </div>

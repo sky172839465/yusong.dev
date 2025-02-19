@@ -1,5 +1,6 @@
 const meta = {
   title: 'YUSONG.TW',
-  description: '這是 Yusong 的部落格'
+  description: 'This is Yusong\'s blog'
 }
+
 export default meta

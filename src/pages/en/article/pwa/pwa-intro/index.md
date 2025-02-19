@@ -46,5 +46,5 @@ Adopting PWA doesn't change the essence of your website; it makes it more flexib
 
 ### References
 
-1. [Progressive Web Apps on Wikipedia](https://en.wikipedia.org/wiki/Progressive_web_app)
-2. [Progressive Web Apps on MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
+1. https://en.wikipedia.org/wiki/Progressive_web_app
+2. https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps

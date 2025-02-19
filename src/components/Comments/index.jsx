@@ -1,5 +1,6 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
 import { lazy, Suspense } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { Button } from '@/components/ui/button'
@@ -18,11 +19,25 @@ const GiscusSkeleton = () => {
   )
 }
 
+const LABEL = {
+  en: {
+    HIDE_COMMENTS: 'Hide comments',
+    SHOW_COMMENTS: 'Show comments'
+  },
+  'zh-tw': {
+    HIDE_COMMENTS: '隱藏留言',
+    SHOW_COMMENTS: '顯示留言'
+  }
+}
+
 const Comments = () => {
   const { isDarkMode } = useTheme()
   const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, false)
-
   const toggleVisible = () => setVisible(!visible)
+  const { pathname } = useLocation()
+  const isEN = pathname.startsWith('/en')
+  const lang = isEN ? 'en' : 'zh-tw'
+  const label = LABEL[lang]
 
   return (
     <>
@@ -30,13 +45,13 @@ const Comments = () => {
         {visible && (
           <>
             <ChevronsDownUp className='size-4' />
-            隱藏留言
+            {label.HIDE_COMMENTS}
           </>
         )}
         {!visible && (
           <>
             <ChevronsUpDown className='size-4' />
-            顯示留言
+            {label.SHOW_COMMENTS}
           </>
         )}
         
@@ -55,7 +70,7 @@ const Comments = () => {
               emitMetadata='0'
               inputPosition='top'
               theme={isDarkMode ? 'dark' : 'light'}
-              lang='zh-TW'
+              lang={isEN ? 'en' : 'zh-TW'}
               loading='lazy'
             />
           </FadeIn>
