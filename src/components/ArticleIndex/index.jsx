@@ -1,12 +1,20 @@
 import { size } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 
 import SkeletonArticleIndex from '../SkeletonArticleIndex'
 
+const LABEL = {
+  en: {
+    INDEX: 'Index: '
+  },
+  'zh-tw': {
+    INDEX: '目錄：'
+  }
+}
 
 const ArticleIndex = (props) => {
   const {
@@ -14,6 +22,11 @@ const ArticleIndex = (props) => {
     articles,
     isLoading
   } = props
+  const { pathname } = useLocation()
+  const isEN = pathname.startsWith('/en')
+  const lang = isEN ? 'en' : 'zh-tw'
+  const label = LABEL[lang]
+
   if (isLoading) {
     return <SkeletonArticleIndex />
   }
@@ -22,7 +35,7 @@ const ArticleIndex = (props) => {
     <div className='container prose prose-lg max-w-none text-foreground dark:prose-invert'>
       {children}
       <p>
-        目錄：
+        {label.INDEX}
       </p>
       <ul>
         {!isLoading && articles.map((article, index) => {
