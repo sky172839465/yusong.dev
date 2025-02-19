@@ -116,7 +116,21 @@ const Article = (props) => {
   }
 
   if (isMarkdownLoading || isEmpty(htmlList)) {
-    return <SkeletonArticle />
+    return (
+      <>
+        <Helmet>
+          <title>
+            {displayTitle}
+          </title>
+          <meta name='description' content={description} />
+          <meta property='og:type' content='article' />
+          <meta property='og:url' content={shareData.url} />
+          <meta property='og:title' content={displayTitle} />
+          <meta property='og:description' content={description} />
+        </Helmet>
+        <SkeletonArticle />
+      </>
+    )
   }
 
   return (
