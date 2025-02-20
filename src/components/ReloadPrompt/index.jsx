@@ -5,11 +5,28 @@ import { useRegisterSW } from 'virtual:pwa-register/react'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const SEC = 1000
 const INTERVAL_MS = 10 * 60 * SEC
 
+const i18nMapping = {
+  [LANG.EN]: {
+    UPDATE_AVAILABLE: 'Update Available',
+    CLICK_TO_UPDATE: 'New content available, click to update.',
+    DOWNING: 'Downloading',
+    PLZ_WAIT_DOWNLOAD: 'Please waiting for new content downloaded.'
+  },
+  [LANG.ZH_TW]: {
+    UPDATE_AVAILABLE: '發現可用更新',
+    CLICK_TO_UPDATE: '網站有更新內容，點我更新網站的內容。',
+    DOWNING: '下載中',
+    PLZ_WAIT_DOWNLOAD: '更新內容中請稍等一下。'
+  }
+}
+
 const ReloadPrompt = () => {
+  const { label } = useI18N(i18nMapping)
   const [isUpdating, setIsUpdating] = useState(false)
   const {
     needRefresh: [needRefresh, setNeedRefresh],
@@ -59,11 +76,11 @@ const ReloadPrompt = () => {
                 <AlertTitle className='flex items-center gap-2'>
                   <MousePointerClick className='size-5' />
                   <span>
-                    Update Available
+                    {label.UPDATE_AVAILABLE}
                   </span>
                 </AlertTitle>
                 <AlertDescription>
-                  New content available, click to update.
+                  {label.CLICK_TO_UPDATE}
                 </AlertDescription>
               </div>
               <div className='flex'>
@@ -78,11 +95,11 @@ const ReloadPrompt = () => {
               <AlertTitle className='flex items-center gap-2'>
                 <Download className='size-5' />
                 <span>
-                  Downloading
+                  {label.DOWNING}
                 </span>
               </AlertTitle>
               <AlertDescription>
-                {'Please waiting for new content downloaded.'.split(' ').map((word, index) => {
+                {label.PLZ_WAIT_DOWNLOAD.split(' ').map((word, index) => {
                   return (
                     <span
                       key={index}
