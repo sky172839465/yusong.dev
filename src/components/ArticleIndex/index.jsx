@@ -21,7 +21,7 @@ const i18nMapping = {
 const ArticleIndex = (props) => {
   const { children } = props
   const { label } = useI18N(i18nMapping)
-  const { isLoading, data: articles } = useSeriesArticles()
+  const { isLoading, data: articles = [] } = useSeriesArticles()
 
   if (isLoading) {
     return <SkeletonArticleIndex />
