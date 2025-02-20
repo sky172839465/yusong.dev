@@ -49,10 +49,8 @@ async function processImages() {
   )
 
   let results = []
-  console.log(
-    imagePaths,
-    MODIFIED_FILES
-  )
+  console.log('Grab image paths', imagePaths.slice(0, 3))
+  console.log('Modified file paths', MODIFIED_FILES)
 
   for (const filePath of imagePaths) {
     const fileName = path.basename(filePath, path.extname(filePath))

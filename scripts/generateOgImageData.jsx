@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { concat } from 'lodash-es'
+import { concat, isEmpty, keyBy } from 'lodash-es'
 import { tryit } from 'radash'
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
@@ -7,8 +7,23 @@ import satori from 'satori'
 import sharp from 'sharp'
 import { twj } from 'tw-to-css'
 
+const MODIFIED_FILES = (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean)
+const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
+const MODIFIED_FILE_MAP = keyBy(MODIFIED_FILES)
+
 const routes = JSON.parse(fs.readFileSync('src/data/routes.json', 'utf-8'))
+const modifiedRoutes = IS_MODIFIED_FILES_EXIST
+  ? routes.filter((route) => {
+    const filePath = route.file
+    if (filePath.endsWith('index.jsx')) {
+      return filePath.replace('index.jsx', 'index.meta.js') in MODIFIED_FILE_MAP
+    }
+
+    return filePath in MODIFIED_FILE_MAP
+  })
+  : routes
 const favicon = fs.readFileSync('public/favicon.svg', 'utf-8').replace(/>\s+</g, '><')
+console.log('Modified routes', modifiedRoutes)
 
 const getOgImgComponent = (route) => {
   const { data = {} } = route
@@ -120,7 +135,7 @@ const generateSVG = async (route, imageType) => {
 
 const [error] = await tryit(() => {
   return Promise.all(concat(...[IMAGE_TYPE.OG, IMAGE_TYPE.X].map((imageType) => {
-    return routes.map((route) => generateSVG(route, imageType))
+    return modifiedRoutes.map((route) => generateSVG(route, imageType))
   })))
 })()
 
