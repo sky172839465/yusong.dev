@@ -19,7 +19,7 @@ const i18nMapping = {
     SERIES_PREFIX: 'Series: ',
     PHASE: 'Phase',
     SHARE: 'Share',
-    TO_TOP: 'To top'
+    TO_TOP: 'Top'
   },
   [LANG.ZH_TW]: {
     SERIES_TITLE: '系列',
