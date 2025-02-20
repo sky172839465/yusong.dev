@@ -38,10 +38,10 @@ jobs:
           fi
 
           MODIFIED_FILES=$(git diff --name-only origin/main...HEAD)
-          echo "MODIFIED_FILES<<EOF" >> $GITHUB_ENV
-          echo "$MODIFIED_FILES" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-          echo "markdown=$(git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.(|jsx|meta\.js)$')"
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$MODIFIED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "markdown=$(git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.md$')"
 
           if git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.(md|jsx|meta\.js)$'; then
             echo "Changes detected in src/, continuing workflow."
@@ -50,10 +50,6 @@ jobs:
             echo "No changes in src/, stopping workflow."
             echo "changed=false" >> $GITHUB_OUTPUT
           fi
-      - name: test
-        env:
-          FILES: ${{ env.MODIFIED_FILES }}
-        run: echo $FILES
 
   generate-images:
     needs: pre-generate-images
