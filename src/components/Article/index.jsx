@@ -90,7 +90,7 @@ const useArticleHtml = (html) => {
     const splitHtmlAndImagesRegexp = new RegExp(`(${splitElements.join('|')})`, 'g')
     const htmlList = convertedHtml.split(splitHtmlAndImagesRegexp).filter((_, i) => i % 2 === 0)
     return { htmlList, imageList }
-  }, [html, pageImages, isLoading])
+  }, [html, pageImages, isLoading, pathname, mainPathName])
   return { sections, htmlList, imageList }
 }
 
