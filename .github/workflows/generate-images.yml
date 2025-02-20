@@ -66,7 +66,7 @@ jobs:
         run: echo ${{ needs.pre-generate-images.outputs.files }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
-        if: needs.pre-generate-images.outputs.changed == 'markdown'
+        if: ${{ needs.pre-generate-images.outputs.changed == 'markdown' }}
         uses: nielsvaneck/render-md-mermaid@v3
 
       - name: Generate RWD / OG / Twitter image
