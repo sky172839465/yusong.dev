@@ -13,6 +13,7 @@ import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import useI18N from '@/hooks/useI18N'
 
 import SkeletonArticle from '../SkeletonArticle'
 
@@ -35,11 +36,11 @@ const getSections = (html) => {
 
 const useMainImageData = () => {
   const { isLoading, data: pageImages } = usePageImages()
-  const { pathname } = useLocation()
+  const { mainPathName } = useI18N()
   const imagePathFromSrc = useMemo(() => {
-    const imagePathFromSrc = `/src/pages${(pathname.endsWith('/') ? pathname : `${pathname}/`).replace(/^\/en/, '')}images/index.png`
+    const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/index.png`
     return imagePathFromSrc
-  }, [pathname])
+  }, [mainPathName])
   if (isLoading || !imagePathFromSrc) {
     return null
   }
