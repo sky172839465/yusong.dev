@@ -75,18 +75,20 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <Link
-                to={`/en${pathname}`}
+                to={pathname.startsWith('/en') ? pathname : `/en${pathname}`}
+                className={isEN ? 'pointer-events-none' : ''}
                 viewTransition
               >
-                <DropdownMenuItem className={isEN ? 'pointer-events-none' : ''} disabled={isEN}>
+                <DropdownMenuItem disabled={isEN}>
                   {label.LANG_EN}
                 </DropdownMenuItem>
               </Link>
               <Link
                 to={pathname.replace(/^\/en/, '')}
+                className={!isEN ? 'pointer-events-none' : ''}
                 viewTransition
               >
-                <DropdownMenuItem className={!isEN ? 'pointer-events-none' : ''} disabled={!isEN}>
+                <DropdownMenuItem disabled={!isEN}>
                   {label.LANG_ZH_TW}
                 </DropdownMenuItem>
               </Link>
