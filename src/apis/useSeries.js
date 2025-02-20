@@ -6,10 +6,7 @@ export const fetcher = async (query) => {
   return filter(data, query)
 }
 
-const DEFAULT_QUERY = {
-  type: 'website'
-}
-export const useSeries = (query = DEFAULT_QUERY, options = {}) => {
+export const useSeries = (query, options = {}) => {
   const { isLoading, isValidating, ...restProps } = useSWR(query, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
 }

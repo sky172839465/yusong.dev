@@ -1,6 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { compact, flow, get, keyBy, map, orderBy } from 'lodash-es'
+import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
 import path from 'path'
 import { tryit } from 'radash'
 import { globSync } from 'tinyglobby'
@@ -12,6 +12,16 @@ const TYPE = {
   ARTICLE: 'article'
 }
 
+const LANG = {
+  EN: 'en',
+  ZH_TW: 'zh-TW'
+}
+const LANG_CODE_MAP = keyBy(values(LANG))
+
+const getLang = pagePath => {
+  return LANG_CODE_MAP[get(pagePath.match(/^\/([A-Za-z-]+)\//), '1')] || LANG.ZH_TW
+}
+
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
 const pageMetaFilePathMap = keyBy(globSync(`${ROUTE_FOLDER}/**/${PAGE_META_FILE_NAME}`))
 const pages = await Promise.all(
@@ -20,10 +30,12 @@ const pages = await Promise.all(
       const pageMetaFilePath = pageFilePath.replace(PAGE_FILE_NAME, PAGE_META_FILE_NAME)
       const isMetaExist = (pageMetaFilePath in pageMetaFilePathMap)
       const metaData = isMetaExist ? await import(`../${pageMetaFilePath}`).then(module => module.default) : {}
+      const pagePath = pageFilePath.replace(ROUTE_FOLDER, '').replace(PAGE_FILE_NAME, '')
       return {
         file: pageFilePath,
-        path: pageFilePath.replace(ROUTE_FOLDER, '').replace(PAGE_FILE_NAME, ''),
+        path: pagePath,
         type: TYPE.WEBSITE,
+        lang: getLang(pagePath),
         data: {
           ...metaData,
           tags: [false]
@@ -40,10 +52,12 @@ const articles = await Promise.all(
   articleFilePaths
     .map(async (articleFilePath) => {
       const text = await fs.promises.readFile(articleFilePath, 'utf-8')
+      const pagePath = articleFilePath.replace(ROUTE_FOLDER, '').replace(ARTICLE_PATH_NAME, '')
       return {
         file: articleFilePath,
-        path: articleFilePath.replace(ROUTE_FOLDER, '').replace(ARTICLE_PATH_NAME, ''),
+        path: pagePath,
         type: TYPE.ARTICLE,
+        lang: getLang(pagePath),
         data: matter(text).data
       }
     })
