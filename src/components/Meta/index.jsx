@@ -11,7 +11,7 @@ const DEFAULT_DATA = {
 const Meta = (props) => {
   const { fetchMetaData } = props
   const { pathname } = useLocation()
-  const { isLoading, data = DEFAULT_DATA } = useSWR(pathname, fetchMetaData)
+  const { isLoading, data = DEFAULT_DATA } = useSWR(`${pathname}-meta`, fetchMetaData)
   if (isLoading) {
     return null
   }
