@@ -20,10 +20,6 @@ on:
         description: "Article tags (comma separated)"
         required: false
         type: string
-      series:
-        description: "Article series"
-        required: false
-        type: string
       index:
         description: "Article index (number, start 0)"
         required: false
@@ -50,7 +46,6 @@ jobs:
           INPUT_TITLE: ${{ github.event.inputs.title }}
           INPUT_DESCRIPTION: ${{ github.event.inputs.description }}
           INPUT_TAGS: ${{ github.event.inputs.tags }}
-          INPUT_SERIES: ${{ github.event.inputs.series }}
           INPUT_INDEX: ${{ github.event.inputs.index }}
           INPUT_CONTENT: ${{ github.event.inputs.content }}
 

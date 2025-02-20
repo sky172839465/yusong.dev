@@ -1,7 +1,8 @@
-import { size } from 'lodash-es'
+import { get, size } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { useSeriesArticles } from '@/apis/useSeriesArticles'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import useI18N, { LANG } from '@/hooks/useI18N'
@@ -18,12 +19,9 @@ const i18nMapping = {
 }
 
 const ArticleIndex = (props) => {
-  const {
-    children,
-    articles,
-    isLoading
-  } = props
+  const { children } = props
   const { label } = useI18N(i18nMapping)
+  const { isLoading, data: articles } = useSeriesArticles()
 
   if (isLoading) {
     return <SkeletonArticleIndex />
@@ -31,6 +29,9 @@ const ArticleIndex = (props) => {
 
   return (
     <div className='container prose prose-lg max-w-none text-foreground dark:prose-invert'>
+      <h3>
+        {get(articles, '0.series', null)}
+      </h3>
       {children}
       <p>
         {label.INDEX}

@@ -3,9 +3,10 @@ import useSWR from 'swr'
 
 import useI18N from '@/hooks/useI18N'
 
+import getDataEndpoint from './utils/getDataEndpoint'
+
 export const fetcher = async (pathname) => {
-  const convertedPathName = pathname.endsWith('/') ? pathname : `${pathname}/`
-  const endpoint = `/data/${convertedPathName.replaceAll('/', '_')}images.json`
+  const endpoint = getDataEndpoint(pathname, 'images')
   const [error, response] = await tryit(() => fetch(endpoint).then((res => res.json())))()
   if (error) {
     console.log(error)

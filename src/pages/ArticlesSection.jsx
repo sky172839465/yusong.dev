@@ -21,8 +21,8 @@ const i18nMapping = {
 }
 
 export default function ArticlesSection() {
-  const { label } = useI18N(i18nMapping)
-  const { isLoading, data: articles } = useArticles({ type: 'article' })
+  const { label, lang } = useI18N(i18nMapping)
+  const { isLoading, data: articles } = useArticles({ type: 'article', lang }, { keepPreviousData: false })
 
   return (
     <section id='articles'>

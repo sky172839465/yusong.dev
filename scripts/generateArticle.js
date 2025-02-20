@@ -5,7 +5,6 @@ const inputPath = process.env.INPUT_PATH || '/src/article'
 const inputTitle = process.env.INPUT_TITLE
 const inputDescription = process.env.INPUT_DESCRIPTION
 const inputTags = process.env.INPUT_TAGS
-const inputSeries = process.env.INPUT_SERIES
 const inputIndex = process.env.INPUT_INDEX
 const inputContent = process.env.INPUT_CONTENT
 
@@ -28,10 +27,6 @@ const dynamicFrontmatterList = []
 if (inputTags) {
   const tagsArray = inputTags.split(',').map(tag => tag.toUpperCase().trim())
   dynamicFrontmatterList.push(`tags:\n  - ${tagsArray.join('\n  - ')}`)
-}
-
-if (inputSeries) {
-  dynamicFrontmatterList.push(`series: ${inputSeries.toUpperCase()}`)
 }
 
 if (inputIndex) {
