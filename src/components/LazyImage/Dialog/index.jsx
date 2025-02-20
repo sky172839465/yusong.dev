@@ -2,7 +2,7 @@ import { get, isUndefined } from 'lodash-es'
 import { useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import getFileUrl from '@/lib/getFileUrl'
+import getFileUrl from '@/utils/getFileUrl'
 
 import LazyImage from '..'
 
