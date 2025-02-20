@@ -1,10 +1,10 @@
-import { usePwaArticles } from '@/apis/usePwaArticles'
+import { useSeriesArticles } from '@/apis/useSeriesArticles'
 import ArticleIndex from '@/components/ArticleIndex'
 
 import { html } from './content.md'
 
 const PwaIndex = () => {
-  const { isLoading, data: articles } = usePwaArticles()
+  const { isLoading, data: articles } = useSeriesArticles()
   return (
     <ArticleIndex
       articles={articles}

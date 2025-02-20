@@ -6,7 +6,6 @@ import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 import { useCounter } from 'usehooks-ts'
 
-import { useArticles } from '@/apis/useArticles'
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
@@ -104,8 +103,7 @@ const Article = (props) => {
   const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown, { suspense: true })
   const { isLoading } = usePageImages()
   const { html, attributes } = data
-  const { title, description, createdAt, modifiedAt, series, tags } = attributes
-  const { data: seriesArticles } = useArticles(series ? { data: { series } } : null)
+  const { title, description, createdAt, modifiedAt, tags } = attributes
   const mainImageData = useMainImageData()
   const { sections, htmlList, imageList } = useArticleHtml(html)
   const { count, increment } = useCounter(0)
@@ -232,7 +230,6 @@ const Article = (props) => {
           topRef={topRef}
           shareData={shareData}
           sections={sections}
-          series={seriesArticles}
         />
         <LazyComment />
       </div>

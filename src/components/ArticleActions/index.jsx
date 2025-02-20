@@ -4,6 +4,7 @@ import { ArrowUpToLine, BookText, Hash, List, Share, SquareLibrary } from 'lucid
 import { useMemo } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import { useSeriesArticles } from '@/apis/useSeriesArticles'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -31,13 +32,14 @@ const i18nMapping = {
 }
 
 const ArticleActions = (props) => {
-  const { shareData, topRef, sections = [], series = [] } = props
+  const { shareData, topRef, sections = [] } = props
+  const { data: series = [] } = useSeriesArticles(false, { keepPreviousData: false })
   const isShareSupported = useIsSupported(() => !!navigator?.share)
   const { pathname } = useLocation()
   const { label } = useI18N(i18nMapping)
   const { seriesName, sortedSeries } = useMemo(() => {
     return {
-      seriesName: get(series, '0.data.series'),
+      seriesName: get(series, '0.series'),
       sortedSeries: orderBy(series, 'data.index', 'asc')
     }
   }, [series])

@@ -1,9 +1,11 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { keyBy, orderBy } from 'lodash-es'
+import { compact, flow, get, keyBy, map, orderBy } from 'lodash-es'
+import path from 'path'
+import { tryit } from 'radash'
 import { globSync } from 'tinyglobby'
 
-import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, ROUTE_FOLDER } from './constants.js'
+import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const TYPE = {
   WEBSITE: 'website',
@@ -51,15 +53,30 @@ fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...arti
 fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles), { encoding: 'utf-8' })
 
 const series = pages.filter((page) => {
-  return page.path.startsWith('/article') && page.file.endsWith('index.jsx')
+  return (page.path.startsWith('/article') || page.path.match(/^\/(\D+)?\/article/)) && page.file.endsWith('index.jsx')
 })
 fs.writeFileSync(`${DATA_FOLDER}/series.json`, JSON.stringify(series), { encoding: 'utf-8' })
 
-const pwaArticles = orderBy(
-  articles.filter((article) => {
-    return article.path.startsWith('/article/pwa')
-  }),
-  'data.index',
-  'asc'
+const articleMapByFilePathName = keyBy(articles, 'file')
+Promise.all(
+  series.map(async (item) => {
+    const seriesPath = item.path
+    const [error, response] = await tryit(
+      () => import(path.resolve(`${ROUTE_FOLDER}/${seriesPath}index.meta.js`))
+    )()
+    const seriesName = error ? 'NotFound' : get(response, 'default.title', 'TitleNotFound')
+    
+    const seriesArticles = flow(
+      () => globSync(`${ROUTE_FOLDER}/${seriesPath}/**/index.md`),
+      (filePaths) => map(filePaths, (filePath) => articleMapByFilePathName[filePath]),
+      compact,
+      (targetArticles) => orderBy(targetArticles, 'data.index', 'asc'),
+      (sortedArticles) => map(sortedArticles, (sortedArticle) => ({ ...sortedArticle, series: seriesName }))
+    )()
+    return fs.promises.writeFile(
+      `${PUBLIC_DATA_FOLDER}/${seriesPath.replaceAll('/', '_')}articles.json`,
+      JSON.stringify(seriesArticles),
+      { encoding: 'utf-8' }
+    )
+  })
 )
-fs.writeFileSync(`${DATA_FOLDER}/pwaArticles.json`, JSON.stringify(pwaArticles), { encoding: 'utf-8' })
