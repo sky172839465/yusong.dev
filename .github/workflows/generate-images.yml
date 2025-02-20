@@ -37,13 +37,8 @@ jobs:
             exit 0
           fi
 
-          MODIFIED_FILES="$(git diff --name-only origin/main...HEAD)<<EOF"
-          echo "files=$MODIFIED_FILES" >> $GITHUB_OUTPUT
-
-          if $MODIFIED_FILES | grep -qE '^src/.*/index\.md$'; then
-            echo "markdown=true" >> $GITHUB_OUTPUT
-          fi
-          if $MODIFIED_FILES | grep -qE '^src/.*/index\.(md|jsx|meta\.js)$'; then
+          git diff --name-only origin/main...HEAD
+          if git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.(md|jsx|meta\.js)$'; then
             echo "Changes detected in src/, continuing workflow."
             echo "changed=true" >> $GITHUB_OUTPUT
           else
