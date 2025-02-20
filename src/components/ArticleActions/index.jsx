@@ -11,16 +11,17 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     SERIES_TITLE: 'Series',
     SERIES_PREFIX: 'Series: ',
     PHASE: 'Phase',
     SHARE: 'Share',
     TO_TOP: 'To top'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     SERIES_TITLE: '系列',
     SERIES_PREFIX: '系列：',
     PHASE: '段落',
@@ -33,6 +34,7 @@ const ArticleActions = (props) => {
   const { shareData, topRef, sections = [], series = [] } = props
   const isShareSupported = useIsSupported(() => !!navigator?.share)
   const { pathname } = useLocation()
+  const { label } = useI18N(i18nMapping)
   const { seriesName, sortedSeries } = useMemo(() => {
     return {
       seriesName: get(series, '0.data.series'),
@@ -43,9 +45,6 @@ const ArticleActions = (props) => {
     const convertedPathName = pathname.endsWith('/') ? pathname : `${pathname}/`
     return convertedPathName.split('/').slice(0, -2).join('/')
   }, [pathname])
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
 
   const scrollToSection = (e) => {
     const target = document.querySelector(`a[href="${e.target.dataset.hash}"]`)

@@ -1,19 +1,16 @@
-import { useLocation } from 'react-router-dom'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     COPYRIGHT: 'YUSONG.TW All rights reserved.'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     COPYRIGHT: 'YUSONG.TW 保留所有權利。'
   }
 }
 
 const Footer = () => {
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label } = useI18N(i18nMapping)
   const currentYear = new Date().getFullYear()
 
   return (

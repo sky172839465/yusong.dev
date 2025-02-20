@@ -1,27 +1,25 @@
 import { isEmpty } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     MORE: 'Read more'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     MORE: '看更多'
   }
 }
 
 const SectionCard = (props) => {
   const { article: { path, data = {} } = {} } = props
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label } = useI18N(i18nMapping)
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false

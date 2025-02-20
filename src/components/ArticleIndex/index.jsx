@@ -1,17 +1,18 @@
 import { size } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 import SkeletonArticleIndex from '../SkeletonArticleIndex'
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     INDEX: 'Index: '
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     INDEX: '目錄：'
   }
 }
@@ -22,10 +23,7 @@ const ArticleIndex = (props) => {
     articles,
     isLoading
   } = props
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label } = useI18N(i18nMapping)
 
   if (isLoading) {
     return <SkeletonArticleIndex />

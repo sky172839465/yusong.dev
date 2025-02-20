@@ -1,10 +1,10 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
 import { lazy, Suspense } from 'react'
-import { useLocation } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import useI18N, { LANG } from '@/hooks/useI18N'
 import useTheme from '@/hooks/useTheme'
 
 import FadeIn from '../FadeIn'
@@ -19,12 +19,12 @@ const GiscusSkeleton = () => {
   )
 }
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     HIDE_COMMENTS: 'Hide comments',
     SHOW_COMMENTS: 'Show comments'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     HIDE_COMMENTS: '隱藏留言',
     SHOW_COMMENTS: '顯示留言'
   }
@@ -34,10 +34,7 @@ const Comments = () => {
   const { isDarkMode } = useTheme()
   const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, false)
   const toggleVisible = () => setVisible(!visible)
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label, lang } = useI18N(i18nMapping)
 
   return (
     <>
@@ -70,7 +67,7 @@ const Comments = () => {
               emitMetadata='0'
               inputPosition='top'
               theme={isDarkMode ? 'dark' : 'light'}
-              lang={isEN ? 'en' : 'zh-TW'}
+              lang={lang}
               loading='lazy'
             />
           </FadeIn>
