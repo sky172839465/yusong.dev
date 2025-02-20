@@ -9,6 +9,7 @@ tags:
 ---
 
 This is the first line of SPA intro.
+
 - lazyload routing
 - custom domain
 - simple CDN

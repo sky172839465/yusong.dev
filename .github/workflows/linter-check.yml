@@ -46,7 +46,7 @@ jobs:
         run: |
           npm run prettier:fix
           npm run lint:fix
-          git status --porcelain | grep -v -E '\.(jpg|jpeg|png|gif|svg)$|package-lock.json' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"          
+          git status --porcelain | grep -v -E '\.(jpg|jpeg|png|gif|svg)$|package-lock.json' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
 
       - name: Commit if code changed by linter
         if: ${{ steps.git_diff.outputs.changed == 1 }}
