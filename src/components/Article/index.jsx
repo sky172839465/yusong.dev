@@ -50,6 +50,7 @@ const useMainImageData = () => {
 }
 
 const useArticleHtml = (html) => {
+  const { pathname, mainPathName } = useI18N()
   const { isLoading, data: pageImages } = usePageImages()
   const sections = useMemo(() => getSections(html), [html])
   const { htmlList, imageList } = useMemo(() => {
@@ -71,7 +72,7 @@ const useArticleHtml = (html) => {
     const imageList = []
     // find images in html
     const convertedHtml = html.replace(/<p>\s*?<img[^>]*src=["']([^"']+)["'][^>]*>\s*<\/p>?/g, (element, relativeFileUrl) => {
-      const pageImageData = pageImages[relativeFileUrl.replace('/', '')]
+      const pageImageData = pageImages[relativeFileUrl.replace(pathname, mainPathName).replace('/', '')]
       // find image alt in image html
       const altMatch = element.match(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/)
       const alt = altMatch ? altMatch[1] : 'Article image'
@@ -89,7 +90,7 @@ const useArticleHtml = (html) => {
     const splitHtmlAndImagesRegexp = new RegExp(`(${splitElements.join('|')})`, 'g')
     const htmlList = convertedHtml.split(splitHtmlAndImagesRegexp).filter((_, i) => i % 2 === 0)
     return { htmlList, imageList }
-  }, [html, pageImages, isLoading])
+  }, [html, pageImages, isLoading, pathname, mainPathName])
   return { sections, htmlList, imageList }
 }
 
