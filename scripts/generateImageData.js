@@ -1,12 +1,13 @@
 import fs from 'fs'
-import { groupBy, keyBy, keys } from 'lodash-es'
+import { groupBy, isEmpty, keyBy, keys } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
 
 import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
-console.log('gen image data', (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean))
+const MODIFIED_FILES = (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean)
+const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
 
 const inputFolder = 'src'  // Folder where the original images are
 const SIZE = {
@@ -41,8 +42,17 @@ async function processImages() {
   const imagePaths = await glob([`${inputFolder}/**/*.{jpg,jpeg,png}`], {
     ignore: ['**/*.gen.{jpg,jpeg,png,webp}', '**/og.jpg', '**/x.jpg']
   })
+  const transformImageMap = keyBy(
+    IS_MODIFIED_FILES_EXIST
+      ? MODIFIED_FILES.filter((file) => file.match(/\.(jpg|jpeg,png)$/))
+      : imagePaths
+  )
 
   let results = []
+  console.log(
+    imagePaths,
+    MODIFIED_FILES
+  )
 
   for (const filePath of imagePaths) {
     const fileName = path.basename(filePath, path.extname(filePath))
@@ -52,10 +62,13 @@ async function processImages() {
     const originalDimensions = await getImageDimensions(filePath)
     if (!originalDimensions) continue
     
+    const isNeedTransform = filePath in transformImageMap
     const webpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
-    await sharp(filePath)
-      .webp({ quality: 100 })
-      .toFile(webpFilePath)
+    if (isNeedTransform) {
+      await sharp(filePath)
+        .webp({ quality: 100 })
+        .toFile(webpFilePath)
+    }
 
     let imageInfo = {
       original: {
@@ -73,10 +86,12 @@ async function processImages() {
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
 
-      await sharp(filePath)
-        .webp({ quality: QUALITY[label] })
-        .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
-        .toFile(outputFilePath)
+      if (isNeedTransform) {
+        await sharp(filePath)
+          .webp({ quality: QUALITY[label] })
+          .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
+          .toFile(outputFilePath)
+      }
 
       // Get dimensions of resized image
       const resizedDimensions = await getImageDimensions(outputFilePath)
