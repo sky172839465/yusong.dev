@@ -41,7 +41,7 @@ jobs:
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$MODIFIED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-          
+
           if git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.md$'; then
             echo "markdown=true" >> $GITHUB_OUTPUT
           fi
