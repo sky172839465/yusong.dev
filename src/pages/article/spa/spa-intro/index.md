@@ -9,3 +9,9 @@ tags:
 ---
 
 This is the first line of SPA intro.
+- lazyload routing
+- custom domain
+- simple CDN
+- RWD images
+- generate flow images
+- i18n gpt
