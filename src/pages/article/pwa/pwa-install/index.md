@@ -1,11 +1,11 @@
 ---
 title: PWA 安裝
 description: 介紹 PWA 如何安裝成 app 與設計的眉眉角角
-createdAt: 2025-01-31
-modifiedAt: 2025-01-31
+createdAt: 2025-01-31T00:00:00.000Z
+modifiedAt: "2025-02-20T17:07:16.729Z"
 tags:
-  - "PWA"
-  - "WEB APP"
+  - PWA
+  - WEB APP
 index: 3
 ---
 
