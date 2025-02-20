@@ -1,20 +1,21 @@
 import { Globe, Moon, Search, Sun } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import LazyImage from '@/components/LazyImage'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import useI18N, { LANG } from '@/hooks/useI18N'
 import useTheme from '@/hooks/useTheme'
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     SEARCH_WEB: 'Search website',
     CHANGE_LANG: 'Change language',
     LANG_EN: 'English',
     LANG_ZH_TW: 'Traditional Chinese',
     CHANGE_DARK_MODE: 'Change dark mode'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     SEARCH_WEB: '查詢網站',
     CHANGE_LANG: '切換語言',
     LANG_EN: '英文',
@@ -25,16 +26,13 @@ const LABEL = {
 
 const Header = () => {
   const { toggle } = useTheme()
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label, lang, langPathNames, isEN, isZhTw } = useI18N(i18nMapping)
 
   return (
     <header className='sticky top-0 z-10 flex-none border-b bg-background/50 backdrop-blur-md'>
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
-          to='/'
+          to={isZhTw ? '/' : `/${lang}`}
           className='flex items-center gap-2'
           viewTransition
         >
@@ -54,7 +52,7 @@ const Header = () => {
         </Link>
         <div className='flex items-center space-x-4'>
           <Link
-            to='/search'
+            to={isZhTw ? '/search' : `/${lang}/search`}
             viewTransition
           >
             <Button variant='outline' size='icon'>
@@ -75,7 +73,7 @@ const Header = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <Link
-                to={pathname.startsWith('/en') ? pathname : `/en${pathname}`}
+                to={langPathNames[LANG.EN]}
                 className={isEN ? 'pointer-events-none' : ''}
                 viewTransition
               >
@@ -84,11 +82,11 @@ const Header = () => {
                 </DropdownMenuItem>
               </Link>
               <Link
-                to={pathname.replace(/^\/en/, '')}
-                className={!isEN ? 'pointer-events-none' : ''}
+                to={langPathNames[LANG.ZH_TW]}
+                className={isZhTw ? 'pointer-events-none' : ''}
                 viewTransition
               >
-                <DropdownMenuItem disabled={!isEN}>
+                <DropdownMenuItem disabled={isZhTw}>
                   {label.LANG_ZH_TW}
                 </DropdownMenuItem>
               </Link>

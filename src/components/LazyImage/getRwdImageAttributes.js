@@ -1,6 +1,6 @@
 import { flow, get, join, last, map, pick } from 'lodash-es'
 
-import getFileUrl from '@/lib/getFileUrl'
+import getFileUrl from '@/utils/getFileUrl'
 
 // const SIZE_QUERY = [
 //   '(max-width: 768px) ',

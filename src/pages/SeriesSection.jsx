@@ -1,9 +1,9 @@
 import { random, times } from 'lodash-es'
-import { useLocation } from 'react-router-dom'
 
 import { useSeries } from '@/apis/useSeries'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const RANDOM = {
   SERIES: times(6),
@@ -11,20 +11,17 @@ const RANDOM = {
   SERIES_DESC: random(1, 5)
 }
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     NEW_SERIES: 'New series'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     NEW_SERIES: '新系列文章'
   }
 }
 
 export default function SeriesSection() {
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label } = useI18N(i18nMapping)
   const { isLoading, data } = useSeries()
 
   return (

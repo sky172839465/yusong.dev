@@ -1,9 +1,9 @@
 import { orderBy, random, times } from 'lodash-es'
-import { useLocation } from 'react-router-dom'
 
 import { useArticles } from '@/apis/useArticles'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const RANDOM = {
   ARTICLES: times(6),
@@ -11,20 +11,17 @@ const RANDOM = {
   ARTICLE_DESC: random(1, 5)
 }
 
-const LABEL = {
-  en: {
+const i18nMapping = {
+  [LANG.EN]: {
     NEW_ARTICLES: 'New articles'
   },
-  'zh-tw': {
+  [LANG.ZH_TW]: {
     NEW_ARTICLES: '新文章'
   }
 }
 
 export default function ArticlesSection() {
-  const { pathname } = useLocation()
-  const isEN = pathname.startsWith('/en')
-  const lang = isEN ? 'en' : 'zh-tw'
-  const label = LABEL[lang]
+  const { label } = useI18N(i18nMapping)
   const { isLoading, data: articles } = useArticles({ type: 'article' })
 
   return (
