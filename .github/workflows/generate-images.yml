@@ -41,7 +41,10 @@ jobs:
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$MODIFIED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-          echo "markdown=$(git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.md$')"
+          
+          if git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.md$'; then
+            echo "markdown=true" >> $GITHUB_OUTPUT
+          fi
 
           if git diff --name-only origin/main...HEAD | grep -qE '^src/.*/index\.(md|jsx|meta\.js)$'; then
             echo "Changes detected in src/, continuing workflow."
@@ -62,14 +65,13 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.REPO_TOKEN }}
 
-      - name: Check files
-        run: echo ${{ needs.pre-generate-images.outputs.files }}
-
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
-        if: ${{ needs.pre-generate-images.outputs.changed == 'markdown' }}
+        if: ${{ needs.pre-generate-images.outputs.markdown == 'true' }}
         uses: nielsvaneck/render-md-mermaid@v3
 
       - name: Generate RWD / OG / Twitter image
+        env:
+          MODIFIED_FILES: ${{ needs.pre-generate-images.outputs.files }}
         run: |
           npm install
           npm run gen:data

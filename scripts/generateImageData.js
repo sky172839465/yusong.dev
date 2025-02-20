@@ -6,6 +6,8 @@ import { glob } from 'tinyglobby'
 
 import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
+console.log('gen image data', process.env.MODIFIED_FILES)
+
 const inputFolder = 'src'  // Folder where the original images are
 const SIZE = {
   SMALL: 'small',   // Small size for mobile
