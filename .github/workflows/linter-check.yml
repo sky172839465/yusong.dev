@@ -40,16 +40,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run linters fix
+      - name: Run linters fix & Check for changes
+        id: git_diff
         if: ${{ contains(github.event.pull_request.labels.*.name, 'lint fix') }}
         run: |
           npm run prettier:fix
           npm run lint:fix
-
-      - name: Check for changes
-        id: git_diff
-        run: |
-          git status --porcelain | grep -v -E '\.(jpg|jpeg|png|gif|svg)$|package-lock.json' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"
+          git status --porcelain | grep -v -E '\.(jpg|jpeg|png|gif|svg)$|package-lock.json' && echo "changed=1" >> $GITHUB_OUTPUT || echo "changed=0"          
 
       - name: Commit if code changed by linter
         if: ${{ steps.git_diff.outputs.changed == 1 }}
