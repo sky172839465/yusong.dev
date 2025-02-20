@@ -2,11 +2,22 @@ import { get, isUndefined } from 'lodash-es'
 import { useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import useI18N, { LANG } from '@/hooks/useI18N'
 import getFileUrl from '@/utils/getFileUrl'
 
 import LazyImage from '..'
 
+const i18nMapping = {
+  [LANG.EN]: {
+    PREVIEW: 'Preview'
+  },
+  [LANG.ZH_TW]: {
+    PREVIEW: '預覽'
+  }
+}
+
 const LazyImagePreview = (props) => {
+  const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
   const { className, imageData, alt, ...restProps } = props
 
@@ -36,7 +47,7 @@ const LazyImagePreview = (props) => {
       <DialogContent className='max-w-[94dvw] border-none bg-transparent p-0 text-white shadow-none md:max-w-[80dvw]'>
         <DialogHeader>
           <DialogTitle className='text-white'>
-            Preview
+            {label.PREVIEW}
           </DialogTitle>
           <DialogDescription className='text-white/80'>
             {alt}
