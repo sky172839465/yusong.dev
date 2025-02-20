@@ -6,7 +6,7 @@ import { glob } from 'tinyglobby'
 
 import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
-console.log('gen image data', process.env.MODIFIED_FILES)
+console.log('gen image data', (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean))
 
 const inputFolder = 'src'  // Folder where the original images are
 const SIZE = {
