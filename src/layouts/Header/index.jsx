@@ -32,7 +32,7 @@ const Header = () => {
     <header className='sticky top-0 z-10 flex-none border-b bg-background/50 backdrop-blur-md'>
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
-          to={langPathNames[lang]}
+          to={isZhTw ? '/' : `/${lang}`}
           className='flex items-center gap-2'
           viewTransition
         >
@@ -52,7 +52,7 @@ const Header = () => {
         </Link>
         <div className='flex items-center space-x-4'>
           <Link
-            to='/search'
+            to={isZhTw ? '/search' : `/${lang}/search`}
             viewTransition
           >
             <Button variant='outline' size='icon'>
