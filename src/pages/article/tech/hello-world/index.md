@@ -7,7 +7,6 @@ tags:
   - hello-world
   - awesome
   - rad
-series: TEST
 index: 1
 ---
 

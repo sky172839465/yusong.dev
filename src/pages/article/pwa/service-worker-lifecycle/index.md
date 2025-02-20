@@ -7,7 +7,6 @@ tags:
   - "PWA"
   - "LIFECYCLE"
 index: 1
-series: "PWA"
 ---
 
 Service Worker 怎麼運作？ 它就像網站的背景工作者，能攔截請求、快取內容，讓網站即使離線也能用。

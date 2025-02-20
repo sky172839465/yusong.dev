@@ -7,7 +7,6 @@ tags:
   - Lazy
   - awesome
   - redbull
-series: TEST
 index: 0
 ---
 
