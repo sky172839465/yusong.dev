@@ -3,14 +3,31 @@ import { lazy } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
+const i18nMapping = {
+  [LANG.EN]: {
+    WAH: 'Oops!',
+    MESSAGE: 'Sorry, an unexpected error has occurred.',
+    PAGE_NOT_FOUND: 'Page not found.',
+    BACK_TO_HOME: 'Back to home'
+  },
+  [LANG.ZH_TW]: {
+    WAH: '啊⋯',
+    MESSAGE: '不好意思，出現預期外的錯誤。',
+    PAGE_NOT_FOUND: '頁面不存在。',
+    BACK_TO_HOME: '返回首頁'
+  }
+}
+
 const ErrorElement = () => {
+  const { label, isZhTw, lang } = useI18N(i18nMapping)
   const error = useRouteError() || {}
   const {
     statusText,
-    message = 'page not found'
+    message = label.PAGE_NOT_FOUND
   } = error
   console.error(error)
 
@@ -22,21 +39,21 @@ const ErrorElement = () => {
             <RouteOff
               className='mx-auto size-12'
             />
-            Oops!
+            {label.WAH}
           </h1>
           <p className='py-3'>
-            Sorry, an unexpected error has occurred.
+            {label.MESSAGE}
           </p>
           <p className='py-3'>
             {statusText || message}
           </p>
           <div className='mt-4'>
             <Link
-              to='../'
+              to={isZhTw ? '/' : `/${lang}`}
               viewTransition
             >
               <Button>
-                Back to home
+                {label.BACK_TO_HOME}
               </Button>
             </Link>
           </div>
