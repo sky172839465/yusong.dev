@@ -53,9 +53,9 @@ const getConvertedPosts = (posts) => {
             return `<div data-table class="[&[data-table]]:overflow-x-auto">${match}</div>`
           })
           // Format links
-          .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
-            return `<a href="${match}">${match}</a>`
-          })
+          // .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
+          //   return `<a href="${match}">${match}</a>`
+          // })
           // Outside links need to open new tab
           .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" class="break-all" referrerpolicy="no-referrer"')
           // Same folder image
