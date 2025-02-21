@@ -165,7 +165,7 @@ const SearchCommand = () => {
             {label.SEARCH_COMMAND_DESC}
           </DialogDescription>
         </DialogHeader>
-        <CommandInput placeholder={label.SEARCH_PLACEHOLDER} />
+        <CommandInput placeholder={label.SEARCH_PLACEHOLDER} className='text-base' />
         <CommandList>
           <CommandEmpty>
             {label.EMPTY_RESULT}
