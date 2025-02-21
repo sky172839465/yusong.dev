@@ -1,5 +1,5 @@
 const meta = {
-  title: 'Progressive Web App (PWA)',
-  description: '可以像 App 一樣執行，甚至能在沒網路時照常使用，這就是 Progressive Web App (PWA) 的特徵！'
+  title: 'PWA 實戰',
+  description: '記錄從無到有把 PWA 加入網站中，以及需要注意的細節。'
 }
 export default meta
