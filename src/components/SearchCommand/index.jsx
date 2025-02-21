@@ -1,8 +1,8 @@
-import { get, isEmpty, random, times } from 'lodash-es'
+import { get, groupBy, isEmpty, keyBy, keys, random, times, values } from 'lodash-es'
+import { Fragment } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useBoolean } from 'usehooks-ts'
 
-import { useArticles } from '@/apis/useArticles'
 import { useRoutes } from '@/apis/useRoutes'
 import {
   CommandDialog,
@@ -21,6 +21,14 @@ import { Separator } from '../ui/separator'
 import { Skeleton } from '../ui/skeleton'
 import TriggerButton from './TriggerButton'
 
+const PAGE_TYPE = {
+  WEBSITE: 'website',
+  ARTICLE: 'article',
+  OTHER: 'other'
+}
+
+const PAGE_TYPE_CODE_MAP = keyBy(values(PAGE_TYPE))
+
 const i18nMapping = {
   [LANG.EN]: {
     SEARCH_WEB: 'Search website',
@@ -28,8 +36,9 @@ const i18nMapping = {
     SEARCH_PLACEHOLDER: 'Type title, description or tag search...',
     EMPTY_RESULT: 'No results found.',
     LOADING_SECTION: 'Loading',
-    PAGES_SECTION: 'Pages',
-    ARTICLES_SECTION: 'Articles'
+    [PAGE_TYPE.WEBSITE]: 'Pages',
+    [PAGE_TYPE.ARTICLE]: 'Articles',
+    [PAGE_TYPE.OTHER]: 'Others'
   },
   [LANG.ZH_TW]: {
     SEARCH_WEB: '查詢網站',
@@ -37,8 +46,9 @@ const i18nMapping = {
     SEARCH_PLACEHOLDER: '輸入標題、描述或標籤查詢⋯',
     EMPTY_RESULT: '查無結果。',
     LOADING_SECTION: '載入中',
-    PAGES_SECTION: '頁面',
-    ARTICLES_SECTION: '文章'
+    [PAGE_TYPE.WEBSITE]: '頁面',
+    [PAGE_TYPE.ARTICLE]: '文章',
+    [PAGE_TYPE.OTHER]: '其他'
   }
 }
 
@@ -77,19 +87,19 @@ const CommandItemContent = (props) => {
 }
 
 const SearchResult = (props) => {
-  const { onSelect } = props
+  const { isOpen, onSelect } = props
   const { lang, label, isZhTw } = useI18N(i18nMapping)
-  const { isLoading: isArticlesLoading, data: articles } = useArticles({ type: 'article', lang })
-  const { isLoading: isRoutesLoading, data: routes } = useRoutes({ lang })
+  const { isLoading: isRoutesLoading, data: routes = [] } = useRoutes(isOpen ? { lang } : null)
   const navigate = useNavigate()
   const defaultNavPath = isZhTw ? '/' : `/${lang}`
+  const routesGroup = groupBy(routes, (route) => route.type || PAGE_TYPE.OTHER)
 
   const onNavigate = (path = defaultNavPath) => () => {
     onSelect()
     navigate(path, { viewTransition: true })
   }
 
-  if (isArticlesLoading || isRoutesLoading) {
+  if (isRoutesLoading) {
     return (
       <CommandGroup heading={label.LOADING_SECTION}>
         {RANDOM.COMMAND_ITEM.map((index) => {
@@ -107,58 +117,44 @@ const SearchResult = (props) => {
     )
   }
 
-  return (
-    <>
-      <CommandGroup heading={label.PAGES_SECTION}>
-        {routes.map((route) => {
-          const data = get(route, 'data', {})
-          
-          return (
-            <Link
-              to={route.path}
-              key={route.file}
-              viewTransition
-            >
-              <CommandItem onSelect={onNavigate(route.path)}>
-                <CommandItemContent data={data} />
-              </CommandItem>
-            </Link>
-          )
-        })}
-      </CommandGroup>
-      <CommandSeparator />
-      <CommandGroup heading={label.ARTICLES_SECTION}>
-        {articles.map((article) => {
-          const data = get(article, 'data', {})
-          
-          return (
-            <Link
-              to={article.path}
-              key={article.file}
-              viewTransition
-            >
-              <CommandItem onSelect={onSelect}>
-                <CommandItemContent data={data} />
-              </CommandItem>
-            </Link>
-          )
-        })}
-      </CommandGroup>
-    </>
-  )
+  return keys(routesGroup).map((pageType, index) => {
+    const heading = label[get(PAGE_TYPE_CODE_MAP, pageType) || PAGE_TYPE.OTHER]
+    const routes = routesGroup[pageType]
+    return (
+      <Fragment key={index}>
+        <CommandGroup heading={heading}>
+          {routes.map((route) => {
+            const data = get(route, 'data', {})
+            
+            return (
+              <Link
+                to={route.path}
+                key={route.file}
+                viewTransition
+              >
+                <CommandItem onSelect={onNavigate(route.path)}>
+                  <CommandItemContent data={data} />
+                </CommandItem>
+              </Link>
+            )
+          })}
+        </CommandGroup>
+        <CommandSeparator />
+      </Fragment>
+    )
+  })
 }
 
 const SearchCommand = () => {
   const { label, lang } = useI18N(i18nMapping)
   const { value: isOpen, setValue: setIsOpen, setTrue: setOpen, setFalse: setClose } = useBoolean(false)
-  const { isLoading: isArticlesLoading } = useArticles({ type: 'article', lang })
-  const { isLoading: isRoutesLoading } = useRoutes({ lang })
+  const { isLoading: isRoutesLoading } = useRoutes(isOpen ? { lang } : null)
 
   return (
     <>
       <TriggerButton
         onClick={setOpen}
-        disabled={isArticlesLoading || isRoutesLoading}
+        disabled={isRoutesLoading}
       />
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogHeader className='sr-only'>
@@ -174,7 +170,7 @@ const SearchCommand = () => {
           <CommandEmpty>
             {label.EMPTY_RESULT}
           </CommandEmpty>
-          <SearchResult onSelect={setClose} />
+          <SearchResult isOpen={isOpen} onSelect={setClose} />
         </CommandList>
       </CommandDialog>
     </>
