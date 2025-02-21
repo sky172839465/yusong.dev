@@ -65,6 +65,7 @@ async function processImages() {
     if (isNeedTransform) {
       await sharp(filePath)
         .webp({ quality: 100 })
+        .resize({ width: originalDimensions.width > 1920 ? 1920 : originalDimensions.width })
         .toFile(webpFilePath)
     }
 

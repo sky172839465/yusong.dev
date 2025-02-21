@@ -37,14 +37,15 @@ const useMainImageData = () => {
   const { isLoading, data: pageImages } = usePageImages()
   const { mainPathName } = useI18N()
   const imagePathFromSrc = useMemo(() => {
-    const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/index.png`
+    const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/index`
     return imagePathFromSrc
   }, [mainPathName])
   if (isLoading || !imagePathFromSrc) {
     return null
   }
 
-  const imageData = pageImages[imagePathFromSrc.replace('/', '')]
+  const mainImageUrl = imagePathFromSrc.replace('/', '')
+  const imageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
   return imageData
 }
 
