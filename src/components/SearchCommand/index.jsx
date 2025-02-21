@@ -73,7 +73,7 @@ const CommandItemContent = (props) => {
         )}
         {tags.filter(Boolean).map((tag, index) => {
           return (
-            <Badge key={index} variant='secondary' className='h-5'>
+            <Badge key={index} variant='outline' className='h-5'>
               {tag}
             </Badge>
           )
