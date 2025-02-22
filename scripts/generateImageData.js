@@ -51,7 +51,7 @@ async function processImages() {
   console.log('Grab image paths', imagePaths.slice(0, 3))
   console.log('Modified file paths', MODIFIED_FILES)
 
-  const results = await Promise.all(imagePaths.map((imagePath) => {
+  const results = await Promise.all(imagePaths.map(async (imagePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
 
@@ -70,7 +70,7 @@ async function processImages() {
     }
 
     // Resize and save images in multiple sizes
-    const sizes = await Promise.all(Object.entries(sizes).map((entry) => {
+    const sizes = await Promise.all(Object.entries(sizes).map(async (entry) => {
       const [label, width] = entry
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
