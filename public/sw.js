@@ -49,7 +49,7 @@ registerRoute(
           if (cachedResponse) {
             const cachedETag = cachedResponse.headers.get('ETag')
             const newETag = response.headers.get('ETag')
-            console.log({ cachedETag, cachedResponse, newETag, response })
+            console.log({ cachedETag, newETag }, [...response.headers.entries()], [...cachedResponse.headers.entries()])
             if (cachedETag && newETag && cachedETag !== newETag) {
               console.log(`Updating image cache: ${request.url}`)
               await cache.delete(request)
