@@ -56,8 +56,6 @@ const getConvertedPosts = (posts) => {
           // .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
           //   return `<a href="${match}">${match}</a>`
           // })
-          // replace single inline backquote to code element
-          .replace(/(?<!``)`([^`]+)`(?!``)/g, '<code>$1</code>')
           // Outside links need to open new tab
           .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" class="break-all" referrerpolicy="no-referrer"')
           // Same folder image
