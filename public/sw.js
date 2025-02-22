@@ -38,18 +38,18 @@ registerRoute(
   })
 )
 
-self.addEventListener('activate', async (event) => {
-  const cacheDeleteList = [GITHUB_ASSETS_CACHE_NAME]
-  event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames.map((cacheName) => {
-          if (!cacheDeleteList.includes(cacheName)) {
-            console.log(`Deleting old cache: ${cacheName}`)
-            return caches.delete(cacheName)
-          }
-        })
-      )
-    )
-  )
-})
+// self.addEventListener('activate', async (event) => {
+//   const cacheDeleteList = [GITHUB_ASSETS_CACHE_NAME]
+//   event.waitUntil(
+//     caches.keys().then((cacheNames) =>
+//       Promise.all(
+//         cacheNames.map((cacheName) => {
+//           if (!cacheDeleteList.includes(cacheName)) {
+//             console.log(`Deleting old cache: ${cacheName}`)
+//             return caches.delete(cacheName)
+//           }
+//         })
+//       )
+//     )
+//   )
+// })
