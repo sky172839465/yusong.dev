@@ -33,11 +33,11 @@ const getSections = (html) => {
   return result
 }
 
-const useMainImageData = () => {
+const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
   const { mainPathName } = useI18N()
   const imagePathFromSrc = useMemo(() => {
-    const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/index`
+    const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/${mainImageName}`
     return imagePathFromSrc
   }, [mainPathName])
   if (isLoading || !imagePathFromSrc) {
@@ -104,8 +104,8 @@ const Article = (props) => {
   const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown, { suspense: true })
   const { isLoading } = usePageImages()
   const { html, attributes } = data
-  const { title, description, createdAt, modifiedAt, tags } = attributes
-  const mainImageData = useMainImageData()
+  const { title, description, createdAt, modifiedAt, tags, mainImage } = attributes
+  const mainImageData = useMainImageData(mainImage)
   const { sections, htmlList, imageList } = useArticleHtml(html)
   const { count, increment } = useCounter(0)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
