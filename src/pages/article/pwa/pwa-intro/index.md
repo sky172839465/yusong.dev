@@ -10,6 +10,8 @@ index: 0
 
 ### [起源](#come-from)
 
+PWA 是 `Progressive Web App` 漸進式網頁應用程式的縮寫。
+
 > Progressive Web App (PWA) 最早由 Google 在 2015 年提出，目標是讓 Web 應用具備與原生 App 相似的體驗，同時保留 Web 的開放性與易維護性。從技術角度來看，PWA 並不是一種新的框架或技術，而是對 Web 應用的一組標準與最佳實踐，使其在現代瀏覽器中能夠具備更強的能力。
 
 ### [主要功能](#core-tech)
