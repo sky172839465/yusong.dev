@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { groupBy, isEmpty, keyBy, keys } from 'lodash-es'
+import { compact, groupBy, isEmpty, keyBy, keys } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
@@ -51,13 +51,15 @@ async function processImages() {
   console.log('Grab image paths', imagePaths.slice(0, 3))
   console.log('Modified file paths', MODIFIED_FILES)
 
-  const results = await Promise.all(imagePaths.map(async (imagePath) => {
+  const getResizeImage = async (filePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
 
     // Get original image dimensions
     const originalDimensions = await getImageDimensions(filePath)
-    if (!originalDimensions) continue
+    if (!originalDimensions) {
+      return null
+    }
     
     const isNeedTransform = filePath in transformImageMap
     const webpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
@@ -69,8 +71,7 @@ async function processImages() {
         .toFile(webpFilePath)
     }
 
-    // Resize and save images in multiple sizes
-    const sizes = await Promise.all(Object.entries(sizes).map(async (entry) => {
+    const getImageSize = async (entry) => {
       const [label, width] = entry
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
@@ -91,7 +92,10 @@ async function processImages() {
         width: resizedDimensions.width,
         height: resizedDimensions.height
       }
-    }))
+    }
+
+    // Resize and save images in multiple sizes
+    const imageSizes = await Promise.all(Object.entries(sizes).map(getImageSize))
 
     const webpDimensions = await getImageDimensions(webpFilePath)
     const imageInfo = {
@@ -102,13 +106,15 @@ async function processImages() {
         width: webpDimensions.width,
         height: webpDimensions.height
       },
-      sizes
+      sizes: imageSizes
     }
     
     return imageInfo
-  }))
+  }
 
-  return results
+  const results = await Promise.all(imagePaths.map(getResizeImage))
+
+  return compact(results)
 }
 
 // Run the script

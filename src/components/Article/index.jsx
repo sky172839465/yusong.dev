@@ -39,7 +39,7 @@ const useMainImageData = (mainImageName = 'index') => {
   const imagePathFromSrc = useMemo(() => {
     const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/${mainImageName}`
     return imagePathFromSrc
-  }, [mainPathName])
+  }, [mainPathName, mainImageName])
   if (isLoading || !imagePathFromSrc) {
     return null
   }
