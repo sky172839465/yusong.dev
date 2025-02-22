@@ -42,7 +42,7 @@ jobs:
 
       - name: Run linters fix & Check for changes
         id: git_diff
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'lint fix') }}
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'skip lint fix') == false }}
         run: |
           npm run prettier:fix
           npm run lint:fix
