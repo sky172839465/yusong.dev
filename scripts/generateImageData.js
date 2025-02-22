@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { groupBy, isEmpty, keyBy, keys, compact } from 'lodash-es'
+import { compact, groupBy, isEmpty, keyBy, keys } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
