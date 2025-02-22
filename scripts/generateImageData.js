@@ -48,11 +48,10 @@ async function processImages() {
       : imagePaths
   )
 
-  let results = []
   console.log('Grab image paths', imagePaths.slice(0, 3))
   console.log('Modified file paths', MODIFIED_FILES)
 
-  for (const filePath of imagePaths) {
+  const results = await Promise.all(imagePaths.map(async (imagePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
 
@@ -62,26 +61,17 @@ async function processImages() {
     
     const isNeedTransform = filePath in transformImageMap
     const webpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
+    const resizeOriginWidth = originalDimensions.width > 1920 ? 1920 : originalDimensions.width
     if (isNeedTransform) {
       await sharp(filePath)
         .webp({ quality: 100 })
-        .resize({ width: originalDimensions.width > 1920 ? 1920 : originalDimensions.width })
+        .resize({ width: resizeOriginWidth })
         .toFile(webpFilePath)
     }
 
-    let imageInfo = {
-      original: {
-        path: filePath,
-        webp: webpFilePath,
-        route: outputDir,
-        width: originalDimensions.width,
-        height: originalDimensions.height
-      },
-      sizes: []
-    }
-
     // Resize and save images in multiple sizes
-    for (const [label, width] of Object.entries(sizes)) {
+    const sizes = await Promise.all(Object.entries(sizes).map(async (entry) => {
+      const [label, width] = entry
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
 
@@ -95,16 +85,28 @@ async function processImages() {
       // Get dimensions of resized image
       const resizedDimensions = await getImageDimensions(outputFilePath)
 
-      imageInfo.sizes.push({
+      return {
         size: label,
         path: outputFilePath,
         width: resizedDimensions.width,
         height: resizedDimensions.height
-      })
-    }
+      }
+    }))
 
-    results.push(imageInfo)
-  }
+    const webpDimensions = await getImageDimensions(webpFilePath)
+    const imageInfo = {
+      original: {
+        path: filePath,
+        webp: webpFilePath,
+        route: outputDir,
+        width: webpDimensions.width,
+        height: webpDimensions.height
+      },
+      sizes
+    }
+    
+    return imageInfo
+  }))
 
   return results
 }

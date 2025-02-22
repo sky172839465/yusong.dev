@@ -28,6 +28,10 @@ on:
         description: "Article content"
         required: true
         type: string
+      mainImage:
+        description: "Article main image name"
+        required: false
+        type: string
 
 jobs:
   generate-article:
@@ -48,6 +52,7 @@ jobs:
           INPUT_TAGS: ${{ github.event.inputs.tags }}
           INPUT_INDEX: ${{ github.event.inputs.index }}
           INPUT_CONTENT: ${{ github.event.inputs.content }}
+          INPUT_MAIN_IMAGE: ${{ github.event.inputs.mainImage }}
 
       - name: Commit and Push
         id: branch
