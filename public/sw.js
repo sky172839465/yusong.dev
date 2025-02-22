@@ -38,18 +38,22 @@ registerRoute(
     cacheName: GITHUB_ASSETS_CACHE_NAME,
     plugins: [
       new CacheableResponsePlugin({
-        statuses: [200] // Cache only successful responses
+        statuses: [0, 200] // Cache only successful responses
       }),
       {
         // force updates by checking the ETag or Last-Modified headers
         fetchDidSucceed: async ({ request, response }) => {
           const cache = await caches.open(GITHUB_ASSETS_CACHE_NAME)
           const cachedResponse = await cache.match(request)
+          console.log('request.url', request.url)
           if (cachedResponse) {
             const cachedETag = cachedResponse.headers.get('ETag')
             const newETag = response.headers.get('ETag')
+            console.log({ cachedETag, newETag })
             if (cachedETag && newETag && cachedETag !== newETag) {
-              cache.put(request, response.clone())
+              console.log(`Updating image cache: ${request.url}`)
+              await cache.delete(request)
+              await cache.put(request, response.clone())
             }
           }
           return response
