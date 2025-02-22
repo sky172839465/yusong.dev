@@ -79,7 +79,7 @@ async function processImages() {
       if (isNeedTransform) {
         await sharp(filePath)
           .webp({ quality: QUALITY[label] })
-          .resize({ width: imageInfo.original.width > width ? width : imageInfo.original.width })
+          .resize({ width: originalDimensions.width > width ? width : originalDimensions.width })
           .toFile(outputFilePath)
       }
 
