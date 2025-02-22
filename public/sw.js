@@ -52,7 +52,7 @@ registerRoute(
             console.log({ cachedETag, newETag })
             if (cachedETag && newETag && cachedETag !== newETag) {
               console.log(`Updating image cache: ${request.url}`)
-              await cache.delete(request);
+              await cache.delete(request)
               await cache.put(request, response.clone())
             }
           }
