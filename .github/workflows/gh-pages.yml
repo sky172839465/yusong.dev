@@ -4,6 +4,9 @@ on:
     branches: ["main"]
     paths:
       - "src/**"
+      - "public/sw.js"
+      - "public/*.svg"
+      - "public/*.png"
 
 permissions:
   contents: write
