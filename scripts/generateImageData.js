@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { groupBy, isEmpty, keyBy, keys } from 'lodash-es'
+import { groupBy, isEmpty, keyBy, keys, compact } from 'lodash-es'
 import path from 'path'
 import sharp from 'sharp'
 import { glob } from 'tinyglobby'
@@ -57,7 +57,9 @@ async function processImages() {
 
     // Get original image dimensions
     const originalDimensions = await getImageDimensions(filePath)
-    if (!originalDimensions) continue
+    if (!originalDimensions) {
+      return null
+    }
     
     const isNeedTransform = filePath in transformImageMap
     const webpFilePath = path.join(outputDir, `${fileName}-origin.gen.webp`)
@@ -108,7 +110,7 @@ async function processImages() {
     return imageInfo
   }))
 
-  return results
+  return compact(results)
 }
 
 // Run the script
