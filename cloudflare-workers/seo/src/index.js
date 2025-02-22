@@ -43,6 +43,7 @@ export default {
     const modifiedHtml = html.replace(
       '</head>',
       `
+					<meta name="description" content="${description}" />
           <meta name="author" content="${AUTHOR}">
           <meta property="og:title" content="${displayTitle}" />
           <meta property="og:description" content="${description}" />
@@ -59,6 +60,7 @@ export default {
           <meta name="twitter:image" content="${twitterImage}">
           <meta name="twitter:site" content="@${ACCOUNT}">
           <meta name="twitter:creator" content="@${ACCOUNT}">
+					<link rel="canonical" href="${requestUrl}"/>
           <title>${displayTitle}</title>
           <script type="application/ld+json">
           {
