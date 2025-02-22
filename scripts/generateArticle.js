@@ -7,6 +7,7 @@ const inputDescription = process.env.INPUT_DESCRIPTION
 const inputTags = process.env.INPUT_TAGS
 const inputIndex = process.env.INPUT_INDEX
 const inputContent = process.env.INPUT_CONTENT
+const mainImage = process.env.INPUT_MAIN_IMAGE
 
 if (!inputTitle || !inputDescription || !inputContent) {
   console.error('Missing required inputs')
@@ -31,6 +32,10 @@ if (inputTags) {
 
 if (inputIndex) {
   dynamicFrontmatterList.push(`index: ${inputIndex}`)
+}
+
+if (mainImage) {
+  dynamicFrontmatterList.push(`mainImage: ${mainImage}`)
 }
 
 const dynamicFrontmatter = dynamicFrontmatterList.join('\n')
