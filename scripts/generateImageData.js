@@ -51,7 +51,7 @@ async function processImages() {
   console.log('Grab image paths', imagePaths.slice(0, 3))
   console.log('Modified file paths', MODIFIED_FILES)
 
-  const getResizeImage = async (imagePath) => {
+  const getResizeImage = async (filePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
 
