@@ -1,3 +1,4 @@
+import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
 import { StaleWhileRevalidate } from 'workbox-strategies'
@@ -27,12 +28,33 @@ precacheAndRoute(self.__WB_MANIFEST)
 // })
 
 // Cache GitHub CDN images using StaleWhileRevalidate
+const GITHUB_ASSETS_CACHE_NAME = 'github-assets'
 registerRoute(
   ({ url }) => (
     url.href.startsWith('https://cdn.yusong.tw') ||
     url.href.startsWith('https://github.githubassets.com/images')
   ),
   new StaleWhileRevalidate({
-    cacheName: 'github-assets'
+    cacheName: GITHUB_ASSETS_CACHE_NAME,
+    plugins: [
+      new CacheableResponsePlugin({
+        statuses: [200] // Cache only successful responses
+      }),
+      {
+        // force updates by checking the ETag or Last-Modified headers
+        fetchDidSucceed: async ({ request, response }) => {
+          const cache = await caches.open(GITHUB_ASSETS_CACHE_NAME)
+          const cachedResponse = await cache.match(request)
+          if (cachedResponse) {
+            const cachedETag = cachedResponse.headers.get('ETag')
+            const newETag = response.headers.get('ETag')
+            if (cachedETag && newETag && cachedETag !== newETag) {
+              cache.put(request, response.clone())
+            }
+          }
+          return response
+        }
+      }
+    ]
   })
 )
