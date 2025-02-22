@@ -22,7 +22,7 @@ const getRwdImageAttributes = (imageData) => {
 
   const imageSizes = get(imageData, 'sizes', [])
   const largeImage = last(imageSizes)
-  const src = getFileUrl(`/${get(largeImage, 'path')}`)
+  const src = getFileUrl(`/${get(imageSizes, '0.path')}`)
   const srcSet = flow(
     () => map(imageSizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
     srcSetList => join(srcSetList, ', ')
