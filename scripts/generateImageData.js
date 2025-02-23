@@ -70,25 +70,29 @@ async function processImages() {
         .resize({ width: resizeOriginWidth })
         .toFile(webpFilePath)
     }
+    const webpDimensions = await getImageDimensions(webpFilePath)
 
     const getImageSize = async (entry) => {
       const [label, width] = entry
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
+      const isSkipTransform = webpDimensions.width < width
 
-      if (isNeedTransform) {
+      if (isNeedTransform && !isSkipTransform) {
         await sharp(filePath)
           .webp({ quality: QUALITY[label] })
-          .resize({ width: originalDimensions.width > width ? width : originalDimensions.width })
+          .resize({ width })
           .toFile(outputFilePath)
       }
 
       // Get dimensions of resized image
-      const resizedDimensions = await getImageDimensions(outputFilePath)
+      const resizedDimensions = isSkipTransform
+        ? webpDimensions
+        : await getImageDimensions(outputFilePath)
 
       return {
         size: label,
-        path: outputFilePath,
+        path: isSkipTransform ? webpFilePath : outputFilePath,
         width: resizedDimensions.width,
         height: resizedDimensions.height
       }
@@ -97,7 +101,6 @@ async function processImages() {
     // Resize and save images in multiple sizes
     const imageSizes = await Promise.all(Object.entries(sizes).map(getImageSize))
 
-    const webpDimensions = await getImageDimensions(webpFilePath)
     const imageInfo = {
       original: {
         path: filePath,
