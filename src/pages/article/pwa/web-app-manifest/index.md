@@ -14,13 +14,13 @@ index: 2
 Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安裝時顯示的資訊與設定安裝後啟動 Web App 的介面，
 這裡有一個 [範例網站](https://pwa-sharing.pages.dev/) 可以參考實際上在不同裝置上會如何呈現，範例需要原始碼的話參考裡有提供連結。
 
-#### 安裝顯示的資訊舉例
+#### 安裝顯示的資訊
 
 - 安裝的名稱
 - 安裝的圖示
 - 安裝時顯示的 Web App 預覽圖
 
-#### 啟動介面相關舉例
+#### 啟動介面相關
 
 - 適用範圍 (例如 `/app` 路徑底下才要讓網頁可以被安裝)
 - 外觀 (保留 URL 介面或是像 App 一個完整的獨立視窗)
@@ -29,7 +29,9 @@ Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安�
 
 ### [範例](#example)
 
-參考 PWA sharing 的 [Web manifest](https://pwa-sharing.pages.dev/manifest.webmanifest)，有實際的例子可以對照更容易理解這些屬性，下面挑了一些支援度相當高的屬性做說明，在桌面版、行動裝置上已經都可以正常顯示或是有替代方案了。
+參考 PWA sharing 的 [Web manifest](https://pwa-sharing.pages.dev/manifest.webmanifest)，有實際的例子可以對照更容易理解這些屬性，下面挑了一些支援度相當高的屬做說明，由於影響 Web App 很明顯建議都要設定。
+
+`screenshots` 與 `icons` 內容比較複雜底下另外做說明。
 
 ```json
 {
@@ -38,7 +40,6 @@ Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安�
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "lang": "en",
   "scope": "/",
   "description": "PWA sharing example code",
   "screenshots": [],
