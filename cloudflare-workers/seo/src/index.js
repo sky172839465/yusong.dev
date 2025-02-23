@@ -2,14 +2,14 @@ import { keyBy } from 'lodash-es'
 
 import routes from './routes.json'
 
-const IMG_HOST = 'https://cdn.yusong.tw'
+const CDN_HOST = 'https://cdn.yusong.tw'
 const AUTHOR = 'YuSong Hsu'
 const ACCOUNT = 'sky172839465'
 const BLOG_HOST = 'yusong.tw'
 const TITLE = BLOG_HOST.toUpperCase()
 const ROUTE_MAP = keyBy(
   routes.map(({ file, ...item }) => {
-    const imageFolder = `${IMG_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
+    const imageFolder = `${CDN_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
     return {
       ...item,
       image: `${imageFolder}/og.jpg`,
@@ -43,7 +43,10 @@ export default {
     const modifiedHtml = html.replace(
       '</head>',
       `
-					<meta name="description" content="${description}" />
+	  <link rel="preconnect" href="${CDN_HOST}" crossorigin />
+	  <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
+   	  <link rel="canonical" href="${requestUrl}"/>
+	  <meta name="description" content="${description}" />
           <meta name="author" content="${AUTHOR}">
           <meta property="og:title" content="${displayTitle}" />
           <meta property="og:description" content="${description}" />
@@ -60,7 +63,6 @@ export default {
           <meta name="twitter:image" content="${twitterImage}">
           <meta name="twitter:site" content="@${ACCOUNT}">
           <meta name="twitter:creator" content="@${ACCOUNT}">
-					<link rel="canonical" href="${requestUrl}"/>
           <title>${displayTitle}</title>
           <script type="application/ld+json">
           {
