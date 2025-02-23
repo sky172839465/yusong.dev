@@ -19,11 +19,11 @@ html.dark .shiki span {
 }
 
 .prose :not(pre) > code {
-  @apply p-1 rounded-md bg-foreground text-background !content-none;
+  @apply p-1 rounded-md bg-foreground text-background before:!content-none after:!content-none;
 }
 
 .prose pre > code {
-  @apply mt-8;
+  @apply block mt-8;
 }
 
 @layer base {
