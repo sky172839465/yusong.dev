@@ -23,7 +23,7 @@ const getSections = (html) => {
   const doc = parser.parseFromString(html, 'text/html')
 
   const result = flow(
-    () => [...(doc.querySelectorAll('a') || [])],
+    () => [...(doc.querySelectorAll('h3 a') || [])],
     (links) => filter(links, (link) => link.href.includes('#')),
     (hashLinks) => map(hashLinks, (hashLink) => ({
       hash: hashLink.getAttribute('href'),
