@@ -18,6 +18,10 @@ html.dark .shiki span {
   background-color: var(--shiki-dark-bg) !important;
 }
 
+.prose :not(pre) > code {
+  @apply p-1 rounded-md bg-foreground text-background !content-none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
