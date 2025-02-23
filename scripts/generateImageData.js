@@ -77,8 +77,11 @@ async function processImages() {
       // const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen${path.extname(filePath)}`)
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
       const isSkipTransform = webpDimensions.width < width
+      if (isSkipTransform) {
+        return null
+      }
 
-      if (isNeedTransform && !isSkipTransform) {
+      if (isNeedTransform) {
         await sharp(filePath)
           .webp({ quality: QUALITY[label] })
           .resize({ width })
@@ -86,13 +89,11 @@ async function processImages() {
       }
 
       // Get dimensions of resized image
-      const resizedDimensions = isSkipTransform
-        ? webpDimensions
-        : await getImageDimensions(outputFilePath)
+      const resizedDimensions = await getImageDimensions(outputFilePath)
 
       return {
         size: label,
-        path: isSkipTransform ? webpFilePath : outputFilePath,
+        path: outputFilePath,
         width: resizedDimensions.width,
         height: resizedDimensions.height
       }
@@ -109,7 +110,7 @@ async function processImages() {
         width: webpDimensions.width,
         height: webpDimensions.height
       },
-      sizes: imageSizes
+      sizes: compact(imageSizes)
     }
     
     return imageInfo
