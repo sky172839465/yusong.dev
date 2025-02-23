@@ -16,8 +16,8 @@ const SIZE = {
   LARGE: 'large'   // Large size for desktops
 }
 const QUALITY = {
-  [SIZE.SMALL]: 100,
-  [SIZE.MEDIUM]: 90,
+  [SIZE.SMALL]: 90,
+  [SIZE.MEDIUM]: 80,
   [SIZE.LARGE]: 80
 }
 const sizes = {
