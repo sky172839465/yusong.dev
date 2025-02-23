@@ -1,4 +1,4 @@
-import Search from '@/src/pages/search/index.jsx'
+import Search from '@/pages/search/index.jsx'
 
 const EnSearch = () => {
   return <Search />
