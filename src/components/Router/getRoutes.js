@@ -44,12 +44,12 @@ const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
   const { lang = '', code = '', highlight = '' } = highlightResult
   const codeHighlightWithClickToClipboard = `
     <div class='relative'>
-      <div class='absolute left-2 top-2 rounded-md border border-foreground dark:border-none bg-background/50 backdrop-blur-md p-2 text-sm ${isEmpty(lang) ? 'hidden' : ''}'>
+      <div class='absolute left-2 top-2 rounded-md bg-secondary text-secondary-foreground p-2 text-sm ${isEmpty(lang) ? 'hidden' : ''}'>
         ${lang.toUpperCase()}
       </div>
       <button
         class='
-          absolute right-2 top-2 rounded-md border border-foreground dark:border-none bg-background/50 backdrop-blur-md p-2 text-sm
+          absolute right-2 top-2 rounded-md bg-secondary text-secondary-foreground p-2 text-sm
           [&_span]:hidden
           [&[data-status="init"]_[data-label="init"]]:inline
           [&[data-status="success"]_[data-label="success"]]:inline
