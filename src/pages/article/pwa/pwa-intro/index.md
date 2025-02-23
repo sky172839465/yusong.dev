@@ -1,8 +1,8 @@
 ---
-title: 簡單認識一下 PWA
+title: 簡單認識 PWA
 description: 認識 PWA 具有哪些功能、用抽象的範例來說明把 PWA 加入既有的網站有什麼好處
 createdAt: 2025-01-31T00:00:00.000Z
-modifiedAt: "2025-02-22T02:19:11.150Z"
+modifiedAt: "2025-02-23T14:59:36.262Z"
 tags:
   - PWA
 index: 0
@@ -59,11 +59,15 @@ PWA 是 `Progressive Web App` 漸進式網頁應用程式的縮寫。
 
 1. 這些改善有機會替咖啡店創造更多機會，不再只是被動等待生意上門，咖啡店 (網站) 的本質沒有改變，但現在它服務更好了 (快取、預先擷取資源)，容易吸引更多回頭客 (推播通知)，並且更方便了 (可以安裝成 Web App 使用)！
 
+### [範例](#example)
+
+PWA 系列都會使用這個 [PWA sharing](https://pwa-sharing.pages.dev/) 網站做解說，如果想要研究實作內容可以看這一篇文章 [範例解說](/article/pwa/example/)，GitHub 程式碼的位置也列在裡面。
+
 ### [結論](#conclusion)
 
 PWA 強調的是漸進式，也就是說不是全部功能都要實作缺一不可，各取所需挑需要的功能逐步實作到既有的網站上，漸進式的做出改善就可以了。
 
-### 參考
+### [參考](#reference)
 
 1. [PWA WIKI](https://zh.wikipedia.org/zh-tw/漸進式網路應用程式)
 1. [MDN PWA](https://developer.mozilla.org/zh-TW/docs/Web/Progressive_web_apps)
