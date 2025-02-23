@@ -2,7 +2,7 @@
 title: 簡單認識 PWA
 description: 認識 PWA 具有哪些功能、用抽象的範例來說明把 PWA 加入既有的網站有什麼好處
 createdAt: 2025-01-31T00:00:00.000Z
-modifiedAt: "2025-02-22T02:19:11.150Z"
+modifiedAt: "2025-02-23T14:59:36.262Z"
 tags:
   - PWA
 index: 0
