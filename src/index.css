@@ -22,6 +22,10 @@ html.dark .shiki span {
   @apply p-1 rounded-md bg-foreground text-background !content-none;
 }
 
+.prose pre > code {
+  @apply mt-8;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
