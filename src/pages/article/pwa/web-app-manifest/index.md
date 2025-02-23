@@ -66,7 +66,7 @@ Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安�
   > Web App 尚未載入前空白畫面預設的背景色
 - theme_color
   > 主題顏色會影響 Web App 頂部 URL 介面區塊的顏色，需要 dark mode 的時候可以在 HTML 加上 meta 根據主題顏色動態切換
-  > 
+  >
   > [MDN combind with media query](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/theme_color#description)
 
 #### 圖示 `icons`
@@ -153,6 +153,7 @@ Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安�
 ```
 
 ### [參考](#reference)
+
 - [MDN Web app manifests](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest)
 - [Vite PWA](https://vite-pwa-org.netlify.app/)
 - [PWA sharing](https://pwa-sharing.pages.dev)
