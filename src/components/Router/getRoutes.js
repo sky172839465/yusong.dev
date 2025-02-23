@@ -40,6 +40,47 @@ const getClosestLayout = (layouts) => {
   }
 }
 
+const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
+  const { code = '', highlight = '' } = highlightResult
+  const codeHighlightWithClickToClipboard = `
+    <div class='relative'>
+      <button
+        class='
+          absolute right-2 top-2 rounded-md border border-foreground dark:border-none bg-background/50 backdrop-blur-md p-2 text-sm
+          [&_span]:hidden
+          [&[data-status="init"]_[data-label="init"]]:inline
+          [&[data-status="success"]_[data-label="success"]]:inline
+          [&[data-status="error"]_[data-label="error"]]:inline
+        '
+        data-status='init'
+        data-code='${code}'
+        onclick='(function(element){
+          const copyToClipboard = navigator && navigator.clipboard && navigator.clipboard.writeText;
+          if (!copyToClipboard) {
+            element.dataset.status = "error";
+            return false;
+          }
+          element.dataset.status = "success"
+          navigator.clipboard.writeText(element.dataset.code);
+          setTimeout(function(ele){ element.dataset.status = "init"; }, 3000, element);
+        })(this)'
+      >
+        <span data-label='init'>
+          Copy
+        </span>
+        <span data-label='success'>
+          Copied!
+        </span>
+        <span data-label='error'>
+          Error.
+        </span>
+      </button>
+      ${highlight}
+    </div>
+  `
+  return codeHighlightWithClickToClipboard
+}
+
 const getConvertedPosts = (posts) => {
   const convertedPosts = reduce(posts, (collect, post, postKey) => {
     const postFolder = postKey.replace('/index.md', '')
@@ -69,23 +110,24 @@ const getConvertedPosts = (posts) => {
         const [replacement, lang, code] = matches
         return { replacement, lang, code }
       })
-      const highlightResults = await Promise.all(
+      const results = await Promise.all(
         matches.map((match) => {
           const { lang, code } = match
           return codeToHtml(code, {
             lang,
-            themes: {
-              light: 'github-light',
-              dark: 'github-dark'
-            },
+            themes: { light: 'github-light', dark: 'github-dark' },
             defaultColor: false
-          })
+          }).then((highlight) => ({ code, highlight }))
         })
       )
       let highlightHtml = html
       for (const [index, match] of matches.entries()) {
         const { replacement } = match
-        highlightHtml = highlightHtml.replace(replacement, highlightResults[index])
+        const highlightResult = get(results, index, {})
+        highlightHtml = highlightHtml.replace(
+          replacement,
+          getCodeHighlightWithClickToClipboard(highlightResult)
+        )
       }
       return { html: highlightHtml, attributes }
     })
