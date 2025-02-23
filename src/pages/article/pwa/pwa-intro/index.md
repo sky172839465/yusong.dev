@@ -69,5 +69,5 @@ PWA 強調的是漸進式，也就是說不是全部功能都要實作缺一不�
 
 ### [參考](#reference)
 
-1. [PWA WIKI](https://zh.wikipedia.org/zh-tw/漸進式網路應用程式)
-1. [MDN PWA](https://developer.mozilla.org/zh-TW/docs/Web/Progressive_web_apps)
+- [PWA WIKI](https://zh.wikipedia.org/zh-tw/漸進式網路應用程式)
+- [MDN PWA](https://developer.mozilla.org/zh-TW/docs/Web/Progressive_web_apps)
