@@ -43,8 +43,8 @@ const dynamicFrontmatter = dynamicFrontmatterList.join('\n')
 const markdownContent = `---
 title: "${inputTitle}"
 description: "${inputDescription}"
-createdAt: ${now}
-modifiedAt: ${now}
+createdAt: "${now}"
+modifiedAt: "${now}"
 ${dynamicFrontmatter}
 ---
 
