@@ -107,9 +107,25 @@ const getConvertedPosts = (posts) => {
             return `<div data-component='table-area'>${match}</div>`
           })
           // Format links
-          // .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
-          //   return `<a href="${match}">${match}</a>`
-          // })
+          .replace(/<a href="\/+.*">/g, (match) => {
+            return match.replace(
+              '>',
+              `
+                onclick="(function(e, element){
+                  e.preventDefault();
+                  if (document.startViewTransition) {
+                    document.startViewTransition(() => {
+                      window.history.pushState({}, '', element.href);
+                      window.dispatchEvent(new Event('popstate'));
+                    })
+                  } else {
+                    window.history.pushState({}, '', element.href);
+                    window.dispatchEvent(new Event('popstate'));
+                  }
+                })(event, this)">
+              `
+            )
+          })
           // Outside links need to open new tab
           .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
           // Same folder image
