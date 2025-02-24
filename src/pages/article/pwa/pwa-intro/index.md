@@ -61,7 +61,7 @@ PWA 是 `Progressive Web App` 漸進式網頁應用程式的縮寫。
 
 ### [範例](#example)
 
-PWA 系列都會使用這個 [PWA sharing](https://pwa-sharing.pages.dev/) 網站做解說，如果想要研究實作內容可以看這一篇文章 [範例解說](/article/pwa/example/)，GitHub 程式碼的位置也列在裡面。
+PWA 系列都會使用這個 [PWA sharing](https://pwa-sharing.pages.dev/) 網站做解說，如果想要研究實作內容可以看 [這一篇文章](/article/pwa/example/)，GitHub 程式碼的位置也列在裡面。
 
 ### [結論](#conclusion)
 
