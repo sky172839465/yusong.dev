@@ -79,7 +79,7 @@ const ArticleIndex = (props) => {
                   )
                 })}
               </div>
-              <p>
+              <p className='text-sm'>
                 {description}
               </p>
               {index !== size(articles) - 1 && (
