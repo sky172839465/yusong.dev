@@ -1,6 +1,8 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size, unescape } from 'lodash-es'
 import { lazy } from 'react'
 
+import getI18N, { LANG } from '@/utils/getI18N'
+
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
 const loaders = import.meta.glob('/src/pages/**/index.loader.js')
@@ -40,7 +42,21 @@ const getClosestLayout = (layouts) => {
   }
 }
 
+const i18nMapping = {
+  [LANG.EN]: {
+    COPY: 'Copy',
+    COPIED: 'Copied!',
+    COPY_ERROR: 'Error.'
+  },
+  [LANG.ZH_TW]: {
+    COPY: '複製',
+    COPIED: '已複製！',
+    COPY_ERROR: '錯誤'
+  }
+}
+
 const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
+  const { label } = useI18N(window.location.pathname, i18nMapping)
   const { lang = '', code = '', highlight = '' } = highlightResult
   const codeHighlightWithClickToClipboard = `
     <div data-component='code-area'>
@@ -63,13 +79,13 @@ const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
         })(this)'
       >
         <span data-label='init'>
-          Copy
+          ${label.COPY}
         </span>
         <span data-label='success'>
-          Copied!
+          ${label.COPIED}
         </span>
         <span data-label='error'>
-          Error.
+          ${label.COPY_ERROR}
         </span>
       </button>
       ${highlight}
