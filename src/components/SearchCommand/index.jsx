@@ -61,8 +61,8 @@ const CommandItemContent = (props) => {
   const filtedTags = tags.filter(Boolean)
 
   return (
-    <div>
-      <div className='flex items-center gap-2'>
+    <div className='flex flex-col gap-2'>
+      <div className='flex flex-wrap items-center gap-2'>
         <span>
           {title}
         </span>
@@ -79,7 +79,7 @@ const CommandItemContent = (props) => {
           )
         })}
       </div>
-      <p className='max-w-80 truncate text-sm md:max-w-96'>
+      <p className='max-w-80 truncate text-xs text-secondary-foreground md:max-w-96'>
         {description}
       </p>
     </div>
