@@ -75,7 +75,7 @@ const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
           }
           element.dataset.status = "success"
           navigator.clipboard.writeText(element.dataset.code);
-          setTimeout(function(ele){ element.dataset.status = "init"; }, 3000, element);
+          setTimeout(function(ele){ element.dataset.status = "init"; }, 1200, element);
         })(this)'
       >
         <span data-label='init'>
