@@ -40,6 +40,7 @@ html.dark .shiki span {
   @apply [&[data-status="init"]_[data-label="init"]]:inline;
   @apply [&[data-status="success"]_[data-label="success"]]:inline;
   @apply [&[data-status="error"]_[data-label="error"]]:inline;
+  @apply [&:not([data-status="init"])]:disabled:pointer-events-none [&:not([data-status="init"])]:disabled:opacity-50;
 }
 
 .prose [data-component="table-area"] {
