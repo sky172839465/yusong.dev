@@ -1,12 +1,8 @@
-import { get, isEmpty, keyBy, reduce, values } from 'lodash-es'
 import { useLocation } from 'react-router-dom'
 
-export const LANG = {
-  ZH_TW: 'zh-TW',
-  EN: 'en'
-}
+import getI18N, { LANG as LANG_FROM_UTIL } from '@/utils/getI18N'
 
-const LANG_CODE_MAP = keyBy(values(LANG))
+export const LANG = LANG_FROM_UTIL
 
 // i18nMapping example
 // const i18nMapping = {
@@ -20,30 +16,9 @@ const LANG_CODE_MAP = keyBy(values(LANG))
 
 const useI18N = (i18nMapping = {}) => {
   const { pathname } = useLocation()
-  const lang = LANG_CODE_MAP[get(pathname.match(/^\/?([^/]+)/), '1')] || LANG.ZH_TW
-  const isEN = lang === LANG.EN
-  const isZhTw = lang === LANG.ZH_TW
-  const mainPathName = pathname.replace(new RegExp(`^/${lang}`), '')
-  const langPathNames = reduce(values(LANG), (mapping, language) => {
-    if (language === LANG.ZH_TW) {
-      mapping[language] = isEmpty(mainPathName) ? '/' : mainPathName
-      return mapping
-    }
+  const i18n = getI18N(pathname, i18nMapping)
 
-    mapping[language] = `/${language}${mainPathName}`
-    return mapping
-  }, {})
-  const label = get(i18nMapping, lang, {})
-
-  return {
-    pathname,
-    mainPathName,
-    langPathNames,
-    lang,
-    label,
-    isEN,
-    isZhTw
-  }
+  return i18n
 }
 
 export default useI18N
