@@ -56,7 +56,7 @@ const i18nMapping = {
 }
 
 const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
-  const { label } = useI18N(window.location.pathname, i18nMapping)
+  const { label } = getI18N(window.location.pathname, i18nMapping)
   const { lang = '', code = '', highlight = '' } = highlightResult
   const codeHighlightWithClickToClipboard = `
     <div data-component='code-area'>
