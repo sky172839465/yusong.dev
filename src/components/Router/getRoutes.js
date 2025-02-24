@@ -43,18 +43,12 @@ const getClosestLayout = (layouts) => {
 const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
   const { lang = '', code = '', highlight = '' } = highlightResult
   const codeHighlightWithClickToClipboard = `
-    <div class='relative'>
-      <div class='absolute left-2 top-2 rounded-md border bg-background text-foreground p-2 text-sm ${isEmpty(lang) ? 'hidden' : ''}'>
+    <div data-component='code-area'>
+      <div data-component='lang' style='display:${isEmpty(lang) ? 'none' : 'block'};'>
         ${lang.toUpperCase()}
       </div>
       <button
-        class='
-          absolute right-2 top-2 rounded-md border bg-background text-foreground p-2 text-sm
-          [&_span]:hidden
-          [&[data-status="init"]_[data-label="init"]]:inline
-          [&[data-status="success"]_[data-label="success"]]:inline
-          [&[data-status="error"]_[data-label="error"]]:inline
-        '
+        data-component='copy-to-clipboard'
         data-status='init'
         data-code='${code}'
         onclick='(function(element){
@@ -94,14 +88,14 @@ const getConvertedPosts = (posts) => {
         originHtml
           // RWD table
           .replace(/<table[\s\S]*?<\/table>/g, (match) => {
-            return `<div data-table class="[&[data-table]]:overflow-x-auto">${match}</div>`
+            return `<div data-component='table-area'>${match}</div>`
           })
           // Format links
           // .replace(/\bhttps?:\/\/[^\s<]+|\bwww\.[^\s<]+/g, (match) => {
           //   return `<a href="${match}">${match}</a>`
           // })
           // Outside links need to open new tab
-          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" class="break-all" referrerpolicy="no-referrer"')
+          .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
           // Same folder image
           .replace(/<img src="([^"]+)"/g, (_, imageFileName) => {
             const fileUrl = `${postFolder}/${imageFileName}`

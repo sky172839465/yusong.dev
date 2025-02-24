@@ -26,6 +26,30 @@ html.dark .shiki span {
   @apply block mt-8;
 }
 
+.prose [data-component="code-area"] {
+  @apply relative;
+}
+
+.prose [data-component="lang"] {
+  @apply absolute left-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
+}
+
+.prose [data-component="copy-to-clipboard"] {
+  @apply absolute right-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
+  @apply [&_span]:hidden;
+  @apply [&[data-status="init"]_[data-label="init"]]:inline;
+  @apply [&[data-status="success"]_[data-label="success"]]:inline;
+  @apply [&[data-status="error"]_[data-label="error"]]:inline;
+}
+
+.prose [data-component="table-area"] {
+  @apply overflow-x-auto;
+}
+
+.prose a {
+  @apply break-all;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
