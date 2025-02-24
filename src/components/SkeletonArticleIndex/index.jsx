@@ -22,7 +22,7 @@ const SkeletonArticleIndex = () => {
             {'This is index title'.repeat(RANDOM.INDEX_TITLE)}
           </Skeleton>
         </h3>
-        <div>
+        <div className='text-sm'>
           <Skeleton className='inline'>
             {'this is index description'.repeat(RANDOM.INDEX_DESC)}
           </Skeleton>
