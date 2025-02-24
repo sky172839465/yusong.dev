@@ -1,8 +1,8 @@
 ---
-title: "PWA 範例解說"
-description: "PWA 系列有另外做了範例網站，這篇主要講解這個網站的結構"
+title: PWA 範例解說
+description: PWA 系列有另外做了範例網站，這篇主要講解這個網站的結構
 createdAt: "2025-02-23T15:02:20.508Z"
-modifiedAt: "2025-02-23T15:02:20.508Z"
+modifiedAt: "2025-02-24T11:38:39.218Z"
 tags:
   - PWA
   - EXAMPLE
