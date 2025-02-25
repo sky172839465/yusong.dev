@@ -55,6 +55,8 @@ export default {
           <meta property="og:type" content="${type}">
           <meta property="og:image" content="${image}" />
           <meta property="og:image:alt" content="${description}">
+	  <meta property="og:image:width" content="1200">
+   	  <meta property="og:image:height" content="630">
           <meta property="og:site_name" content="${TITLE}">
           <meta property="og:locale" content="zh_TW">
           <meta property="article:author" content="${AUTHOR}">
