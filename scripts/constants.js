@@ -1,6 +1,8 @@
 export const ROUTE_FOLDER = 'src/pages'
 
-export const PUBLIC_DATA_FOLDER = 'public/data'
+export const PUBLIC_FOLDER = 'public/'
+
+export const PUBLIC_DATA_FOLDER = `${PUBLIC_FOLDER}/data`
 
 export const DATA_FOLDER = 'src/data'
 
