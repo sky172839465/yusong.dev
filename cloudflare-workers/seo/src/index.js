@@ -31,7 +31,7 @@ export default {
     const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html', '')
     const targetRoute = ROUTE_MAP[convertedPath]
-    const isArticle = get(targetRoute, 'article') === 'article'
+    const isArticle = get(targetRoute, 'type') === 'article'
     if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
@@ -51,14 +51,17 @@ export default {
     const { type, data, image, twitterImage } = targetRoute
     const { title, description } = data
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
+    const noJsMeta = isArticle
+      ? `
+	 <noscript>
+	   <meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}">
+         </noscript>
+      `
+      : ''
     const modifiedHtml = html.replace(
       '</head>',
       `
-          ${!isNoJsRoute ? `
-          <noscript>
-            <meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}">
-          </noscript>
-          ` : ''}
+          ${noJsMeta}
           <link rel="preconnect" href="${CDN_HOST}" crossorigin />
           <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
           <link rel="canonical" href="${requestUrl}"/>
