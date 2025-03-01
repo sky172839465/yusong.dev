@@ -8,8 +8,8 @@ on:
       - "src/pages/**/index.md"
       - "src/pages/**/index.meta.js"
       - "cloudflare-workers/seo/src/index.js"
-  # pull_request:
-  #   types: [opened, reopened, synchronize]
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 concurrency:
   group: "deploy-worker"
