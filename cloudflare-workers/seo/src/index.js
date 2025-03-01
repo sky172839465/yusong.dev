@@ -41,7 +41,7 @@ export default {
       fetch(request).then((response) => response.text()),
       isNoJsRoute ? await fetch(path).then((response) => response.text()) : Promise.resolve()
     ])
-		console.log(targetRoute)
+    console.log(targetRoute)
 
     if (isNoJsRoute) {
       html = html.replace(/<body[^>]*>([\s\S]*)<\/body>/, noJsHtml)
