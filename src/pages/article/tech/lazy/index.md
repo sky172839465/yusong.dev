@@ -2,7 +2,7 @@
 title: Lazy Title
 description: Describe Lazy content
 createdAt: 2025-01-12T00:00:00.000Z
-modifiedAt: "2025-02-20T17:07:16.729Z"
+modifiedAt: "2025-03-01T13:18:04.205Z"
 tags:
   - Lazy
   - awesome
