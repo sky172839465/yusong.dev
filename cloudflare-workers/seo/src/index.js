@@ -12,6 +12,7 @@ const ROUTE_MAP = keyBy(
     const imageFolder = `${CDN_HOST}/${file.replace(/index.jsx|index.md/, 'images')}`
     return {
       ...item,
+      imageFolder,
       image: `${imageFolder}/og.jpg`,
       twitterImage: `${imageFolder}/x.jpg`
     }
@@ -46,13 +47,25 @@ export default {
       isNoJsRoute ? await fetch(`https://${BLOG_HOST}${convertedPath}`).then((response) => response.text()) : Promise.resolve()
     ])
 
+    // Dynamic generate meta tags
+    const { type, data, image, imageFolder, twitterImage } = targetRoute
+    const { title, description } = data
     if (isNoJsRoute) {
-      html = jsHtml.replace(/<body[^>]*>([\s\S]*)<\/body>/, html)
+      html = jsHtml.replace(
+        /<body[^>]*>([\s\S]*)<\/body>/,
+        html
+          .replace('<!-- __WORKER_INSERT__ -->', `
+            <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
+            <img
+              class="aspect-video w-full rounded-lg"
+              src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
+              alt="${title}"
+            />
+          `)
+          .replaceAll('images', imageFolder)
+      )
     }
 
-    // Dynamic generate meta tags
-    const { type, data, image, twitterImage } = targetRoute
-    const { title, description } = data
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',

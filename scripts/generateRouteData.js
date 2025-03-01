@@ -1,5 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
+import hljs from 'highlight.js'
 import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
 import markdownit from 'markdown-it'
 import path from 'path'
@@ -26,7 +27,22 @@ const getLang = pagePath => {
 const md = markdownit({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `
+          <pre><code class="hljs">
+          ${hljs.highlight(str, { language: lang, ignoreIllegals: true }).value}
+          </code></pre>
+        `
+      } catch (e) {
+        console.log('Parse markdown error', e)
+      }
+    }
+
+    return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`
+  }
 })
 
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
@@ -51,6 +67,8 @@ const pages = await Promise.all(
     })
 )
 
+const noJsArticleTemplate = fs.readFileSync('scripts/noJsArticle/index.html', 'utf-8')
+
 const articleFilePaths = globSync([
   `${ROUTE_FOLDER}/**/${ARTICLE_PATH_NAME}`,
   `!${ROUTE_FOLDER}/**/${DRAFT_ARTICLE_PATH_NAME}`
@@ -70,13 +88,7 @@ const articles = await Promise.all(
       ])
       await fs.promises.writeFile(
         htmlFilePath,
-        `
-          <body class="bg-background">
-            <div class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert">
-              ${htmlContent}
-            </div>
-          </body>
-        `,
+        noJsArticleTemplate.replace('<!-- __replacement__ -->', htmlContent),
         'utf-8'
       )
       return {
