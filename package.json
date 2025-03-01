@@ -92,6 +92,7 @@
     "husky": "^9.1.5",
     "js-yaml": "^4.1.0",
     "lint-staged": "^15.2.10",
+    "markdown-it": "^14.1.0",
     "npm-run-all2": "^7.0.2",
     "patch-package": "^8.0.0",
     "postcss": "^8.4.45",

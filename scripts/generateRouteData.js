@@ -1,6 +1,7 @@
 import fs from 'fs'
 import matter from 'gray-matter'
 import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
+import markdownit from 'markdown-it'
 import path from 'path'
 import { tryit } from 'radash'
 import { globSync } from 'tinyglobby'
@@ -21,6 +22,12 @@ const LANG_CODE_MAP = keyBy(values(LANG))
 const getLang = pagePath => {
   return LANG_CODE_MAP[get(pagePath.match(/^\/([A-Za-z-]+)\//), '1')] || LANG.ZH_TW
 }
+
+const md = markdownit({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
 const pageMetaFilePathMap = keyBy(globSync(`${ROUTE_FOLDER}/**/${PAGE_META_FILE_NAME}`))
@@ -53,12 +60,31 @@ const articles = await Promise.all(
     .map(async (articleFilePath) => {
       const text = await fs.promises.readFile(articleFilePath, 'utf-8')
       const pagePath = articleFilePath.replace(ROUTE_FOLDER, '').replace(ARTICLE_PATH_NAME, '')
+      const { data, content } = matter(text)
+      // create nojs html
+      const htmlFilePath = `${PUBLIC_DATA_FOLDER}/nojs${pagePath}/index.html`
+      const dir = path.dirname(htmlFilePath)
+      const [htmlContent] = await Promise.all([
+        await new Promise((resolve) => resolve(md.render(content))),
+        await fs.promises.mkdir(dir, { recursive: true })
+      ])
+      await fs.promises.writeFile(
+        htmlFilePath,
+        `
+          <body class="bg-background">
+            <div class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert">
+              ${htmlContent}
+            </div>
+          </body>
+        `,
+        'utf-8'
+      )
       return {
         file: articleFilePath,
         path: pagePath,
         type: TYPE.ARTICLE,
         lang: getLang(pagePath),
-        data: matter(text).data
+        data
       }
     })
 )
