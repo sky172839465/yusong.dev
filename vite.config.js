@@ -18,6 +18,7 @@ export default ({ mode }) => {
   const isProd = mode === 'production'
 
   return defineConfig({
+    root: 'scripts/noJsArticle',
     plugins: [
       react(),
       pwaPluginConfig,

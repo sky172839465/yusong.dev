@@ -51,6 +51,8 @@ const pages = await Promise.all(
     })
 )
 
+const noJsArticleTemplate = fs.readFileSync('./noJsArticle/index.html', 'utf-8')
+
 const articleFilePaths = globSync([
   `${ROUTE_FOLDER}/**/${ARTICLE_PATH_NAME}`,
   `!${ROUTE_FOLDER}/**/${DRAFT_ARTICLE_PATH_NAME}`
@@ -70,13 +72,7 @@ const articles = await Promise.all(
       ])
       await fs.promises.writeFile(
         htmlFilePath,
-        `
-          <body class="bg-background">
-            <div class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert">
-              ${htmlContent}
-            </div>
-          </body>
-        `,
+        noJsArticleTemplate.replace('__replacement__', htmlContent),
         'utf-8'
       )
       return {
