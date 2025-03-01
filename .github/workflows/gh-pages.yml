@@ -8,6 +8,7 @@ on:
       - "public/sw.js"
       - "public/*.svg"
       - "public/*.png"
+      - "scripts/noJsArticle/index.html"
 
 permissions:
   contents: write
