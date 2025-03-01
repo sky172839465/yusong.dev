@@ -32,6 +32,9 @@ export default {
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html', '')
     const targetRoute = ROUTE_MAP[convertedPath]
     const isArticle = get(targetRoute, 'type') === 'article'
+		if (isNoJsRoute) {
+			console.log({ targetRoute, convertedPath, path })
+		}
     if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
