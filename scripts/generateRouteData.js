@@ -1,6 +1,5 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import hljs from 'highlight.js'
 import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
 import markdownit from 'markdown-it'
 import path from 'path'
@@ -27,22 +26,22 @@ const getLang = pagePath => {
 const md = markdownit({
   html: true,
   linkify: true,
-  typographer: true,
-  highlight: function (str, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return `
-          <pre><code class="hljs">
-          ${hljs.highlight(str, { language: lang, ignoreIllegals: true }).value}
-          </code></pre>
-        `
-      } catch (e) {
-        console.log('Parse markdown error', e)
-      }
-    }
+  typographer: true
+  // highlight: function (str, lang) {
+  //   if (lang && hljs.getLanguage(lang)) {
+  //     try {
+  //       return `
+  //         <pre><code class="hljs">
+  //         ${hljs.highlight(str, { language: lang, ignoreIllegals: true }).value}
+  //         </code></pre>
+  //       `
+  //     } catch (e) {
+  //       console.log('Parse markdown error', e)
+  //     }
+  //   }
 
-    return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`
-  }
+  //   return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`
+  // }
 })
 
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)

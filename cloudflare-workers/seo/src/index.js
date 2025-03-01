@@ -54,6 +54,7 @@ export default {
       html = jsHtml.replace(
         /<body[^>]*>([\s\S]*)<\/body>/,
         html
+          .replaceAll('images', imageFolder)
           .replace('<!-- __WORKER_INSERT__ -->', `
             <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
             <img
@@ -62,7 +63,6 @@ export default {
               alt="${title}"
             />
           `)
-          .replaceAll('images', imageFolder)
       )
     }
 
