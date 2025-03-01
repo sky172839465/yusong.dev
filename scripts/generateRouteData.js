@@ -1,3 +1,4 @@
+import Shiki from '@shikijs/markdown-it'
 import fs from 'fs'
 import matter from 'gray-matter'
 import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
@@ -23,26 +24,14 @@ const getLang = pagePath => {
   return LANG_CODE_MAP[get(pagePath.match(/^\/([A-Za-z-]+)\//), '1')] || LANG.ZH_TW
 }
 
-const md = markdownit({
-  html: true,
-  linkify: true,
-  typographer: true
-  // highlight: function (str, lang) {
-  //   if (lang && hljs.getLanguage(lang)) {
-  //     try {
-  //       return `
-  //         <pre><code class="hljs">
-  //         ${hljs.highlight(str, { language: lang, ignoreIllegals: true }).value}
-  //         </code></pre>
-  //       `
-  //     } catch (e) {
-  //       console.log('Parse markdown error', e)
-  //     }
-  //   }
+const md = markdownit()
 
-  //   return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`
-  // }
-})
+md.use(await Shiki({
+  themes: {
+    light: 'github-light',
+    dark: 'github-dark'
+  }
+}))
 
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
 const pageMetaFilePathMap = keyBy(globSync(`${ROUTE_FOLDER}/**/${PAGE_META_FILE_NAME}`))

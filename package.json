@@ -72,6 +72,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
+    "@shikijs/markdown-it": "^3.1.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^18.3.5",
@@ -89,7 +90,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "globals": "^15.9.0",
-    "highlight.js": "^11.11.1",
     "husky": "^9.1.5",
     "js-yaml": "^4.1.0",
     "lint-staged": "^15.2.10",
