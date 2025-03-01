@@ -51,15 +51,9 @@ export default {
     const { type, data, image, twitterImage } = targetRoute
     const { title, description } = data
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
-    const noJsMeta = isArticle
-      ? `
-
-      `
-      : ''
     const modifiedHtml = html.replace(
       '</head>',
       `
-          ${noJsMeta}
 	  <noscript>
 	    <meta http-equiv="${isArticle ? 'refresh' : 'default-style'}" content="${isArticle ? `0;url=${NO_JS_PATH}${path}` : ''}">
           </noscript>
