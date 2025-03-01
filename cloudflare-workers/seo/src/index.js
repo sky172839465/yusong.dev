@@ -1,4 +1,4 @@
-import { keyBy } from 'lodash-es'
+import { get, keyBy } from 'lodash-es'
 
 import routes from './routes.json'
 
@@ -18,6 +18,7 @@ const ROUTE_MAP = keyBy(
   }),
   'path'
 )
+const NO_JS_PATH = '/nojs'
 
 export default {
   async fetch(request) {
@@ -26,28 +27,42 @@ export default {
 
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
-    const isAssetRoute = /\.\D+$/.test(path)
-    const convertedPath = path.endsWith('/') ? path : `${path}/`
+    const isAssetRoute = /\.\D+$/.test(path) && !path.endsWith('.html')
+    const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
+    const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html', '')
     const targetRoute = ROUTE_MAP[convertedPath]
+    const isArticle = get(targetRoute, 'article') === 'article'
     if (isAssetRoute || !targetRoute) {
       console.log({ requestUrl, convertedPath })
       return fetch(request)
     }
 
     // Fetch the original HTML
-    const response = await fetch(request)
-    const html = await response.text()
-    // 如果路徑匹配文章，動態生成 meta tags
+    let [html, noJsHtml] = await Promise.all([
+      fetch(request).then((response) => response.text()),
+      isNoJsRoute ? await fetch(path).then((response) => response.text()) : Promise.resolve()
+    ])
+
+    if (isNoJsRoute) {
+      html = html.replace(/<body[^>]*>([\s\S]*)<\/body>/, noJsHtml)
+    }
+
+    // Dynamic generate meta tags
     const { type, data, image, twitterImage } = targetRoute
     const { title, description } = data
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',
       `
-	  <link rel="preconnect" href="${CDN_HOST}" crossorigin />
-	  <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
-   	  <link rel="canonical" href="${requestUrl}"/>
-	  <meta name="description" content="${description}" />
+          ${isArticle ? `
+          <noscript>
+            <meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}">
+          </noscript>
+          ` : ''}
+          <link rel="preconnect" href="${CDN_HOST}" crossorigin />
+          <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
+          <link rel="canonical" href="${requestUrl}"/>
+          <meta name="description" content="${description}" />
           <meta name="author" content="${AUTHOR}">
           <meta property="og:title" content="${displayTitle}" />
           <meta property="og:description" content="${description}" />
@@ -55,8 +70,8 @@ export default {
           <meta property="og:type" content="${type}">
           <meta property="og:image" content="${image}" />
           <meta property="og:image:alt" content="${description}">
-	  <meta property="og:image:width" content="1200">
-   	  <meta property="og:image:height" content="630">
+          <meta property="og:image:width" content="1200">
+          <meta property="og:image:height" content="630">
           <meta property="og:site_name" content="${TITLE}">
           <meta property="og:locale" content="zh_TW">
           <meta property="article:author" content="${AUTHOR}">
