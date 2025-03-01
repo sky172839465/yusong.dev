@@ -41,14 +41,13 @@ export default {
     }
 
     // Fetch the original HTML
-    let [html, noJsHtml] = await Promise.all([
+    let [html, jsHtml] = await Promise.all([
       fetch(request).then((response) => response.text()),
-      isNoJsRoute ? await fetch(path).then((response) => response.text()) : Promise.resolve()
+      isNoJsRoute ? await fetch(convertedPath).then((response) => response.text()) : Promise.resolve()
     ])
-    console.log(targetRoute)
 
     if (isNoJsRoute) {
-      html = html.replace(/<body[^>]*>([\s\S]*)<\/body>/, noJsHtml)
+      html = jsHtml.replace(/<body[^>]*>([\s\S]*)<\/body>/, html)
     }
 
     // Dynamic generate meta tags
