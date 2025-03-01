@@ -53,8 +53,7 @@ export default {
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',
-      `
-	  <noscript><meta http-equiv="${isArticle ? 'refresh' : 'default-style'}" content="${isArticle ? `0;url=${NO_JS_PATH}${path}` : ''}"></noscript>
+      `   ${isArticle ? '<noscript><meta http-equiv="refresh" content="`0;url=${NO_JS_PATH}${path}`"></noscript>' : ''}
           <link rel="preconnect" href="${CDN_HOST}" crossorigin />
           <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
           <link rel="canonical" href="${requestUrl}"/>
