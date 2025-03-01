@@ -33,7 +33,6 @@ export default {
     const targetRoute = ROUTE_MAP[convertedPath]
     const isArticle = get(targetRoute, 'article') === 'article'
     if (isAssetRoute || !targetRoute) {
-      console.log({ requestUrl, convertedPath })
       return fetch(request)
     }
 
@@ -42,6 +41,7 @@ export default {
       fetch(request).then((response) => response.text()),
       isNoJsRoute ? await fetch(path).then((response) => response.text()) : Promise.resolve()
     ])
+		console.log(targetRoute)
 
     if (isNoJsRoute) {
       html = html.replace(/<body[^>]*>([\s\S]*)<\/body>/, noJsHtml)
@@ -54,7 +54,7 @@ export default {
     const modifiedHtml = html.replace(
       '</head>',
       `
-          ${isArticle ? `
+          ${!isNoJsRoute ? `
           <noscript>
             <meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}">
           </noscript>
