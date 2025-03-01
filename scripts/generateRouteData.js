@@ -72,7 +72,7 @@ const articles = await Promise.all(
       ])
       await fs.promises.writeFile(
         htmlFilePath,
-        noJsArticleTemplate.replace('__replacement__', htmlContent),
+        noJsArticleTemplate.replace('<!-- __replacement__ -->', htmlContent),
         'utf-8'
       )
       return {
