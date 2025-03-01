@@ -41,14 +41,13 @@ export default {
     }
 
     // Fetch the original HTML
-    let [html, noJsHtml] = await Promise.all([
+    let [html, jsHtml] = await Promise.all([
       fetch(request).then((response) => response.text()),
-      isNoJsRoute ? await fetch(path).then((response) => response.text()) : Promise.resolve()
+      isNoJsRoute ? await fetch(`https://${BLOG_HOST}${convertedPath}`).then((response) => response.text()) : Promise.resolve()
     ])
-    console.log(targetRoute)
 
     if (isNoJsRoute) {
-      html = html.replace(/<body[^>]*>([\s\S]*)<\/body>/, noJsHtml)
+      html = jsHtml.replace(/<body[^>]*>([\s\S]*)<\/body>/, html)
     }
 
     // Dynamic generate meta tags
@@ -57,7 +56,7 @@ export default {
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html.replace(
       '</head>',
-      `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}index.html"></noscript>` : ''}
+      `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}"></noscript>` : ''}
           <link rel="preconnect" href="${CDN_HOST}" crossorigin />
           <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
           <link rel="canonical" href="${requestUrl}"/>
