@@ -33,9 +33,9 @@ export default {
     const targetRoute = ROUTE_MAP[convertedPath]
     const isArticle = get(targetRoute, 'type') === 'article'
 
-		if (isNoJsRoute) {
+    if (isNoJsRoute) {
       console.log({ targetRoute, convertedPath, path })
-		}
+    }
     if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
