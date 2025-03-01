@@ -1,0 +1,167 @@
+
+          <body class="bg-background">
+            <div class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert">
+              <h3><a href="#intro">介紹</a></h3>
+<p>Web Manifest 是一個 JSON 格式的設定檔，可以用來定義 Web App 安裝時顯示的資訊與設定安裝後啟動 Web App 的介面，
+<a href="https://pwa-sharing.pages.dev/">範例網站</a> 可以參考實際上在不同裝置上會如何呈現，範例網站的程式碼解說參考 <a href="/article/pwa/example/">這篇</a> 文章。</p>
+<h4>安裝顯示的資訊</h4>
+<ul>
+<li>安裝的名稱</li>
+<li>安裝的圖示</li>
+<li>安裝時顯示的 Web App 預覽圖</li>
+</ul>
+<h4>啟動介面相關</h4>
+<ul>
+<li>適用範圍 (例如 <code>/app</code> 路徑底下才要讓網頁可以被安裝)</li>
+<li>外觀 (保留 URL 介面或是像 App 一個完整的獨立視窗)</li>
+<li>啟動畫面</li>
+<li>預設背景 (網站還沒載入時顯示)</li>
+</ul>
+<h3><a href="#example">範例</a></h3>
+<p>參考 PWA sharing 的 <a href="https://pwa-sharing.pages.dev/manifest.webmanifest">Web manifest</a>，有實際的範例對照更容易理解這些屬性，下面挑了一些支援度相當高的屬做說明，由於影響 Web App 很明顯建議都要設定。</p>
+<p><code>screenshots</code> 與 <code>icons</code> 內容比較複雜底下另外做說明。</p>
+<h4>基本設定</h4>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;PWA sharing&quot;,
+  &quot;short_name&quot;: &quot;PWA sharing&quot;,
+  &quot;description&quot;: &quot;PWA sharing example code&quot;,
+  &quot;scope&quot;: &quot;/&quot;,
+  &quot;start_url&quot;: &quot;/&quot;,
+  &quot;display&quot;: &quot;standalone&quot;,
+  &quot;background_color&quot;: &quot;#ffffff&quot;,
+  &quot;theme_color&quot;: &quot;#ffffff&quot;,
+  &quot;icons&quot;: [],
+  &quot;screenshots&quot;: []
+}
+</code></pre>
+<ul>
+<li>name
+<blockquote>
+<p>完整名稱，安裝成 Web App 後行動裝置的設定應用程式裡會顯示這個名稱</p>
+</blockquote>
+</li>
+<li>short_name
+<blockquote>
+<p>顯示在桌面上的 Web App 名稱，只有一個圖示的寬度，所以要短一點</p>
+</blockquote>
+</li>
+<li>description
+<blockquote>
+<p>Web App 的描述，像是 App 商店裡用於描述這個程式的用途，在豐富的安裝使用者介面會顯示在 UI 上</p>
+</blockquote>
+</li>
+<li>scope
+<blockquote>
+<p>指定 Web App 的適用範圍，例如網站是 <code>https://example.com</code> 但是開始接受安裝成爲 Web App 的是另外開發的網站放在 <code>https://example.com/app</code> 路徑時可以指定成 <code>/app</code></p>
+</blockquote>
+</li>
+<li>start_url
+<blockquote>
+<p>指定未開啟的 Web App 開起來時預設要開哪一個頁面，通常首頁可以直接放 <code>/</code></p>
+</blockquote>
+</li>
+<li>display
+<blockquote>
+<p>決定安裝成 Web App 時的應用程式外框</p>
+</blockquote>
+</li>
+<li>background_color
+<blockquote>
+<p>Web App 尚未載入前空白畫面預設的背景色</p>
+</blockquote>
+</li>
+<li>theme_color
+<blockquote>
+<p>主題顏色會影響 Web App 頂部 URL 介面區塊的顏色，需要 dark mode 的時候可以在 HTML 加上 meta 根據主題顏色動態切換</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/theme_color#description">MDN combind with media query</a></p>
+</blockquote>
+</li>
+</ul>
+<h4>圖示 <code>icons</code></h4>
+<pre><code class="language-json">[
+  {
+    &quot;src&quot;: &quot;pwa-64x64.png&quot;,
+    &quot;sizes&quot;: &quot;64x64&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;pwa-192x192.png&quot;,
+    &quot;sizes&quot;: &quot;192x192&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;pwa-512x512.png&quot;,
+    &quot;sizes&quot;: &quot;512x512&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;pwa-512x512.png&quot;,
+    &quot;sizes&quot;: &quot;512x512&quot;,
+    &quot;purpose&quot;: &quot;any&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;maskable-icon-512x512.png&quot;,
+    &quot;sizes&quot;: &quot;512x512&quot;,
+    &quot;purpose&quot;: &quot;maskable&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  }
+]
+</code></pre>
+<h4>豐富的安裝使用者介面 <code>screenshots</code></h4>
+<pre><code class="language-json">[
+  {
+    &quot;src&quot;: &quot;rich-install/0_desktop-home.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 0_desktop-home&quot;,
+    &quot;form_factor&quot;: &quot;wide&quot;,
+    &quot;sizes&quot;: &quot;1600x919&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;rich-install/1_desktop-sw.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 1_desktop-sw&quot;,
+    &quot;form_factor&quot;: &quot;wide&quot;,
+    &quot;sizes&quot;: &quot;1600x919&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;rich-install/2_desktop-notification.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 2_desktop-notification&quot;,
+    &quot;form_factor&quot;: &quot;wide&quot;,
+    &quot;sizes&quot;: &quot;1600x919&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;rich-install/0_mobile-home.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 0_mobile-home&quot;,
+    &quot;form_factor&quot;: &quot;narrow&quot;,
+    &quot;sizes&quot;: &quot;772x1568&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;rich-install/1_mobile-sw.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 1_mobile-sw&quot;,
+    &quot;form_factor&quot;: &quot;narrow&quot;,
+    &quot;sizes&quot;: &quot;772x1568&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  },
+  {
+    &quot;src&quot;: &quot;rich-install/2_mobile-notification.png&quot;,
+    &quot;label&quot;: &quot;PWA sharing 2_mobile-notification&quot;,
+    &quot;form_factor&quot;: &quot;narrow&quot;,
+    &quot;sizes&quot;: &quot;772x1568&quot;,
+    &quot;type&quot;: &quot;image/png&quot;
+  }
+]
+</code></pre>
+<h3><a href="#reference">參考</a></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest">MDN Web app manifests</a></li>
+<li><a href="https://vite-pwa-org.netlify.app/">Vite PWA</a></li>
+<li><a href="https://pwa-sharing.pages.dev">PWA sharing</a></li>
+<li><a href="https://github.com/sky172839465/pwa-sharing">PWA sharing source code</a></li>
+</ul>
+
+            </div>
+          </body>
+        

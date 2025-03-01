@@ -1,5 +1,7 @@
 *.js
 *.jsx
+*.html
 package-lock.json
 src/data/*
 pubilc/data/*
+pubilc/nojs/*

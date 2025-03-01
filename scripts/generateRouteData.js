@@ -6,7 +6,7 @@ import path from 'path'
 import { tryit } from 'radash'
 import { globSync } from 'tinyglobby'
 
-import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
+import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, PUBLIC_DATA_FOLDER, PUBLIC_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const TYPE = {
   WEBSITE: 'website',
@@ -62,7 +62,7 @@ const articles = await Promise.all(
       const pagePath = articleFilePath.replace(ROUTE_FOLDER, '').replace(ARTICLE_PATH_NAME, '')
       const { data, content } = matter(text)
       // create nojs html
-      const htmlFilePath = `${PUBLIC_DATA_FOLDER}/nojs${pagePath}/index.html`
+      const htmlFilePath = `${PUBLIC_FOLDER}/nojs${pagePath}/index.html`
       const dir = path.dirname(htmlFilePath)
       const [htmlContent] = await Promise.all([
         await new Promise((resolve) => resolve(md.render(content))),
