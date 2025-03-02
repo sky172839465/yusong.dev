@@ -70,7 +70,7 @@ const articles = await Promise.all(
       const dir = path.dirname(htmlFilePath)
       const [htmlContent] = await Promise.all([
         await (async () => {
-          const originHtml = md.render(content)
+          const originHtml = (md.render(content)).replaceAll(/\.png|\.jpg/g, '-origin.gen.webp')
           const [error, convertedHtml] = await tryit(() => getConvertedHtml(originHtml))()
           if (error) {
             throw error
