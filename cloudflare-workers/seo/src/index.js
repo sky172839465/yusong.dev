@@ -51,19 +51,20 @@ export default {
     const { type, data, image, imageFolder, twitterImage } = targetRoute
     const { title, description } = data
     if (isNoJsRoute) {
-      html = jsHtml.replace(
-        /<body[^>]*>([\s\S]*)<\/body>/,
-        html
-          .replaceAll('images', imageFolder)
-          .replace('<!-- __WORKER_INSERT__ -->', `
-            <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
-            <img
-              class="aspect-video w-full rounded-lg"
-              src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
-              alt="${title}"
-            />
-          `)
-      )
+      const theme = url.search.includes('theme=dark') ? 'dark' : 'light'
+      html = jsHtml
+        .replace('<html lang="en" class="bg-background">', `<html lang="en" class="bg-background ${theme}">`)
+        .replace(/<body[^>]*>([\s\S]*)<\/body>/, html
+	  .replaceAll('images', imageFolder)
+	  .replace('<!-- __WORKER_INSERT__ -->', `
+	    <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
+	    <img
+	      class="aspect-video w-full rounded-lg"
+	      src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
+	      alt="${title}"
+	    />
+	  `)
+        )
     }
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
