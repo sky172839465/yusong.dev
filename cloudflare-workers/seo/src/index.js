@@ -28,15 +28,13 @@ export default {
 
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
+    const lang = !path.startsWith('/en/') ? 'zh-TW' : 'en'
     const isAssetRoute = /\.\D+$/.test(path) && !path.endsWith('.html')
     const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html/', '')
     const targetRoute = ROUTE_MAP[convertedPath]
     const isArticle = get(targetRoute, 'type') === 'article'
 
-    if (isNoJsRoute) {
-      console.log({ targetRoute, convertedPath, path })
-    }
     if (isAssetRoute || !targetRoute) {
       return fetch(request)
     }
@@ -53,63 +51,67 @@ export default {
     if (isNoJsRoute) {
       const theme = url.search.includes('theme=dark') ? 'dark' : 'light'
       html = jsHtml
-        .replace('<html lang="en" class="bg-background">', `<html lang="en" class="bg-background ${theme}">`)
-        .replace(/<body[^>]*>([\s\S]*)<\/body>/, html
-	  .replaceAll('images', imageFolder)
-	  .replace('<!-- __WORKER_INSERT__ -->', `
-	    <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
-	    <img
-	      src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
-	      alt="${title}"
-	    />
-	  `)
+        .replace('__NO_JS_THEME_FROM_WORKER__', theme)
+        .replace(
+          /<body[^>]*>([\s\S]*)<\/body>/,
+          html
+            .replaceAll('images', imageFolder)
+            .replace('<!-- __WORKER_INSERT__ -->', `
+              <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
+              <img
+                src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
+                alt="${title}"
+              />
+            `)
         )
     }
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
-    const modifiedHtml = html.replace(
-      '</head>',
-      `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}"></noscript>` : ''}
-          <link rel="preconnect" href="${CDN_HOST}" crossorigin />
-          <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
-          <link rel="canonical" href="${requestUrl}"/>
-          <meta name="description" content="${description}" />
-          <meta name="author" content="${AUTHOR}">
-          <meta property="og:title" content="${displayTitle}" />
-          <meta property="og:description" content="${description}" />
-          <meta property="og:url" content="${requestUrl}">
-          <meta property="og:type" content="${type}">
-          <meta property="og:image" content="${image}" />
-          <meta property="og:image:alt" content="${description}">
-          <meta property="og:image:width" content="1200">
-          <meta property="og:image:height" content="630">
-          <meta property="og:site_name" content="${TITLE}">
-          <meta property="og:locale" content="zh_TW">
-          <meta property="article:author" content="${AUTHOR}">
-          <meta name="twitter:card" content="summary_large_image">
-          <meta name="twitter:title" content="${displayTitle}">
-          <meta name="twitter:description" content="${description}">
-          <meta name="twitter:image" content="${twitterImage}">
-          <meta name="twitter:site" content="@${ACCOUNT}">
-          <meta name="twitter:creator" content="@${ACCOUNT}">
-          <title>${displayTitle}</title>
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "${displayTitle}",
-            "description": "${description}",
-            "url": "${requestUrl}",
-            "image": "${image}",
-            "author": {
-              "@type": "Person",
-              "name": "${AUTHOR}"
+    const modifiedHtml = html
+      .replace('__NO_JS_LANG__', lang)
+      .replace(
+        '</head>',
+        `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}"></noscript>` : ''}
+            <link rel="preconnect" href="${CDN_HOST}" crossorigin />
+            <link rel="dns-prefetch" href="${CDN_HOST.replace('https:', '')}" />
+            <link rel="canonical" href="${requestUrl}"/>
+            <meta name="description" content="${description}" />
+            <meta name="author" content="${AUTHOR}">
+            <meta property="og:title" content="${displayTitle}" />
+            <meta property="og:description" content="${description}" />
+            <meta property="og:url" content="${requestUrl}">
+            <meta property="og:type" content="${type}">
+            <meta property="og:image" content="${image}" />
+            <meta property="og:image:alt" content="${description}">
+            <meta property="og:image:width" content="1200">
+            <meta property="og:image:height" content="630">
+            <meta property="og:site_name" content="${TITLE}">
+            <meta property="og:locale" content="zh_TW">
+            <meta property="article:author" content="${AUTHOR}">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="${displayTitle}">
+            <meta name="twitter:description" content="${description}">
+            <meta name="twitter:image" content="${twitterImage}">
+            <meta name="twitter:site" content="@${ACCOUNT}">
+            <meta name="twitter:creator" content="@${ACCOUNT}">
+            <title>${displayTitle}</title>
+            <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "WebPage",
+              "name": "${displayTitle}",
+              "description": "${description}",
+              "url": "${requestUrl}",
+              "image": "${image}",
+              "author": {
+                "@type": "Person",
+                "name": "${AUTHOR}"
+              }
             }
-          }
-          </script>
-        </head>
-      `
-    )
+            </script>
+          </head>
+        `
+      )
     return new Response(
       modifiedHtml,
       { headers: { 'Content-Type': 'text/html' } }

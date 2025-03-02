@@ -1,16 +1,60 @@
 <!doctype html>
-<html lang="en" class="bg-background">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
-    <meta name="theme-color" content="#fff" />
-  </head>
+<html lang="en"
+  class="bg-background [&_[data-nojs-lang]]:hidden [&_[data-nojs-lang='__NO_JS_LANG__']]:block __NO_JS_THEME_FROM_WORKER__">
 
-  <body class="bg-background">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+  <meta name="theme-color" content="#fff" />
+</head>
+
+<body class="bg-background">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <noscript>
+    <div data-nojs-lang="zh-TW" class="flex flex-col items-center justify-center min-h-screen container p-2">
+      <div class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert space-y-2">
+        <h1 class="text-2xl font-bold text-center">
+          JavaScript 已停用 🚫
+        </h1>
+        <p>
+          瀏覽器似乎已停用 JavaScript。本頁面需要 JavaScript 才能提供完整功能，請啟用 JavaScript 以獲得最佳體驗。
+        </p>
+        <hr />
+        <p>
+          如何啟用 JavaScript：
+        </p>
+        <ol>
+          <li>打開瀏覽器設定。</li>
+          <li>找到 <code>隱私與安全</code> 或 <code>網站設定</code> 選項。</li>
+          <li>尋找 <code>JavaScript</code> 並將其啟用。</li>
+          <li>重新整理此頁面以繼續瀏覽。</li>
+        </ol>
+      </div>
+      <div data-nojs-lang="zh-TW"
+        class="prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert space-y-2">
+        <h1 class="text-2xl font-bold text-center">
+          JavaScript is Disabled 🚫
+        </h1>
+        <p>
+          It looks like JavaScript is disabled in browser. This page relies on JavaScript for essential functionality.
+        </p>
+        <hr />
+        <p>
+          How to Enable JavaScript:
+        </p>
+        <ol>
+          <li>Open your browser settings.</li>
+          <li>Find the <code>Privacy & Security</code> or <code>Site Settings</code> section.</li>
+          <li>Look for <code>JavaScript</code> and enable it.</li>
+          <li>Refresh this page to continue browsing.</li>
+        </ol>
+      </div>
+    </div>
+  </noscript>
+</body>
+
 </html>
