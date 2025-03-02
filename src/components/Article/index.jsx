@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import { useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
+import ArticleActions from '@/components/ArticleActions'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -15,7 +16,6 @@ import useI18N from '@/hooks/useI18N'
 
 import SkeletonArticle from '../SkeletonArticle'
 
-const LazyArticleActions = lazy(() => import('@/components/ArticleActions'))
 const LazyComment = lazy(() => import('@/components/Comments'))
 
 const getSections = (html) => {
@@ -227,7 +227,7 @@ const Article = (props) => {
             )
           })}
         </div>
-        <LazyArticleActions
+        <ArticleActions
           topRef={topRef}
           shareData={shareData}
           sections={sections}
