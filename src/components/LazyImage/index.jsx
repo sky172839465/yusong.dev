@@ -41,7 +41,7 @@ const ImageStatus = (props) => {
 
   if (isEmpty(src)) {
     return (
-      <Skeleton className={`${className ? className : ''} flex items-center justify-center text-4xl text-foreground`}>
+      <Skeleton className={`${className ? className : ''} aspect-video flex items-center justify-center text-4xl text-foreground`}>
         <p>
           NO IMAGE
         </p>
