@@ -28,7 +28,7 @@ export default {
 
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
-    const lang = !path.startsWith('/en/') ? 'zh-TW' : 'en'
+    const lang = !path.startsWith('/en') ? 'zh-TW' : 'en'
     const isZhTw = lang === 'zh-TW'
     const isAssetRoute = /\.\D+$/.test(path) && !path.endsWith('.html')
     const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
@@ -70,7 +70,7 @@ export default {
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html
-      .replace('__NO_JS_LANG__', lang)
+      .replace('__NO_JS_LANG__', lang.toLowerCase())
       .replace(
         '</head>',
         `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}"></noscript>` : ''}
