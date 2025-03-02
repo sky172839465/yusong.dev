@@ -29,6 +29,7 @@ export default {
     // 根據路徑識別文章 slug，例如 /article/my-article
     const path = url.pathname
     const lang = !path.startsWith('/en/') ? 'zh-TW' : 'en'
+		const isZhTw = lang === 'zh-TW'
     const isAssetRoute = /\.\D+$/.test(path) && !path.endsWith('.html')
     const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html/', '')
@@ -47,6 +48,7 @@ export default {
 
     // Dynamic generate meta tags
     const { type, data, image, imageFolder, twitterImage } = targetRoute
+		const convertedImageFolder = isZhTw ? imageFolder : imageFolder.replace('/en/', '/')
     const { title, description } = data
     if (isNoJsRoute) {
       const theme = url.search.includes('theme=dark') ? 'dark' : 'light'
@@ -55,11 +57,11 @@ export default {
         .replace(
           /<body[^>]*>([\s\S]*)<\/body>/,
           html
-            .replaceAll('images', imageFolder)
+            .replaceAll('images', convertedImageFolder)
             .replace('<!-- __WORKER_INSERT__ -->', `
               <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
               <img
-                src="${imageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
+                src="${convertedImageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
                 alt="${title}"
               />
             `)
