@@ -90,7 +90,7 @@ const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
       return codeToHtml(code, {
         lang,
         themes: { light: 'github-light', dark: 'github-dark' },
-        defaultColor: false
+        defaultColor: isEmpty(label) ? 'light' : false
       }).then((highlight) => ({ lang, code, highlight }))
     })
   )
