@@ -70,7 +70,7 @@ export default {
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html
-			// apply !block
+    // apply !block
       .replace(`__NO_JS_LANG__${lang}`, '')
       .replace(
         '</head>',
