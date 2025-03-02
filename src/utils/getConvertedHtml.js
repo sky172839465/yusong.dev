@@ -4,12 +4,14 @@ import { codeToHtml } from 'shiki'
 // eslint-disable-next-line default-param-last
 const getCodeHighlightWithClickToClipboard = (highlightResult = {}, label) => {
   const { lang = '', code = '', highlight = '' } = highlightResult
+  const isNoCopy = isEmpty(label)
   const codeHighlightWithClickToClipboard = `
     <div data-component='code-area'>
       <div data-component='lang' style='display:${isEmpty(lang) ? 'none' : 'block'};'>
         ${lang.toUpperCase()}
       </div>
       <button
+        class="${isNoCopy ? 'hidden' : ''}"
         data-component='copy-to-clipboard'
         data-status='init'
         data-code='${code}'
@@ -90,7 +92,7 @@ const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
       return codeToHtml(code, {
         lang,
         themes: { light: 'github-light', dark: 'github-dark' },
-        defaultColor: isEmpty(label) ? 'light' : false
+        defaultColor: false
       }).then((highlight) => ({ lang, code, highlight }))
     })
   )
