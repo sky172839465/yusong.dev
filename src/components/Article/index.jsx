@@ -199,7 +199,7 @@ const Article = (props) => {
         <LazyImagePreview
           imageData={mainImageData}
           alt={title}
-          className={`aspect-video w-full rounded-lg ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+          className={`aspect-video w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
           loading='eager'
         />
@@ -219,7 +219,7 @@ const Article = (props) => {
                   <LazyImagePreview
                     imageData={imageData}
                     alt={alt}
-                    className='aspect-video w-full rounded-lg'
+                    className='aspect-video w-full rounded-lg object-contain'
                     isLoading={isLoading}
                   />
                 )}
