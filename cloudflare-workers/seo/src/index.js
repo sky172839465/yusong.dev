@@ -34,9 +34,9 @@ export default {
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html/', '')
     const targetRoute = ROUTE_MAP[convertedPath] || {
       type: 'website',
-			image: '',
-			imageFolder: '',
-			twitterImage: '',
+      image: '',
+      imageFolder: '',
+      twitterImage: '',
       data: {
         title: '404',
         description: 'Not found.'
