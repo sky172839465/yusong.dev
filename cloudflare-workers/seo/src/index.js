@@ -33,12 +33,12 @@ export default {
     const isNoJsRoute = path.startsWith(`${NO_JS_PATH}/`)
     const convertedPath = (path.endsWith('/') ? path : `${path}/`).replace(NO_JS_PATH, '').replace('index.html/', '')
     const targetRoute = ROUTE_MAP[convertedPath] || {
-			type: 'website',
-			data: {
-				title: '404',
-				description: 'Not found.'
-			}
-		}
+      type: 'website',
+      data: {
+        title: '404',
+        description: 'Not found.'
+      }
+    }
     const isArticle = get(targetRoute, 'type') === 'article'
 
     if (isAssetRoute) {
