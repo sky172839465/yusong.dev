@@ -7,7 +7,6 @@ import useSWR from 'swr'
 import { useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
-import ArticleActions from '@/components/ArticleActions'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -16,6 +15,7 @@ import useI18N from '@/hooks/useI18N'
 
 import SkeletonArticle from '../SkeletonArticle'
 
+const LazyArticleActions = lazy(() => import('@/components/ArticleActions'))
 const LazyComment = lazy(() => import('@/components/Comments'))
 
 const getSections = (html) => {
@@ -199,7 +199,7 @@ const Article = (props) => {
         <LazyImagePreview
           imageData={mainImageData}
           alt={title}
-          className={`aspect-video w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+          className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
           loading='eager'
         />
@@ -227,7 +227,7 @@ const Article = (props) => {
             )
           })}
         </div>
-        <ArticleActions
+        <LazyArticleActions
           topRef={topRef}
           shareData={shareData}
           sections={sections}
