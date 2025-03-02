@@ -51,10 +51,10 @@ export default {
     const { type, data, image, imageFolder, twitterImage } = targetRoute
     const { title, description } = data
     if (isNoJsRoute) {
-			const theme = url.search.includes('theme=dark') ? 'dark' : 'light'
+      const theme = url.search.includes('theme=dark') ? 'dark' : 'light'
       html = jsHtml
-	.replace('<html lang="en" class="bg-background">', `<html lang="en" class="bg-background ${theme}">`)
-	.replace(/<body[^>]*>([\s\S]*)<\/body>/, html
+        .replace('<html lang="en" class="bg-background">', `<html lang="en" class="bg-background ${theme}">`)
+        .replace(/<body[^>]*>([\s\S]*)<\/body>/, html
 	  .replaceAll('images', imageFolder)
 	  .replace('<!-- __WORKER_INSERT__ -->', `
 	    <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
@@ -64,7 +64,7 @@ export default {
 	      alt="${title}"
 	    />
 	  `)
-      )
+        )
     }
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
