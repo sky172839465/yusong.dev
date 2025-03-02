@@ -1,4 +1,3 @@
-import Shiki from '@shikijs/markdown-it'
 import fs from 'fs'
 import matter from 'gray-matter'
 import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
@@ -7,6 +6,7 @@ import path from 'path'
 import { tryit } from 'radash'
 import { globSync } from 'tinyglobby'
 
+import getConvertedHtml from '../src/utils/getConvertedHtml.js'
 import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME, PAGE_META_FILE_NAME, PUBLIC_DATA_FOLDER, PUBLIC_FOLDER, ROUTE_FOLDER } from './constants.js'
 
 const TYPE = {
@@ -24,14 +24,11 @@ const getLang = pagePath => {
   return LANG_CODE_MAP[get(pagePath.match(/^\/([A-Za-z-]+)\//), '1')] || LANG.ZH_TW
 }
 
-const md = markdownit()
-
-md.use(await Shiki({
-  themes: {
-    light: 'github-light',
-    dark: 'github-dark'
-  }
-}))
+const md = markdownit({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 const pageFilePaths = globSync(`${ROUTE_FOLDER}/**/${PAGE_FILE_NAME}`)
 const pageMetaFilePathMap = keyBy(globSync(`${ROUTE_FOLDER}/**/${PAGE_META_FILE_NAME}`))
@@ -61,6 +58,7 @@ const articleFilePaths = globSync([
   `${ROUTE_FOLDER}/**/${ARTICLE_PATH_NAME}`,
   `!${ROUTE_FOLDER}/**/${DRAFT_ARTICLE_PATH_NAME}`
 ])
+// const getConvertedHtml = await import('../src/utils/getConvertedHtml.js').then((m) => m.default)
 const articles = await Promise.all(
   articleFilePaths
     .map(async (articleFilePath) => {
@@ -71,7 +69,15 @@ const articles = await Promise.all(
       const htmlFilePath = `${PUBLIC_FOLDER}/nojs${pagePath}/index.html`
       const dir = path.dirname(htmlFilePath)
       const [htmlContent] = await Promise.all([
-        await new Promise((resolve) => resolve(md.render(content))),
+        await (async () => {
+          const originHtml = md.render(content)
+          const [error, convertedHtml] = await tryit(() => getConvertedHtml(originHtml))()
+          if (error) {
+            throw error
+          }
+
+          return convertedHtml
+        })(),
         await fs.promises.mkdir(dir, { recursive: true })
       ])
       await fs.promises.writeFile(

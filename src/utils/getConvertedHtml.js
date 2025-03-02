@@ -1,23 +1,8 @@
 import { get, isEmpty, unescape } from 'lodash-es'
 import { codeToHtml } from 'shiki'
 
-import getI18N, { LANG } from './getI18N'
-
-const i18nMapping = {
-  [LANG.EN]: {
-    COPY: 'Copy',
-    COPIED: 'Copied!',
-    COPY_ERROR: 'Error.'
-  },
-  [LANG.ZH_TW]: {
-    COPY: '複製',
-    COPIED: '已複製！',
-    COPY_ERROR: '錯誤'
-  }
-}
-
-const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
-  const { label } = getI18N(window.location.pathname, i18nMapping)
+// eslint-disable-next-line default-param-last
+const getCodeHighlightWithClickToClipboard = (highlightResult = {}, label) => {
   const { lang = '', code = '', highlight = '' } = highlightResult
   const codeHighlightWithClickToClipboard = `
     <div data-component='code-area'>
@@ -55,7 +40,7 @@ const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
   return codeHighlightWithClickToClipboard
 }
 
-const getConvertedHtml = async (originHtml, fileFolder) => {
+const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
   const html = unescape(
     originHtml
       // RWD table
@@ -85,7 +70,11 @@ const getConvertedHtml = async (originHtml, fileFolder) => {
       // Outside links need to open new tab
       .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
       // Same folder image
-      .replace(/<img src="([^"]+)"/g, (_, imageFileName) => {
+      .replace(/<img src="([^"]+)"/g, (originElement, imageFileName) => {
+        if (isEmpty(fileFolder)) {
+          return originElement
+        }
+
         const fileUrl = `${fileFolder}/${imageFileName}`
         return `<img src="${fileUrl}"`
       })
@@ -111,7 +100,7 @@ const getConvertedHtml = async (originHtml, fileFolder) => {
     const highlightResult = get(results, index, {})
     highlightHtml = highlightHtml.replace(
       replacement,
-      getCodeHighlightWithClickToClipboard(highlightResult)
+      getCodeHighlightWithClickToClipboard(highlightResult, label)
     )
   }
   return highlightHtml
