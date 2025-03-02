@@ -70,7 +70,8 @@ export default {
 
     const displayTitle = `${title}${title === TITLE ? '' : ` | ${TITLE}`}`
     const modifiedHtml = html
-      .replace('__NO_JS_LANG__', lang.toLowerCase())
+			// apply !block
+      .replace(`__NO_JS_LANG__${lang}`, '')
       .replace(
         '</head>',
         `   ${(isArticle && !isNoJsRoute) ? `<noscript><meta http-equiv="refresh" content="0;url=${NO_JS_PATH}${path}"></noscript>` : ''}
