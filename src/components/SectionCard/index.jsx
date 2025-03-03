@@ -10,16 +10,17 @@ import { Separator } from '@/components/ui/separator'
 import getI18N from '@/utils/getI18N'
 
 const SectionCard = (props) => {
-  const { article: { file, path = '', data = {} } = {}, isArticle } = props
+  const { article: { file = '', path = '', data = {} } = {}, isArticle } = props
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
-  const pathname = isArticle ? getI18N(path).mainPathName : null
-  const { isLoading, data: pathImages } = usePathImages(pathname)
+  const { mainPathName, pathname } = getI18N(path)
+  const { isLoading, data: pathImages } = usePathImages(isArticle ? mainPathName : null)
+  const fileMainPathName = file.replace(pathname, mainPathName)
   const imageData = get(
     pathImages,
-    `${file}`.replace('index.md', 'images/index.jpg'),
-    get(pathImages, `${file}`.replace('index.md', 'images/index.png'), null)
+    `${fileMainPathName}`.replace('index.md', 'images/index.jpg'),
+    get(pathImages, `${fileMainPathName}`.replace('index.md', 'images/index.png'), null)
   )
 
   return (
