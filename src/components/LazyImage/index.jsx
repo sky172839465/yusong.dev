@@ -100,7 +100,7 @@ const LazyImage = (props) => {
 
   return (
     <FadeIn className='relative size-full'>
-      {((isLoading|| !isLoaded || error)) && (
+      {((isLoading || !isLoaded || error)) && (
         <div className='absolute flex size-full grow items-center'>
           <ImageStatus
             src={src}

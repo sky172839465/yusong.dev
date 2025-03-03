@@ -21,12 +21,11 @@ const i18nMapping = {
 }
 
 const SectionCard = (props) => {
-  const { article: { file, type, path, data = {} } = {} } = props
+  const { article: { file, path, data = {} } = {}, isArticle } = props
   const { label } = useI18N(i18nMapping)
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
-  const isArticle = type === 'article'
   const pathname = isArticle ? getI18N(path).mainPathName : null
   const { isLoading, data: pathImages } = usePathImages(pathname)
   const imageData = get(
