@@ -206,7 +206,7 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className='prose prose-lg max-w-none !bg-background !text-foreground dark:prose-invert'
+          className='max-w-none !bg-background !text-foreground'
         >
           {map(htmlList, (__html, index) => {
             const { imageData, alt } = get(imageList, index, {})

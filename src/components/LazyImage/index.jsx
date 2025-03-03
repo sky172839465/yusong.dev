@@ -1,5 +1,7 @@
 import { isEmpty, isUndefined } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
+import { AnimatePresence } from 'motion/react'
+import * as m from 'motion/react-m'
 import { useEffect, useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
@@ -28,7 +30,7 @@ const ImageStatus = (props) => {
   const { label } = useI18N(i18nMapping)
   if (isLoading || (!isLoaded && !isEmpty(src))) {
     return (
-      <Skeleton className={className ? className : ''} />
+      <Skeleton className={`${className ? className : ''} flex aspect-video`} />
     )
   }
 
@@ -99,32 +101,36 @@ const LazyImage = (props) => {
   }, [src])
 
   return (
-    <FadeIn className='relative size-full'>
-      {((isLoading || !isLoaded || error)) && (
-        <div className='absolute flex size-full grow items-center'>
-          <ImageStatus
-            src={src}
-            className={className}
-            isLoading={isLoading}
-            isLoaded={isLoaded}
-            isIcon={isIcon}
-            error={error}
+    <AnimatePresence>
+      <FadeIn className='relative size-full'>
+        {(isLoading || !isLoaded || error) && (
+          <m.div
+            className='absolute flex size-full grow items-center'
+          >
+            <ImageStatus
+              src={src}
+              className={`${className ? className : ''} absolute top-0`}
+              isLoading={isLoading}
+              isLoaded={isLoaded}
+              isIcon={isIcon}
+              error={error}
+            />
+          </m.div>
+        )}
+        {isUndefined(src) && (
+          <m.div className='my-8 aspect-video w-full' />
+        )}
+        {!isUndefined(src) && (
+          <m.img
+            onLoad={onLoad}
+            onError={onError}
+            className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
+            loading={loading}
+            {...imageAttributes}
           />
-        </div>
-      )}
-      {isUndefined(src) && (
-        <div className='my-8 aspect-video w-full' />
-      )}
-      {!isUndefined(src) && (
-        <img
-          onLoad={onLoad}
-          onError={onError}
-          className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
-          loading={loading}
-          {...imageAttributes}
-        />
-      )}
-    </FadeIn>
+        )}
+      </FadeIn>
+    </AnimatePresence>
   )
 }
 
