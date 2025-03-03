@@ -1,5 +1,5 @@
 import { tryit } from 'radash'
-import useSWR from 'swr'
+import useSWR, { preload } from 'swr'
 
 import useI18N from '@/hooks/useI18N'
 
@@ -16,8 +16,8 @@ export const fetcher = async (pathname) => {
   return response
 }
 
-export const usePathImages = (pathname, options = {}) => {
-  const { isLoading, isValidating, ...restProps } = useSWR(() => pathname || null, fetcher, options)
+export const usePathImages = (pathname = null, options = {}) => {
+  const { isLoading, isValidating, ...restProps } = useSWR(pathname, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
 }
 
@@ -25,4 +25,8 @@ export const usePageImages = (options = {}) => {
   const { mainPathName } = useI18N()
   const result = usePathImages(mainPathName, options)
   return result
+}
+
+export const preloadPageImages = (mainPathName) => {
+  return preload(mainPathName, fetcher)
 }
