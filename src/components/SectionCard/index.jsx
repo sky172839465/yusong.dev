@@ -2,11 +2,14 @@ import { isEmpty } from 'lodash-es'
 import { FilePlus2, PencilLine } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { usePathImages } from '@/apis/usePageImages'
+import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import useI18N, { LANG } from '@/hooks/useI18N'
+import getI18N from '@/utils/getI18N'
 
 const i18nMapping = {
   [LANG.EN]: {
@@ -18,14 +21,24 @@ const i18nMapping = {
 }
 
 const SectionCard = (props) => {
-  const { article: { path, data = {} } = {} } = props
+  const { article: { type, path, data = {} } = {} } = props
   const { label } = useI18N(i18nMapping)
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
+  const isArticle = type === 'article'
+  const pathname = isArticle ? getI18N(path).mainPathName : null
+  const imageData = usePathImages(pathname)
+  console.log(imageData)
 
   return (
     <Card key={path} className='flex grow flex-col'>
+      {pathname && (
+        <LazyImage
+          imageData={imageData}
+          className='aspect-video w-full object-contain'
+        />
+      )}
       <CardHeader className='grow'>
         <CardTitle>
           {title}
