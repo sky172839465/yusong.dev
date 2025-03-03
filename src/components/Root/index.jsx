@@ -17,11 +17,7 @@ const useScrollRestoration = () => {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-    }, 100) // Adjust delay if needed
-
-    return () => clearTimeout(timeout)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [pathname])
 }
 
