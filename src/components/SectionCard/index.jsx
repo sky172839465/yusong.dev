@@ -30,7 +30,7 @@ const SectionCard = (props) => {
       viewTransition
     >
       <Card key={path} className='flex grow flex-col'>
-        {!isEmpty(imageData) && (
+        {isArticle && (
           <LazyImage
             imageData={imageData}
             className={`w-full rounded-t-lg object-contain ${isEmpty(imageData) ? 'absolute top-0 rounded-b-none' : ''}`}
