@@ -200,7 +200,6 @@ const Article = (props) => {
           imageData={mainImageData}
           alt={title}
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
-          style={{ viewTransitionName: pathname.replaceAll('/', '-') }}
           isLoading={isLoading}
           loading='eager'
         />
