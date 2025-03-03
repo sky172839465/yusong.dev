@@ -6,9 +6,26 @@ import FadeIn from '@/components/FadeIn'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Skeleton } from '@/components/ui/skeleton'
+import useI18N, { LANG } from '@/hooks/useI18N'
+
+const i18nMapping = {
+  [LANG.EN]: {
+    ICON_ERROR: 'ERR',
+    ERROR_TITLE: 'Error',
+    ERROR_DESC: 'Load image failed',
+    NO_IMAGE: 'NO IMAGE'
+  },
+  [LANG.ZH_TW]: {
+    ICON_ERROR: '錯誤',
+    ERROR_TITLE: '錯誤',
+    ERROR_DESC: '載入圖片失敗',
+    NO_IMAGE: '沒有圖片'
+  }
+}
 
 const ImageStatus = (props) => {
   const { isLoading, isLoaded, isIcon, src, className, error } = props
+  const { label } = useI18N(i18nMapping)
   if (isLoading || (!isLoaded && !isEmpty(src))) {
     return (
       <Skeleton className={className ? className : ''} />
@@ -19,7 +36,7 @@ const ImageStatus = (props) => {
     if (isIcon) {
       return (
         <p className='text-destructive'>
-          錯誤
+          {label.ICON_ERROR}
         </p>
       )
     }
@@ -29,10 +46,10 @@ const ImageStatus = (props) => {
         <Alert variant='destructive'>
           <AlertCircle className='size-4' />
           <AlertTitle>
-            錯誤
+            {label.ERROR_TITLE}
           </AlertTitle>
           <AlertDescription>
-            載入圖片失敗
+            {label.ERROR_DESC}
           </AlertDescription>
         </Alert>
       </div>
@@ -43,7 +60,7 @@ const ImageStatus = (props) => {
     return (
       <Skeleton className={`${className ? className : ''} flex aspect-video items-center justify-center text-4xl text-foreground`}>
         <p>
-          NO IMAGE
+          {label.NO_IMAGE}
         </p>
       </Skeleton>
     )
