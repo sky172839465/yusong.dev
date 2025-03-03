@@ -152,6 +152,7 @@ const Article = (props) => {
         <h1
           ref={topRef}
           className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'
+          style={{ viewTransitionName: `${pathname.replaceAll('/', '-')}-title` }}
           onClick={increment}
         >
           {title}
@@ -200,6 +201,7 @@ const Article = (props) => {
           imageData={mainImageData}
           alt={title}
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+          style={{ viewTransitionName: pathname.replaceAll('/', '-') }}
           isLoading={isLoading}
           loading='eager'
         />
