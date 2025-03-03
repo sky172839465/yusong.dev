@@ -16,8 +16,13 @@ export const fetcher = async (pathname) => {
   return response
 }
 
+export const usePathImages = (pathname, options = {}) => {
+  const { isLoading, isValidating, ...restProps } = useSWR(() => pathname || null, fetcher, options)
+  return { ...restProps, isLoading: isLoading || isValidating }
+}
+
 export const usePageImages = (options = {}) => {
   const { mainPathName } = useI18N()
-  const { isLoading, isValidating, ...restProps } = useSWR(mainPathName, fetcher, options)
-  return { ...restProps, isLoading: isLoading || isValidating }
+  const result = usePathImages(mainPathName, options)
+  return result
 }
