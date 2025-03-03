@@ -13,7 +13,7 @@ const SkeletonSectionCard = (props) => {
     <Card className='flex grow flex-col'>
       {isArticle && (
         <LazyImage
-          className='absolute top-0 h-40 w-full rounded-b-none rounded-t-lg'
+          className='absolute top-0 h-40 w-full rounded-b-none rounded-t-lg md:h-64'
           isLoading
         />
       )}
