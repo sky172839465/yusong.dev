@@ -152,7 +152,6 @@ const Article = (props) => {
         <h1
           ref={topRef}
           className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'
-          style={{ viewTransitionName: `${pathname.replaceAll('/', '-')}-title` }}
           onClick={increment}
         >
           {title}
