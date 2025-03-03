@@ -30,7 +30,7 @@ const ImageStatus = (props) => {
   const { label } = useI18N(i18nMapping)
   if (isLoading || (!isLoaded && !isEmpty(src))) {
     return (
-      <Skeleton className={className ? className : ''} />
+      <Skeleton className={`${className ? className : ''} flex aspect-video`} />
     )
   }
 
@@ -103,11 +103,13 @@ const LazyImage = (props) => {
   return (
     <AnimatePresence>
       <FadeIn className='relative size-full'>
-        {((isLoading || !isLoaded || error)) && (
-          <m.div className='absolute flex size-full grow items-center'>
+        {(isLoading || !isLoaded || error) && (
+          <m.div
+            className='absolute flex size-full grow items-center'
+          >
             <ImageStatus
               src={src}
-              className={className}
+              className={`${className ? className : ''} absolute top-0`}
               isLoading={isLoading}
               isLoaded={isLoaded}
               isIcon={isIcon}
