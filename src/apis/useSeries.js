@@ -1,5 +1,5 @@
 import { filter } from 'lodash-es'
-import useSWR from 'swr'
+import useSWR, { preload } from 'swr'
 
 export const fetcher = async (query) => {
   const data = (await import('../data/series.json')).default
@@ -9,5 +9,9 @@ export const fetcher = async (query) => {
 export const useSeries = (query, options = {}) => {
   const { isLoading, isValidating, ...restProps } = useSWR(query, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
+}
+
+export const preloadSeries = (query) => {
+  return preload(query, fetcher)
 }
 
