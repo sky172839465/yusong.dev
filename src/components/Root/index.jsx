@@ -66,7 +66,6 @@ const Root = () => {
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
-      <ScrollRestoration />
       <Toaster
         toastOptions={{
           className: '!bg-background/50 !text-foreground !border-foreground !border !backdrop-blur-md'
