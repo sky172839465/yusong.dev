@@ -1,16 +1,22 @@
 import { times } from 'lodash-es'
 
+import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 
 const SkeletonSectionCard = (props) => {
-  const { article: { data = {} } = {}, isContentExist } = props
+  const { article: { data = {} } = {}, isContentExist, isArticle } = props
   const { title, description } = data
   return (
     <Card className='flex grow flex-col'>
+      {isArticle && (
+        <LazyImage
+          className='absolute top-0 h-40 w-full rounded-b-none rounded-t-lg'
+          isLoading
+        />
+      )}
       <CardHeader className='grow [&_*]:text-transparent'>
         <CardTitle>
           <Skeleton>
@@ -46,13 +52,6 @@ const SkeletonSectionCard = (props) => {
           </>
         )}
       </CardContent>
-      <CardFooter>
-        <Skeleton>
-          <Button variant='secondary' className='invisible'>
-            看更多
-          </Button>
-        </Skeleton>
-      </CardFooter>
     </Card>
   )
 }

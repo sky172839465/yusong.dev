@@ -39,6 +39,7 @@ export default function SeriesSection() {
             <SkeletonSectionCard
               key={index}
               article={{ data }}
+              isArticle={false}
             />
           )
         })}
@@ -48,6 +49,7 @@ export default function SeriesSection() {
             <SectionCard
               key={path}
               article={article}
+              isArticle={false}
             />
           )
         })}

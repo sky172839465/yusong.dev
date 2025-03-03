@@ -40,6 +40,7 @@ export default function ArticlesSection() {
               key={index}
               article={{ data }}
               isContentExist
+              isArticle
             />
           )
         })}
@@ -49,6 +50,7 @@ export default function ArticlesSection() {
             <SectionCard
               key={path}
               article={article}
+              isArticle
             />
           )
         })}
