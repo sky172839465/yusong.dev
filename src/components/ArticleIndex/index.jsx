@@ -20,7 +20,7 @@ const i18nMapping = {
 
 const ArticleIndex = (props) => {
   const { children } = props
-  const { label, pathname } = useI18N(i18nMapping)
+  const { label } = useI18N(i18nMapping)
   const { isLoading, data: articles = [] } = useSeriesArticles()
 
   if (isLoading) {
@@ -29,7 +29,7 @@ const ArticleIndex = (props) => {
 
   return (
     <div className='container prose prose-lg max-w-none text-foreground dark:prose-invert'>
-      <h3 style={{ viewTransitionName: `${pathname.replaceAll('/', '-')}-title` }}>
+      <h3>
         {get(articles, '0.series', null)}
       </h3>
       {children}
