@@ -3,7 +3,7 @@ import { LazyMotion } from 'motion/react'
 import { lazy, useEffect, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
-import { Outlet, useLocation, useNavigationType } from 'react-router-dom'
+import { Outlet, useLocation, useNavigation } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import fetcher from '../../utils/fetcher'
@@ -15,18 +15,20 @@ const loadFeatures = () => import('./motionFeatures.js').then(res => res.default
 
 const useScrollRestoration = () => {
   const { pathname } = useLocation()
-  const navigationType = useNavigationType()
+  const navigation = useNavigation()
+  const timer = useRef()
 
   useEffect(() => {
-    if (navigationType === 'POP') {
+    if (navigation.state !== 'idle') {
       return
     }
 
-    const timeout = setTimeout(() => {
+    clearTimeout(timer.current)
+    timer.current = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 100)
-    return () => clearTimeout(timeout)
-  }, [pathname, navigationType])
+    }, 120)
+    return () => clearTimeout(timer.current)
+  }, [pathname, navigation])
 }
 
 const Root = () => {
