@@ -8,7 +8,6 @@ export const fetcher = async (pathname) => {
   const endpoint = getDataEndpoint(pathname, 'articles')
   const [error, response] = await tryit(() => fetch(endpoint).then((res => res.json())))()
   if (error) {
-    console.log(error)
     return []
   }
 
