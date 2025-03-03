@@ -5,7 +5,7 @@ export default VitePWA({
   // https://vite-pwa-org.netlify.app/guide/inject-manifest.html
   strategies: 'injectManifest',
   injectManifest: {
-    globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'] // Cache only necessary files
+    globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'] // Cache only necessary files
   },
   manifest: {
     name: 'yusong.tw',
