@@ -1,6 +1,6 @@
 import { tryit } from 'radash'
 import { useLocation } from 'react-router-dom'
-import useSWR from 'swr'
+import useSWR, { preload } from 'swr'
 
 import getDataEndpoint from './utils/getDataEndpoint'
 
@@ -15,12 +15,22 @@ export const fetcher = async (pathname) => {
   return response
 }
 
-export const useSeriesArticles = (isSeries = true, options = {}) => {
-  const { pathname } = useLocation()
+const getConvertedPathname = (isSeries, pathname) => {
   const convertedPathname = isSeries
     ? pathname
     : (pathname.endsWith('/') ? pathname : `${pathname}/`).replace(/\/[^/]+\/$/, '/')
+  return convertedPathname
+}
+
+export const useSeriesArticles = (isSeries = true, options = {}) => {
+  const { pathname } = useLocation()
+  const convertedPathname = getConvertedPathname(isSeries, pathname)
   const { isLoading, isValidating, ...restProps } = useSWR(convertedPathname, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
+}
+
+export const preloadSeriesArticles = (isSeries = true, pathname = '') => {
+  const convertedPathname = getConvertedPathname(isSeries, pathname)
+  return preload(convertedPathname, fetcher)
 }
 

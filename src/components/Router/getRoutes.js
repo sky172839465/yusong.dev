@@ -100,10 +100,14 @@ const getRoutes = () => {
         .join('/')
 
       const isIndex = fileName === '/index'
-      const pageLoader = get(loaders, loaderPath)
       const pageMeta = get(metaes, metaPath)
       const layout = getClosestLayoutFromGlob(path)
       const isMarkdown = filePath.endsWith('.md')
+      const pageLoader = isMarkdown
+        ? () => import('@/loaders/articleLoader').then((module) => {
+          return { default: module.default({ filePath, markdown: page }) }
+        })
+        : get(loaders, loaderPath)
       collect.push({
         isMarkdown,
         markdown: isMarkdown ? page : undefined,
