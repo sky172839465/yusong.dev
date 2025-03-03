@@ -33,15 +33,12 @@ const SectionCard = (props) => {
           <LazyImage
             imageData={imageData}
             className={`w-full rounded-t-lg object-contain ${isEmpty(imageData) ? 'absolute top-0 rounded-b-none' : ''}`}
-            style={{ viewTransitionName: path.replaceAll('/', '-') }}
             isLoading={isLoading}
           />
         )}
         <CardHeader className='grow'>
           <CardTitle>
-            <span style={{ viewTransitionName: `${path.replaceAll('/', '-')}-title` }}>
-              {title}
-            </span>
+            {title}
           </CardTitle>
           <CardDescription>
             {description}
