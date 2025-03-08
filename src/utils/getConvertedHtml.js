@@ -71,6 +71,11 @@ const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
       })
       // Outside links need to open new tab
       .replace(/<a([^>]*\shref="https:\/\/[^"]*")/g, '<a$1 target="_blank" referrerpolicy="no-referrer"')
+      // Format hash link add id and emoji prefix
+      .replace(
+        /<a\s+href=['"]#(.*?)['"]>(.*?)<\/a>/g,
+        (_, hash, linkText) => `<a id="${hash}" href="#${hash}">🔗 ${linkText}</a>`
+      )
       // Same folder image
       .replace(/<img src="([^"]+)"/g, (originElement, imageFileName) => {
         if (isEmpty(fileFolder)) {
