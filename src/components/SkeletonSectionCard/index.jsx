@@ -23,15 +23,13 @@ const SkeletonSectionCard = (props) => {
             {title}
           </Skeleton>
         </CardTitle>
-        <CardDescription>
+        <CardDescription className='sr-only'>
           <Skeleton className='inline'>
             {description}
           </Skeleton>
         </CardDescription>
-      </CardHeader>
-      <CardContent className='flex flex-wrap gap-2 [&_*]:!text-transparent'>
         {isContentExist && (
-          <>
+          <div className='contents [&_*]:!text-transparent'>
             <Skeleton className='flex'>
               <Badge variant='secondary' className='h-7'>
                 {new Date().toLocaleDateString()}
@@ -49,8 +47,11 @@ const SkeletonSectionCard = (props) => {
                 </Skeleton>
               )
             })}
-          </>
+          </div>
         )}
+      </CardHeader>
+      <CardContent className='text-transparent'>
+        {description}
       </CardContent>
     </Card>
   )
