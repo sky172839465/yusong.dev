@@ -1,5 +1,5 @@
 import { random, times } from 'lodash-es'
-import { CalendarDays, ArrowRight } from 'lucide-react'
+import { ArrowRight, CalendarDays } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'

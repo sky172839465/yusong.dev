@@ -1,5 +1,5 @@
 import { get, orderBy, size } from 'lodash-es'
-import { CalendarDays, ArrowRight, SquareLibrary } from 'lucide-react'
+import { ArrowRight, CalendarDays, SquareLibrary } from 'lucide-react'
 import { useState } from 'react'
 
 import { useSeriesArticles } from '@/apis/useSeriesArticles'
