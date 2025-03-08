@@ -29,7 +29,7 @@ const SkeletonSectionCard = (props) => {
           </Skeleton>
         </CardDescription>
         {isContentExist && (
-          <div class='contents [&_*]:!text-transparent'>
+          <div className='contents [&_*]:!text-transparent'>
             <Skeleton className='flex'>
               <Badge variant='secondary' className='h-7'>
                 {new Date().toLocaleDateString()}
