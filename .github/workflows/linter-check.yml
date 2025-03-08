@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   linters:
-    if: contains(github.event.pull_request.labels.*.name, 'skip ci') == false
+    if: contains(github.event.pull_request.labels.*.name, 'skip ci') == false && github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
 
     steps:
