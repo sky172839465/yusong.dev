@@ -1,22 +1,24 @@
-import { random, size, times } from 'lodash-es'
+import { random, times } from 'lodash-es'
+import { ArrowDownNarrowWide, ArrowRight } from 'lucide-react'
 
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 
+import SkeletonSectionCard from '../SkeletonSectionCard'
+
 const RANDOM = {
-  INDEX_TITLE: random(3, 6),
-  INDEX_DESC: random(10, 30),
+  INDEX_TITLE: random(1, 2),
+  INDEX_DESC: random(5, 10),
   ARTICLES: times(random(2, 6)),
   ARTICLE_TITLE: random(1, 3),
-  ARTICLE_TAGS: times(random(1, 3)),
   ARTICLE_DESC: random(3, 10)
 }
 
-const SkeletonArticleIndex = () => {
+const SkeletonArticleIndex = (props) => {
+  const { label } = props
   return (
-    <div className='container prose prose-lg max-w-none text-transparent dark:prose-invert'>
-      <div>
+    <div className='m-auto w-full space-y-2 md:max-w-2xl'>
+      <div className='prose prose-lg max-w-none text-transparent dark:prose-invert'>
         <h3 className='text-transparent'>
           <Skeleton className='inline'>
             {'This is index title'.repeat(RANDOM.INDEX_TITLE)}
@@ -28,52 +30,36 @@ const SkeletonArticleIndex = () => {
           </Skeleton>
         </div>
       </div>
-      <p className='text-white'>
-        目錄：
-      </p>
-      <ul>
+      <div className='flex flex-col gap-4'>
+        <div className='flex justify-between'>
+          <Button variant='secondary' className='text-transparent'>
+            <ArrowDownNarrowWide /> 
+            {label.OLD}
+            <ArrowRight />
+            {label.NEW}
+          </Button>
+          <Button
+            variant='secondary'
+            className='text-transparent'
+          >
+            {`${label.TOTAL} 9`}
+          </Button>
+        </div>
         {RANDOM.ARTICLES.map((index) => {
+          const data = {
+            title: 'skeleton title'.repeat(RANDOM.ARTICLE_TITLE),
+            description: 'skeleton description'.repeat(RANDOM.ARTICLE_DESC)
+          }
           return (
-            <li className='space-y-2' key={index}>
-              <div className='space-x-2'>
-                <div className='inline cursor-pointer underline'>
-                  <Skeleton className='inline'>
-                    {'this is article title'.repeat(RANDOM.ARTICLE_TITLE)}
-                  </Skeleton>
-                </div>
-              </div>
-              <div className='flex flex-wrap gap-2'>
-                <Skeleton className='flex [&_*]:invisible' key={index}>
-                  <Badge variant='secondary' className='h-7'>
-                    <div className='mr-1 size-4' />
-                    {new Date().toLocaleDateString()}
-                  </Badge>
-                </Skeleton>
-                <div className='h-7'>
-                  <Separator orientation='vertical' />
-                </div>
-                {RANDOM.ARTICLE_TAGS.map((tag, index) => {
-                  return (
-                    <Skeleton className='flex [&_*]:invisible' key={index}>
-                      <Badge variant='secondary' className='h-7'>
-                        {`tags ${index}`}
-                      </Badge>
-                    </Skeleton>
-                  )
-                })}
-              </div>
-              <div>
-                <Skeleton className='inline'>
-                  {'this is article description'.repeat(RANDOM.ARTICLE_DESC)}
-                </Skeleton>
-              </div>
-              {index !== size(RANDOM.ARTICLES) - 1 && (
-                <Separator />
-              )}
-            </li>
+            <SkeletonSectionCard
+              key={index}
+              article={{ data }}
+              isContentExist
+              isArticle
+            />
           )
         })}
-      </ul>
+      </div>
     </div>
   )
 }
