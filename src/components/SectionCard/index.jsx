@@ -41,11 +41,9 @@ const SectionCard = (props) => {
           <CardTitle>
             {title}
           </CardTitle>
-          <CardDescription>
+          <CardDescription className='sr-only'>
             {description}
           </CardDescription>
-        </CardHeader>
-        <CardContent className='flex flex-wrap gap-2'>
           {(createdAt || modifiedAt) && (
             <>
               <Badge variant='secondary' className='h-7'>
@@ -64,6 +62,9 @@ const SectionCard = (props) => {
               </Badge>
             )
           })}
+        </CardHeader>
+        <CardContent>
+          {description}
         </CardContent>
       </Card>
     </Link>
