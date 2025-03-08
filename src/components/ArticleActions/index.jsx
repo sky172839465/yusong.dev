@@ -49,12 +49,15 @@ const ArticleActions = (props) => {
   }, [pathname])
 
   const scrollToSection = (e) => {
+    const header = document.querySelector('header')
     const target = document.querySelector(`a[href="${e.target.dataset.hash}"]`)
     if (!target) {
       return
     }
 
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const offset = get(header.getBoundingClientRect(), 'height', 70) + 30
+    const top = element.getBoundingClientRect().top + window.scrollY - offset
+    window.scrollTo({ top, behavior: 'smooth' })
   }
 
   const sharePost = () => {
