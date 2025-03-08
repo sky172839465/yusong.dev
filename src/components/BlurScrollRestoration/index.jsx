@@ -17,8 +17,6 @@ const useScrollRestoration = () => {
     }, 100)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
-
-  return { loading, done }
 }
 
 const BlurScrollRestoration = () => {
