@@ -23,7 +23,7 @@ const useScrollRestoration = () => {
     timer.current = setTimeout(() => {
       setLoading(false)
       setTimeout(() => setDone(true), 150)
-    }, 100)
+    }, 300)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
