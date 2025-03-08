@@ -7,7 +7,7 @@ const useScrollRestoration = () => {
   const timer = useRef()
 
   useEffect(() => {
-    if (navigation.state !== 'idle') {
+    if (navigation.state === 'idle') {
       return
     }
 
