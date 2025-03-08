@@ -33,17 +33,10 @@ const useScrollRestoration = () => {
 }
 
 const BlurScrollRestoration = () => {
-  const { loading, done } = useScrollRestoration()
+  // const { loading, done } = useScrollRestoration()
+  useScrollRestoration()
 
-  return (
-    <div
-      className={`
-        ${done ? 'hidden' : 'fixed z-50 h-dvh w-full'}
-        bg-transparent ${loading ? 'backdrop-blur-md' : 'backdrop-blur-none'}
-        transition-all
-      `}
-    />
-  )
+  return null
 }
 
 export default BlurScrollRestoration
