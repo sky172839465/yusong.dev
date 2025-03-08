@@ -1,40 +1,23 @@
 import { get } from 'lodash-es'
-import { LazyMotion } from 'motion/react'
-import { lazy, useEffect, useRef } from 'react'
+import { AnimatePresence, LazyMotion } from 'motion/react'
+import { lazy, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
-import { Outlet, useLocation, useNavigation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
-import fetcher from '../../utils/fetcher'
-import CustomSwipe from '../CustomSwipe'
-import { ThemeProvider } from '../ThemeProvider'
+import CustomSwipe from '@/components/CustomSwipe'
+import FadeIn from '@/components/FadeIn'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import fetcher from '@/utils/fetcher'
 
+const LazyBlurScrollRestoration = lazy(() => import('@/components/BlurScrollRestoration'))
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
-const loadFeatures = () => import('./motionFeatures.js').then(res => res.default)
-
-const useScrollRestoration = () => {
-  const { pathname } = useLocation()
-  const navigation = useNavigation()
-  const timer = useRef()
-
-  useEffect(() => {
-    if (navigation.state !== 'idle') {
-      return
-    }
-
-    clearTimeout(timer.current)
-    timer.current = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-    }, 50)
-    return () => clearTimeout(timer.current)
-  }, [pathname, navigation])
-}
+const loadFeatures = () => import('@/components/Root/motionFeatures.js').then(res => res.default)
 
 const Root = () => {
   const errorToastIdRef = useRef()
   const errorToastKeyRef = useRef()
-  useScrollRestoration()
 
   const onError = (error, key) => {
     errorToastIdRef.current = key
@@ -51,6 +34,7 @@ const Root = () => {
 
   return (
     <ThemeProvider>
+      <LazyBlurScrollRestoration />
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -68,7 +52,14 @@ const Root = () => {
             features={loadFeatures}
             strict
           >
-            <Outlet />
+            <AnimatePresence>
+              <FadeIn
+                key='main'
+                exit={{ opacity: 0 }}
+              >
+                <Outlet />
+              </FadeIn>
+            </AnimatePresence>
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>

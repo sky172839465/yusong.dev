@@ -4,7 +4,6 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import FadeIn from '@/components/FadeIn/index.jsx'
 import Root from '@/components/Root/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
@@ -15,7 +14,6 @@ import loader from './index.loader'
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazySkeletonArticle = lazy(() => import('@/components/SkeletonArticle/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
-const LazyAnimatePresence = lazy(() => import('./AnimatePresence.jsx'))
 
 const DefaultLayout = (props) => props.children
 
@@ -30,34 +28,25 @@ const withErrorElement = (routes) => routes.map((item) => {
   return {
     ...route,
     element: (
-      <LazyAnimatePresence>
-        <FadeIn
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Suspense
-            fallback={(
-              <SkeletonHome className='fixed top-0 z-0' />
-            )}
-          >
-            <Layout>
-              {isMarkdown && (
-                <Suspense fallback={<LazySkeletonArticle />}>
-                  <LazyArticle {...item} />
-                </Suspense>
-              )}
-              {!isMarkdown && (
-                <>
-                  <Comp />
-                  <LazyMeta fetchMetaData={meta} />
-                </>
-              )}
-            </Layout>
-          </Suspense>
-        </FadeIn>
-      </LazyAnimatePresence>
+      <Suspense
+        fallback={(
+          <SkeletonHome className='fixed top-0 z-0' />
+        )}
+      >
+        <Layout>
+          {isMarkdown && (
+            <Suspense fallback={<LazySkeletonArticle />}>
+              <LazyArticle {...item} />
+            </Suspense>
+          )}
+          {!isMarkdown && (
+            <>
+              <Comp />
+              <LazyMeta fetchMetaData={meta} />
+            </>
+          )}
+        </Layout>
+      </Suspense>
     ),
     errorElement: <ErrorElement />
   }
