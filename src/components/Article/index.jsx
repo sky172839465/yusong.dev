@@ -27,7 +27,7 @@ const getSections = (html) => {
     (links) => filter(links, (link) => link.href.includes('#')),
     (hashLinks) => map(hashLinks, (hashLink) => ({
       hash: hashLink.getAttribute('href'),
-      label: hashLink.textContent
+      label: get(hashLink, 'textContent', 'Empty').replace('🔗 ', '')
     }))
   )()
   return result
