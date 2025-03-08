@@ -1,5 +1,5 @@
 import { random, times } from 'lodash-es'
-import { ArrowDownNarrowWide, ArrowRight } from 'lucide-react'
+import { ArrowRight, CalendarDays } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -33,7 +33,7 @@ const SkeletonArticleIndex = (props) => {
       <div className='flex flex-col gap-4'>
         <div className='flex justify-between'>
           <Button variant='secondary' className='text-transparent'>
-            <ArrowDownNarrowWide /> 
+            <CalendarDays />
             {label.OLD}
             <ArrowRight />
             {label.NEW}

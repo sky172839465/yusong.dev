@@ -1,5 +1,5 @@
 import { get, orderBy, size } from 'lodash-es'
-import { ArrowDownNarrowWide, ArrowDownWideNarrow, ArrowRight, SquareLibrary } from 'lucide-react'
+import { ArrowRight, CalendarDays, SquareLibrary } from 'lucide-react'
 import { useState } from 'react'
 
 import { useSeriesArticles } from '@/apis/useSeriesArticles'
@@ -51,9 +51,9 @@ const ArticleIndex = (props) => {
             variant='secondary'
             onClick={() => setSorting(!sorting)}
           >
+            <CalendarDays />
             {sorting && (
-              <FadeIn className='flex items-center gap-1'>
-                <ArrowDownWideNarrow />
+              <FadeIn className='flex items-center gap-1'>   
                 {label.NEW}
                 <ArrowRight />
                 {label.OLD}
@@ -61,7 +61,6 @@ const ArticleIndex = (props) => {
             )}
             {!sorting && (
               <FadeIn className='flex items-center gap-1'>
-                <ArrowDownNarrowWide /> 
                 {label.OLD}
                 <ArrowRight />
                 {label.NEW}
