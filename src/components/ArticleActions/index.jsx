@@ -55,8 +55,8 @@ const ArticleActions = (props) => {
       return
     }
 
-    const offset = get(header.getBoundingClientRect(), 'height', 70) + 30
-    const top = element.getBoundingClientRect().top + window.scrollY - offset
+    const offset = (header ? get(header.getBoundingClientRect(), 'height', 70) : 70) + 30
+    const top = target.getBoundingClientRect().top + window.scrollY - offset
     window.scrollTo({ top, behavior: 'smooth' })
   }
 
