@@ -10,7 +10,7 @@ const useScrollRestoration = () => {
     if (navigation.state === 'loading') {
       clearTimeout(timer.current)
       timer.current = setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.scrollTo({ top: 0, behavior: 'auto' })
       }, 150)
       return
     }
