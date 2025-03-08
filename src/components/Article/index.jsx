@@ -112,7 +112,6 @@ const Article = (props) => {
   
   const shareData = {
     title: displayTitle,
-    text: description,
     url: window.location.href
   }
 
