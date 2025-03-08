@@ -37,31 +37,33 @@ const SectionCard = (props) => {
             isLoading={isLoading}
           />
         )}
-        <CardHeader className='grow'>
+        <CardHeader className={`${isArticle ? 'grow' : ''} gap-2`}>
           <CardTitle>
             {title}
           </CardTitle>
           <CardDescription className='sr-only'>
             {description}
           </CardDescription>
-          {(createdAt || modifiedAt) && (
-            <>
-              <Badge variant='secondary' className='h-7'>
-                {isModified ? <PencilLine className='mr-2 size-4' /> : <FilePlus2 className='mr-2 size-4' />}
-                {new Date(modifiedAt).toLocaleDateString()}
-              </Badge>
-              <div className='h-7'>
-                <Separator orientation='vertical' />
-              </div>
-            </>
-          )}
-          {isTagExist && tags.map((tag, index) => {
-            return (
-              <Badge key={index} variant='secondary' className='h-7'>
-                {tag}
-              </Badge>
-            )
-          })}
+          <div className={isArticle ? 'flex flex-wrap gap-2' : 'hidden'}>
+            {(createdAt || modifiedAt) && (
+              <>
+                <Badge variant='secondary' className='h-7'>
+                  {isModified ? <PencilLine className='mr-2 size-4' /> : <FilePlus2 className='mr-2 size-4' />}
+                  {new Date(modifiedAt).toLocaleDateString()}
+                </Badge>
+                <div className='h-7'>
+                  <Separator orientation='vertical' />
+                </div>
+              </>
+            )}
+            {isTagExist && tags.map((tag, index) => {
+              return (
+                <Badge key={index} variant='secondary' className='h-7'>
+                  {tag}
+                </Badge>
+              )
+            })}
+          </div>
         </CardHeader>
         <CardContent>
           {description}
