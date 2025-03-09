@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigation } from 'react-router-dom'
 
+import SkeletonHome from '@/components/SkeletonHome'
+
 const useScrollRestoration = () => {
   const { pathname } = useLocation()
   const navigation = useNavigation()
@@ -30,7 +32,7 @@ const BlurScrollRestoration = (props) => {
   const { loading } = useScrollRestoration()
 
   if (loading) {
-    return null
+    return <SkeletonHome />
   }
 
   return children
