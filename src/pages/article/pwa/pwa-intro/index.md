@@ -2,7 +2,7 @@
 title: 簡單認識 PWA
 description: 認識 PWA 具有哪些功能、用抽象的範例來說明把 PWA 加入既有的網站有什麼好處
 createdAt: 2025-01-31T00:00:00.000Z
-modifiedAt: "2025-02-24T11:38:39.218Z"
+modifiedAt: "2025-03-09T11:30:39.826Z"
 tags:
   - PWA
 index: 0
@@ -10,11 +10,11 @@ index: 0
 
 ### [起源](#come-from)
 
-PWA 是 `Progressive Web App` 漸進式網頁應用程式的縮寫。
+PWA，全名 `Progressive Web App` 意為「漸進式網頁應用程式」。
 
 > Progressive Web App (PWA) 最早由 Google 在 2015 年提出，目標是讓 Web 應用具備與原生 App 相似的體驗，同時保留 Web 的開放性與易維護性。從技術角度來看，PWA 並不是一種新的框架或技術，而是對 Web 應用程式的一組標準與最佳實踐，使其在現代瀏覽器中能夠具備更強的能力。
 
-### [主要功能](#core-tech)
+### [主要功能](#core)
 
 主要圍繞在底下幾個功能：
 
@@ -33,9 +33,9 @@ PWA 是 `Progressive Web App` 漸進式網頁應用程式的縮寫。
 - 🔐 HTTPS (限制)
   - PWA 必須在 HTTPS 環境下執行
 
-第一次接觸可能還是不太理解結合既有的網站跟 PWA 所能帶來的好處是什麼？
+剛接觸 PWA 時，可能不太清楚它能為既有網站帶來哪些優勢？
 
-下面用一個比喻說明結合 PWA 後可以帶來的好處 ↓
+下面用一個比喻來說明 PWA 如何改善使用者體驗。
 
 ### [比喻](#simile)
 
