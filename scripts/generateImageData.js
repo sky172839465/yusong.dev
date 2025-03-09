@@ -44,7 +44,7 @@ async function processImages() {
   })
   const transformImageMap = keyBy(
     IS_MODIFIED_FILES_EXIST
-      ? MODIFIED_FILES.filter((file) => file.match(/\.(jpg,jpeg,png)$/))
+      ? MODIFIED_FILES.filter((file) => file.match(/\.(jpg|jpeg|png)$/))
       : imagePaths
   )
 
