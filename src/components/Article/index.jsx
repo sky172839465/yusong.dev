@@ -126,12 +126,13 @@ const useArticleHtml = (html) => {
         }
 
         if (domNode.type === 'tag' && domNode.name === 'a' && domNode.attribs.href.startsWith('/')) {
+          const text = domNode.children.map((child) => child.type === 'text' ? child.data : '').join('')
           return (
             <Link
               to={domNode.attribs.href}
               viewTransition
             >
-              aaa
+              {text}
             </Link>
           )
         }
