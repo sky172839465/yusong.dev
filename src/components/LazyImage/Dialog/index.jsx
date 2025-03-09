@@ -1,4 +1,4 @@
-import { get, isUndefined } from 'lodash-es'
+import { get, isEqual, isUndefined } from 'lodash-es'
 import { useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -20,8 +20,12 @@ const LazyImagePreview = (props) => {
   const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
   const { className, imageData, alt, ...restProps } = props
+  const isSameSizeImage = isEqual(
+    get(imageData, 'original.width'),
+    get(imageData, 'sizes[2].width', get(imageData, 'sizes[0].width'))
+  )
 
-  if (isUndefined(imageData)) {
+  if (isUndefined(imageData) || isSameSizeImage) {
     return (
       <LazyImage
         className={className}
