@@ -198,6 +198,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 > 注意：描述 `description` 也需要有設定 `screenshots` 才會在安裝時一起顯示，否則只會有網站名稱
 
 Windows & macOS 在 chrome 上顯示的安裝界面一致
+
 <div>
   <img src="images/macOS-rich-install.jpg" alt="macOS PWA Web app 桌面版安裝畫面" />
 </div>
