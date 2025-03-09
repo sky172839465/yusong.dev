@@ -1,5 +1,6 @@
 import { get, isEqual, isUndefined } from 'lodash-es'
 import { useState } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import useI18N, { LANG } from '@/hooks/useI18N'
@@ -20,12 +21,13 @@ const LazyImagePreview = (props) => {
   const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
   const { className, imageData, alt, ...restProps } = props
+  const largeScreen = useMediaQuery('(min-width: 1200px)')
   const isSameSizeImage = isEqual(
     get(imageData, 'original.width'),
     get(imageData, 'sizes[2].width', get(imageData, 'sizes[0].width'))
   )
 
-  if (isUndefined(imageData) || isSameSizeImage) {
+  if (isUndefined(imageData) || (largeScreen && isSameSizeImage)) {
     return (
       <LazyImage
         className={className}
