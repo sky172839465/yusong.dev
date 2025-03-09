@@ -42,8 +42,14 @@ html.dark .shiki span {
   @apply m-2;
 }
 
+.prose [data-component="table-area"] table th,
 .prose [data-component="table-area"] table td {
-  @apply p-2 text-center align-middle;
+  @apply p-2 align-middle;
+}
+
+.prose [data-component="table-area"] table[data-center] th,
+.prose [data-component="table-area"] table[data-center] td {
+  @apply text-center;
 }
 
 .prose a {

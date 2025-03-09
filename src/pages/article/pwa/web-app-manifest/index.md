@@ -43,7 +43,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
   > 完整名稱，安裝成 Web App 後裝置的應用程式、應用程式的清單裡或啟動 Web App 的畫面上 `可能` 會顯示這個名稱，建議與 `short_name` 一致
 - short_name
   > 顯示在桌面上的 Web App 名稱，只有一個圖示的寬度，所以要短一點
-  <table>
+  <table data-center>
     <tr>
       <td>macOS</td>
       <td>iOS</td>
@@ -68,7 +68,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
   > 指定未開啟的 Web App 開起來時預設要開哪一個頁面，通常首頁可以直接放 `/`
 - display
   > 決定安裝成 Web App 時的應用程式外框
-  <table>
+  <table data-center>
     <tr>
       <td>standalone</td>
       <td>
@@ -105,7 +105,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
   />
   ```
 
-  <table>
+  <table data-center>
     <tr>
       <td>macOS light</td>
       <td>
@@ -168,7 +168,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 ]
 ```
 
-<table>
+<table data-center>
   <tr>
     <td>macOS</td>
     <td>Win10</td>
@@ -257,7 +257,7 @@ Windows & macOS 在 chrome 上顯示的安裝界面一致
 1. 行動裝置上也有顯示 Web App 預覽圖可以讓使用者更容易了解安裝的目的
 1. 加入安裝引導，iOS 上並不叫安裝而是 `加入主畫面`，所以最好有引導告訴使用者如何安裝 Web App
 
-<table>
+<table data-center>
   <tr>
     <td>macOS</td>
     <td>iOS</td>
