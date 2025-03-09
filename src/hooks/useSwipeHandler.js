@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 const MAXIMUM_TRIGGER_PX = 40
 const SCREEN_WIDTH = window.innerWidth
 
-const useSwipeHandler = (setLoading) => {
+const useSwipeHandler = () => {
   const startX = useRef(0)
   const [swipeDistance, setSwipeDistance] = useState(0)
   const [opacityPercent, setOpacityPercent] = useState(0)
@@ -72,7 +72,6 @@ const useSwipeHandler = (setLoading) => {
     }
 
     const isSwipeToRight = currentDistanceInPercent > 0
-    setLoading(true)
     history.go(isSwipeToRight ? -1 : 1)
   })
 
