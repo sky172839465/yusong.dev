@@ -9,8 +9,8 @@ import { SWRConfig } from 'swr'
 import CustomSwipe from '@/components/CustomSwipe'
 import FadeIn from '@/components/FadeIn'
 import { ThemeProvider } from '@/components/ThemeProvider'
-import fetcher from '@/utils/fetcher'
 import useScrollRestoration from '@/hooks/useScrollRestoration'
+import fetcher from '@/utils/fetcher'
 
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('@/components/Root/motionFeatures.js').then(res => res.default)
