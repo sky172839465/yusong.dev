@@ -25,15 +25,4 @@ const useScrollRestoration = () => {
   return { loading, setLoading }
 }
 
-const BlurScrollRestoration = (props) => {
-  const { children } = props
-  const { loading } = useScrollRestoration()
-
-  if (loading) {
-    return null
-  }
-
-  return children
-}
-
-export default BlurScrollRestoration
+export default useScrollRestoration

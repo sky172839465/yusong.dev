@@ -5,14 +5,15 @@ import useSwipeHandler from '../../hooks/useSwipeHandler'
 const ICONS = [ArrowLeft, ArrowRight]
 const DEFAULT_X_POSITION = [-8, 10]
 
-const CustomSwipe = () => {
+const CustomSwipe = (props) => {
+  const { setLoading } = props
   const {
     swiping,
     isSwipeFromLeft,
     isSwipeFromRight,
     opacityPercent,
     distanceInPercent
-  } = useSwipeHandler()
+  } = useSwipeHandler(setLoading)
 
   return (
     <div
