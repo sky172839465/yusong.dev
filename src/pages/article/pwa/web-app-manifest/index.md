@@ -59,7 +59,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
   </table>
 - description
   > Web App 的描述，像是 App 商店裡用於描述這個程式的用途，在豐富的安裝使用者介面會顯示在 UI 上
-  <img src="images/rich-install-macOS.png" alt="macOS 安裝 Web App 描述" />
+  > <img src="images/rich-install-macOS.png" alt="macOS 安裝 Web App 描述" />
 - scope
   > 指定 Web App 的適用範圍，例如網站是 `https://example.com` 但是開始接受安裝成爲 Web App 的是另外開發的網站放在 `https://example.com/app` 路徑時可以指定成 `/app`
 - start_url
@@ -83,15 +83,26 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 - background_color
   > Web App 尚未載入前空白畫面預設的背景色
 - theme_color
+
   > 主題顏色會影響 Web App 頂部 URL 介面區塊的顏色，需要 dark mode 的時候可以在 HTML 加上 meta 根據主題顏色動態切換
   >
   > [MDN combind with media query](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/theme_color#description)
 
   自訂 dark / light 模式下的主題顏色
+
   ```html
-  <meta name="theme-color" content="#51a2ff" media="(prefers-color-scheme: light)"/>
-  <meta name="theme-color" content="#162556" media="(prefers-color-scheme: dark)"/>
+  <meta
+    name="theme-color"
+    content="#51a2ff"
+    media="(prefers-color-scheme: light)"
+  />
+  <meta
+    name="theme-color"
+    content="#162556"
+    media="(prefers-color-scheme: dark)"
+  />
   ```
+
   <table>
     <tr>
       <td>macOS light</td>
@@ -181,6 +192,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 ### [豐富的安裝介面](#rich-install)
 
 透過 `screenshots` 屬性可以在安裝時顯示 Web App 的預覽圖，Windows & macOS 支援度比較高
+
 > 注意：描述 `description` 也需要有設定 `screenshots` 才會在安裝時一起顯示，否則只會有網站名稱
 
 Windows & macOS 在 chrome 上顯示的安裝界面一致
@@ -236,6 +248,7 @@ Windows & macOS 在 chrome 上顯示的安裝界面一致
 ### [客製化的安裝介面](#custom-rich-install)
 
 會需要客製化的原因有兩個
+
 1. 行動裝置上也有顯示 Web App 預覽圖可以讓使用者更容易了解安裝的目的
 1. 加入安裝引導，iOS 上並不叫安裝而是 `加入主畫面`，所以最好有引導告訴使用者如何安裝 Web App
 
