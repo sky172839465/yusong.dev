@@ -81,7 +81,7 @@ const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
             onclick="(function(e, element){
               e.preventDefault();
               const header = document.querySelector('header');
-              const offser = Math.max(header.getBoundingClientRect().height, 70) + 30;
+              const offset = Math.max(header.getBoundingClientRect().height, 70) + 30;
               const top = element.getBoundingClientRect().top + window.scrollY - offset;
               window.scrollTo({ top, behavior: 'smooth' });
             })(event, this)"
