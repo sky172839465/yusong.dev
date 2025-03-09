@@ -2,7 +2,7 @@
 title: Lazy Title
 description: Describe Lazy content
 createdAt: 2025-01-12T00:00:00.000Z
-modifiedAt: "2025-03-01T13:18:04.205Z"
+modifiedAt: "2025-03-09T02:42:30.552Z"
 tags:
   - Lazy
   - awesome
@@ -28,6 +28,8 @@ collect.push({
 });
 ```
 
+![test small image 1 description](images/IMG_4681.jpeg)
+
 ## [I am not sure...](#test3)
 
 Lazy Vite is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
@@ -43,6 +45,8 @@ const FILE_NAME = {
 # One morning, when Gregor Samsa woke from troubled dreams.
 
 One morning, when Gregor Samsa woke from troubled dreams, he found himself _transformed_ in his bed into a horrible [vermin](http://en.wikipedia.org/wiki/Vermin "Wikipedia Vermin"). He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover **strong** it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, link waved abouthelplessly as he looked. <cite>“What's happened to me?”</cite> he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls.</p>
+
+![test small image 2 description](images/IMG_4551.jpeg)
 
 ## [The bedding was hardly able to cover it.](#test1)
 
@@ -137,6 +141,8 @@ graph LR
 Thus, he tried to get his upper body out of the bed first and turned his head carefully toward the edge of the bed. He managed to do this easily, and in spite of its width and weight his body mass at last slowly followed the turning of his head. But as he finally raised his head outside the bed in the open air, he became anxious about moving forward any further in this manner, for if he allowed himself eventually to fall by this process, it would take a miracle to prevent his head from getting injured. And at all costs he must not lose consciousness right now. He preferred to remain in bed.
 
 #### First five selected publications in English
+
+![test small image 3 description](images/IMG_5577.jpeg)
 
 1. The Castle
 2. The Great Wall of China

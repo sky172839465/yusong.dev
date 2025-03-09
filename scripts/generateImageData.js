@@ -44,12 +44,13 @@ async function processImages() {
   })
   const transformImageMap = keyBy(
     IS_MODIFIED_FILES_EXIST
-      ? MODIFIED_FILES.filter((file) => file.match(/\.(jpg|jpeg,png)$/))
+      ? MODIFIED_FILES.filter((file) => file.match(/\.(jpg|jpeg|png)$/))
       : imagePaths
   )
 
   console.log('Grab image paths', imagePaths.slice(0, 3))
   console.log('Modified file paths', MODIFIED_FILES)
+  console.log('Transform image map keys', keys(transformImageMap).slice(0, 3))
 
   const getResizeImage = async (filePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
@@ -78,7 +79,12 @@ async function processImages() {
       const outputFilePath = path.join(outputDir, `${fileName}-${label}.gen.webp`)
       const isSkipTransform = webpDimensions.width < width
       if (isSkipTransform) {
-        return null
+        return {
+          size: label,
+          path: webpFilePath,
+          width: webpDimensions.width,
+          height: webpDimensions.height
+        }
       }
 
       if (isNeedTransform) {
