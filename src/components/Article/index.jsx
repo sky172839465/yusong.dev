@@ -1,10 +1,12 @@
+import parse from 'html-react-parser'
 import { filter, flow, get, isEmpty, map } from 'lodash-es'
-import { FilePlus2, Pencil, PencilLine } from 'lucide-react'
-import { Fragment, lazy, useMemo, useRef } from 'react'
+import { Check, Copy, FilePlus2, Link as LinkIcon, Pencil, PencilLine } from 'lucide-react'
+import { tryit } from 'radash'
+import { lazy, useMemo, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
-import { useCounter } from 'usehooks-ts'
+import { useCopyToClipboard, useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
@@ -12,11 +14,25 @@ import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import useI18N from '@/hooks/useI18N'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
+import FadeIn from '../FadeIn'
 import SkeletonArticle from '../SkeletonArticle'
 
 const LazyComment = lazy(() => import('@/components/Comments'))
+
+const i18nMapping = {
+  [LANG.EN]: {
+    COPY: 'Copy',
+    COPIED: 'Copied!',
+    COPY_ERROR: 'Error.'
+  },
+  [LANG.ZH_TW]: {
+    COPY: '複製',
+    COPIED: '已複製！',
+    COPY_ERROR: '錯誤'
+  }
+}
 
 const getSections = (html) => {
   const parser = new DOMParser()
@@ -35,7 +51,7 @@ const getSections = (html) => {
 
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
-  const { mainPathName } = useI18N()
+  const { mainPathName } = useI18N(i18nMapping)
   const imagePathFromSrc = useMemo(() => {
     const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/${mainImageName}`
     return imagePathFromSrc
@@ -52,46 +68,99 @@ const useMainImageData = (mainImageName = 'index') => {
 const useArticleHtml = (html) => {
   const { pathname, mainPathName } = useI18N()
   const { isLoading, data: pageImages } = usePageImages()
+  const [, copy] = useCopyToClipboard()
+  const [copied, setCopied] = useState(false)
   const sections = useMemo(() => getSections(html), [html])
-  const { htmlList, imageList } = useMemo(() => {
-    if (isLoading) {
-      return {
-        htmlList: [],
-        imageList: []
+  const articleHtml = useMemo(() => {
+    const onCopy = (code) => async () => {
+      const [error] = await tryit(() => copy(code))()
+      setCopied(true)
+      if (error) {
+        setCopied(false)
+        return
       }
+  
+      setTimeout(() => setCopied(false), 1200)
+    }
+
+    if (isLoading) {
+      return ''
     }
 
     if (isEmpty(pageImages)) {
-      return {
-        htmlList: [html],
-        imageList: []
-      }
+      return parse(html)
     }
 
-    const splitElements = []
-    const imageList = []
-    // find images in html
-    const convertedHtml = html.replace(/<p>\s*?<img[^>]*src=["']([^"']+)["'][^>]*>\s*<\/p>?/g, (element, relativeFileUrl) => {
-      const pageImageData = pageImages[relativeFileUrl.replace(pathname, mainPathName).replace('/', '')]
-      // find image alt in image html
-      const altMatch = element.match(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/)
-      const alt = altMatch ? altMatch[1] : 'Article image'
-      splitElements.push(element)
-      imageList.push({ alt, imageData: pageImageData })
-      return element
+    const convertedHtml = parse(html, {
+      replace: (domNode) => {
+        const dataComponent = get(domNode, 'attribs["data-component"]')
+        if (domNode.type === 'tag' && domNode.name === 'button' && dataComponent === 'copy-to-clipboard') {
+          const code = get(domNode, 'attribs.data-code', '')
+          return (
+            <Button
+              variant='outline'
+              size='icon'
+              className='absolute right-2 top-2 rounded-md border bg-background p-2 text-foreground [&[disabled]]:pointer-events-none [&[disabled]]:opacity-50'
+              onClick={onCopy(code)}
+              disabled={copied}
+            >
+              <FadeIn>
+                {!copied && <Copy />}
+                {copied && <Check />}
+              </FadeIn>
+            </Button>
+          )
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'img') {
+          const { src, alt } = domNode.attribs
+          const pageImageData = pageImages[src.replace(pathname, mainPathName).replace('/', '')]
+          return (
+            <LazyImagePreview
+              imageData={pageImageData}
+              alt={alt}
+              className='w-full rounded-lg object-contain'
+              isLoading={isLoading}
+            />
+          )
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'a' && domNode.attribs.href.startsWith('/')) {
+          return (
+            <Link
+              to={domNode.attribs.href}
+              viewTransition
+            >
+              aaa
+            </Link>
+          )
+        }
+
+        if (domNode.type === 'tag' && domNode.name === 'a' && domNode.attribs.href.startsWith('#')) {
+          const text = domNode.children.map((child) => child.type === 'text' ? child.data : '').join('')
+          return (
+            <a
+              id={domNode.attribs.href.replace('#', '')}
+              href={domNode.attribs.href}
+              onClick={(e) => {
+                e.preventDefault()
+                const header = document.querySelector('header')            
+                const offset = (header ? get(header.getBoundingClientRect(), 'height', 70) : 70) + 30
+                const top = e.target.getBoundingClientRect().top + window.scrollY - offset
+                window.scrollTo({ top, behavior: 'smooth' })
+              }}
+              className='flex items-center gap-2'
+            >
+              <LinkIcon />
+              {text}
+            </a>
+          )
+        }
+      }
     })
-    if (isEmpty(splitElements)) {
-      return {
-        htmlList: [html],
-        imageList: []
-      }
-    }
-
-    const splitHtmlAndImagesRegexp = new RegExp(`(${splitElements.join('|')})`, 'g')
-    const htmlList = convertedHtml.split(splitHtmlAndImagesRegexp).filter((_, i) => i % 2 === 0)
-    return { htmlList, imageList }
-  }, [html, pageImages, isLoading, pathname, mainPathName])
-  return { sections, htmlList, imageList }
+    return convertedHtml
+  }, [html, pageImages, isLoading, pathname, mainPathName, copied, copy])
+  return { sections, articleHtml }
 }
 
 const DEFAULT_TITLE = 'YUSONG.TW'
@@ -106,7 +175,7 @@ const Article = (props) => {
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, tags, mainImage } = attributes
   const mainImageData = useMainImageData(mainImage)
-  const { sections, htmlList, imageList } = useArticleHtml(html)
+  const { sections, articleHtml } = useArticleHtml(html)
   const { count, increment } = useCounter(0)
   const displayTitle = `${title}${title === DEFAULT_TITLE ? '' : ` | ${DEFAULT_TITLE}`}`
   
@@ -115,7 +184,7 @@ const Article = (props) => {
     url: window.location.href
   }
 
-  if (isMarkdownLoading || isEmpty(htmlList)) {
+  if (isMarkdownLoading || isEmpty(articleHtml)) {
     return (
       <>
         {!isMarkdownLoading && (
@@ -207,24 +276,7 @@ const Article = (props) => {
           ref={articleRef}
           className='max-w-none !bg-background !text-foreground'
         >
-          {map(htmlList, (__html, index) => {
-            const { imageData, alt } = get(imageList, index, {})
-            // split html string by image tags
-            // image tags will replace to react lazy image with preview
-            return (
-              <Fragment key={index}>
-                <div dangerouslySetInnerHTML={{ __html }} />
-                {!isEmpty(imageData) && (
-                  <LazyImagePreview
-                    imageData={imageData}
-                    alt={alt}
-                    className='w-full rounded-lg object-contain'
-                    isLoading={isLoading}
-                  />
-                )}
-              </Fragment>
-            )
-          })}
+          {articleHtml}
         </div>
         <ArticleActions
           topRef={topRef}
