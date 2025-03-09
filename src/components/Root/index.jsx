@@ -9,16 +9,15 @@ import { SWRConfig } from 'swr'
 import CustomSwipe from '@/components/CustomSwipe'
 import FadeIn from '@/components/FadeIn'
 import { ThemeProvider } from '@/components/ThemeProvider'
-import useScrollRestoration from '@/hooks/useScrollRestoration'
 import fetcher from '@/utils/fetcher'
 
+const LazyBlurScrollRestoration = lazy(() => import('@/components/BlurScrollRestoration'))
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('@/components/Root/motionFeatures.js').then(res => res.default)
 
 const Root = () => {
   const errorToastIdRef = useRef()
   const errorToastKeyRef = useRef()
-  const { loading, setLoading } = useScrollRestoration()
 
   const onError = (error, key) => {
     errorToastIdRef.current = key
@@ -53,11 +52,11 @@ const Root = () => {
             strict
           >
             <AnimatePresence>
-              {!loading && (
+              <LazyBlurScrollRestoration>
                 <FadeIn exit={{ opacity: 0 }}>
                   <Outlet />
                 </FadeIn>
-              )}
+              </LazyBlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
         </HelmetProvider>
@@ -67,7 +66,7 @@ const Root = () => {
           className: '!bg-background/50 !text-foreground !border-foreground !border !backdrop-blur-md'
         }}
       />
-      <CustomSwipe setLoading={setLoading} />
+      <CustomSwipe />
       <LazyReloadPrompt />
     </ThemeProvider>
   )
