@@ -74,7 +74,21 @@ const getConvertedHtml = async (originHtml, fileFolder, label = {}) => {
       // Format hash link add id and emoji prefix
       .replace(
         /<a\s+href=['"]#(.*?)['"]>(.*?)<\/a>/g,
-        (_, hash, linkText) => `<a id="${hash}" href="#${hash}">🔗 ${linkText}</a>`
+        (_, hash, linkText) => `
+          <a
+            id="${hash}"
+            href="#${hash}"
+            onclick="(function(e, element){
+              e.preventDefault()
+              const header = document.querySelector('header')
+              const offser = Math.max(header.getBoundingClientRect().height, 70) + 30
+              const top = element.getBoundingClientRect().top + window.scrollY - offset
+              window.scrollTo({ top, behavior: 'smooth' })
+            })(this)"
+          >
+            🔗 ${linkText}
+          </a>
+        `
       )
       // Same folder image
       .replace(/<img src="([^"]+)"/g, (originElement, imageFileName) => {
