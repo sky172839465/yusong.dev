@@ -34,7 +34,6 @@ const Root = () => {
 
   return (
     <ThemeProvider>
-      <LazyBlurScrollRestoration />
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -53,12 +52,11 @@ const Root = () => {
             strict
           >
             <AnimatePresence>
-              <FadeIn
-                key='main'
-                exit={{ opacity: 0 }}
-              >
-                <Outlet />
-              </FadeIn>
+              <LazyBlurScrollRestoration>
+                <FadeIn exit={{ opacity: 0 }}>
+                  <Outlet />
+                </FadeIn>
+              </LazyBlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
         </HelmetProvider>
