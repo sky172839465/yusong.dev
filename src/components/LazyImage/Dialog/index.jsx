@@ -68,7 +68,7 @@ const LazyImagePreview = (props) => {
             width={width}
             height={height}
             alt={alt}
-            className={`${className || ''} max-h-[96dvh] md:max-h-[90dvh]`}
+            className={`${className || ''} max-h-[90dvh]`}
           />
         </div>
       </DialogContent>
