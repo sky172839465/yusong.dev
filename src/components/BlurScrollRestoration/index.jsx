@@ -15,13 +15,14 @@ const useScrollRestoration = () => {
 
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-      setTimeout(() => setLoading(false), 100)
-    }, 50)
+      // window.scrollTo({ top: 0, behavior: 'auto' })
+      // setTimeout(() => setLoading(false), 100)
+      setLoading(false)
+    }, 150)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
-  return { loading }
+  return { loading, setLoading }
 }
 
 const BlurScrollRestoration = (props) => {
