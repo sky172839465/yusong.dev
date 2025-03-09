@@ -1,8 +1,6 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size } from 'lodash-es'
 import { lazy } from 'react'
 
-import getI18N, { LANG } from '@/utils/getI18N'
-
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
 const loaders = import.meta.glob('/src/pages/**/index.loader.js')
@@ -42,27 +40,13 @@ const getClosestLayout = (layouts) => {
   }
 }
 
-const i18nMapping = {
-  [LANG.EN]: {
-    COPY: 'Copy',
-    COPIED: 'Copied!',
-    COPY_ERROR: 'Error.'
-  },
-  [LANG.ZH_TW]: {
-    COPY: '複製',
-    COPIED: '已複製！',
-    COPY_ERROR: '錯誤'
-  }
-}
-
 const getConvertedPosts = (posts) => {
-  const { label } = getI18N(window.location.pathname, i18nMapping)
   const convertedPosts = reduce(posts, (collect, post, postKey) => {
     const postFolder = postKey.replace('/index.md', '')
     const result = (async () => {
       const getConvertedHtml = await import('@/utils/getConvertedHtml').then((module) => module.default)
       const { html: originHtml, attributes } = await post()
-      const highlightHtml = await getConvertedHtml(originHtml, postFolder, label)
+      const highlightHtml = await getConvertedHtml(originHtml, postFolder)
       return { html: highlightHtml, attributes }
     })
     collect[postKey] = result

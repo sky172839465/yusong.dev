@@ -59,7 +59,9 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
   </table>
 - description
   > Web App 的描述，像是 App 商店裡用於描述這個程式的用途，在豐富的安裝使用者介面會顯示在 UI 上
-  > <img src="images/rich-install-macOS.png" alt="macOS 安裝 Web App 描述" />
+  <div>
+    <img src="images/rich-install-macOS.png" alt="macOS 安裝 Web App 描述" />
+  </div>
 - scope
   > 指定 Web App 的適用範圍，例如網站是 `https://example.com` 但是開始接受安裝成爲 Web App 的是另外開發的網站放在 `https://example.com/app` 路徑時可以指定成 `/app`
 - start_url
@@ -196,7 +198,10 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 > 注意：描述 `description` 也需要有設定 `screenshots` 才會在安裝時一起顯示，否則只會有網站名稱
 
 Windows & macOS 在 chrome 上顯示的安裝界面一致
-<img src="images/macOS-rich-install.jpg" alt="macOS PWA Web app 桌面版安裝畫面" />
+
+<div>
+  <img src="images/macOS-rich-install.jpg" alt="macOS PWA Web app 桌面版安裝畫面" />
+</div>
 
 ```json
 [

@@ -34,17 +34,16 @@ html.dark .shiki span {
   @apply absolute left-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
 }
 
-.prose [data-component="copy-to-clipboard"] {
-  @apply absolute right-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
-  @apply [&_span]:hidden;
-  @apply [&[data-status="init"]_[data-label="init"]]:inline;
-  @apply [&[data-status="success"]_[data-label="success"]]:inline;
-  @apply [&[data-status="error"]_[data-label="error"]]:inline;
-  @apply [&:not([data-status="init"])]:pointer-events-none [&:not([data-status="init"])]:opacity-50;
-}
-
 .prose [data-component="table-area"] {
   @apply overflow-x-auto;
+}
+
+.prose li [data-component="table-area"] table {
+  @apply m-2;
+}
+
+.prose [data-component="table-area"] table td {
+  @apply p-2 text-center align-middle;
 }
 
 .prose a {
