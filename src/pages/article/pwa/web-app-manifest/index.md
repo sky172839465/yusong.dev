@@ -53,7 +53,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
         <img src="images/macOS-app.jpg" alt="macOS 安裝 Web App 顯示名稱" />
       </td>
       <td>
-        <img src="images/iOS-app.jpeg" alt="iOS 安裝 Web App 顯示名稱" />
+        <img src="images/iOS-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
       </td>
     </tr>
   </table>
@@ -183,7 +183,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
       <img src="images/win10-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
     </td>
     <td>
-      <img src="images/iOS-app.jpeg" alt="macOS 安裝 Web App 顯示名稱" />
+      <img src="images/iOS-app.jpg" alt="macOS 安裝 Web App 顯示名稱" />
     </td>
     <td>
       <img src="images/andriod15-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
