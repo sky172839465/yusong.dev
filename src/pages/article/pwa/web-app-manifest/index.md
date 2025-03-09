@@ -2,7 +2,7 @@
 title: Web Manifest 介紹
 description: 設定 Web Manifest 可以描繪出安裝 Web App 所需要的資訊與外觀
 createdAt: 2025-02-23T06:34:23.319Z
-modifiedAt: "2025-02-24T11:38:39.218Z"
+modifiedAt: "2025-03-09T14:52:16.702Z"
 tags:
   - PWA
   - WEB MANIFEST
