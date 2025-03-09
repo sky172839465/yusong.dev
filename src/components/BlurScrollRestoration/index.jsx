@@ -8,16 +8,16 @@ const useScrollRestoration = () => {
   const timer = useRef()
 
   useEffect(() => {
+    setLoading(true)
     if (navigation.state === 'loading') {
       return
     }
 
-    setLoading(true)
-    window.scrollTo({ top: 0, behavior: 'auto' })
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
-      setLoading(false)
-    }, 150)
+      window.scrollTo({ top: 0, behavior: 'auto' })
+      setTimeout(() => setLoading(false), 200)
+    }, 100)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
