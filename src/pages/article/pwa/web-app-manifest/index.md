@@ -40,7 +40,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
 ```
 
 - name
-  > 完整名稱，安裝成 Web App 後裝置的應用程式、應用程式的清單裡或啟動 Web App 的畫面上 `可能` 會顯示這個名稱，建議與 `short_name` 一致
+  > 完整名稱，安裝成 Web App 後裝置的應用程式、應用程式的清單裡或啟動 Web App 的畫面上 `可能` 會顯示這個名稱，建議與 `short_name` 一致才不會出錯
 - short_name
   > 顯示在桌面上的 Web App 名稱，只有一個圖示的寬度，所以要短一點
   <table data-center>
@@ -58,7 +58,7 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
     </tr>
   </table>
 - description
-  > Web App 的描述，像是 App 商店裡用於描述這個程式的用途，在豐富的安裝使用者介面會顯示在 UI 上
+  > Web App 的描述，像是 App 商店裡用於描述這個程式的用途，在安裝介面會顯示在 UI 上
   <div>
     <img src="images/rich-install-macOS.png" alt="macOS 安裝 Web App 描述" />
   </div>
@@ -109,25 +109,25 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
     <tr>
       <td>macOS light</td>
       <td>
-        <img src="images/macOS-header-light-mode.jpg" alt="macOS 安裝 Web App 顯示名稱" />
+        <img src="images/macOS-header-light-mode.jpg" alt="macOS light 模式外觀" />
       </td>
     </tr>
     <tr>
       <td>macOS dark</td>
       <td>
-        <img src="images/macOS-header-dark-mode.jpg" alt="macOS 安裝 Web App 顯示名稱" />
+        <img src="images/macOS-header-dark-mode.jpg" alt="macOS dark 模式外觀" />
       </td>
     </tr>
     <tr>
       <td>iOS light</td>
       <td>
-        <img src="images/iOS-header-light-mode.jpg" alt="macOS 安裝 Web App 顯示名稱" />
+        <img src="images/iOS-header-light-mode.jpg" alt="iOS light 模式外觀" />
       </td>
     </tr>
     <tr>
       <td>iOS dark</td>
       <td>
-        <img src="images/iOS-header-dark-mode.jpg" alt="macOS 安裝 Web App 顯示名稱" />
+        <img src="images/iOS-header-dark-mode.jpg" alt="iOS dark 模式外觀" />
       </td>
     </tr>
   </table>
@@ -180,18 +180,18 @@ Web Manifest 設定比起說明看到實際顯示的畫面更容易了解，所�
       <img src="images/macOS-app.jpg" alt="macOS 安裝 Web App 顯示名稱" />
     </td>
     <td>
-      <img src="images/win10-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
+      <img src="images/win10-app.jpg" alt="Windows10 安裝 Web App 顯示名稱" />
     </td>
     <td>
-      <img src="images/iOS-app.jpg" alt="macOS 安裝 Web App 顯示名稱" />
+      <img src="images/iOS-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
     </td>
     <td>
-      <img src="images/andriod15-app.jpg" alt="iOS 安裝 Web App 顯示名稱" />
+      <img src="images/andriod15-app.jpg" alt="Android 安裝 Web App 顯示名稱" />
     </td>
   </tr>
 </table>
 
-### [豐富的安裝介面](#rich-install)
+### [安裝介面](#rich-install)
 
 透過 `screenshots` 屬性可以在安裝時顯示 Web App 的預覽圖，Windows & macOS 支援度比較高
 
@@ -252,10 +252,10 @@ Windows & macOS 在 chrome 上顯示的安裝界面一致
 
 ### [客製化的安裝介面](#custom-rich-install)
 
-會需要客製化的原因有兩個
+會需要客製化的原因
 
-1. 行動裝置上也有顯示 Web App 預覽圖可以讓使用者更容易了解安裝的目的
-1. 加入安裝引導，iOS 上並不叫安裝而是 `加入主畫面`，所以最好有引導告訴使用者如何安裝 Web App
+- 行動裝置上也有顯示 Web App 預覽圖可以讓使用者更容易了解安裝的目的
+- 加入安裝引導，iOS 上並不叫安裝而是 `加入主畫面`，所以最好有引導告訴使用者如何安裝 Web App
 
 <table data-center>
   <tr>
