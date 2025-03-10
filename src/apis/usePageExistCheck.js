@@ -6,9 +6,10 @@ import getFileUrl from '@/utils/getFileUrl'
 
 export const fetcher = async (pathname) => {
   const formatedPathName = (pathname.endsWith('/') ? pathname : `${pathname}/`)
-  const endpoint = getFileUrl(`/src/pages${formatedPathName}images/og.jpg`)
-  const [error] = await tryit(() => fetch(endpoint).then((res) => res.ok))()
-  if (error) {
+  const endpoint = getFileUrl(`/src/pages${formatedPathName}images/x.jpg`)
+  const [error, result] = await tryit(() => fetch(endpoint).then((res) => res.ok).catch(() => false))()
+  console.log({ error, result })
+  if (error || !result) {
     return false
   }
 
