@@ -9,6 +9,17 @@ const useScrollRestoration = () => {
   const [loading, setLoading] = useState(false)
   const timer = useRef()
 
+  // force Repaint After Navigation
+  // mobile sometimes show blank page when navigate
+  useEffect(() => {
+    if (navigation.state === 'loading') {
+      return
+    }
+
+    window.scrollBy(0, 1)
+    window.scrollBy(0, -1)
+  }, pathname)
+
   useEffect(() => {
     setLoading(true)
 
