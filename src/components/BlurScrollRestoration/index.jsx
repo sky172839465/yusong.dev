@@ -1,29 +1,30 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigation, useNavigationType } from 'react-router-dom'
+import { useLocation, useNavigation } from 'react-router-dom'
 
 import SkeletonHome from '@/components/SkeletonHome'
 
 const useScrollRestoration = () => {
   const { pathname } = useLocation()
   const navigation = useNavigation()
-  const navigationType = useNavigationType()
   const [loading, setLoading] = useState(false)
   const timer = useRef()
 
   useEffect(() => {
-    if (navigationType === 'POP') {
-      setLoading(false)
-      return
+    setLoading(true)
+    // force Repaint After Navigation
+    // mobile sometimes show blank page when navigate
+    if (navigation.state === 'idle') {
+      window.scrollBy(0, 1)
+      window.scrollBy(0, -1)
     }
 
-    setLoading(true)
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'auto' })
       setTimeout(() => setLoading(false), 150)
     }, 100)
     return () => clearTimeout(timer.current)
-  }, [pathname, navigation, navigationType])
+  }, [pathname, navigation])
 
   return { loading, setLoading }
 }
