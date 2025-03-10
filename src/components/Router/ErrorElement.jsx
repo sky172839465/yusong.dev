@@ -1,5 +1,5 @@
 import { RouteOff } from 'lucide-react'
-import { lazy } from 'react'
+import { lazy, Suspense } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 
 import { usePageExistCheck } from '@/apis/usePageExistCheck'
@@ -41,34 +41,36 @@ const ErrorElement = () => {
   }
 
   return (
-    <LazyMainLayout isFullScreen>
-      <div className='flex w-full justify-center text-center text-foreground'>
-        <div className='max-w-md'>
-          <h1 className='text-5xl font-bold'>
-            <RouteOff
-              className='mx-auto size-12'
-            />
-            {label.WAH}
-          </h1>
-          <p className='py-3'>
-            {label.MESSAGE}
-          </p>
-          <p className='py-3'>
-            {statusText || message}
-          </p>
-          <div className='mt-4'>
-            <Link
-              to={isZhTw ? '/' : `/${lang}`}
-              viewTransition
-            >
-              <Button>
-                {label.BACK_TO_HOME}
-              </Button>
-            </Link>
+    <Suspense fallback={<SkeletonHome />}>
+      <LazyMainLayout isFullScreen>
+        <div className='flex w-full justify-center text-center text-foreground'>
+          <div className='max-w-md'>
+            <h1 className='text-5xl font-bold'>
+              <RouteOff
+                className='mx-auto size-12'
+              />
+              {label.WAH}
+            </h1>
+            <p className='py-3'>
+              {label.MESSAGE}
+            </p>
+            <p className='py-3'>
+              {statusText || message}
+            </p>
+            <div className='mt-4'>
+              <Link
+                to={isZhTw ? '/' : `/${lang}`}
+                viewTransition
+              >
+                <Button>
+                  {label.BACK_TO_HOME}
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </LazyMainLayout>
+      </LazyMainLayout>
+    </Suspense>
   )
 }
 
