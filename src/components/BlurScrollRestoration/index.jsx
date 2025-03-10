@@ -23,6 +23,7 @@ const useScrollRestoration = () => {
 
   useEffect(() => {
     if (navigationType === 'POP') {
+      setLoading(false)
       return
     }
 
