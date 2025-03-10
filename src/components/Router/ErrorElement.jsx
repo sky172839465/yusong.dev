@@ -2,10 +2,10 @@ import { RouteOff } from 'lucide-react'
 import { lazy } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
-import SkeletonHome from '@/components/SkeletonHome'
-import useI18N, { LANG } from '@/hooks/useI18N'
 import { usePageExistCheck } from '@/apis/usePageExistCheck'
+import SkeletonHome from '@/components/SkeletonHome'
+import { Button } from '@/components/ui/button'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
