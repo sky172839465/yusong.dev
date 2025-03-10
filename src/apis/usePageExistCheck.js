@@ -13,11 +13,12 @@ export const fetcher = async (pathname) => {
     return false
   }
 
+  setTimeout(() => window.location.reload(), 1000 * 10)
   return true
 }
 
-export const usePageExistCheck = (options = {}) => {
+export const usePageExistCheck = (is404, options = {}) => {
   const { pathname } = useLocation()
-  const { isLoading, isValidating, ...restProps } = useSWR(pathname, fetcher, options)
+  const { isLoading, isValidating, ...restProps } = useSWR(is404 ? pathname : null, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
 }
