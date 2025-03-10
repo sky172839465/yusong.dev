@@ -3,7 +3,9 @@ import { lazy } from 'react'
 import { Link, useRouteError } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
+import SkeletonHome from '@/components/SkeletonHome'
 import useI18N, { LANG } from '@/hooks/useI18N'
+import { usePageExistCheck } from '@/apis/usePageExistCheck'
 
 const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
@@ -29,7 +31,14 @@ const ErrorElement = () => {
     statusText,
     message = label.PAGE_NOT_FOUND
   } = error
+  const { isLoading, data: isPageExist } = usePageExistCheck(message === label.PAGE_NOT_FOUND)
   console.error(error)
+
+  if (isLoading || isPageExist) {
+    return (
+      <SkeletonHome />
+    )
+  }
 
   return (
     <LazyMainLayout isFullScreen>
