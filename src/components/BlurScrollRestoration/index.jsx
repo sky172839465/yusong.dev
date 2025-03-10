@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigation } from 'react-router-dom'
+import { useLocation, useNavigation, useNavigationType } from 'react-router-dom'
 
 import SkeletonHome from '@/components/SkeletonHome'
 
 const useScrollRestoration = () => {
   const { pathname } = useLocation()
   const navigation = useNavigation()
+  const navigationType = useNavigationType()
   const [loading, setLoading] = useState(false)
   const timer = useRef()
 
@@ -18,18 +19,21 @@ const useScrollRestoration = () => {
 
     window.scrollBy(0, 1)
     window.scrollBy(0, -1)
-  }, pathname)
+  }, [pathname])
 
   useEffect(() => {
-    setLoading(true)
+    if (navigationType === 'POP') {
+      return
+    }
 
+    setLoading(true)
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'auto' })
       setTimeout(() => setLoading(false), 150)
     }, 100)
     return () => clearTimeout(timer.current)
-  }, [pathname, navigation])
+  }, [pathname, navigation, navigationType])
 
   return { loading, setLoading }
 }
