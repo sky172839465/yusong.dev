@@ -29,7 +29,7 @@ const ArticleIndex = (props) => {
   const { children } = props
   const { label } = useI18N(i18nMapping)
   const { isLoading, data: articles = [] } = useSeriesArticles()
-  const [sorting, setSorting] = useState(false)
+  const [sorting, setSorting] = useState(true)
   const order = sorting ? 'desc' : 'asc'
 
   if (isLoading) {
