@@ -19,7 +19,7 @@ const useScrollRestoration = () => {
   const navigation = useNavigation()
   const [loading, setLoading] = useState(false)
   const timer = useRef()
-  const currentPathname = useRef()
+  const currentPathname = useRef(pathname)
 
   useEffect(() => {
     if (currentPathname.current === pathname) {
