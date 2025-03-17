@@ -16,9 +16,11 @@ export const fetcher = async (query) => {
   return filter(data, query)
 }
 
-export const useArticles = (query, options = {}) => {
-  const { isLoading, isValidating, ...restProps } = useSWR(query || SEARCH_ALL, fetcher, options)
-  return { ...restProps, isLoading: isLoading || isValidating }
+const defaultFilter = v => v
+
+export const useArticles = (query, options = {}, filterData = defaultFilter) => {
+  const { isLoading, isValidating, data, ...restProps } = useSWR(query || SEARCH_ALL, fetcher, options)
+  return { ...restProps, data: filterData(data), isLoading: isLoading || isValidating }
 }
 
 export const preloadArticles = (query = null) => {

@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { isEmpty, omitBy } from 'lodash-es'
-import queryString from 'query-string'
+import { get, isString, keys, reduce } from 'lodash-es'
 import { useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
@@ -15,6 +14,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import useI18N, { LANG } from '@/hooks/useI18N'
+import useOmitQueryStringObject from '@/hooks/useOmitQueryStringObject'
+import getOmitObject from '@/utils/getOmitObject'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const FIELD = {
@@ -54,10 +55,18 @@ const defaultValues = {
   [FIELD.TAGS]: []
 }
 
-const getOmitFormValues = (formValues) => {
-  return omitBy(formValues, (value) => {
-    return isEmpty(value) || (Array.isArray(value) && value.every(isEmpty))
-  })
+const getConvertedDefaultValues = (qsObj) => {
+  const obj = { ...defaultValues, ...qsObj }
+  const convertedDefaultValues = reduce(keys(obj), (collect, key) => {
+    const value = get(obj, key)
+    if (key === FIELD.TAGS && isString(value)) {
+      collect[key] = [value]
+    } else {
+      collect[key] = value
+    }
+    return collect
+  }, {})
+  return convertedDefaultValues
 }
 
 const SearchForm = () => {
@@ -68,19 +77,21 @@ const SearchForm = () => {
     [FIELD.DESCRIPTION]: z.string(),
     [FIELD.TAGS]: z.array(z.string())
   })
-  const [searchParams, SetSearchParams] = useSearchParams()
-  const { control, register, handleSubmit } = useForm({
+  const [, SetSearchParams] = useSearchParams()
+  const qsObj = useOmitQueryStringObject()
+  const { control, register, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: searchParams.size === 0
-      ? defaultValues
-      : getOmitFormValues(queryString.parse(searchParams.toString(), { arrayFormat: 'repeat' }))
+    defaultValues: getConvertedDefaultValues(qsObj)
   })
   const tagsOptions = useMemo(() => tags.map((tag) => ({ value: tag, label: tag })), [tags])
 
-  const onReset = () => SetSearchParams({})
+  const onReset = () => {
+    reset(defaultValues)
+    SetSearchParams({})
+  }
 
   const onSubmit = (data) => {
-    const newFormValues = getOmitFormValues(data)
+    const newFormValues = getOmitObject(data)
     SetSearchParams(newFormValues)
   }
 
