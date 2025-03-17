@@ -5,7 +5,7 @@ import SearchForm from './Form'
 import SearchResult from './Result'
 
 const updateQueryString = (qsObj) => {
-  const params = new URLSearchParams(window.location.search)
+  const params = new URLSearchParams(qsObj)
   const search = params.toString()
   const newUrl = `${window.location.pathname}${qsObj ? `?${search}` : ''}`
   window.history.pushState({}, '', newUrl)
