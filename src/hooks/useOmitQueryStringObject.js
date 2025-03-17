@@ -1,12 +1,10 @@
-import queryString from 'query-string'
 import { useSearchParams } from 'react-router-dom'
 
-import getOmitObject from '@/utils/getOmitObject'
+import getOmitQueryStringObject from '@/utils/getOmitQueryStringObject'
 
 const useOmitQueryStringObject = (qsString) => {
   const [searchParams] = useSearchParams()
-  const qsObj = queryString.parse(qsString || searchParams.toString(), { arrayFormat: 'repeat' })
-  return getOmitObject(qsObj)
+  return getOmitQueryStringObject(qsString, searchParams)
 }
 
 export default useOmitQueryStringObject
