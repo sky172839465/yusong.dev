@@ -1,5 +1,5 @@
-import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import SearchForm from './Form'
 import SearchResult from './Result'
