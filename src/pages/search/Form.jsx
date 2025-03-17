@@ -7,7 +7,7 @@ import * as z from 'zod'
 
 import { useTags } from '@/apis/useTags'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
 import { Input } from '@/components/ui/input'
@@ -26,6 +26,8 @@ export const FIELD = {
 
 const i18nMapping = {
   [LANG.EN]: {
+    SEARCH_TITLE: 'Search page',
+    SEARCH_DESCRIPTION: 'Search all site by Title, Description and Tags',
     [FIELD.TITLE]: 'Title',
     [FIELD.DESCRIPTION]: 'Description',
     [FIELD.TAGS]: 'Tags',
@@ -37,6 +39,8 @@ const i18nMapping = {
     NOT_TAGS_FOUND: 'No results found.'
   },
   [LANG.ZH_TW]: {
+    SEARCH_TITLE: '查詢頁',
+    SEARCH_DESCRIPTION: '根據標題、描述或標籤查詢整個網站',
     [FIELD.TITLE]: '標題',
     [FIELD.DESCRIPTION]: '描述',
     [FIELD.TAGS]: '標籤',
@@ -97,6 +101,14 @@ const SearchForm = () => {
 
   return (
     <Card className='mx-auto w-full'>
+      <CardHeader>
+        <CardTitle>
+          {label.SEARCH_TITLE}
+        </CardTitle>
+        <CardDescription>
+          {label.SEARCH_DESCRIPTION}
+        </CardDescription>
+      </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-2'>
           <div>
@@ -166,7 +178,7 @@ const SearchForm = () => {
               )}
             />
           </div>
-          <div className='flex flex-row justify-between'>
+          <div className='mt-2 flex flex-row justify-between'>
             <Button type='button' onClick={onReset}>
               {label.RESET}
             </Button>
