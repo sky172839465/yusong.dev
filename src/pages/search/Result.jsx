@@ -41,7 +41,7 @@ const ALL_PAGE_TYPE = 'all'
 const ARTICLE_PAGE_TYPE = 'article'
 
 const SearchResult = (props) => {
-  const { searchParams } = props
+  const { searchParams = '' } = props
   const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = getOmitQueryStringObject(searchParams)
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
   const isAllPageType = type === ALL_PAGE_TYPE
