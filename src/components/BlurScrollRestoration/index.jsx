@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation, useNavigation } from 'react-router-dom'
 
-import SkeletonHome from '@/components/SkeletonHome'
 import FadeIn from '@/components/FadeIn'
+import SkeletonHome from '@/components/SkeletonHome'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 const LazyMainLayout = lazy(() => import('@/layouts/Main'))
