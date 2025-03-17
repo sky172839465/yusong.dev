@@ -40,8 +40,9 @@ const getFilterData = (qsObj = {}) => {
 const ALL_PAGE_TYPE = 'all'
 const ARTICLE_PAGE_TYPE = 'article'
 
-const SearchResult = () => {
-  const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = useOmitQueryStringObject()
+const SearchResult = (props) => {
+  const { searchParams } = props
+  const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = useOmitQueryStringObject(searchParams)
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
   const isAllPageType = type === ALL_PAGE_TYPE
   const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type }, {}, filterData)
