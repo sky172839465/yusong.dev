@@ -171,6 +171,7 @@ const Article = (props) => {
   const articleRef = useRef()
   const topRef = useRef()
   const { pathname } = useLocation()
+  const { isZhTw, lang } = useI18N()
   const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown, { suspense: true })
   const { isLoading } = usePageImages()
   const { html, attributes } = data
@@ -246,9 +247,15 @@ const Article = (props) => {
             </div>
             {tags.map((tag, index) => {
               return (
-                <Badge variant='secondary' key={index} className='h-9'>
-                  {tag}
-                </Badge>
+                <Link
+                  key={index}
+                  to={`/${isZhTw ? '' : `${lang}/`}search?tags=${tag}`}
+                  viewTransition
+                >
+                  <Badge variant='secondary' className='h-9'>
+                    {tag}
+                  </Badge>
+                </Link>
               )
             })}
           </div>
