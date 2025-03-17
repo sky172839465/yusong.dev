@@ -1,5 +1,5 @@
 import { filter } from 'lodash-es'
-import useSWR from 'swr'
+import useSWR, { preload } from 'swr'
 
 const SEARCH_ALL = '__SEARCH_ALL_TAGS__'
 
@@ -15,5 +15,9 @@ export const fetcher = async (tag) => {
 export const useTags = (tag, options = {}) => {
   const { isLoading, isValidating, ...restProps } = useSWR(tag || SEARCH_ALL, fetcher, options)
   return { ...restProps, isLoading: isLoading || isValidating }
+}
+
+export const preloadTags = (tag = null) => {
+  return preload(tag || SEARCH_ALL, fetcher)
 }
 

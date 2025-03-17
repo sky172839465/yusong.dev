@@ -23,7 +23,7 @@ export const useArticles = (query, options = {}, filterData = defaultFilter) => 
   return { ...restProps, data: filterData(data), isLoading: isLoading || isValidating }
 }
 
-export const preloadArticles = (query = null) => {
-  return preload(query, fetcher)
+export const preloadArticles = (query) => {
+  return preload(query || SEARCH_ALL, fetcher)
 }
 
