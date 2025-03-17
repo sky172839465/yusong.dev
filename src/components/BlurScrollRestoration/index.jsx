@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation, useNavigation } from 'react-router-dom'
 
+import FadeIn from '@/components/FadeIn'
 import SkeletonHome from '@/components/SkeletonHome'
 import useI18N, { LANG } from '@/hooks/useI18N'
+
+const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
 const i18nMapping = {
   [LANG.EN]: {
@@ -53,7 +56,11 @@ const BlurScrollRestoration = (props) => {
             {label.TITLE}
           </title>
         </Helmet>
-        <SkeletonHome />
+        <FadeIn>
+          <Suspense fallback={<SkeletonHome />}>
+            <LazyMainLayout />
+          </Suspense>
+        </FadeIn>
       </>
     )
   }
