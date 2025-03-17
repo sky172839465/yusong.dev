@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useRoutes } from '@/apis/useRoutes'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
-import useOmitQueryStringObject from '@/hooks/useOmitQueryStringObject'
+import getOmitQueryStringObject from '@/utils/getOmitQueryStringObject'
 
 import { FIELD } from './constants'
 
@@ -42,7 +42,7 @@ const ARTICLE_PAGE_TYPE = 'article'
 
 const SearchResult = (props) => {
   const { searchParams } = props
-  const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = useOmitQueryStringObject(searchParams)
+  const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = getOmitQueryStringObject(searchParams)
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
   const isAllPageType = type === ALL_PAGE_TYPE
   const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type }, {}, filterData)
