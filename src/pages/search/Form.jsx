@@ -113,6 +113,7 @@ const SearchForm = () => {
             <Input
               id={FIELD.TITLE}
               placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.TITLE]}`}
+              autoComplete='off'
               {...register(FIELD.TITLE)}
             />
           </div>
@@ -124,6 +125,7 @@ const SearchForm = () => {
             <Input
               id={FIELD.DESCRIPTION}
               placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.DESCRIPTION]}`}
+              autoComplete='off'
               {...register(FIELD.DESCRIPTION)}
             />
           </div>
