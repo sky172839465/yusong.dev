@@ -12,6 +12,15 @@ import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '@
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import useI18N, { LANG } from '@/hooks/useI18N'
 import useOmitQueryStringObject from '@/hooks/useOmitQueryStringObject'
 import getOmitObject from '@/utils/getOmitObject'
@@ -26,9 +35,14 @@ const i18nMapping = {
     [FIELD.TITLE]: 'Title',
     [FIELD.DESCRIPTION]: 'Description',
     [FIELD.TAGS]: 'Tags',
+    [FIELD.TYPE]: 'Type',
     ENTER_PLACEHOLDER: 'Enter',
     SELECT_PLACEHOLDER: 'Select',
     SEARCH_PLACEHOLDER: 'Search',
+    TYPE_PLACEHOLDER: 'Select page type',
+    ALL_PAGE_TYPE: 'All pages',
+    ARTICLE_PAGE_TYPE: 'Articles',
+    OTHER_PAGE_TYPE: 'Other pages',
     RESET: 'Reset',
     SUBMIT: 'Submit',
     NOT_TAGS_FOUND: 'No results found.'
@@ -39,9 +53,14 @@ const i18nMapping = {
     [FIELD.TITLE]: '標題',
     [FIELD.DESCRIPTION]: '描述',
     [FIELD.TAGS]: '標籤',
+    [FIELD.TYPE]: '類型',
     ENTER_PLACEHOLDER: '輸入',
     SELECT_PLACEHOLDER: '選擇',
     SEARCH_PLACEHOLDER: '查詢',
+    TYPE_PLACEHOLDER: '選擇頁面類型',
+    ALL_PAGE_TYPE: '全部頁面',
+    ARTICLE_PAGE_TYPE: '文章',
+    OTHER_PAGE_TYPE: '其他頁面',
     RESET: '重置',
     SUBMIT: '送出',
     NOT_TAGS_FOUND: '查無資料。'
@@ -54,7 +73,8 @@ const SearchForm = () => {
   const formSchema = z.object({
     [FIELD.TITLE]: z.string(),
     [FIELD.DESCRIPTION]: z.string(),
-    [FIELD.TAGS]: z.array(z.string())
+    [FIELD.TAGS]: z.array(z.string()),
+    [FIELD.TYPE]: z.string()
   })
   const [, SetSearchParams] = useSearchParams()
   const qsObj = useOmitQueryStringObject()
@@ -93,7 +113,7 @@ const SearchForm = () => {
             <Input
               id={FIELD.TITLE}
               placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.TITLE]}`}
-              {...register(FIELD.TITLE, { required: true })}
+              {...register(FIELD.TITLE)}
             />
           </div>
 
@@ -104,7 +124,7 @@ const SearchForm = () => {
             <Input
               id={FIELD.DESCRIPTION}
               placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.DESCRIPTION]}`}
-              {...register(FIELD.DESCRIPTION, { required: true })}
+              {...register(FIELD.DESCRIPTION)}
             />
           </div>
 
@@ -153,6 +173,40 @@ const SearchForm = () => {
               )}
             />
           </div>
+
+          <div>
+            <Label>
+              {label[FIELD.TYPE]}
+            </Label>
+            <Controller
+              control={control}
+              name={FIELD.TYPE}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className='w-full'>
+                    <SelectValue placeholder={label.TYPE_PLACEHOLDER} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>
+                        {label.TYPE_PLACEHOLDER}
+                      </SelectLabel>
+                      <SelectItem value='all'>
+                        {label.ALL_PAGE_TYPE}
+                      </SelectItem>
+                      <SelectItem value='article'>
+                        {label.ARTICLE_PAGE_TYPE}
+                      </SelectItem>
+                      <SelectItem value='website'>
+                        {label.OTHER_PAGE_TYPE}
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+
           <div className='mt-2 flex flex-row justify-between'>
             <Button type='button' onClick={onReset}>
               {label.RESET}

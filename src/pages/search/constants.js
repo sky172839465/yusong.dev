@@ -1,11 +1,13 @@
 export const FIELD = {
   TITLE: 'title',
   DESCRIPTION: 'description',
-  TAGS: 'tags'
+  TAGS: 'tags',
+  TYPE: 'type'
 }
 
 export const DEFAULT_VALUES = {
   [FIELD.TITLE]: '',
   [FIELD.DESCRIPTION]: '',
-  [FIELD.TAGS]: []
+  [FIELD.TAGS]: [],
+  [FIELD.TYPE]: 'article'
 }

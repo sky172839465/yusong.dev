@@ -6,10 +6,15 @@ const getConvertedDefaultValues = (qsObj) => {
   const obj = { ...DEFAULT_VALUES, ...qsObj }
   const convertedDefaultValues = reduce(keys(obj), (collect, key) => {
     const value = get(obj, key)
-    if (key === FIELD.TAGS && isString(value)) {
+    switch (true) {
+    case (key === FIELD.TAGS && isString(value)): {
       collect[key] = [value]
-    } else {
+      break
+    }
+    default: {
       collect[key] = value
+      break
+    }
     }
     return collect
   }, {})

@@ -19,26 +19,32 @@ const getFilterData = (qsObj = {}) => {
     return
   }
 
-  const filterData = (articles) => filter(articles, (article) => {
-    const isAllMatch = ![FIELD.TITLE, FIELD.DESCRIPTION, FIELD.TAGS].map((field) => {
-      const queryValue = get(qsObj, field)
-      if (isEmpty(queryValue)) {
-        return true
-      }
-
-      const articleValue = get(article, `data.${field}`)
-      return includes(articleValue, queryValue)
-    }).some((match) => !match)
-    return isAllMatch
-  })
+  const filterData = (articles) => {
+    return filter(articles, (article) => {
+      const isAllMatch = ![FIELD.TITLE, FIELD.DESCRIPTION, FIELD.TAGS].map((field) => {
+        const queryValue = get(qsObj, field)
+        if (isEmpty(queryValue)) {
+          return true
+        }
+  
+        const articleValue = get(article, `data.${field}`)
+        return includes(articleValue, queryValue)
+      }).some((match) => !match)
+      return isAllMatch
+    })
+  }
 
   return filterData
 }
 
+const ALL_PAGE_TYPE = 'all'
+const ARTICLE_PAGE_TYPE = 'article'
+
 const SearchResult = () => {
-  const qsObj = useOmitQueryStringObject()
+  const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = useOmitQueryStringObject()
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
-  const { isLoading, data: routes = [] } = useRoutes(null, {}, filterData)
+  const isAllPageType = type === ALL_PAGE_TYPE
+  const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type }, {}, filterData)
   return (
     <div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
