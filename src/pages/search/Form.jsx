@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { useSearchParams } from 'react-router-dom'
 import * as z from 'zod'
 
 import { useTags } from '@/apis/useTags'
@@ -68,6 +67,12 @@ const i18nMapping = {
   }
 }
 
+const updateQueryString = (qsObj) => {
+  const params = new URLSearchParams(window.location.search)
+  const newUrl = `${window.location.pathname}${qsObj ? `?${params.toString()}` : ''}`
+  window.history.pushState({}, '', newUrl)
+}
+
 const SearchForm = () => {
   const { label } = useI18N(i18nMapping)
   const { isLoading: isTagsLoading, data: tags = [] } = useTags()
@@ -77,7 +82,6 @@ const SearchForm = () => {
     [FIELD.TAGS]: z.array(z.string()),
     [FIELD.TYPE]: z.string()
   })
-  const [, SetSearchParams] = useSearchParams()
   const qsObj = useOmitQueryStringObject()
   const { control, register, handleSubmit, reset } = useForm({
     resolver: zodResolver(formSchema),
@@ -87,12 +91,12 @@ const SearchForm = () => {
 
   const onReset = () => {
     reset(DEFAULT_VALUES)
-    SetSearchParams({})
+    updateQueryString()
   }
 
   const onSubmit = (data) => {
     const newFormValues = getOmitObject(data)
-    SetSearchParams(newFormValues)
+    updateQueryString(newFormValues)
   }
 
   return (
