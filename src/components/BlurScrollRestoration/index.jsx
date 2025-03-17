@@ -44,22 +44,20 @@ const BlurScrollRestoration = (props) => {
   const { loading } = useScrollRestoration()
   const { label } = useI18N(i18nMapping)
 
-  if (loading) {
-    return (
-      <>
+  return (
+    <>
+      {loading && (
         <Helmet>
           <title>
             {label.TITLE}
           </title>
         </Helmet>
-        <div className='[&_main]:opacity-0'>
-          {children}
-        </div>
-      </>
-    )
-  }
-
-  return children
+      )}
+      <div className={`contents ${loading ? '[&_main]:opacity-0' : ''`}>
+        {children}
+      </div>
+    </>
+  )
 }
 
 export default BlurScrollRestoration
