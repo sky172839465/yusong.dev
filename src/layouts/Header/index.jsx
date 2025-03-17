@@ -1,4 +1,4 @@
-import { Globe, Moon, Sun } from 'lucide-react'
+import { Globe, Moon, Search, Sun } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -16,25 +16,29 @@ const i18nMapping = {
     CHANGE_LANG: 'Change language',
     LANG_EN: 'English',
     LANG_ZH_TW: 'Traditional Chinese',
+    SEARCH: 'Search',
     CHANGE_DARK_MODE: 'Change dark mode'
   },
   [LANG.ZH_TW]: {
     CHANGE_LANG: '切換語言',
     LANG_EN: '英文',
     LANG_ZH_TW: '繁體中文',
+    SEARCH: '查詢',
     CHANGE_DARK_MODE: '切換黑暗模式'
   }
 }
 
 const Header = () => {
   const { toggle } = useTheme()
-  const { label, lang, langPathNames, isEN, isZhTw } = useI18N(i18nMapping)
+  const { label, lang, langPathNames, isEN, isZhTw, pathname } = useI18N(i18nMapping)
+  const isRoot = pathname.replace(lang, '') === '/'
+  const isSearch = pathname.replace(`/${lang}`, '') === '/search'
 
   return (
     <header className='sticky top-0 z-10 flex-none border-b bg-background/50 backdrop-blur-md'>
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
-          to={isZhTw ? '/' : `/${lang}`}
+          to={`/${isZhTw ? '' : lang}`}
           className='flex items-center gap-2'
           viewTransition
         >
@@ -53,13 +57,28 @@ const Header = () => {
           </span>
         </Link>
         <div className='flex items-center space-x-4'>
-          <Suspense
-            fallback={(
-              <TriggerButton disabled />
-            )}
-          >
-            <LazySearchCommand />
-          </Suspense>
+          {(!isSearch && isRoot) && (
+            <Link
+              to={`/${isZhTw ? '' : `${lang}/`}search`}
+              viewTransition
+            >
+              <Button variant='outline' size='icon'>
+                <Search className='size-[1.2rem]' />
+                <span className='sr-only'>
+                  {label.SEARCH}
+                </span>
+              </Button>
+            </Link>
+          )}
+          {!isSearch && !isRoot && (
+            <Suspense
+              fallback={(
+                <TriggerButton disabled />
+              )}
+            >
+              <LazySearchCommand />
+            </Suspense>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='outline' size='icon'>

@@ -1,55 +1,16 @@
-import { Form, FormProvider, useForm, useWatch } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
 
-import { Input } from '@/components/ui/input'
-
-import { useArticles } from '../../apis/useArticles'
-
-const defaultValues = { title: 'Lazy' }
-
-const Result = () => {
-  const { title } = useWatch('title')
-  const { isLoading, data } = useArticles(title)
-
-  return (
-    <div className='grow rounded-md bg-foreground p-2 text-background'>
-      <div className='h-full overflow-y-scroll'>
-        {isLoading && (
-          <pre>
-            <code>
-              loading frontMatters
-            </code>
-          </pre>
-        )}
-        {!isLoading && JSON.stringify(data, null, 2).split('\n').map((row, index) => {
-          return (
-            <pre key={index}>
-              <code>
-                {row}
-              </code>
-            </pre>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
+import SearchForm from './Form'
+import SearchResult from './Result'
 
 const Demo = () => {
-  const methods = useForm({ defaultValues })
-
+  const { search } = useLocation()
   return (
-    <div className='flex h-[calc(100dvh-11rem)] flex-col gap-2'>
-      <FormProvider {...methods}>
-        <Form>
-          <Input
-            type='text'
-            placeholder='Type here'
-            className='w-full'
-            {...methods.register('title')}
-          />
-        </Form>
-        <Result />
-      </FormProvider>
+    <div className='m-auto w-full space-y-2 md:max-w-2xl lg:max-w-3xl'>
+      <div className='space-y-6'>
+        <SearchForm />
+        <SearchResult key={search} />
+      </div>
     </div>
   )
 }
