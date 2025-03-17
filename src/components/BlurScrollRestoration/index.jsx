@@ -16,20 +16,11 @@ const i18nMapping = {
 
 const useScrollRestoration = () => {
   const { pathname } = useLocation()
-  const { isZhTw, lang } = useI18N()
   const navigation = useNavigation()
   const [loading, setLoading] = useState(false)
   const timer = useRef()
-  const currentPathname = useRef(pathname)
 
   useEffect(() => {
-    if (
-      currentPathname.current === pathname &&
-      pathname.startsWith(`/${isZhTw ? '' : `${lang}/`}search`)
-    ) {
-      return
-    }
-
     setLoading(true)
     // force Repaint After Navigation
     // mobile sometimes show blank page when navigate
@@ -40,7 +31,6 @@ const useScrollRestoration = () => {
 
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
-      currentPathname.current = pathname
       window.scrollTo({ top: 0, behavior: 'auto' })
       setTimeout(() => setLoading(false), 150)
     }, 100)

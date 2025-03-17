@@ -36,8 +36,9 @@ const i18nMapping = {
     [FIELD.DESCRIPTION]: 'Description',
     [FIELD.TAGS]: 'Tags',
     [FIELD.TYPE]: 'Type',
-    ENTER_PLACEHOLDER: 'Enter',
-    SELECT_PLACEHOLDER: 'Select',
+    TITLE_PLACEHOLDER: 'Enter title',
+    DESCRIPTION_PLACEHOLDER: 'Enter description',
+    TAGS_PLACEHOLDER: 'Select tags',
     SEARCH_PLACEHOLDER: 'Search',
     TYPE_PLACEHOLDER: 'Select page type',
     ALL_PAGE_TYPE: 'All pages',
@@ -54,9 +55,9 @@ const i18nMapping = {
     [FIELD.DESCRIPTION]: '描述',
     [FIELD.TAGS]: '標籤',
     [FIELD.TYPE]: '類型',
-    ENTER_PLACEHOLDER: '輸入',
-    SELECT_PLACEHOLDER: '選擇',
-    SEARCH_PLACEHOLDER: '查詢',
+    TITLE_PLACEHOLDER: '輸入標題',
+    DESCRIPTION_PLACEHOLDER: '輸入描述',
+    TAGS_PLACEHOLDER: '選擇標籤',
     TYPE_PLACEHOLDER: '選擇頁面類型',
     ALL_PAGE_TYPE: '全部頁面',
     ARTICLE_PAGE_TYPE: '文章',
@@ -112,7 +113,7 @@ const SearchForm = () => {
             </Label>
             <Input
               id={FIELD.TITLE}
-              placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.TITLE]}`}
+              placeholder={label.TITLE_PLACEHOLDER}
               autoComplete='off'
               {...register(FIELD.TITLE)}
             />
@@ -124,7 +125,7 @@ const SearchForm = () => {
             </Label>
             <Input
               id={FIELD.DESCRIPTION}
-              placeholder={`${label.ENTER_PLACEHOLDER} ${label[FIELD.DESCRIPTION]}`}
+              placeholder={label.DESCRIPTION_PLACEHOLDER}
               autoComplete='off'
               {...register(FIELD.DESCRIPTION)}
             />
@@ -141,12 +142,12 @@ const SearchForm = () => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button variant='outline' className='w-full justify-start' disabled={isTagsLoading}>
-                      {field.value.length > 0 ? field.value.join(', ') : `${label.SELECT_PLACEHOLDER} ${label[FIELD.TAGS]}...`}
+                      {field.value.length > 0 ? field.value.join(', ') : label.TAGS_PLACEHOLDER}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className='w-full p-2'>
                     <Command>
-                      <CommandInput placeholder={`${label.SEARCH_PLACEHOLDER} ${label[FIELD.TAGS]}`} />
+                      <CommandInput placeholder={label.TAGS_PLACEHOLDER} />
                       <CommandList>
                         <CommandEmpty>
                           {label.NOT_TAGS_FOUND}
