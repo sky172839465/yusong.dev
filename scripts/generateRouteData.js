@@ -1,6 +1,6 @@
 import fs from 'fs'
 import matter from 'gray-matter'
-import { compact, flow, get, keyBy, map, orderBy, values } from 'lodash-es'
+import { compact, concat, flow, get, keyBy, map, orderBy, uniq, values } from 'lodash-es'
 import markdownit from 'markdown-it'
 import path from 'path'
 import { tryit } from 'radash'
@@ -95,8 +95,15 @@ const articles = await Promise.all(
     })
 )
 
+const tags = flow(
+  () => map(articles, 'data.tags'),
+  (tagsList) => concat(...tagsList),
+  uniq
+)()
+
 fs.writeFileSync(`${DATA_FOLDER}/routes.json`, JSON.stringify([...pages, ...articles]), { encoding: 'utf-8' })
 fs.writeFileSync(`${DATA_FOLDER}/articles.json`, JSON.stringify(articles), { encoding: 'utf-8' })
+fs.writeFileSync(`${DATA_FOLDER}/tags.json`, JSON.stringify(tags), { encoding: 'utf-8' })
 
 const series = pages.filter((page) => {
   return (page.path.startsWith('/article') || page.path.match(/^\/(\D+)?\/article/)) && page.file.endsWith('index.jsx')
