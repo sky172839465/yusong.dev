@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { get, isString, keys, reduce } from 'lodash-es'
 import { useMemo } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
@@ -17,12 +16,8 @@ import useI18N, { LANG } from '@/hooks/useI18N'
 import useOmitQueryStringObject from '@/hooks/useOmitQueryStringObject'
 import getOmitObject from '@/utils/getOmitObject'
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const FIELD = {
-  TITLE: 'title',
-  DESCRIPTION: 'description',
-  TAGS: 'tags'
-}
+import { DEFAULT_VALUES, FIELD } from './constants'
+import getConvertedDefaultValues from './getConvertedDefaultValues'
 
 const i18nMapping = {
   [LANG.EN]: {
@@ -53,26 +48,6 @@ const i18nMapping = {
   }
 }
 
-const defaultValues = {
-  [FIELD.TITLE]: '',
-  [FIELD.DESCRIPTION]: '',
-  [FIELD.TAGS]: []
-}
-
-const getConvertedDefaultValues = (qsObj) => {
-  const obj = { ...defaultValues, ...qsObj }
-  const convertedDefaultValues = reduce(keys(obj), (collect, key) => {
-    const value = get(obj, key)
-    if (key === FIELD.TAGS && isString(value)) {
-      collect[key] = [value]
-    } else {
-      collect[key] = value
-    }
-    return collect
-  }, {})
-  return convertedDefaultValues
-}
-
 const SearchForm = () => {
   const { label } = useI18N(i18nMapping)
   const { isLoading: isTagsLoading, data: tags = [] } = useTags()
@@ -90,7 +65,7 @@ const SearchForm = () => {
   const tagsOptions = useMemo(() => tags.map((tag) => ({ value: tag, label: tag })), [tags])
 
   const onReset = () => {
-    reset(defaultValues)
+    reset(DEFAULT_VALUES)
     SetSearchParams({})
   }
 

@@ -1,12 +1,12 @@
 import { filter, get, includes, isEmpty, random, times } from 'lodash-es'
 import { useMemo } from 'react'
 
-import { useArticles } from '@/apis/useArticles'
+import { useRoutes } from '@/apis/useRoutes'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
 import useOmitQueryStringObject from '@/hooks/useOmitQueryStringObject'
 
-import { FIELD } from './Form'
+import { FIELD } from './constants'
 
 const RANDOM = {
   ARTICLES: times(6),
@@ -38,7 +38,7 @@ const getFilterData = (qsObj = {}) => {
 const SearchResult = () => {
   const qsObj = useOmitQueryStringObject()
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
-  const { isLoading, data: articles = [] } = useArticles(null, {}, filterData)
+  const { isLoading, data: routes = [] } = useRoutes(null, {}, filterData)
   return (
     <div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
@@ -56,13 +56,13 @@ const SearchResult = () => {
             />
           )
         })}
-        {!isLoading && articles.map((article) => {
-          const { path } = article
+        {!isLoading && routes.map((route) => {
+          const { path, type } = route
           return (
             <SectionCard
               key={path}
-              article={article}
-              isArticle
+              article={route}
+              isArticle={type === 'article'}
             />
           )
         })}
