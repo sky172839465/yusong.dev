@@ -8,8 +8,13 @@ const useScrollRestoration = () => {
   const navigation = useNavigation()
   const [loading, setLoading] = useState(false)
   const timer = useRef()
+  const currentPathname = useRef()
 
   useEffect(() => {
+    if (currentPathname.current === pathname) {
+      return
+    }
+
     setLoading(true)
     // force Repaint After Navigation
     // mobile sometimes show blank page when navigate
@@ -20,6 +25,7 @@ const useScrollRestoration = () => {
 
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
+      currentPathname.current = pathname
       window.scrollTo({ top: 0, behavior: 'auto' })
       setTimeout(() => setLoading(false), 150)
     }, 100)
