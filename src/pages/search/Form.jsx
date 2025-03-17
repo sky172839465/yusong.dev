@@ -67,13 +67,8 @@ const i18nMapping = {
   }
 }
 
-const updateQueryString = (qsObj) => {
-  const params = new URLSearchParams(window.location.search)
-  const newUrl = `${window.location.pathname}${qsObj ? `?${params.toString()}` : ''}`
-  window.history.pushState({}, '', newUrl)
-}
-
-const SearchForm = () => {
+const SearchForm = (props) => {
+  const { onChange } = props
   const { label } = useI18N(i18nMapping)
   const { isLoading: isTagsLoading, data: tags = [] } = useTags()
   const formSchema = z.object({
@@ -91,12 +86,12 @@ const SearchForm = () => {
 
   const onReset = () => {
     reset(DEFAULT_VALUES)
-    updateQueryString()
+    onChange()
   }
 
   const onSubmit = (data) => {
     const newFormValues = getOmitObject(data)
-    updateQueryString(newFormValues)
+    onChange(newFormValues)
   }
 
   return (
