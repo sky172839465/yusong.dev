@@ -7,7 +7,6 @@ import { Outlet } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import CustomSwipe from '@/components/CustomSwipe'
-import FadeIn from '@/components/FadeIn'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import fetcher from '@/utils/fetcher'
 
@@ -53,9 +52,7 @@ const Root = () => {
           >
             <AnimatePresence>
               <LazyBlurScrollRestoration>
-                <FadeIn exit={{ opacity: 0 }}>
-                  <Outlet />
-                </FadeIn>
+                <Outlet />
               </LazyBlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
