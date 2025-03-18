@@ -36,7 +36,7 @@ const withErrorElement = (routes) => routes.map((item) => {
         <Layout>
           {isMarkdown && (
             <Suspense fallback={<LazySkeletonArticle />}>
-                <LazyArticle {...item} />
+              <LazyArticle {...item} />
             </Suspense>
           )}
           {!isMarkdown && (
