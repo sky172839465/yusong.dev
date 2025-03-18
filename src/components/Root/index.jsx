@@ -52,7 +52,7 @@ const Root = () => {
           >
             <AnimatePresence>
               <BlurScrollRestoration>
-                  <Outlet />
+                <Outlet />
               </BlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
