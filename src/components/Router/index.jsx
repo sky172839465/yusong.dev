@@ -36,17 +36,17 @@ const withErrorElement = (routes) => routes.map((item) => {
       >
         <Layout>
           <FadeIn>
-          {isMarkdown && (
-            <Suspense fallback={<LazySkeletonArticle />}>
-              <LazyArticle {...item} />
-            </Suspense>
-          )}
-          {!isMarkdown && (
-            <>
-              <Comp />
-              <LazyMeta fetchMetaData={meta} />
-            </>
-          )}
+            {isMarkdown && (
+              <Suspense fallback={<LazySkeletonArticle />}>
+                <LazyArticle {...item} />
+              </Suspense>
+            )}
+            {!isMarkdown && (
+              <>
+                <Comp />
+                <LazyMeta fetchMetaData={meta} />
+              </>
+            )}
           </FadeIn>
         </Layout>
       </Suspense>
