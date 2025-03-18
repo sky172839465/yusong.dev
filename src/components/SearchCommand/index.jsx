@@ -145,7 +145,8 @@ const SearchResult = (props) => {
   })
 }
 
-const SearchCommand = () => {
+const SearchCommand = (props) => {
+  const { disabled } = props
   const { label, lang } = useI18N(i18nMapping)
   const { value: isOpen, setValue: setIsOpen, setTrue: setOpen, setFalse: setClose } = useBoolean(false)
   const { isLoading: isRoutesLoading } = useRoutes(isOpen ? { lang } : null)
@@ -154,7 +155,7 @@ const SearchCommand = () => {
     <>
       <TriggerButton
         onClick={setOpen}
-        disabled={isRoutesLoading}
+        disabled={isRoutesLoading || disabled}
       />
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogHeader className='sr-only'>
