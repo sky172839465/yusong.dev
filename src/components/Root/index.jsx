@@ -6,12 +6,12 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
+import BlurScrollRestoration from '@/components/BlurScrollRestoration'
 import CustomSwipe from '@/components/CustomSwipe'
 import FadeIn from '@/components/FadeIn'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import fetcher from '@/utils/fetcher'
 
-const LazyBlurScrollRestoration = lazy(() => import('@/components/BlurScrollRestoration'))
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('@/components/Root/motionFeatures.js').then(res => res.default)
 
@@ -52,11 +52,11 @@ const Root = () => {
             strict
           >
             <AnimatePresence>
-              <LazyBlurScrollRestoration>
+              <BlurScrollRestoration>
                 <FadeIn exit={{ opacity: 0 }}>
                   <Outlet />
                 </FadeIn>
-              </LazyBlurScrollRestoration>
+              </BlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
         </HelmetProvider>
