@@ -8,7 +8,6 @@ import { SWRConfig } from 'swr'
 
 import BlurScrollRestoration from '@/components/BlurScrollRestoration'
 import CustomSwipe from '@/components/CustomSwipe'
-// import FadeIn from '@/components/FadeIn'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import fetcher from '@/utils/fetcher'
 
@@ -53,9 +52,7 @@ const Root = () => {
           >
             <AnimatePresence>
               <BlurScrollRestoration>
-                // <FadeIn exit={{ opacity: 0 }}>
                   <Outlet />
-                // </FadeIn>
               </BlurScrollRestoration>
             </AnimatePresence>
           </LazyMotion>
