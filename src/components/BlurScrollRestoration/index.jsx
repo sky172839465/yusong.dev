@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation, useNavigation } from 'react-router-dom'
 
+import FadeIn from '@/components/FadeIn'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 const i18nMapping = {
@@ -47,9 +48,9 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <div className={`contents [&_main]:transition-opacity ${loading ? '[&_main]:opacity-0' : '[&_main]:opacity-100'}`}>
+      <FadeIn className={`contents ${loading ? '[&_main]:invisible' : ''}`}>
         {children}
-      </div>
+      </FadeIn>
     </>
   )
 }
