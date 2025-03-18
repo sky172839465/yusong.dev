@@ -57,7 +57,7 @@ const Header = () => {
           </span>
         </Link>
         <div className='flex items-center space-x-4'>
-          {(!isSearch && isRoot) && (
+          {isRoot && (
             <Link
               to={`/${isZhTw ? '' : `${lang}/`}search`}
               viewTransition
@@ -70,13 +70,13 @@ const Header = () => {
               </Button>
             </Link>
           )}
-          {!isSearch && !isRoot && (
+          {!isRoot && (
             <Suspense
               fallback={(
                 <TriggerButton disabled />
               )}
             >
-              <LazySearchCommand />
+              <LazySearchCommand disabled={isSearch} />
             </Suspense>
           )}
           <DropdownMenu>
