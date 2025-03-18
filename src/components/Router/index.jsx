@@ -4,7 +4,7 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import FadeIn from '@/components/FadeIn'
+// import FadeIn from '@/components/FadeIn'
 import Root from '@/components/Root/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
@@ -35,7 +35,7 @@ const withErrorElement = (routes) => routes.map((item) => {
         )}
       >
         <Layout>
-          <FadeIn>
+          // <FadeIn>
             {isMarkdown && (
               <Suspense fallback={<LazySkeletonArticle />}>
                 <LazyArticle {...item} />
@@ -47,7 +47,7 @@ const withErrorElement = (routes) => routes.map((item) => {
                 <LazyMeta fetchMetaData={meta} />
               </>
             )}
-          </FadeIn>
+          // </FadeIn>
         </Layout>
       </Suspense>
     ),
