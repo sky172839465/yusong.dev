@@ -2,7 +2,7 @@
   "name": "yusong.tw",
   "homepage": "https://yusong.tw",
   "private": true,
-  "version": "0.367.0",
+  "version": "0.368.0",
   "type": "module",
   "scripts": {
     "analyze": "analyze -c vite.config.js",
