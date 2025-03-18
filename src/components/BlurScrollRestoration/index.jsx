@@ -26,7 +26,7 @@ const useScrollRestoration = () => {
     timer.current = setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'auto' })
       setTimeout(() => setLoading(false), 100)
-    }, 150)
+    }, 50)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
@@ -47,7 +47,7 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <div className={`contents ${loading ? '[&_main]:opacity-0' : ''}`}>
+      <div className={`contents ${loading ? '[&_main]:invisible' : ''}`}>
         {children}
       </div>
     </>
