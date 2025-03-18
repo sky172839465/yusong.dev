@@ -53,7 +53,7 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <div className={`contents ${loading ? '[&_main]:opacity-0' : ''`}>
+      <div className={`contents ${loading ? '[&_main]:opacity-0' : ''}`}>
         {children}
       </div>
     </>
