@@ -57,7 +57,11 @@ const routes = getRoutes()
 const Router = () => {
   const totalRoutes = [
     {
-      element: <Root />,
+      element: (
+        <Suspense fallback={<SkeletonHome />}>
+          <Root />
+        </Suspense>
+      ),
       loader,
       errorElement: <ErrorElement />,
       children: [
