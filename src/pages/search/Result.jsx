@@ -1,4 +1,4 @@
-import { filter, get, includes, isEmpty, random, times } from 'lodash-es'
+import { filter, get, includes, isArray, isEmpty, random, some, times } from 'lodash-es'
 import { useMemo } from 'react'
 
 import { useRoutes } from '@/apis/useRoutes'
@@ -28,6 +28,11 @@ const getFilterData = (qsObj = {}) => {
         }
   
         const articleValue = get(article, `data.${field}`)
+        if (isArray(queryValue)) {
+          return some(queryValue, (item) => {
+            return includes(articleValue, item)
+          })
+        }
         return includes(articleValue, queryValue)
       }).some((match) => !match)
       return isAllMatch
