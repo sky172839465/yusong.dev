@@ -1,4 +1,4 @@
-import { filter, get, includes, isArray, isEmpty, random, some, times } from 'lodash-es'
+import { every, filter, get, includes, isEmpty, random, split, times } from 'lodash-es'
 import { useMemo } from 'react'
 
 import { useRoutes } from '@/apis/useRoutes'
@@ -22,15 +22,16 @@ const getFilterData = (qsObj = {}) => {
   const filterData = (articles) => {
     return filter(articles, (article) => {
       const isAllMatch = ![FIELD.TITLE, FIELD.DESCRIPTION, FIELD.TAGS].map((field) => {
-        const queryValue = get(qsObj, field)
+        const queryValue = get(qsObj, field, '')
         if (isEmpty(queryValue)) {
           return true
         }
   
         const articleValue = get(article, `data.${field}`)
-        if (isArray(queryValue)) {
-          return some(queryValue, (item) => {
-            return includes(articleValue, item)
+        if (field === FIELD.TAGS) {
+          const tags = split(queryValue, ',')
+          return every(tags, (tag) => {
+            return includes(articleValue, tag)
           })
         }
         return includes(articleValue, queryValue)
