@@ -22,7 +22,8 @@ const registerServiceWorker = () => {
 
     result.update()
   }
-  registerSW()
+
+  setTimeout(() => registerSW(), 1500)
 }
 
 window.addEventListener('load', registerServiceWorker)
