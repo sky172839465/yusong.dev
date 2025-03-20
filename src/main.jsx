@@ -6,7 +6,11 @@ import { createRoot } from 'react-dom/client'
 
 import Router from '@/components/Router'
 
-if ('serviceWorker' in navigator) {
+const registerServiceWorker = () => {
+  if (!('serviceWorker' in navigator)) {
+    return
+  }
+
   const registerSW = async () => {
     const [error, result] = await tryit(
       () => navigator.serviceWorker.register('/sw.js')
@@ -20,6 +24,8 @@ if ('serviceWorker' in navigator) {
   }
   registerSW()
 }
+
+window.addEventListener('load', registerServiceWorker)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
