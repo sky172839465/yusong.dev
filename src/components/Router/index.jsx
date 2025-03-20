@@ -4,7 +4,7 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
-import Root from '@/components/Root/index.jsx'
+// import Root from '@/components/Root/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
 import ErrorElement from './ErrorElement.jsx'
@@ -12,6 +12,7 @@ import getRoutes from './getRoutes.js'
 import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
+const LazyRoot = lazy(() => import('@/components/Root/index.jsx'))
 const LazySkeletonArticle = lazy(() => import('@/components/SkeletonArticle/index.jsx'))
 const LazyMeta = lazy(() => import('@/components/Meta'))
 
@@ -57,7 +58,7 @@ const routes = getRoutes()
 const Router = () => {
   const totalRoutes = [
     {
-      element: <Root />,
+      element: <LazyRoot />,
       loader,
       errorElement: <ErrorElement />,
       children: [
