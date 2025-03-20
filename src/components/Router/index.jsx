@@ -60,10 +60,10 @@ const Router = () => {
     {
       element: (
         <Suspense
-        fallback={(
-          <SkeletonHome className='fixed top-0 z-0' />
-        )}
-      >
+          fallback={(
+            <SkeletonHome className='fixed top-0 z-0' />
+          )}
+        >
           <LazyRoot />
         </Suspense>
       ),
