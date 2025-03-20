@@ -9,7 +9,7 @@ import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
 import ErrorElement from './ErrorElement.jsx'
 import getRoutes from './getRoutes.js'
-import loader from './index.loader'
+// import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazyRoot = lazy(() => import('@/components/Root/index.jsx'))
@@ -67,7 +67,7 @@ const Router = () => {
           <LazyRoot />
         </Suspense>
       ),
-      loader,
+      // loader,
       errorElement: <ErrorElement />,
       children: [
         ...withErrorElement(routes),
