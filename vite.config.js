@@ -38,7 +38,14 @@ export default ({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['react', 'react-dom'] // Move common libraries to a separate chunk
+            vendor: [
+              'react',
+              'react-dom',
+              'react-router-dom',
+              'lodash-es',
+              'axios',
+              'swr'
+            ] // Move common libraries to a separate chunk
           }
         }
       }
