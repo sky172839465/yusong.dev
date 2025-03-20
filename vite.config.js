@@ -34,21 +34,7 @@ export default ({ mode }) => {
     },
     build: {
       minify: 'esbuild',
-      cssCodeSplit: true,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: [
-              'react',
-              'react-dom',
-              'react-router-dom',
-              'lodash-es',
-              'axios',
-              'swr'
-            ] // Move common libraries to a separate chunk
-          }
-        }
-      }
+      cssCodeSplit: true
     },
     define: {
       'window.IS_PROD': `${isProd}`
