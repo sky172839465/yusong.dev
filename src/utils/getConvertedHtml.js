@@ -1,5 +1,18 @@
 import { get, isEmpty, unescape } from 'lodash-es'
-import { codeToHtml } from 'shiki'
+import { createHighlighter } from 'shiki/bundle-web.mjs'
+
+const langs = [
+  'html',
+  'css',
+  'js',
+  'json',
+  'markdown'
+]
+
+const highlighter = await createHighlighter({
+  langs,
+  themes: ['github-dark', 'github-light']
+})
 
 const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
   const { lang = '', code = '', highlight = '' } = highlightResult
@@ -48,11 +61,12 @@ const getConvertedHtml = async (originHtml, fileFolder) => {
   const results = await Promise.all(
     matches.map((match) => {
       const { lang, code } = match
-      return codeToHtml(code, {
-        lang,
+      const highlight = highlighter.codeToHtml(code, {
+        lang: lang === 'mermaid' ? 'markdown' : lang,
         themes: { light: 'github-light', dark: 'github-dark' },
         defaultColor: false
-      }).then((highlight) => ({ lang, code, highlight }))
+      })
+      return { lang, code, highlight }
     })
   )
   let highlightHtml = html
