@@ -34,7 +34,8 @@ export default ({ mode }) => {
     },
     build: {
       minify: 'esbuild',
-      cssCodeSplit: true
+      cssCodeSplit: true,
+      sourcemap: true
     },
     define: {
       'window.IS_PROD': `${isProd}`
