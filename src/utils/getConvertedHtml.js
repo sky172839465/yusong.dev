@@ -9,7 +9,7 @@ const langs = [
   'markdown'
 ]
 
-const highlighter = await createHighlighter({
+const highlighterPromise = createHighlighter({
   langs,
   themes: ['github-dark', 'github-light']
 })
@@ -35,6 +35,7 @@ const getCodeHighlightWithClickToClipboard = (highlightResult = {}) => {
 }
 
 const getConvertedHtml = async (originHtml, fileFolder) => {
+  const highlighter = await highlighterPromise
   const html = unescape(
     originHtml
       // RWD table
