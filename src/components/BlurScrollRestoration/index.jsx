@@ -35,10 +35,17 @@ const useScrollRestoration = () => {
         window.scrollTo({ top: 0, behavior: 'auto' })
       }
 
-      setTimeout(() => {
+      const showContent = (count = 0) => {
+        if (window.scrollY !== 0 && count < 8) {
+          window.scrollTo({ top: 0, behavior: 'auto' })
+          setTimeout(() => showContent(count + 1), 20)
+          return
+        }
+        
         loadingState.current = false
         setLoading(false)
-      }, 50)
+      }
+      setTimeout(() => showContent(), 60)
     }, 80)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
