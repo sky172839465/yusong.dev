@@ -1,4 +1,4 @@
-import { Globe, Moon, Search, Sun } from 'lucide-react'
+import { Languages, Moon, Search, Sun } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -82,7 +82,7 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='outline' size='icon'>
-                <Globe className='size-[1.2rem]' />
+                <Languages className='size-[1.2rem]' />
                 <span className='sr-only'>
                   {label.CHANGE_LANG}
                 </span>
