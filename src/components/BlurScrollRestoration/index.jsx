@@ -38,8 +38,8 @@ const useScrollRestoration = () => {
       setTimeout(() => {
         loadingState.current = false
         setLoading(false)
-      }, 100)
-    }, 100)
+      }, 50)
+    }, 80)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
