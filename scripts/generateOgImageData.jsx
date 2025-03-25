@@ -39,7 +39,8 @@ const getOgImgComponent = (route) => {
         style={{
           fontFamily: 'Noto Sans TC',
           fontWeight: 700,
-          ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
+          background: 'linear-gradient(to bottom right, #000, #1c398e)',
+          ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
         }}
       >
         <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
@@ -70,11 +71,12 @@ const getOgImgComponent = (route) => {
       style={{
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
-        ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
+        background: 'linear-gradient(to bottom right, #000, #1c398e)',
+        ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
       }}
     >
       <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
-        <div style={twj('flex items-center')}>
+        <div style={twj('flex items-center gap-6')}>
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
               style={twj('rounded-sm')}
@@ -105,7 +107,7 @@ const getOgImgComponent = (route) => {
         <div
           style={{
             fontSize: '20px',
-            ...twj(`flex gap-6 ${isNoTags ? 'invisible' : ''}`)
+            ...twj(`flex gap-6 ${isNoTags ? 'hidden' : ''}`)
           }}
         >
           {tags.map((tag, index) => (
