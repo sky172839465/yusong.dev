@@ -74,7 +74,8 @@ jobs:
           MODIFIED_FILES: ${{ needs.pre-generate-images.outputs.files }}
         run: |
           npm install
-          npm run gen:data
+          # npm run gen:data
+          MODIFIED_FILES='' npm run gen:data
 
       - name: Check for changes
         id: git_diff
