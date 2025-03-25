@@ -39,7 +39,8 @@ const getOgImgComponent = (route) => {
         style={{
           fontFamily: 'Noto Sans TC',
           fontWeight: 700,
-          ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
+          background: 'linear-gradient(to bottom right, #000, #1c398e)',
+          ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
         }}
       >
         <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
@@ -70,7 +71,8 @@ const getOgImgComponent = (route) => {
       style={{
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
-        ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
+        background: 'linear-gradient(to bottom right, #000, #1c398e)',
+        ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
       }}
     >
       <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
