@@ -25,28 +25,56 @@ const modifiedRoutes = IS_MODIFIED_FILES_EXIST
 const favicon = fs.readFileSync('public/favicon.svg', 'utf-8').replace(/>\s+</g, '><')
 console.log('Modified routes', modifiedRoutes)
 
+const HOMEPAGE_TITLE = 'YUSONG.TW'
+
 const getOgImgComponent = (route) => {
   const { data = {} } = route
   const { title, tags = [] } = data
   const isNoTags = tags[0] === false
-  const OgImg = (
+  const isHomepage = title === HOMEPAGE_TITLE
+  let OgImg
+  if (isHomepage) {
+    OgImg = (
+      <div
+        style={{
+          fontFamily: 'Noto Sans TC',
+          fontWeight: 700,
+          ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
+        }}
+      >
+        <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
+          <div style={twj('flex rounded-md bg-white p-2')}>
+            <img
+              style={twj('rounded-sm')}
+              src={`data:image/svg+xml,${favicon}`}
+              width={150}
+              height={150}
+            />
+          </div>
+          <span
+            style={{
+              fontSize: '120px',
+              ...twj('flex')
+            }}
+          >
+            {HOMEPAGE_TITLE}
+          </span>
+        </div>
+      </div>
+    )
+    return OgImg
+  }
+  
+  OgImg = (
     <div
       style={{
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
-        ...twj('flex flex-col w-full bg-white')
+        ...twj('w-full h-full flex flex-col justify-between p-12 bg-gradient-to-br from-black to-blue-900 text-white')
       }}
     >
-      <div
-        style={{
-          fontSize: '70px',
-          ...twj('flex h-[84%] items-center justify-center px-10')
-        }}
-      >
-        {title}
-      </div>
-      <div style={twj('flex h-[16%] w-full items-center justify-between bg-black px-8 text-white')}>
-        <div style={twj('flex items-center gap-2')}>
+      <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
+        <div style={twj('flex items-center')}>
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
               style={twj('rounded-sm')}
@@ -57,24 +85,33 @@ const getOgImgComponent = (route) => {
           </div>
           <span
             style={{
-              fontSize: '30px',
+              fontSize: '50px',
               ...twj('flex')
             }}
           >
-            YUSONG.TW
+            {HOMEPAGE_TITLE}
           </span>
         </div>
+      </div>
+      <div
+        style={{
+          fontSize: '100px',
+          ...twj('flex h-[84%] items-center justify-center px-10')
+        }}
+      >
+        {title}
+      </div>
+      <div style={twj('flex h-[8%] w-full items-center justify-end text-white')}>
         <div
           style={{
             fontSize: '20px',
-            ...twj(`flex gap-6 ${isNoTags ? 'hidden' : ''}`)
+            ...twj(`flex gap-6 ${isNoTags ? 'invisible' : ''}`)
           }}
         >
           {tags.map((tag, index) => (
             <div
               style={{
-                border: '4px solid white',
-                ...twj('flex rounded-md p-2')
+                ...twj('flex p-4 bg-black/30 backdrop-blur-md text-white text-xl rounded-md')
               }}
               key={index}
             >
