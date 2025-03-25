@@ -74,7 +74,7 @@ const getOgImgComponent = (route) => {
       }}
     >
       <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
-        <div style={twj('flex items-center')}>
+        <div style={twj('flex items-center gap-6')}>
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
               style={twj('rounded-sm')}
