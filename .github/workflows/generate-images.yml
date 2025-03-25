@@ -56,7 +56,7 @@ jobs:
 
   generate-images:
     needs: pre-generate-images
-    if: needs.pre-generate-images.outputs.changed == 'true'
+    # if: needs.pre-generate-images.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
