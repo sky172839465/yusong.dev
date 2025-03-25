@@ -107,7 +107,7 @@ const getOgImgComponent = (route) => {
         <div
           style={{
             fontSize: '20px',
-            ...twj(`flex gap-6 ${isNoTags ? 'invisible' : ''}`)
+            ...twj(`flex gap-6 ${isNoTags ? 'hidden' : ''}`)
           }}
         >
           {tags.map((tag, index) => (
