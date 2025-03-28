@@ -1,10 +1,12 @@
 import './index.css'
 
 import { tryit } from 'radash'
-import { StrictMode } from 'react'
+import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import Router from '@/components/Router'
+import SkeletonHome from '@/components/SkeletonHome/index.jsx'
+
+const LazyRouter = lazy(() => import('@/components/Router'))
 
 const registerServiceWorker = () => {
   if (!('serviceWorker' in navigator)) {
@@ -30,6 +32,12 @@ window.addEventListener('load', registerServiceWorker)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router />
+    <Suspense
+      fallback={(
+        <SkeletonHome className='fixed top-0 z-0' />
+      )}
+    >
+      <LazyRouter />
+    </Suspense>
   </StrictMode>
 )
