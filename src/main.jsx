@@ -1,7 +1,7 @@
 import './index.css'
 
 import { tryit } from 'radash'
-import { StrictMode, Suspense, lazy } from 'react'
+import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
