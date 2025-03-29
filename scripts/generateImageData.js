@@ -6,7 +6,7 @@ import { glob } from 'tinyglobby'
 
 import { DATA_FOLDER, PUBLIC_DATA_FOLDER, ROUTE_FOLDER } from './constants.js'
 
-const MODIFIED_FILES = (process.env.MODIFIED_FILESS || '').split('\n').filter(Boolean)
+const MODIFIED_FILES = (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean)
 const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
 
 const inputFolder = 'src'  // Folder where the original images are
