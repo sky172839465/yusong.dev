@@ -1,4 +1,4 @@
-import { flow, get, join, last, map, pick } from 'lodash-es'
+import { flow, get, join, last, map, pick, size } from 'lodash-es'
 
 import getFileUrl from '@/utils/getFileUrl'
 
@@ -8,11 +8,11 @@ import getFileUrl from '@/utils/getFileUrl'
 //   ''
 // ]
 
-const SIZE_QUERY = [
-  '(max-width: 768px) 100vw',
-  '(max-width: 1024px) 90vw',
-  null
-]
+// const SIZE_QUERY = [
+//  '(max-width: 768px) 100vw',
+//  '(max-width: 1024px) 90vw',
+//  null
+// ]
 
 const getRwdImageAttributes = (imageData) => {
   if (!imageData) {
@@ -27,9 +27,10 @@ const getRwdImageAttributes = (imageData) => {
     () => map(imageSizes, ({ path, width }) => `${getFileUrl(`/${path}`)} ${width}w`),
     srcSetList => join(srcSetList, ', ')
   )()
+  const lastIndex = size(imageSizes) - 1
   const sizes = flow(
     // () => map(imageSizes, ({ width }, index) => `${SIZE_QUERY[index]}${width}px`),
-    () => map(imageSizes, ({ width }, index) => SIZE_QUERY[index] || `${width}px`),
+    () => map(imageSizes, ({ width }, index) => index !== lastIndex ? `(max-width: ${width}px) ${width}px` : `${width}px`),
     (sizeList) => join(sizeList, ', ')
   )()
   const dimensions = pick(largeImage, ['width', 'height'])

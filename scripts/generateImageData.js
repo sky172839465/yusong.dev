@@ -12,18 +12,21 @@ const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
 const inputFolder = 'src'  // Folder where the original images are
 const SIZE = {
   SMALL: 'small',   // Small size for mobile
+  TABLET: 'tablet',
   MEDIUM: 'medium',  // Medium size for tablets
   LARGE: 'large'   // Large size for desktops
 }
 const QUALITY = {
   [SIZE.SMALL]: 90,
+  [SIZE.TABLET]: 80,
   [SIZE.MEDIUM]: 80,
   [SIZE.LARGE]: 80
 }
 const sizes = {
-  [SIZE.SMALL]: 768,
+  [SIZE.SMALL]: 480,
+  [SIZE.TABLET]: 768,
   [SIZE.MEDIUM]: 1024,
-  [SIZE.LARGE]: 1200
+  [SIZE.LARGE]: 1600
 }
 
 // Get dimensions of an image
@@ -67,7 +70,7 @@ async function processImages() {
     const resizeOriginWidth = originalDimensions.width > 1920 ? 1920 : originalDimensions.width
     if (isNeedTransform) {
       await sharp(filePath)
-        .webp({ quality: 100 })
+        .webp({ quality: 90 })
         .resize({ width: resizeOriginWidth })
         .toFile(webpFilePath)
     }
