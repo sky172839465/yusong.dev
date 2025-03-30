@@ -277,6 +277,7 @@ const Article = (props) => {
           alt={title}
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
+          fetchpriority='high'
           loading='eager'
           sizes='
             (max-width: 640px) 100vw, 
