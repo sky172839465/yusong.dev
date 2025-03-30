@@ -9,8 +9,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator'
 import getI18N from '@/utils/getI18N'
 
+const DEFAULT_IMAGE_SIZES = `
+  (max-width: 640px) calc(100vw-2rem), 
+  (max-width: 768px) 608px, 
+  65ch
+`
+
 const SectionCard = (props) => {
-  const { article: { file = '', path = '', data = {} } = {}, isArticle } = props
+  const { article: { file = '', path = '', data = {} } = {}, isArticle, imageSizes = DEFAULT_IMAGE_SIZES } = props
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
@@ -36,6 +42,7 @@ const SectionCard = (props) => {
             className={`w-full rounded-t-lg object-contain ${isEmpty(imageData) ? 'absolute top-0 rounded-b-none' : ''}`}
             alt={title}
             isLoading={isLoading}
+            sizes={imageSizes}
             fetchpriority='high'
             loading='eager'
           />
