@@ -36,6 +36,8 @@ const SectionCard = (props) => {
             className={`w-full rounded-t-lg object-contain ${isEmpty(imageData) ? 'absolute top-0 rounded-b-none' : ''}`}
             alt={title}
             isLoading={isLoading}
+            fetchpriority='high'
+            loading='eager'
           />
         )}
         <CardHeader className={`${isArticle ? 'grow' : ''} gap-2`}>
