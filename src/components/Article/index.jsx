@@ -278,6 +278,12 @@ const Article = (props) => {
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
           isLoading={isLoading}
           loading='eager'
+          sizes='
+            (max-width: 640px) 100vw, 
+            (max-width: 1024px) 90vw, 
+            (max-width: 1280px) 80vw, 
+            75vw
+          '
         />
         <div
           key={pathname}
