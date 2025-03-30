@@ -280,10 +280,9 @@ const Article = (props) => {
           fetchpriority='high'
           loading='eager'
           sizes='
-            (max-width: 640px) 100vw, 
-            (max-width: 1024px) 90vw, 
-            (max-width: 1280px) 80vw, 
-            75vw
+            (max-width: 640px) calc(100vw-2rem), 
+            (max-width: 768px) 608px, 
+            65ch
           '
         />
         <div
