@@ -50,6 +50,14 @@ export default function ArticlesSection() {
             <SectionCard
               key={path}
               article={article}
+              imageSizes='
+                (max-width: 640px) calc(100dvw-2rem),
+                (max-width: 768px) 608px,
+                (max-width: 1024px) 354px,
+                (max-width: 1280px) 313px,
+                (max-width: 1536px) 398px,
+                484px
+              '
               isArticle
             />
           )
