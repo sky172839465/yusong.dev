@@ -1,4 +1,4 @@
-import { isEmpty, isUndefined } from 'lodash-es'
+import { isEmpty, isUndefined, omit } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
@@ -77,10 +77,16 @@ const LazyImage = (props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
   const imageAttributes = useMemo(() => {
-    return {
-      ...getRwdImageAttributes(imageData),
+    const { isSameImageSize, ...rwdAttrs } = getRwdImageAttributes(imageData)
+    const mergedAttrs = {
+      ...rwdAttrs,
       ...imageProps
     }
+    if (!isSameImageSize) {
+      return mergedAttrs
+    }
+
+    return omit(mergedAttrs, ['sizes'])
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
