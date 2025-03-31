@@ -86,7 +86,7 @@ const LazyImage = (props) => {
       return mergedAttrs
     }
 
-    return omit(mergedAttrs, ['sizes'])
+    return omit(mergedAttrs, ['sizes', 'srcSet'])
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
