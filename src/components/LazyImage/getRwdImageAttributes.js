@@ -1,4 +1,4 @@
-import { flow, get, join, last, map, pick, size } from 'lodash-es'
+import { flow, get, join, last, map, pick, size, uniqBy } from 'lodash-es'
 
 import getFileUrl from '@/utils/getFileUrl'
 
@@ -21,6 +21,7 @@ const getRwdImageAttributes = (imageData) => {
   }
 
   const imageSizes = get(imageData, 'sizes', [])
+  const isSameImageSize = size(uniqBy(imageSizes, 'width')) === size(imageSizes)
   const largeImage = last(imageSizes)
   const src = getFileUrl(`/${get(imageSizes, '0.path')}`)
   const srcSet = flow(
@@ -34,7 +35,7 @@ const getRwdImageAttributes = (imageData) => {
     (sizeList) => join(sizeList, ', ')
   )()
   const dimensions = pick(largeImage, ['width', 'height'])
-  return { src, srcSet, sizes, ...dimensions }
+  return { src, srcSet, sizes, isSameImageSize, ...dimensions }
 }
 
 export default getRwdImageAttributes
