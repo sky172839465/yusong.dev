@@ -82,7 +82,7 @@ const LazyImage = (props) => {
       ...rwdAttrs,
       ...imageProps
     }
-    if (!isSameImageSize) {
+    if (isSameImageSize) {
       return mergedAttrs
     }
 
