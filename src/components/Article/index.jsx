@@ -125,7 +125,7 @@ const useArticleHtml = (html) => {
               sizes='
                 (max-width: 640px) calc(100vw-2rem), 
                 (max-width: 768px) 608px, 
-                65ch
+                736px
               '
             />
           )
@@ -288,7 +288,7 @@ const Article = (props) => {
           sizes='
             (max-width: 640px) calc(100vw-2rem), 
             (max-width: 768px) 608px, 
-            65ch
+            736px
           '
         />
         <div
