@@ -17,7 +17,7 @@ import getFileUrl from '@/utils/getFileUrl'
 const getRwdImageAttributes = (imageData) => {
   if (!imageData) {
     const dimensions = { width: 1200, height: 675 }
-    return dimensions
+    return { isSameImageSize: true, ...dimensions }
   }
 
   const imageSizes = get(imageData, 'sizes', [])
