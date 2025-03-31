@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import getI18N from '@/utils/getI18N'
 
 const DEFAULT_IMAGE_SIZES = `
-  (max-width: 640px) calc(100vw-2rem), 
+  (max-width: 640px) calc(100dvw-2rem), 
   (max-width: 768px) 608px, 
   65ch
 `
