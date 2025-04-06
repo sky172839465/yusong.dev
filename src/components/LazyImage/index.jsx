@@ -90,10 +90,20 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
-  const onLoad = () => {
-    window.requestAnimationFrame(() => {
+  const onLoad = (event) => {
+    const img = event.currentTarget
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    if (!ctx) {
       setIsLoaded(true)
-    })
+      return
+    }
+
+    canvas.width = img.naturalWidth
+    canvas.height = img.naturalHeight
+    // make sure image rendered
+    ctx.drawImage(img, 0, 0)
+    setIsLoaded(true)
   }
 
   const onError = (e) => {
