@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { useLocation, useNavigation } from 'react-router-dom'
 
 import FadeIn from '@/components/FadeIn'
+import { PageLoadingProvider } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 const i18nMapping = {
@@ -57,7 +58,7 @@ const BlurScrollRestoration = (props) => {
   const { label } = useI18N(i18nMapping)
 
   return (
-    <>
+    <PageLoadingProvider loading={loading}>
       {loading && (
         <Helmet>
           <title>
@@ -65,10 +66,10 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <FadeIn className={`contents ${loading ? '[&_main]:invisible' : ''}`}>
+      <FadeIn className={`contents ${loading ? '[&_main]:opacity-0' : ''}`}>
         {children}
       </FadeIn>
-    </>
+    </PageLoadingProvider>
   )
 }
 
