@@ -7,7 +7,7 @@ export const PageLoadingProvider = ({ children, loading }) => {
     <PageLoadingContext.Provider value={{ loading }}>
       {children}
     </PageLoadingContext.Provider>
-  );
+  )
 }
 
 export const usePageLoading = () => {
