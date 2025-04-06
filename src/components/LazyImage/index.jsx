@@ -118,8 +118,8 @@ const LazyImage = (props) => {
 
   return (
     <AnimatePresence>
-      <FadeIn className='relative size-full'>
-        {(isLoading || !isLoaded || error) && (
+      {(isLoading || !isLoaded || error) && (
+        <FadeIn className='relative size-full'>
           <m.div
             className='absolute flex size-full grow items-center'
           >
@@ -132,11 +132,15 @@ const LazyImage = (props) => {
               error={error}
             />
           </m.div>
-        )}
-        {isUndefined(src) && (
+        </FadeIn>
+      )}
+      {isUndefined(src) && (
+        <FadeIn className='relative size-full'>
           <m.div className='my-8 aspect-video w-full' />
-        )}
-        {!isUndefined(src) && (
+        </FadeIn>
+      )}
+      {!isUndefined(src) && (
+        <FadeIn className='relative size-full'>
           <m.img
             onLoad={onLoad}
             onError={onError}
@@ -144,8 +148,8 @@ const LazyImage = (props) => {
             loading={loading}
             {...imageAttributes}
           />
-        )}
-      </FadeIn>
+        </FadeIn>
+      )}
     </AnimatePresence>
   )
 }
