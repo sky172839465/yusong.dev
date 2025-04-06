@@ -183,7 +183,7 @@ const Article = (props) => {
 
   if (isMarkdownLoading || isEmpty(articleHtml)) {
     return (
-      <>
+      <div className='w-full'>
         {!isMarkdownLoading && (
           <Helmet key={pathname}>
             <title>
@@ -197,12 +197,12 @@ const Article = (props) => {
           </Helmet>
         )}
         <SkeletonArticle />
-      </>
+      </div>
     )
   }
 
   return (
-    <>
+    <div className='w-full'>
       <Helmet key={pathname}>
         <title>
           {displayTitle}
@@ -294,7 +294,7 @@ const Article = (props) => {
         />
         <LazyComment />
       </div>
-    </>
+    </div>
   )
 }
 
