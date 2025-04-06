@@ -12,6 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { usePageLoading } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 const i18nMapping = {
@@ -33,6 +34,7 @@ const i18nMapping = {
 
 const ArticleActions = (props) => {
   const { shareData, topRef, sections = [] } = props
+  const { loading: pageLoading } = usePageLoading()
   const { data: series = [] } = useSeriesArticles(false, { keepPreviousData: false })
   const isShareSupported = useIsSupported(() => !!navigator?.share)
   const { pathname } = useLocation()
@@ -68,6 +70,10 @@ const ArticleActions = (props) => {
 
   const scrollToTop = () => {
     topRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  if (pageLoading) {
+    return null
   }
 
   return (
