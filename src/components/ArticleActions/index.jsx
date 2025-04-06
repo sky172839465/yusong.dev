@@ -50,7 +50,8 @@ const ArticleActions = (props) => {
 
   const scrollToSection = (e) => {
     const header = document.querySelector('header')
-    const target = document.querySelector(`a[href="${e.target.dataset.hash}"]`)
+    const hash = e.target.dataset.hash
+    const target = document.querySelector(`a[href="${hash}"]`)
     if (!target) {
       return
     }
@@ -58,6 +59,7 @@ const ArticleActions = (props) => {
     const offset = (header ? get(header.getBoundingClientRect(), 'height', 70) : 70) + 30
     const top = target.getBoundingClientRect().top + window.scrollY - offset
     window.scrollTo({ top, behavior: 'smooth' })
+    history.replaceState(null, '', hash)
   }
 
   const sharePost = () => {
