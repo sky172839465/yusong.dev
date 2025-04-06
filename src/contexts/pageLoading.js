@@ -10,6 +10,6 @@ export const PageLoadingProvider = ({ children, loading }) => {
   );
 }
 
-export const usePageLoading () {
-  return useContext(PageLoadingContext);
+export const usePageLoading = () => {
+  return useContext(PageLoadingContext)
 }
