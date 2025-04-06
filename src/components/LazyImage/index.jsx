@@ -90,12 +90,14 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
+  const delayOnLoaded = () => setTimeout(() => setIsLoaded(true), 60)
+
   const onLoad = (event) => {
     const img = event.currentTarget
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext('2d')
     if (!ctx) {
-      setIsLoaded(true)
+      delayOnLoaded()
       return
     }
 
@@ -103,7 +105,7 @@ const LazyImage = (props) => {
     canvas.height = img.naturalHeight
     // make sure image rendered
     ctx.drawImage(img, 0, 0)
-    setIsLoaded(true)
+    delayOnLoaded()
   }
 
   const onError = (e) => {
