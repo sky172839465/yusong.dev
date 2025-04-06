@@ -214,13 +214,13 @@ const Article = (props) => {
         <meta property='og:description' content={description} />
       </Helmet>
       <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
-        <h1
+        <h2
           ref={topRef}
           className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'
           onClick={increment}
         >
           {title}
-        </h1>
+        </h2>
         <div className='flex flex-row items-center justify-between'>
           <div className={`flex flex-wrap gap-2 ${isEmpty(tags) ? 'hidden' : ''}`}>
             <Badge variant='secondary' className='h-9'>
