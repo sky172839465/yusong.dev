@@ -142,7 +142,6 @@ const useArticleHtml = (html) => {
                 const header = document.querySelector('header')            
                 const offset = (header ? get(header.getBoundingClientRect(), 'height', 70) : 70) + 30
                 const top = e.target.getBoundingClientRect().top + window.scrollY - offset
-                window.location.hash = hashValue
                 history.replaceState(null, '', domNode.attribs.href)
                 window.scrollTo({ top, behavior: 'smooth' })
               }}
