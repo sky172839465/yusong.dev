@@ -1,5 +1,5 @@
 import parse from 'html-react-parser'
-import { filter, flow, get, isEmpty, map } from 'lodash-es'
+import { flow, get, isEmpty } from 'lodash-es'
 import { Check, Copy, FilePlus2, Link as LinkIcon, Pencil, PencilLine } from 'lucide-react'
 import { tryit } from 'radash'
 import { lazy, useMemo, useRef, useState } from 'react'
@@ -34,21 +34,6 @@ const i18nMapping = {
   }
 }
 
-const getSections = (html) => {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(html, 'text/html')
-
-  const result = flow(
-    () => [...(doc.querySelectorAll('h3 a') || [])],
-    (links) => filter(links, (link) => link.href.includes('#')),
-    (hashLinks) => map(hashLinks, (hashLink) => ({
-      hash: hashLink.getAttribute('href'),
-      label: get(hashLink, 'textContent', 'Empty').replace('🔗 ', '')
-    }))
-  )()
-  return result
-}
-
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
   const { mainPathName } = useI18N(i18nMapping)
@@ -70,8 +55,9 @@ const useArticleHtml = (html) => {
   const { isLoading, data: pageImages } = usePageImages()
   const [, copy] = useCopyToClipboard()
   const [copied, setCopied] = useState(false)
-  const sections = useMemo(() => getSections(html), [html])
-  const articleHtml = useMemo(() => {
+  const [articleHtml, articleSections] = useMemo(() => {
+    const tempSections = []
+
     const onCopy = (code) => async () => {
       const [error] = await tryit(() => copy(code))()
       setCopied(true)
@@ -145,15 +131,18 @@ const useArticleHtml = (html) => {
 
         if (domNode.type === 'tag' && domNode.name === 'a' && domNode.attribs.href.startsWith('#')) {
           const text = domNode.children.map((child) => child.type === 'text' ? child.data : '').join('')
+          tempSections.push({ hash: domNode.attribs.href, label: text })
+          const hashValue = domNode.attribs.href.replace('#', '')
           return (
             <a
-              id={domNode.attribs.href.replace('#', '')}
+              id={hashValue}
               href={domNode.attribs.href}
               onClick={(e) => {
                 e.preventDefault()
                 const header = document.querySelector('header')            
                 const offset = (header ? get(header.getBoundingClientRect(), 'height', 70) : 70) + 30
                 const top = e.target.getBoundingClientRect().top + window.scrollY - offset
+                window.location.hash = hashValue
                 window.scrollTo({ top, behavior: 'smooth' })
               }}
               className='flex items-center gap-2'
@@ -165,9 +154,9 @@ const useArticleHtml = (html) => {
         }
       }
     })
-    return convertedHtml
+    return [convertedHtml, tempSections]
   }, [html, pageImages, isLoading, pathname, mainPathName, copied, copy])
-  return { sections, articleHtml }
+  return { sections: articleSections, articleHtml }
 }
 
 const DEFAULT_TITLE = 'YUSONG.TW'
