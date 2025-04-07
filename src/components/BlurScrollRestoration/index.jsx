@@ -18,25 +18,30 @@ const i18nMapping = {
 const useScrollRestoration = () => {
   const navigation = useNavigation()
   const [loading, setLoading] = useState(false)
+  const [blur, setBlur] = useState(false)
   const timer = useRef()
 
   useEffect(() => {
     setLoading(true)
+    setBlur(true)
     if (navigation.state === 'loading') {
       return
     }
 
     clearTimeout(timer.current)
-    timer.current = setTimeout(() => setLoading(false), 240)
+    timer.current = setTimeout(() => {
+      setLoading(false)
+      setTimeout(() => setBlur(false), 80)
+    }, 260)
   }, [navigation])
 
-  return { loading, setLoading }
+  return { loading, blur }
 }
 
 const BlurScrollRestoration = (props) => {
   const { children } = props
-  const { loading } = useScrollRestoration()
-  const { label, pathname } = useI18N(i18nMapping)
+  const { loading, blur } = useScrollRestoration()
+  const { label } = useI18N(i18nMapping)
 
   return (
     <PageLoadingProvider loading={loading}>
@@ -47,7 +52,9 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <FadeIn key={pathname} className={`contents ${loading ? '[&_main]:invisible' : ''}`}>
+      <FadeIn
+        className={`contents ${blur ? '[&_main]:blur-md' : '[&_main]:blur-none'} ${loading ? '[&_main]:invisible' : ''}`}
+      >
         {children}
       </FadeIn>
       <ScrollRestoration />
