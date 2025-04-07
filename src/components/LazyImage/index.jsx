@@ -72,7 +72,7 @@ const ImageStatus = (props) => {
 }
 
 
-const LazyImage = memo((props) => {
+const LazyImage = (props) => {
   const { isLoading, isIcon, imageData, loading = 'lazy', ...imageProps } = props
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
@@ -157,6 +157,6 @@ const LazyImage = memo((props) => {
       </FadeIn>
     </AnimatePresence>
   )
-})
+}
 
-export default LazyImage
+export default memo(LazyImage)
