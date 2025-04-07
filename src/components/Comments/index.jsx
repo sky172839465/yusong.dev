@@ -15,7 +15,7 @@ const LazyGiscus = lazy(() => import('@giscus/react'))
 
 const GiscusSkeleton = () => {
   return (
-    <Skeleton className='h-[30dvh] w-full block' />
+    <Skeleton className='block h-[30dvh] w-full' />
   )
 }
 
