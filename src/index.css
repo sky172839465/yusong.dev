@@ -6,6 +6,10 @@
   --animation-btn: 0;
 }
 
+* {
+  @apply max-md:select-none;
+}
+
 html.light .shiki,
 html.light .shiki span {
   color: var(--shiki-light) !important;

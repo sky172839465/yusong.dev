@@ -15,7 +15,7 @@ const LazyGiscus = lazy(() => import('@giscus/react'))
 
 const GiscusSkeleton = () => {
   return (
-    <Skeleton className='h-[30dvh] w-full' />
+    <Skeleton className='block h-[30dvh] w-full' />
   )
 }
 
@@ -55,7 +55,7 @@ const Comments = () => {
       </Button>
       {visible && (
         <Suspense fallback={<GiscusSkeleton />}>
-          <FadeIn>
+          <FadeIn className='select-auto'>
             <LazyGiscus
               id='comments'
               repo='sky172839465/yusong.tw'
