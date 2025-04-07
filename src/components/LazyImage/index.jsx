@@ -2,7 +2,7 @@ import { isEmpty, isUndefined, omit } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, memo } from 'react'
 
 import FadeIn from '@/components/FadeIn'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
@@ -72,7 +72,7 @@ const ImageStatus = (props) => {
 }
 
 
-const LazyImage = (props) => {
+const LazyImage = memo((props) => {
   const { isLoading, isIcon, imageData, loading = 'lazy', ...imageProps } = props
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
@@ -157,6 +157,6 @@ const LazyImage = (props) => {
       </FadeIn>
     </AnimatePresence>
   )
-}
+})
 
 export default LazyImage
