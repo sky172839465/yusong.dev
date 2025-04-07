@@ -90,7 +90,7 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
-  const delayOnLoaded = () => setTimeout(() => setIsLoaded(true), 60)
+  const delayOnLoaded = () => requestAnimationFrame(() => setIsLoaded(true))
 
   const onLoad = (event) => {
     const img = event.currentTarget
