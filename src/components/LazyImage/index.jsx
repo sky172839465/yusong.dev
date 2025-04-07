@@ -102,10 +102,14 @@ const LazyImage = (props) => {
   }
 
   useEffect(() => {
+    if (!isLoading) {
+      return
+    }
+
     setIsLoaded(false)
     setError(false)
-    console.log(src)
-  }, [src])
+    console.log(imageAttributes, props)
+  }, [isLoading])
 
   return (
     <AnimatePresence>
