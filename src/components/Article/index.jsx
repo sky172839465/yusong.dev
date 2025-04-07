@@ -108,11 +108,7 @@ const useArticleHtml = (html) => {
               className='w-full rounded-lg object-contain'
               isLoading={isLoading}
               fetchpriority='high'
-              sizes='
-                (max-width: 640px) calc(100vw-2rem), 
-                (max-width: 768px) 608px, 
-                736px
-              '
+              sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
             />
           )
         }
@@ -274,11 +270,7 @@ const Article = (props) => {
           isLoading={isLoading}
           fetchpriority='high'
           loading='eager'
-          sizes='
-            (max-width: 640px) calc(100vw-2rem), 
-            (max-width: 768px) 608px, 
-            736px
-          '
+          sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
         />
         <div
           key={pathname}
