@@ -163,7 +163,7 @@ const Article = (props) => {
   const topRef = useRef()
   const { pathname } = useLocation()
   const { isZhTw, lang } = useI18N()
-  const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown, { suspense: true })
+  const { data, isValidating: isMarkdownLoading } = useSWR(filePath, markdown)
   const { isLoading } = usePageImages()
   const { html, attributes } = data
   const { title, description, createdAt, modifiedAt, tags, mainImage } = attributes
