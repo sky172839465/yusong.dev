@@ -2,7 +2,7 @@ import parse from 'html-react-parser'
 import { get, isEmpty } from 'lodash-es'
 import { Check, Copy, FilePlus2, Link as LinkIcon, Pencil, PencilLine } from 'lucide-react'
 import { tryit } from 'radash'
-import { lazy, memo, useMemo, useRef, useState } from 'react'
+import { lazy, useMemo, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
@@ -305,4 +305,4 @@ const Article = (props) => {
   )
 }
 
-export default memo(Article)
+export default Article

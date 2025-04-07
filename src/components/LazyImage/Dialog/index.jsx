@@ -1,5 +1,5 @@
 import { get } from 'lodash-es'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import useI18N, { LANG } from '@/hooks/useI18N'
@@ -52,4 +52,4 @@ const LazyImagePreview = (props) => {
   )
 }
 
-export default memo(LazyImagePreview)
+export default LazyImagePreview
