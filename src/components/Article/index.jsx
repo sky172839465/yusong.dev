@@ -10,7 +10,7 @@ import { useCopyToClipboard, useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
-// import LazyImagePreview from '@/components/LazyImage/Dialog'
+import LazyImagePreview from '@/components/LazyImage/Dialog'
 import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
