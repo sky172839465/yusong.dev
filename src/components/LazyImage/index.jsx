@@ -90,7 +90,7 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
-  const delayOnLoaded = () => requestAnimationFrame(() => setIsLoaded(true))
+  const delayOnLoaded = () => setTimeout(() => setIsLoaded(true), 30)
 
   const onLoad = (event) => {
     const img = event.currentTarget
@@ -124,7 +124,6 @@ const LazyImage = (props) => {
         {(isLoading || !isLoaded || error) && (
           <m.div
             className='absolute flex size-full grow items-center'
-            exit={{ opacity: 0 }}
           >
             <ImageStatus
               src={src}
@@ -139,7 +138,6 @@ const LazyImage = (props) => {
         {isUndefined(src) && (
           <m.div
             className='my-8 aspect-video w-full'
-            exit={{ opacity: 0 }}
           />
         )}
         {!isUndefined(src) && (
@@ -148,7 +146,6 @@ const LazyImage = (props) => {
             onError={onError}
             className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
             loading={loading}
-            exit={{ opacity: 0 }}
             initial={{ opacity: 0, filter: 'blur(10px)' }}
             animate={{ opacity: isLoaded ? 1 : 0, filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
