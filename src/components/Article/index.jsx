@@ -10,6 +10,7 @@ import { useCopyToClipboard, useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
+import LazyImage from '@/components/LazyImage'
 import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -106,10 +107,14 @@ const useArticleHtml = (html) => {
               imageData={pageImageData}
               alt={alt}
               className='w-full rounded-lg object-contain'
-              isLoading={isLoading}
-              fetchpriority='high'
-              sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
-            />
+            >
+              <LazyImage
+                className='w-full rounded-lg object-contain transition md:hover:scale-105'
+                isLoading={isLoading}
+                fetchpriority='high'
+                sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
+              />
+            </LazyImagePreview>
           )
         }
 
@@ -267,11 +272,17 @@ const Article = (props) => {
           imageData={mainImageData}
           alt={title}
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
-          isLoading={isLoading}
-          fetchpriority='high'
-          loading='eager'
-          sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
-        />
+        >
+          <LazyImage
+            imageData={mainImageData}
+            alt={title}
+            className={`w-full rounded-lg object-contain md:object-cover transition md:hover:scale-105 ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+            isLoading={isLoading}
+            fetchpriority='high'
+            loading='eager'
+            sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
+          >
+        </LazyImagePreview>
         <div
           key={pathname}
           ref={articleRef}
