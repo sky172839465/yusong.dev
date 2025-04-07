@@ -92,7 +92,7 @@ const LazyImage = (props) => {
 
   const delayOnLoaded = () => requestAnimationFrame(() => setIsLoaded(true))
 
-  const onLoad = (event) => {
+  const onLoad = () => {
     delayOnLoaded()
   }
 
