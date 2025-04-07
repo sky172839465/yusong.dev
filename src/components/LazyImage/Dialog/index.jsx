@@ -25,10 +25,8 @@ const LazyImagePreview = (props) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='w-full cursor-pointer'>
         <LazyImage
+          {...props}
           className={`${className || ''} transition md:hover:scale-105`}
-          imageData={imageData}
-          alt={alt}
-          {...restProps}
         />
       </DialogTrigger>
       <DialogContent className='max-w-[94dvw] border-none bg-transparent p-0 text-white shadow-none md:max-w-[80dvw]'>
