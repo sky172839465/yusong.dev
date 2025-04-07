@@ -277,6 +277,7 @@ const Article = (props) => {
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
         >
           <LazyImage
+            key={pathname}
             imageData={mainImageData}
             alt={title}
             className={`w-full rounded-lg object-contain transition md:object-cover md:hover:scale-105 ${isEmpty(mainImageData) ? 'my-8' : ''}`}
