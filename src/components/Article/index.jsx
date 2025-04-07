@@ -54,7 +54,7 @@ const useMainImageData = (mainImageName = 'index') => {
 
 const useArticleHtml = (html) => {
   const { pathname, mainPathName } = useI18N()
-  const { isLoading, data: pageImages } = usePageImages()
+  const { isLoading, data: pageImages = {} } = usePageImages()
   const [, copy] = useCopyToClipboard()
   const [copied, setCopied] = useState(false)
   const [articleHtml, articleSections] = useMemo(() => {
@@ -69,14 +69,6 @@ const useArticleHtml = (html) => {
       }
   
       setTimeout(() => setCopied(false), 1200)
-    }
-
-    if (isLoading) {
-      return ''
-    }
-
-    if (isEmpty(pageImages)) {
-      return parse(html)
     }
 
     const convertedHtml = parse(html, {
