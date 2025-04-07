@@ -22,7 +22,6 @@ const useScrollRestoration = () => {
 
   useEffect(() => {
     setLoading(true)
-    setBlur(true)
     if (navigation.state === 'loading') {
       return
     }
