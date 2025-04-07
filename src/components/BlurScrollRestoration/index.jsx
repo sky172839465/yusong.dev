@@ -35,7 +35,7 @@ const useScrollRestoration = () => {
       const showContent = (count = 0) => {
         if (window.scrollY !== 0 && count !== -1 && count < 10) {
           window.scrollTo({ top: 0, behavior: 'auto' })
-          setTimeout(() => showContent(count + 1), 30)
+          setTimeout(() => showContent(count + 1), 100)
           return
         }
         
@@ -45,7 +45,7 @@ const useScrollRestoration = () => {
 
       const defaultCount = loadingState.current ? 0 : -1
       showContent(defaultCount)
-    }, 80)
+    }, 120)
     return () => clearTimeout(timer.current)
   }, [pathname, navigation])
 
@@ -66,7 +66,7 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <FadeIn className={`contents ${loading ? '[&_main]:opacity-0' : ''}`}>
+      <FadeIn className={`contents ${loading ? '[&_main]:invisible' : ''}`}>
         {children}
       </FadeIn>
     </PageLoadingProvider>
