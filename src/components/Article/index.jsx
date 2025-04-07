@@ -44,7 +44,8 @@ const useMainImageData = (mainImageName = 'index') => {
     }
 
     const mainImageUrl = imagePathFromSrc.replace('/', '')
-    const imageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+    const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+    return mainImageData
   }, [isLoading, mainPathName, mainImageName])
   return imageData
 }
