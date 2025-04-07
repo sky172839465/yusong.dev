@@ -18,7 +18,6 @@ const i18nMapping = {
 const useScrollRestoration = () => {
   const navigation = useNavigation()
   const [loading, setLoading] = useState(false)
-  const [blur, setBlur] = useState(false)
   const timer = useRef()
 
   useEffect(() => {
@@ -31,16 +30,15 @@ const useScrollRestoration = () => {
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
       setLoading(false)
-      setTimeout(() => setBlur(false), 160)
     }, 240)
   }, [navigation])
 
-  return { loading, blur }
+  return { loading }
 }
 
 const BlurScrollRestoration = (props) => {
   const { children } = props
-  const { loading, blur } = useScrollRestoration()
+  const { loading } = useScrollRestoration()
   const { label, pathname } = useI18N(i18nMapping)
 
   return (
@@ -54,7 +52,7 @@ const BlurScrollRestoration = (props) => {
       )}
       <FadeIn
         key={pathname}
-        className={`contents ${blur ? '[&_main]:blur-md' : '[&_main]:blur-none'} ${loading ? '[&_main]:invisible' : ''}`}
+        className={`contents ${loading ? '[&_main]:invisible' : ''}`}
       >
         {children}
       </FadeIn>
