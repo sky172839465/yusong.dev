@@ -108,7 +108,6 @@ const LazyImage = (props) => {
 
     setIsLoaded(false)
     setError(false)
-    console.log(imageAttributes, props)
   }, [isLoading])
 
   return (
