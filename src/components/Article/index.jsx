@@ -2,7 +2,7 @@ import parse from 'html-react-parser'
 import { get, isEmpty } from 'lodash-es'
 import { Check, Copy, FilePlus2, Link as LinkIcon, Pencil, PencilLine } from 'lucide-react'
 import { tryit } from 'radash'
-import { lazy, useMemo, useRef, useState } from 'react'
+import { lazy, memo, useMemo, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
@@ -37,16 +37,16 @@ const i18nMapping = {
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
   const { mainPathName } = useI18N(i18nMapping)
-  const imagePathFromSrc = useMemo(() => {
+  const imageData = useMemo(() => {
     const imagePathFromSrc = `/src/pages${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/${mainImageName}`
-    return imagePathFromSrc
-  }, [mainPathName, mainImageName])
-  if (isLoading || !imagePathFromSrc) {
-    return null
-  }
+    if (isLoading || !imagePathFromSrc) {
+      return null
+    }
 
-  const mainImageUrl = imagePathFromSrc.replace('/', '')
-  const imageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+    const mainImageUrl = imagePathFromSrc.replace('/', '')
+    const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+    return mainImageData
+  }, [isLoading, mainPathName, mainImageName])
   return imageData
 }
 
@@ -108,11 +108,7 @@ const useArticleHtml = (html) => {
               className='w-full rounded-lg object-contain'
               isLoading={isLoading}
               fetchpriority='high'
-              sizes='
-                (max-width: 640px) calc(100vw-2rem), 
-                (max-width: 768px) 608px, 
-                736px
-              '
+              sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
             />
           )
         }
@@ -274,11 +270,7 @@ const Article = (props) => {
           isLoading={isLoading}
           fetchpriority='high'
           loading='eager'
-          sizes='
-            (max-width: 640px) calc(100vw-2rem), 
-            (max-width: 768px) 608px, 
-            736px
-          '
+          sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
         />
         <div
           key={pathname}
@@ -298,4 +290,4 @@ const Article = (props) => {
   )
 }
 
-export default Article
+export default memo(Article)
