@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useNavigation, ScrollRestoration } from 'react-router-dom'
+import { ScrollRestoration, useNavigation } from 'react-router-dom'
 
 import FadeIn from '@/components/FadeIn'
 import { PageLoadingProvider } from '@/contexts/pageLoading'
