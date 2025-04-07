@@ -109,6 +109,8 @@ const useArticleHtml = (html) => {
               className='w-full rounded-lg object-contain'
             >
               <LazyImage
+                imageData={pageImageData}
+                alt={alt}
                 className='w-full rounded-lg object-contain transition md:hover:scale-105'
                 isLoading={isLoading}
                 fetchpriority='high'
