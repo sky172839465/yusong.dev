@@ -285,6 +285,15 @@ const Article = (props) => {
             sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
           />
         </LazyImagePreview>
+        <LazyImage
+          imageData={mainImageData}
+          alt={title}
+          className={`w-full rounded-lg object-contain transition md:object-cover md:hover:scale-105 ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+          isLoading={isLoading}
+          fetchpriority='high'
+          loading='eager'
+          sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
+        />
         <div
           key={pathname}
           ref={articleRef}
