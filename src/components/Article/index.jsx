@@ -213,7 +213,7 @@ const Article = (props) => {
       <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
         <h2
           ref={topRef}
-          className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'
+          className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white select-auto'
           onClick={increment}
         >
           {title}
@@ -283,7 +283,7 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className='max-w-none !bg-background !text-foreground'
+          className='max-w-none !bg-background !text-foreground select-auto'
         >
           {articleHtml}
         </div>
