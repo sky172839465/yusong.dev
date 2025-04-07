@@ -281,7 +281,7 @@ const Article = (props) => {
             fetchpriority='high'
             loading='eager'
             sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
-          >
+          />
         </LazyImagePreview>
         <div
           key={pathname}
