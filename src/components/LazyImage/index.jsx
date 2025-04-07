@@ -2,7 +2,7 @@ import { isEmpty, isUndefined, omit } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
-import { useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
@@ -159,4 +159,4 @@ const LazyImage = (props) => {
   )
 }
 
-export default LazyImage
+export default memo(LazyImage)
