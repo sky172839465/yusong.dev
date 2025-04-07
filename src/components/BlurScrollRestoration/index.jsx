@@ -27,7 +27,7 @@ const useScrollRestoration = () => {
     }
 
     clearTimeout(timer.current)
-    timer.current = setTimeout(() => setLoading(false), 300)
+    timer.current = setTimeout(() => setLoading(false), 120)
   }, [navigation])
 
   return { loading, setLoading }
