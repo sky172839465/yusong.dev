@@ -92,19 +92,7 @@ const LazyImage = (props) => {
 
   const delayOnLoaded = () => requestAnimationFrame(() => setIsLoaded(true))
 
-  const onLoad = (event) => {
-    const img = event.currentTarget
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    if (!ctx) {
-      delayOnLoaded()
-      return
-    }
-
-    canvas.width = img.naturalWidth
-    canvas.height = img.naturalHeight
-    // make sure image rendered
-    ctx.drawImage(img, 0, 0)
+  const onLoad = () => {
     delayOnLoaded()
   }
 
@@ -146,7 +134,7 @@ const LazyImage = (props) => {
           <m.img
             onLoad={onLoad}
             onError={onError}
-            className={className}
+            className={`${isLoaded ? '' : 'invisible'} ${className}`}
             loading={loading}
             initial={{ opacity: 0, filter: 'blur(10px)' }}
             animate={{ opacity: isLoaded ? 1 : 0, filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
