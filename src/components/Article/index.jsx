@@ -276,7 +276,7 @@ const Article = (props) => {
           <LazyImage
             imageData={mainImageData}
             alt={title}
-            className={`w-full rounded-lg object-contain md:object-cover transition md:hover:scale-105 ${isEmpty(mainImageData) ? 'my-8' : ''}`}
+            className={`w-full rounded-lg object-contain transition md:object-cover md:hover:scale-105 ${isEmpty(mainImageData) ? 'my-8' : ''}`}
             isLoading={isLoading}
             fetchpriority='high'
             loading='eager'
