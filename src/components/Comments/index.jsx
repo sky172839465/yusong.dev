@@ -55,7 +55,7 @@ const Comments = () => {
       </Button>
       {visible && (
         <Suspense fallback={<GiscusSkeleton />}>
-          <FadeIn className='select-auto'>
+          <FadeIn className='select-text'>
             <LazyGiscus
               id='comments'
               repo='sky172839465/yusong.tw'
