@@ -10,7 +10,8 @@ import { useCopyToClipboard, useCounter } from 'usehooks-ts'
 
 import { usePageImages } from '@/apis/usePageImages'
 import ArticleActions from '@/components/ArticleActions'
-import LazyImagePreview from '@/components/LazyImage/Dialog'
+// import LazyImagePreview from '@/components/LazyImage/Dialog'
+import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -263,7 +264,7 @@ const Article = (props) => {
             </Button>
           </a>
         </div>
-        <LazyImagePreview
+        <LazyImage
           imageData={mainImageData}
           alt={title}
           className={`w-full rounded-lg object-contain md:object-cover ${isEmpty(mainImageData) ? 'my-8' : ''}`}
