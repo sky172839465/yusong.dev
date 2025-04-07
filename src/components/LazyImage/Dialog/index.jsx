@@ -1,4 +1,4 @@
-import { get, isUndefined } from 'lodash-es'
+import { get } from 'lodash-es'
 import { memo, useState } from 'react'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -20,19 +20,6 @@ const LazyImagePreview = (props) => {
   const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
   const { className, imageData, alt, ...restProps } = props
-
-  if (isUndefined(imageData)) {
-    return (
-      <LazyImage
-        className={className}
-        imageData={imageData}
-        alt={alt}
-        {...restProps}
-      />
-    )
-  }
-
-
   const { webp, width, height } = get(imageData, 'original', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
