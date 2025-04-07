@@ -149,7 +149,9 @@ const LazyImage = (props) => {
             className={`${(isLoading|| !isLoaded || error) && 'invisible'} ${className}`}
             loading={loading}
             exit={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, filter: 'blur(10px)' }}
+            animate={{ opacity: isLoaded ? 1 : 0, filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             {...imageAttributes}
           />
         )}
