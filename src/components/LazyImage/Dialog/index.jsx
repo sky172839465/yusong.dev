@@ -19,7 +19,7 @@ const i18nMapping = {
 const LazyImagePreview = (props) => {
   const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
-  const { className, imageData, alt, ...restProps } = props
+  const { className, imageData, alt } = props
   const { webp, width, height } = get(imageData, 'original', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
