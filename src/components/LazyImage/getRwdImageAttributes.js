@@ -1,4 +1,4 @@
-import { flow, get, join, last, map, pick, size, uniqBy } from 'lodash-es'
+import { flow, get, join, last, map, pick, size, uniqBy, isEmpty } from 'lodash-es'
 
 import getFileUrl from '@/utils/getFileUrl'
 
@@ -15,7 +15,7 @@ import getFileUrl from '@/utils/getFileUrl'
 // ]
 
 const getRwdImageAttributes = (imageData) => {
-  if (!imageData) {
+  if (isEmpty(imageData)) {
     const dimensions = { width: 1200, height: 675 }
     return { isSameImageSize: true, ...dimensions }
   }
