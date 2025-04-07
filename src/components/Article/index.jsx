@@ -283,7 +283,7 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className='max-w-none select-text !bg-background !text-foreground'
+          className='max-w-none !bg-background !text-foreground [&_*]:select-text'
         >
           {articleHtml}
         </div>

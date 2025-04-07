@@ -38,7 +38,7 @@ const ArticleIndex = (props) => {
 
   return (
     <div className='m-auto w-full space-y-2 md:max-w-2xl lg:max-w-3xl'>
-      <div className='prose prose-lg max-w-none select-text text-foreground dark:prose-invert'>
+      <div className='prose prose-lg max-w-none text-foreground dark:prose-invert [&_*]:select-text'>
         <h3 className='flex items-center gap-2'>
           <SquareLibrary />
           {get(articles, '0.series', null)}

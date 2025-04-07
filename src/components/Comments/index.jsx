@@ -55,7 +55,7 @@ const Comments = () => {
       </Button>
       {visible && (
         <Suspense fallback={<GiscusSkeleton />}>
-          <FadeIn className='select-text'>
+          <FadeIn className='[&_*]:select-text'>
             <LazyGiscus
               id='comments'
               repo='sky172839465/yusong.tw'
@@ -68,7 +68,6 @@ const Comments = () => {
               inputPosition='top'
               theme={isDarkMode ? 'dark' : 'light'}
               lang={lang}
-              loading='lazy'
             />
           </FadeIn>
         </Suspense>
