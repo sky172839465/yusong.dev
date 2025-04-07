@@ -6,10 +6,6 @@
   --animation-btn: 0;
 }
 
-* {
-  @apply max-md:select-none;
-}
-
 html.light .shiki,
 html.light .shiki span {
   color: var(--shiki-light) !important;
@@ -122,7 +118,7 @@ html.dark .shiki span {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border max-md:select-none;
   }
   body {
     @apply bg-background text-foreground;
