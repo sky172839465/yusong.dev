@@ -38,7 +38,6 @@ const i18nMapping = {
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
   const { mainPathName } = useI18N(i18nMapping)
-  console.log({ isLoading, pageImages })
   const imageData = useMemo(() => {
     if (isLoading || isEmpty(pageImages)) {
       return null
@@ -48,7 +47,7 @@ const useMainImageData = (mainImageName = 'index') => {
     const mainImageUrl = imagePathFromSrc.replace('/', '')
     const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
     return mainImageData
-  }, [isLoading, mainPathName, mainImageName])
+  }, [isLoading, mainPathName, mainImageName, pageImages])
   return imageData
 }
 
