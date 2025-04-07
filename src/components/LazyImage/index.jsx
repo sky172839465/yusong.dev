@@ -2,7 +2,7 @@ import { isEmpty, isUndefined, omit } from 'lodash-es'
 import { AlertCircle } from 'lucide-react'
 import { AnimatePresence } from 'motion/react'
 import * as m from 'motion/react-m'
-import { memo, useEffect, useMemo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 
 import FadeIn from '@/components/FadeIn'
 import getRwdImageAttributes from '@/components/LazyImage/getRwdImageAttributes'
@@ -90,7 +90,7 @@ const LazyImage = (props) => {
   }, [imageData, imageProps])
   const { src, className } = imageAttributes
 
-  const delayOnLoaded = () => setTimeout(() => setIsLoaded(true), 100)
+  const delayOnLoaded = () => requestAnimationFrame(() => setIsLoaded(true))
 
   const onLoad = () => {
     delayOnLoaded()
@@ -98,17 +98,8 @@ const LazyImage = (props) => {
 
   const onError = (e) => {
     setError(e)
-    setIsLoaded(true)
+    delayOnLoaded()
   }
-
-  useEffect(() => {
-    if (!isLoading) {
-      return
-    }
-
-    setIsLoaded(false)
-    setError(false)
-  }, [isLoading])
 
   return (
     <AnimatePresence>
