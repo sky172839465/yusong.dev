@@ -119,24 +119,17 @@ const LazyImage = (props) => {
             />
           </m.div>
         )}
-        {isUndefined(src) && (
-          <m.div
-            className='my-8 aspect-video w-full'
-            exit={{ opacity: 0 }}
-          />
-        )}
-        {!isUndefined(src) && (
-          <m.img
-            onLoad={onLoad}
-            onError={onError}
-            className={`${isLoaded ? '' : 'invisible'} ${className}`}
-            loading={loading}
-            initial={{ opacity: 0, filter: 'blur(10px)' }}
-            animate={{ opacity: isLoaded ? 1 : 0, filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
-            transition={{ duration: 0.5 }}
-            {...imageAttributes}
-          />
-        )}
+        <m.img
+          onLoad={onLoad}
+          onError={onError}
+          // className={`${isLoaded ? '' : 'invisible'} ${className}`}
+          className={className}
+          loading={loading}
+          initial={{ opacity: 0, filter: 'blur(10px)' }}
+          animate={{ opacity: (isLoaded && !error) ? 1 : 0, filter: isLoaded ? 'blur(0px)' : 'blur(10px)' }}
+          transition={{ duration: 0.5 }}
+          {...imageAttributes}
+        />
       </FadeIn>
     </AnimatePresence>
   )
