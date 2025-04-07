@@ -19,15 +19,12 @@ const i18nMapping = {
 const LazyImagePreview = (props) => {
   const { label } = useI18N(i18nMapping)
   const [open, setOpen] = useState(false)
-  const { className, imageData, alt } = props
+  const { className, imageData, alt, children } = props
   const { webp, width, height } = get(imageData, 'original', {})
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className='w-full cursor-pointer'>
-        <LazyImage
-          {...props}
-          className={`${className || ''} transition md:hover:scale-105`}
-        />
+        {children}
       </DialogTrigger>
       <DialogContent className='max-w-[94dvw] border-none bg-transparent p-0 text-white shadow-none md:max-w-[80dvw]'>
         <DialogHeader>
