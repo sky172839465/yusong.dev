@@ -31,8 +31,8 @@ const useScrollRestoration = () => {
     clearTimeout(timer.current)
     timer.current = setTimeout(() => {
       setLoading(false)
-      setTimeout(() => setBlur(false), 80)
-    }, 260)
+      setTimeout(() => setBlur(false), 160)
+    }, 240)
   }, [navigation])
 
   return { loading, blur }
@@ -41,7 +41,7 @@ const useScrollRestoration = () => {
 const BlurScrollRestoration = (props) => {
   const { children } = props
   const { loading, blur } = useScrollRestoration()
-  const { label } = useI18N(i18nMapping)
+  const { label, pathname } = useI18N(i18nMapping)
 
   return (
     <PageLoadingProvider loading={loading}>
@@ -53,6 +53,7 @@ const BlurScrollRestoration = (props) => {
         </Helmet>
       )}
       <FadeIn
+        key={pathname}
         className={`contents ${blur ? '[&_main]:blur-md' : '[&_main]:blur-none'} ${loading ? '[&_main]:invisible' : ''}`}
       >
         {children}
