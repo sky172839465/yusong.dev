@@ -13,7 +13,7 @@ const MainLayout = (props) => {
   return (
     <FadeIn className='flex min-h-dvh flex-col bg-background'>
       <LazyHeader />
-      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible opacity-0' : 'delay-150'}`}>
+      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible opacity-0' : ''}`}>
         {children}
       </main>
       <LazyFooter />
