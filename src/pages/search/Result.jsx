@@ -69,12 +69,13 @@ const SearchResult = (props) => {
             />
           )
         })}
-        {!isLoading && routes.map((route) => {
+        {!isLoading && routes.map((route, index) => {
           const { path, type } = route
           return (
             <SectionCard
               key={path}
               article={route}
+              viewTransition={index === 0}
               isArticle={type === 'article'}
             />
           )
