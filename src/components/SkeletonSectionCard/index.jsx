@@ -5,12 +5,12 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { usePageLoading } from '@/contexts/pageLoading'
+import { usePageLoaded } from '@/contexts/pageLoading'
 
 const SkeletonSectionCard = (props) => {
   const { article: { data = {} } = {}, isContentExist, isArticle, viewTransition } = props
   const { title, description } = data
-  const { loading: isPageLoading } = usePageLoading()
+  const { loading: isPageLoading } = usePageLoaded()
   return (
     <Card className='flex grow flex-col'>
       {isArticle && (
