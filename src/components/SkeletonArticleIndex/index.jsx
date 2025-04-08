@@ -54,6 +54,7 @@ const SkeletonArticleIndex = (props) => {
             <SkeletonSectionCard
               key={index}
               article={{ data }}
+              viewTransition={index === 0}
               isContentExist
               isArticle
             />

@@ -7,7 +7,7 @@ import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { usePageLoading } from '@/contexts/pageLoading'
+import { usePageLoaded } from '@/contexts/pageLoading'
 import getI18N from '@/utils/getI18N'
 
 const DEFAULT_IMAGE_SIZES = `
@@ -22,7 +22,7 @@ const SectionCard = (props) => {
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
   const { mainPathName, pathname } = getI18N(path)
-  const { loading: isPageLoading } = usePageLoading()
+  const { loading: isPageLoading } = usePageLoaded()
   const { isLoading, data: pathImages } = usePathImages(isArticle ? mainPathName : null)
   const fileMainPathName = file.replace(pathname, mainPathName)
   const imageData = get(

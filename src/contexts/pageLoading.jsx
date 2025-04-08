@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const PageLoadingContext = createContext()
 
@@ -14,4 +14,20 @@ export const PageLoadingProvider = ({ children, loading }) => {
 /* eslint-disable react-refresh/only-export-components */
 export const usePageLoading = () => {
   return useContext(PageLoadingContext)
+}
+
+/* eslint-disable react-refresh/only-export-components */
+export const usePageLoaded = () => {
+  const { loading } = useContext(PageLoadingContext)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    if (!loading || loaded) {
+      return
+    }
+    
+    setLoaded(true)
+  }, [loading, loaded])
+
+  return { loading: loading && !loaded }
 }
