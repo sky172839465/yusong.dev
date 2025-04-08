@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { ScrollRestoration, useNavigation } from 'react-router-dom'
 
-// import FadeIn from '@/components/FadeIn'
 import { PageLoadingProvider } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
@@ -47,12 +46,7 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <div
-        // key={pathname}
-        className={`contents [&_main]:opacity-100 [&_main]:transition-opacity ${loading ? '[&_main]:invisible [&_main]:opacity-0' : '[&_main]:delay-150'}`}
-      >
-        {children}
-      </div>
+      {children}
       <ScrollRestoration />
     </PageLoadingProvider>
   )
