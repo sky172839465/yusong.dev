@@ -39,6 +39,7 @@ export default function ArticlesSection() {
             <SkeletonSectionCard
               key={index}
               article={{ data }}
+              viewTransition={index === 0}
               isContentExist
               isArticle
             />
@@ -58,6 +59,7 @@ export default function ArticlesSection() {
                 (max-width: 1536px) 398px,
                 484px
               '
+               viewTransition={index === 0}
               isArticle
             />
           )
