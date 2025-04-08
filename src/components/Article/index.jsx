@@ -15,6 +15,7 @@ import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { usePageLoading } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 import FadeIn from '../FadeIn'
@@ -166,6 +167,7 @@ const Article = (props) => {
     data: { html = '', attributes = {} } = {},
     isValidating: isMarkdownLoading
   } = useSWR(filePath, markdown)
+  const { loading: isPageLoading } = usePageLoading()
   const { isLoading } = usePageImages()
   const { title, description, createdAt, modifiedAt, tags, mainImage } = attributes
   const mainImageData = useMainImageData(mainImage)
@@ -278,6 +280,7 @@ const Article = (props) => {
             fetchpriority='high'
             loading='eager'
             sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
+            style={{ viewTransitionName: isPageLoading ? '' : 'test' }}
           />
         </LazyImagePreview>
         <div

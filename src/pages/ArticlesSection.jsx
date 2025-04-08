@@ -39,12 +39,13 @@ export default function ArticlesSection() {
             <SkeletonSectionCard
               key={index}
               article={{ data }}
+              viewTransition={index === 0}
               isContentExist
               isArticle
             />
           )
         })}
-        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map((article) => {
+        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map((article, index) => {
           const { path } = article
           return (
             <SectionCard
@@ -58,6 +59,7 @@ export default function ArticlesSection() {
                 (max-width: 1536px) 398px,
                 484px
               '
+              viewTransition={index === 0}
               isArticle
             />
           )
