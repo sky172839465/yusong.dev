@@ -78,6 +78,7 @@ const ArticleIndex = (props) => {
             <SectionCard
               key={index}
               article={article}
+              viewTransition={index === 0}
               isArticle
             />
           )
