@@ -49,7 +49,7 @@ const BlurScrollRestoration = (props) => {
       )}
       <div
         // key={pathname}
-        className={`contents [&_main]:opacity-100 [&_main]:transition-opacity ${loading ? '[&_main]:opacity-0' : ''}`}
+        className={`contents [&_main]:opacity-100 [&_main]:transition-opacity ${loading ? '[&_main]:opacity-0' : '[&_main]:delay-150'}`}
       >
         {children}
       </div>
