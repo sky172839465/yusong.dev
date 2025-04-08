@@ -4,7 +4,7 @@ import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { usePageLoading } from '@/contexts/pageLoading'
+import { usePageLoaded } from '@/contexts/pageLoading'
 
 const RANDOM = {
   TAGS: times(random(1, 3)),
@@ -13,7 +13,7 @@ const RANDOM = {
 }
 
 const SkeletonArticle = () => {
-  const { loading: isPageLoading } = usePageLoading()
+  const { loading: isPageLoading } = usePageLoaded()
   return (
     <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
       <h1 className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'>
