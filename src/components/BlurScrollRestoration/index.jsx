@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { ScrollRestoration, useNavigation } from 'react-router-dom'
 
-import FadeIn from '@/components/FadeIn'
+// import FadeIn from '@/components/FadeIn'
 import { PageLoadingProvider } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
@@ -27,9 +27,7 @@ const useScrollRestoration = () => {
     }
 
     clearTimeout(timer.current)
-    timer.current = setTimeout(() => {
-      setLoading(false)
-    }, 160)
+    timer.current = setTimeout(() => setLoading(false), 160)
   }, [navigation])
 
   return { loading }
@@ -38,7 +36,7 @@ const useScrollRestoration = () => {
 const BlurScrollRestoration = (props) => {
   const { children } = props
   const { loading } = useScrollRestoration()
-  const { label, pathname } = useI18N(i18nMapping)
+  const { label } = useI18N(i18nMapping)
 
   return (
     <PageLoadingProvider loading={loading}>
@@ -49,12 +47,12 @@ const BlurScrollRestoration = (props) => {
           </title>
         </Helmet>
       )}
-      <FadeIn
-        key={pathname}
-        className={`contents ${loading ? '[&_main]:invisible' : ''}`}
+      <div
+        // key={pathname}
+        className={`contents transition-opacity [&_main]:opacity-100 ${loading ? '[&_main]:opacity-0' : ''}`}
       >
         {children}
-      </FadeIn>
+      </div>
       <ScrollRestoration />
     </PageLoadingProvider>
   )
