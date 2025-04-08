@@ -45,7 +45,7 @@ export default function ArticlesSection() {
             />
           )
         })}
-        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map((article) => {
+        {!isLoading && orderBy(articles, 'data.modifiedAt', 'desc').slice(0, 6).map((article, index) => {
           const { path } = article
           return (
             <SectionCard
