@@ -6,6 +6,10 @@
   --animation-btn: 0;
 }
 
+::view-transition-group(*) {
+  @apply delay-150 duration-300;
+}
+
 * {
   @apply border-border select-none md:select-auto;
 }
