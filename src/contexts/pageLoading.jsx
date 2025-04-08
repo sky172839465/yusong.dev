@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useRef } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const PageLoadingContext = createContext()
 
@@ -27,7 +27,7 @@ export const usePageLoaded = () => {
     }
     
     setLoaded(true)
-  }, [loading])
+  }, [loading, loaded])
 
   return { loading: loading && !loaded }
 }
