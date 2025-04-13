@@ -88,12 +88,12 @@ const ArticleActions = (props) => {
           'sticky bottom-16 z-10': isPinned,
           'w-full': !isPinned
         })}
-        onClick={() => setIsPinned(!isPinned)}
       >
         <Pin
           className={clx('transition cursor-pointer fill-white dark:fill-black stroke-black dark:stroke-white', {
             'rotate-45': !isPinned
           })}
+          onClick={() => setIsPinned(!isPinned)}
         />
       </div>
       <div
