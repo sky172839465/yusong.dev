@@ -8,8 +8,6 @@
     "analyze": "analyze -c vite.config.js",
     "dev": "vite",
     "build": "run-s gen:routeData gen:imageData && vite build",
-    "build:gh": "run-s build build:404",
-    "build:404": "cp dist/index.html dist/404.html",
     "gen:data": "run-s gen:routeData gen:imageData gen:ogImageData",
     "gen:routeData": "mkdir -p src/data && mkdir -p public/data && node scripts/generateRouteData.js",
     "gen:imageData": "mkdir -p public/data && node scripts/generateImageData.js",
