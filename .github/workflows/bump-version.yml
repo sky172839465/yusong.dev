@@ -1,0 +1,41 @@
+name: bump-version
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+concurrency:
+  group: "bump-version"
+  cancel-in-progress: true
+
+jobs:
+  bump-version:
+    name: "Bump Version"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check needs
+        # see https://stackoverflow.com/a/67532120/4907315
+        if: >-
+          ${{
+               contains(needs.*.result, 'failure')
+            || contains(needs.*.result, 'cancelled')
+          }}
+        run: echo "Check needs"
+      - name: "Checkout source code"
+        uses: "actions/checkout@v4"
+        with:
+          ref: ${{ github.ref }}
+          token: ${{ secrets.REPO_TOKEN }}
+      - name: "cat package.json"
+        run: cat ./package.json
+      - name: "Automated Version Bump"
+        id: version-bump
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+        with:
+          version-type: "minor"
+          target-branch: "main"
+          tag-prefix: "v"
+          commit-message: "ci: bumps version to {{version}} [skip ci]"
