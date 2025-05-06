@@ -54,9 +54,7 @@ export default {
       isNoJsRoute ? await fetch(`https://${BLOG_HOST}${convertedPath}`).then((response) => response.text()) : Promise.resolve()
     ])
     if (path.endsWith('.html') && response.status > 404) {
-      // return Response.redirect(`https://${BLOG_HOST}`, 301)
-      const rewrittenUrl = new URL('/', request.url)
-      return fetch(rewrittenUrl)
+      return Response.redirect(`https://${BLOG_HOST}`, 301)
     }
 
     let html = await response.text()
