@@ -55,8 +55,8 @@ export default {
     ])
     if (path.endsWith('.html') && response.status > 404) {
       // return Response.redirect(`https://${BLOG_HOST}`, 301)
-			const rewrittenUrl = new URL('/', request.url)
-			return fetch(rewrittenUrl)
+      const rewrittenUrl = new URL('/', request.url)
+      return fetch(rewrittenUrl)
     }
 
     let html = await response.text()
