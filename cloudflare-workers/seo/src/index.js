@@ -57,7 +57,7 @@ export default {
 			return Response.redirect(`https://${BLOG_HOST}`, 301)
 		}
 
-		const html = await response.text()
+		let html = await response.text()
 
     // Dynamic generate meta tags
     const { type, data, image, imageFolder, twitterImage } = targetRoute
