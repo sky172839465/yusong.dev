@@ -1,6 +1,6 @@
 import { delay } from 'lodash-es'
 import { Download, MousePointerClick, X } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useSWR from 'swr'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
