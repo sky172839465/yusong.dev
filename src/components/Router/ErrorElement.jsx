@@ -27,6 +27,8 @@ const i18nMapping = {
   }
 }
 
+const DEFAULT_TITLE = 'YUSONG.TW'
+
 const ErrorElement = () => {
   const { label, isZhTw, lang } = useI18N(i18nMapping)
   const error = useRouteError() || {}
@@ -47,7 +49,7 @@ const ErrorElement = () => {
     <Suspense fallback={<SkeletonHome />}>
       <Helmet>
         <title>
-          {label.TITLE}
+          {`${label.TITLE} | ${DEFAULT_TITLE}`}
         </title>
       </Helmet>
       <LazyMainLayout isFullScreen>
