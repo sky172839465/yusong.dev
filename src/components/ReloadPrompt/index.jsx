@@ -1,6 +1,7 @@
 import { delay } from 'lodash-es'
 import { Download, MousePointerClick, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import useSWR from 'swr'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -25,8 +26,24 @@ const i18nMapping = {
   }
 }
 
+const useCheckUpdate = (registration, reloadIfUpdateExist) => {
+  useSWR(
+    registration || null,
+    r => r.update().then(reloadIfUpdateExist),
+    {
+      revalidateOnMount: true,
+      revalidateOnFocus: true,
+      revalidateOnReconnect: true,
+      refreshInterval: INTERVAL_MS
+    }
+  )
+}
+
+let tmpRegistration = null
 const ReloadPrompt = () => {
   const { label } = useI18N(i18nMapping)
+  const isMounted = useRef(false)
+  const [registration, setRegistration] = useState(null)
   const [isUpdating, setIsUpdating] = useState(false)
   const {
     needRefresh: [needRefresh, setNeedRefresh],
@@ -37,9 +54,12 @@ const ReloadPrompt = () => {
         return
       }
 
-      // on page load check new sw, if exist trigger upload & refresh flow
-      r.update().then(() => updateServiceWorker(true))
-      setInterval(() => r.update(), INTERVAL_MS)
+      tmpRegistration = r
+      if (!isMounted.current) {
+        return
+      }
+
+      setRegistration(r)
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
@@ -50,7 +70,7 @@ const ReloadPrompt = () => {
     setNeedRefresh(false)
   }
 
-  const opUpdate = () => {
+  const onUpdate = () => {
     if (!needRefresh) {
       return
     }
@@ -59,6 +79,16 @@ const ReloadPrompt = () => {
     updateServiceWorker(true)
     delay(() => window.location.reload(), SEC * 10)
   }
+
+  useCheckUpdate(registration, onUpdate)
+
+  useEffect(() => {
+    isMounted.current = true
+    setRegistration(tmpRegistration)
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   return (
     needRefresh && (
@@ -72,7 +102,7 @@ const ReloadPrompt = () => {
         >
           {!isUpdating && (
             <>
-              <div onClick={opUpdate}>
+              <div onClick={onUpdate}>
                 <AlertTitle className='flex items-center gap-2'>
                   <MousePointerClick className='size-5' />
                   <span>
