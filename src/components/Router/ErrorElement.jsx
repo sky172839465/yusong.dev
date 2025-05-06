@@ -1,5 +1,6 @@
 import { RouteOff } from 'lucide-react'
 import { lazy, Suspense } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link, useRouteError } from 'react-router-dom'
 
 import { usePageExistCheck } from '@/apis/usePageExistCheck'
@@ -11,12 +12,14 @@ const LazyMainLayout = lazy(() => import('@/layouts/Main'))
 
 const i18nMapping = {
   [LANG.EN]: {
+    TITLE: 'Error',
     WAH: 'Oops!',
     MESSAGE: 'Sorry, an unexpected error has occurred.',
     PAGE_NOT_FOUND: 'Page not found.',
     BACK_TO_HOME: 'Back to home'
   },
   [LANG.ZH_TW]: {
+    TITLE: '錯誤',
     WAH: '啊⋯',
     MESSAGE: '不好意思，出現預期外的錯誤。',
     PAGE_NOT_FOUND: '頁面不存在。',
@@ -42,6 +45,11 @@ const ErrorElement = () => {
 
   return (
     <Suspense fallback={<SkeletonHome />}>
+      <Helmet>
+        <title>
+          {label.TITLE}
+        </title>
+      </Helmet>
       <LazyMainLayout isFullScreen>
         <div className='flex w-full justify-center text-center text-foreground'>
           <div className='max-w-md'>
