@@ -49,10 +49,15 @@ export default {
     }
 
     // Fetch the original HTML
-    let [html, jsHtml] = await Promise.all([
-      fetch(request).then((response) => response.text()),
+    let [response, jsHtml] = await Promise.all([
+      fetch(request),
       isNoJsRoute ? await fetch(`https://${BLOG_HOST}${convertedPath}`).then((response) => response.text()) : Promise.resolve()
     ])
+    if (path.endsWith('.html') && (response.status > 400 && response.status < 500)) {
+      return Response.redirect(`https://${BLOG_HOST}`, 301)
+    }
+
+    let html = await response.text()
 
     // Dynamic generate meta tags
     const { type, data, image, imageFolder, twitterImage } = targetRoute
