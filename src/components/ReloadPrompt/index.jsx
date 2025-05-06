@@ -55,6 +55,7 @@ const ReloadPrompt = () => {
       }
 
       tmpRegistration = r
+      r.update().then(() => updateServiceWorker(true))
       if (!isMounted.current) {
         return
       }
