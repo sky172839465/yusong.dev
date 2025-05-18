@@ -30,7 +30,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 const GITHUB_ASSETS_CACHE_NAME = 'github-assets'
 registerRoute(
   ({ url }) => (
-    url.href.startsWith('https://cdn.yusong.tw') ||
+    url.href.startsWith('https://cdn.yusong.dev') ||
     url.href.startsWith('https://github.githubassets.com/images')
   ),
   new StaleWhileRevalidate({
