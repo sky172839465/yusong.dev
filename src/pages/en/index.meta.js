@@ -1,5 +1,5 @@
 const meta = {
-  title: 'YUSONG.TW',
+  title: 'YUSONG.DEV',
   description: 'This is Yusong\'s blog'
 }
 
