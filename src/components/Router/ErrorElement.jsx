@@ -27,7 +27,7 @@ const i18nMapping = {
   }
 }
 
-const DEFAULT_TITLE = 'YUSONG.TW'
+const DEFAULT_TITLE = 'YUSONG.DEV'
 
 const ErrorElement = () => {
   const { label, isZhTw, lang } = useI18N(i18nMapping)
