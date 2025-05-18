@@ -25,7 +25,7 @@ const modifiedRoutes = IS_MODIFIED_FILES_EXIST
 const favicon = fs.readFileSync('public/favicon.svg', 'utf-8').replace(/>\s+</g, '><')
 console.log('Modified routes', modifiedRoutes)
 
-const HOMEPAGE_TITLE = 'YUSONG.TW'
+const HOMEPAGE_TITLE = 'YUSONG.DEV'
 
 const getOgImgComponent = (route) => {
   const { data = {} } = route
