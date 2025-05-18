@@ -58,7 +58,7 @@ const Comments = () => {
           <FadeIn className='[&_*]:select-text'>
             <LazyGiscus
               id='comments'
-              repo='sky172839465/yusong.tw'
+              repo='sky172839465/yusong.dev'
               repoId='R_kgDONva8Tw'
               category='Announcements'
               categoryId='DIC_kwDONva8T84Cmdvk'
