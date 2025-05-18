@@ -2,10 +2,10 @@ import { get, keyBy } from 'lodash-es'
 
 import routes from './routes.json'
 
-const CDN_HOST = 'https://cdn.yusong.tw'
+const CDN_HOST = 'https://cdn.yusong.dev'
 const AUTHOR = 'YuSong Hsu'
 const ACCOUNT = 'sky172839465'
-const BLOG_HOST = 'yusong.tw'
+const BLOG_HOST = 'yusong.dev'
 const TITLE = BLOG_HOST.toUpperCase()
 const ROUTE_MAP = keyBy(
   routes.map(({ file, ...item }) => {

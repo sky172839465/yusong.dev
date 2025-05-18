@@ -8,8 +8,8 @@ export default VitePWA({
     globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'] // Cache only necessary files
   },
   manifest: {
-    name: 'yusong.tw',
-    short_name: 'yusong.tw',
+    name: 'yusong.dev',
+    short_name: 'yusong.dev',
     description: 'This is Yusong\'s blog',
     theme_color: '#ffffff',
     display: 'standalone',

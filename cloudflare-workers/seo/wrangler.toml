@@ -4,7 +4,7 @@ main = "src/index.js"
 compatibility_date = "2025-01-24"
 
 routes = [
-  "yusong.tw/*"
+  "yusong.dev/*"
 ]
 
 # wrangler.toml (wrangler v3.88.0^)

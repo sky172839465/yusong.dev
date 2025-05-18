@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 
 const DEFAULT_DATA = {
-  title: 'YUSONG.TW',
+  title: 'YUSONG.DEV',
   description: 'This is Yusong\'s blog'
 }
 

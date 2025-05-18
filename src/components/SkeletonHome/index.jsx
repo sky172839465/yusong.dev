@@ -6,7 +6,7 @@ const SkeletonHome = () => {
       <div className='text-center'>
         <div className='max-w-md space-y-4'>
           <h1 className='text-5xl font-bold'>
-            YUSONG.TW
+            YUSONG.DEV
           </h1>
           <div className='flex items-center justify-center space-x-2 text-xl'>
             {['Loading', '...'].map((word, index) => (

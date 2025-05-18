@@ -155,7 +155,7 @@ const useArticleHtml = (html) => {
   return { sections: articleSections, articleHtml }
 }
 
-const DEFAULT_TITLE = 'YUSONG.TW'
+const DEFAULT_TITLE = 'YUSONG.DEV'
 
 const Article = (props) => {
   const { filePath, markdown } = props
@@ -254,7 +254,7 @@ const Article = (props) => {
             })}
           </div>
           <a
-            href={`https://github.com/sky172839465/yusong.tw/blob/main/${filePath}`}
+            href={`https://github.com/sky172839465/yusong.dev/blob/main/${filePath}`}
             target='_blank'
             className={count >= 10 ? 'inline' : 'hidden'}
           >
