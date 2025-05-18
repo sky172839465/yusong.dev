@@ -22,4 +22,4 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.CROSS_REPO_WORKFLOW }}" \
           -H "Content-Type: application/json" \
           --data '{"event_type": "trigger-build"}' \
-          https://api.github.com/repos/sky172839465/cdn.yusong.tw/dispatches
+          https://api.github.com/repos/sky172839465/cdn.yusong.dev/dispatches
