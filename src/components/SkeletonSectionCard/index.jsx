@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 // import { usePageLoaded } from '@/contexts/pageLoading'
 
 const SkeletonSectionCard = (props) => {
-  const { article: { data = {} } = {}, isContentExist, isArticle, viewTransition } = props
+  const { article: { data = {} } = {}, isContentExist, isArticle } = props
   const { title, description } = data
   // const { loading: isPageLoading } = usePageLoaded()
   return (
@@ -16,7 +16,6 @@ const SkeletonSectionCard = (props) => {
       {isArticle && (
         <LazyImage
           className='absolute top-0 h-56 w-full rounded-b-none rounded-t-lg md:h-96'
-          style={{ viewTransitionName: !viewTransition ? '' : 'test' }}
           isLoading
         />
       )}

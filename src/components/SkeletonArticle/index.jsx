@@ -46,8 +46,6 @@ const SkeletonArticle = () => {
       </div>
       <LazyImage
         className='my-8 aspect-video w-full rounded-lg'
-        // style={{ viewTransitionName: isPageLoading ? '' : 'test' }}
-        style={{ viewTransitionName: 'test' }}
         isLoading
       />
       <div

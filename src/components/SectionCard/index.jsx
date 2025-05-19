@@ -17,7 +17,7 @@ const DEFAULT_IMAGE_SIZES = `
 `
 
 const SectionCard = (props) => {
-  const { article: { file = '', path = '', data = {} } = {}, isArticle, imageSizes = DEFAULT_IMAGE_SIZES, viewTransition } = props
+  const { article: { file = '', path = '', data = {} } = {}, isArticle, imageSizes = DEFAULT_IMAGE_SIZES } = props
   const { title, description, tags = [], createdAt, modifiedAt } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
@@ -47,7 +47,6 @@ const SectionCard = (props) => {
             sizes={imageSizes}
             fetchpriority='high'
             loading='eager'
-            style={{ viewTransitionName: !viewTransition ? '' : 'test' }}
           />
         )}
         <CardHeader className={`${isArticle ? 'grow' : ''} gap-2`}>
