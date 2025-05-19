@@ -280,8 +280,6 @@ const Article = (props) => {
             fetchpriority='high'
             loading='eager'
             sizes='(max-width: 640px) calc(100vw-2rem), (max-width: 768px) 608px, 736px'
-            // style={{ viewTransitionName: isPageLoading ? '' : 'test' }}
-            style={{ viewTransitionName: 'test' }}
           />
         </LazyImagePreview>
         <div
