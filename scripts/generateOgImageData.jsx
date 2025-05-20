@@ -46,7 +46,7 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            backdropFilter: 'blur(40px)',
+            boxShadow: '0 0 80px rgba(255, 255, 255, 0.6)',
             ...twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 bg-white')
           }}
         >
@@ -85,7 +85,7 @@ const getOgImgComponent = (route) => {
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
         <div
           style={{
-            backdropFilter: 'blur(40px)',
+            boxShadow: '0 0 80px rgba(255, 255, 255, 0.6)',
             ...twj('flex items-center gap-6 p-4 pl-2 bg-white')
           }}
         >
@@ -115,7 +115,7 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            backdropFilter: 'blur(40px)',
+            boxShadow: '0 0 80px rgba(255, 255, 255, 0.6)',
             ...twj('bg-white p-4')
           }}  
         >
