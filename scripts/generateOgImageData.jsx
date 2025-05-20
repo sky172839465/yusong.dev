@@ -78,7 +78,12 @@ const getOgImgComponent = (route) => {
       }}
     >
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
-        <div style={twj('flex items-center gap-6 p-4 bg-white')}>
+        <div
+          style={{
+            boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.5)',
+            ...twj('flex items-center gap-6 p-4 bg-white')
+          }}
+         >
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
               style={twj('rounded-sm')}
@@ -100,11 +105,17 @@ const getOgImgComponent = (route) => {
       <div
         style={{
           fontSize: '90px',
-          boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.25)',
-          ...twj('flex h-[84%] items-center justify-center px-10 p-4 bg-white')
+          ...twj('flex h-[84%] items-center justify-center px-10')
         }}
       >
-        {title}
+        <div
+          style={{
+            boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.5)',
+            ...twj('bg-white p-4')
+          }}  
+        >
+          {title}
+        </div>
       </div>
       <div style={twj('flex h-[8%] w-full items-center justify-end text-white')}>
         <div
