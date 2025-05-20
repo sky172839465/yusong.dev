@@ -44,8 +44,8 @@ const getOgImgComponent = (route) => {
           ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
         }}
       >
-        <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
-          <div style={twj('flex rounded-md bg-white p-2')}>
+        <div style={twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 bg-white backdrop-blur-xl')}>
+          <div style={twj('flex rounded-md p-2')}>
             <img
               style={twj('rounded-sm')}
               src={`data:image/svg+xml,${favicon}`}
@@ -80,8 +80,7 @@ const getOgImgComponent = (route) => {
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
         <div
           style={{
-            boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.5)',
-            ...twj('flex items-center gap-6 p-4 bg-white')
+            ...twj('flex items-center gap-6 p-4 pl-2 bg-white backdrop-blur-xl')
           }}
         >
           <div style={twj('flex rounded-md bg-white p-2')}>
@@ -110,8 +109,7 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.5)',
-            ...twj('bg-white p-4')
+            ...twj('bg-white p-4 backdrop-blur-xl')
           }}  
         >
           {title}
