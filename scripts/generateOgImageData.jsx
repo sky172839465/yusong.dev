@@ -83,7 +83,7 @@ const getOgImgComponent = (route) => {
             boxShadow: '0 25px 50px -12px rgb(255 255 255 / 0.5)',
             ...twj('flex items-center gap-6 p-4 bg-white')
           }}
-         >
+        >
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
               style={twj('rounded-sm')}
