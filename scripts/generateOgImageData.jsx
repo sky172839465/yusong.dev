@@ -44,7 +44,12 @@ const getOgImgComponent = (route) => {
           ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
         }}
       >
-        <div style={twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 bg-white backdrop-blur-xl')}>
+        <div
+          style={{
+            backdropFilter: 'blur(40px)',
+            ...twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 bg-white')
+          }}
+        >
           <div style={twj('flex rounded-md p-2')}>
             <img
               style={twj('rounded-sm')}
@@ -80,7 +85,8 @@ const getOgImgComponent = (route) => {
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
         <div
           style={{
-            ...twj('flex items-center gap-6 p-4 pl-2 bg-white backdrop-blur-xl')
+            backdropFilter: 'blur(40px)',
+            ...twj('flex items-center gap-6 p-4 pl-2 bg-white')
           }}
         >
           <div style={twj('flex rounded-md bg-white p-2')}>
@@ -109,7 +115,8 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            ...twj('bg-white p-4 backdrop-blur-xl')
+            backdropFilter: 'blur(40px)',
+            ...twj('bg-white p-4')
           }}  
         >
           {title}
@@ -125,7 +132,8 @@ const getOgImgComponent = (route) => {
           {tags.map((tag, index) => (
             <div
               style={{
-                ...twj('flex p-4 bg-black/30 backdrop-blur-md text-white text-xl rounded-md')
+                backdropFilter: 'blur(24px)',
+                ...twj('flex p-4 bg-black/30 text-white text-xl rounded-md')
               }}
               key={index}
             >
