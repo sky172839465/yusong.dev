@@ -73,7 +73,7 @@ const getOgImgComponent = (route) => {
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
         backgroundColor: '#f8fafc',
-          backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
+        backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
         ...twj('w-full h-full flex flex-col justify-between p-12 text-white bg-repeat')
       }}
     >
