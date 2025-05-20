@@ -41,7 +41,7 @@ const getOgImgComponent = (route) => {
           fontWeight: 700,
           backgroundColor: '#f8fafc',
           backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
-          ...twj('w-full h-full flex flex-col justify-between p-12 shadow-2xl shadow-[#fff] text-black bg-repeat')
+          ...twj('w-full h-full flex flex-col justify-between p-12 shadow-2xl shadow-white text-black bg-white bg-repeat')
         }}
       >
         <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
@@ -77,7 +77,7 @@ const getOgImgComponent = (route) => {
         ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
       }}
     >
-      <div style={twj('flex h-[8%] w-full items-center justify-between shadow-2xl shadow-[#fff]')}>
+      <div style={twj('flex h-[8%] w-full items-center justify-between shadow-2xl shadow-white p-4 bg-white')}>
         <div style={twj('flex items-center gap-6')}>
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
@@ -100,7 +100,7 @@ const getOgImgComponent = (route) => {
       <div
         style={{
           fontSize: '90px',
-          ...twj('flex h-[84%] items-center justify-center px-10')
+          ...twj('flex h-[84%] items-center justify-center px-10 shadow-2xl shadow-white bg-white')
         }}
       >
         {title}
