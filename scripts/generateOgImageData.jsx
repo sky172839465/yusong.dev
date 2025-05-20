@@ -39,7 +39,8 @@ const getOgImgComponent = (route) => {
         style={{
           fontFamily: 'Noto Sans TC',
           fontWeight: 700,
-          background: 'linear-gradient(to bottom right, #000, #1c398e)',
+          backgroundColor: '#f8fafc',
+          backgroundImage: `background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>'); background-repeat: repeat;`,
           ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
         }}
       >
@@ -71,11 +72,12 @@ const getOgImgComponent = (route) => {
       style={{
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
-        background: 'linear-gradient(to bottom right, #000, #1c398e)',
+          backgroundColor: '#f8fafc',
+          backgroundImage: `background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>'); background-repeat: repeat;`,
         ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
       }}
     >
-      <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
+      <div style={twj('flex h-[8%] w-full items-center justify-between text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]')}>
         <div style={twj('flex items-center gap-6')}>
           <div style={twj('flex rounded-md bg-white p-2')}>
             <img
@@ -97,8 +99,8 @@ const getOgImgComponent = (route) => {
       </div>
       <div
         style={{
-          fontSize: '100px',
-          ...twj('flex h-[84%] items-center justify-center px-10')
+          fontSize: '90px',
+          ...twj('flex h-[84%] items-center justify-center px-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]')
         }}
       >
         {title}
