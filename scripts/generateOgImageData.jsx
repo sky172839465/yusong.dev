@@ -51,7 +51,7 @@ const getOgImgComponent = (route) => {
         >
           <div
             style={{
-              background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+              background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%)',
               boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
               ...twj('flex rounded-md p-2 pr-0')
             }}
@@ -90,7 +90,7 @@ const getOgImgComponent = (route) => {
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
         <div
           style={{
-            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%)',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
             ...twj('flex items-center gap-6 p-4 pl-2 rounded-lg')
           }}
@@ -121,7 +121,7 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+            background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%)',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
             ...twj('rounded-lg p-4')
           }}  
@@ -143,7 +143,7 @@ const getOgImgComponent = (route) => {
           {tags.map((tag, index) => (
             <div
               style={{
-                background: 'linear-gradient(to right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 50%)',
                 border: '2px solid rgba(0, 0, 0, 0.5)',
                 ...twj('flex p-4 text-xl rounded-md')
               }}
