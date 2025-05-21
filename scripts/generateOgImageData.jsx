@@ -46,12 +46,12 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.9))',
+            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.6))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
             ...twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 rounded-lg')
           }}
         >
-          <div style={twj('flex rounded-md p-2')}>
+          <div style={twj('flex rounded-md p-2 pr-0')}>
             <img
               style={twj('rounded-sm')}
               src={`data:image/svg+xml,${favicon}`}
@@ -86,12 +86,12 @@ const getOgImgComponent = (route) => {
       <div style={twj('flex h-[8%] w-full items-center justify-between')}>
         <div
           style={{
-            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.9))',
+            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.6))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
             ...twj('flex items-center gap-6 p-4 pl-2 rounded-lg')
           }}
         >
-          <div style={twj('flex rounded-md bg-white p-2')}>
+          <div style={twj('flex rounded-md bg-white p-2 pr-0')}>
             <img
               style={twj('rounded-sm')}
               src={`data:image/svg+xml,${favicon}`}
@@ -111,13 +111,13 @@ const getOgImgComponent = (route) => {
       </div>
       <div
         style={{
-          fontSize: '90px',
+          fontSize: '84px',
           ...twj('flex h-[84%] items-center justify-center px-10')
         }}
       >
         <div
           style={{
-            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.9))',
+            background: 'linear-gradient(to top right, #fff, rgba(255, 255, 255, 0.6))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
             ...twj('rounded-lg p-4')
           }}  
