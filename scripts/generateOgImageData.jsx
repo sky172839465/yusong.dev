@@ -47,7 +47,7 @@ const getOgImgComponent = (route) => {
         <div
           style={{
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
-            ...twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 rounded-md bg-white')
+            ...twj('flex justify-center items-center gap-20 h-full w-full p-4 pl-2 rounded-lg bg-white/90')
           }}
         >
           <div style={twj('flex rounded-md p-2')}>
@@ -86,7 +86,7 @@ const getOgImgComponent = (route) => {
         <div
           style={{
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
-            ...twj('flex items-center gap-6 p-4 pl-2 bg-white rounded-md')
+            ...twj('flex items-center gap-6 p-4 pl-2 bg-white/90 rounded-lg')
           }}
         >
           <div style={twj('flex rounded-md bg-white p-2')}>
@@ -116,7 +116,7 @@ const getOgImgComponent = (route) => {
         <div
           style={{
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.9)',
-            ...twj('bg-white rounded-md p-4')
+            ...twj('bg-white/90 rounded-lg p-4')
           }}  
         >
           {title}
