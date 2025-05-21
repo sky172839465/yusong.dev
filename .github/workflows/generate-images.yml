@@ -56,7 +56,7 @@ jobs:
 
   generate-images:
     needs: pre-generate-images
-    # if: needs.pre-generate-images.outputs.changed == 'true'
+    if: needs.pre-generate-images.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -74,8 +74,8 @@ jobs:
           MODIFIED_FILES: ${{ needs.pre-generate-images.outputs.files }}
         run: |
           npm install
-          # npm run gen:data
-          MODIFIED_FILES='' npm run gen:data
+          npm run gen:data
+          # MODIFIED_FILES='' npm run gen:data
 
       - name: Check for changes
         id: git_diff
