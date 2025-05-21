@@ -39,12 +39,23 @@ const getOgImgComponent = (route) => {
         style={{
           fontFamily: 'Noto Sans TC',
           fontWeight: 700,
-          background: 'linear-gradient(to bottom right, #000, #1c398e)',
-          ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
+          backgroundColor: '#f8fafc',
+          backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
+          ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
         }}
       >
-        <div style={twj('flex justify-center items-center gap-20 h-full w-full')}>
-          <div style={twj('flex rounded-md bg-white p-2')}>
+        <div
+          style={{
+            ...twj('flex justify-center items-center h-full w-full gap-16 p-4 pl-2 rounded-lg')
+          }}
+        >
+          <div
+            style={{
+              background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+              boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
+              ...twj('flex rounded-md p-2 pr-0')
+            }}
+          >
             <img
               style={twj('rounded-sm')}
               src={`data:image/svg+xml,${favicon}`}
@@ -71,13 +82,20 @@ const getOgImgComponent = (route) => {
       style={{
         fontFamily: 'Noto Sans TC',
         fontWeight: 700,
-        background: 'linear-gradient(to bottom right, #000, #1c398e)',
-        ...twj('w-full h-full flex flex-col justify-between p-12 text-white')
+        backgroundColor: '#f8fafc',
+        backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
+        ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
       }}
     >
-      <div style={twj('flex h-[8%] w-full items-center justify-between text-white')}>
-        <div style={twj('flex items-center gap-6')}>
-          <div style={twj('flex rounded-md bg-white p-2')}>
+      <div style={twj('flex h-[8%] w-full items-center justify-between')}>
+        <div
+          style={{
+            background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+            boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
+            ...twj('flex items-center gap-6 p-4 pl-2 rounded-lg')
+          }}
+        >
+          <div style={twj('flex rounded-md bg-white p-2 pr-0')}>
             <img
               style={twj('rounded-sm')}
               src={`data:image/svg+xml,${favicon}`}
@@ -87,7 +105,7 @@ const getOgImgComponent = (route) => {
           </div>
           <span
             style={{
-              fontSize: '50px',
+              fontSize: '40px',
               ...twj('flex')
             }}
           >
@@ -97,13 +115,25 @@ const getOgImgComponent = (route) => {
       </div>
       <div
         style={{
-          fontSize: '100px',
+          fontSize: '84px',
           ...twj('flex h-[84%] items-center justify-center px-10')
         }}
       >
-        {title}
+        <div
+          style={{
+            background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+            boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
+            ...twj('rounded-lg p-4')
+          }}  
+        >
+          {title}
+        </div>
       </div>
-      <div style={twj('flex h-[8%] w-full items-center justify-end text-white')}>
+      <div
+        style={{
+          ...twj('flex h-[8%] w-full items-center justify-end')
+        }}  
+      >
         <div
           style={{
             fontSize: '20px',
@@ -113,7 +143,9 @@ const getOgImgComponent = (route) => {
           {tags.map((tag, index) => (
             <div
               style={{
-                ...twj('flex p-4 bg-black/30 backdrop-blur-md text-white text-xl rounded-md')
+                background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+                border: '2px solid rgba(0, 0, 0, 0.5)',
+                ...twj('flex p-4 text-xl rounded-md')
               }}
               key={index}
             >
