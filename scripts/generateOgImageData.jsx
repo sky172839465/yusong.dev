@@ -46,33 +46,31 @@ const getOgImgComponent = (route) => {
       >
         <div
           style={{
-            ...twj('flex justify-center items-center h-full w-full')
+            ...twj('flex justify-center items-center h-full w-full gap-16 p-4 pl-2 rounded-lg')
           }}
         >
           <div
             style={{
               background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
               boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
-              ...twj('flex justify-center items-center gap-16 w-full p-4 pl-2 rounded-lg')
-            }}  
+              ...twj('flex rounded-md p-2 pr-0')
+            }}
           >
-            <div style={twj('flex rounded-md p-2 pr-0')}>
-              <img
-                style={twj('rounded-sm')}
-                src={`data:image/svg+xml,${favicon}`}
-                width={150}
-                height={150}
-              />
-            </div>
-            <span
-              style={{
-                fontSize: '120px',
-                ...twj('flex')
-              }}
-            >
-              {HOMEPAGE_TITLE}
-            </span>
+            <img
+              style={twj('rounded-sm')}
+              src={`data:image/svg+xml,${favicon}`}
+              width={150}
+              height={150}
+            />
           </div>
+          <span
+            style={{
+              fontSize: '120px',
+              ...twj('flex')
+            }}
+          >
+            {HOMEPAGE_TITLE}
+          </span>
         </div>
       </div>
     )
@@ -131,7 +129,11 @@ const getOgImgComponent = (route) => {
           {title}
         </div>
       </div>
-      <div style={twj('flex h-[8%] w-full items-center justify-end text-white')}>
+      <div
+        style={{
+          ...twj('flex h-[8%] w-full items-center justify-end')
+        }}  
+      >
         <div
           style={{
             fontSize: '20px',
@@ -141,7 +143,9 @@ const getOgImgComponent = (route) => {
           {tags.map((tag, index) => (
             <div
               style={{
-                ...twj('flex p-4 bg-black/30 text-white text-xl rounded-md')
+                background: 'linear-gradient(to right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
+                border: '2px solid rgba(0, 0, 0, 0.5)',
+                ...twj('flex p-4 text-xl rounded-md')
               }}
               key={index}
             >
