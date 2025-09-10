@@ -9,7 +9,7 @@
 		"build": "cp ../../src/data/routes.json ./src/routes.json"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.8.23",
+		"@cloudflare/vitest-pool-workers": "^0.8.71",
 		"wrangler": "^4.13.2"
 	},
 	"dependencies": {
