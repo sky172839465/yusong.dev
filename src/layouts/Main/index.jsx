@@ -11,11 +11,11 @@ const Content = (props) => {
   const { loading } = usePageLoading()
   return (
     <FadeIn
-      animate={{ opacity: loading ? 0 : 1 }}
       className={clx(
         'container mx-auto grow px-4 py-8 opacity-100 transition-opacity',
         {
-          'flex items-center': isFullScreen
+          'flex items-center': isFullScreen,
+          invisible: loading
         }
       )}
     >
