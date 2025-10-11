@@ -17,7 +17,7 @@
     "lint:fix": "eslint . --fix",
     "postinstall": "patch-package",
     "preview": "vite preview",
-    "prepare": "husky && run-s gen:routeData",
+    "prepare": "run-s gen:routeData",
     "prettier": "prettier . -c",
     "prettier:fix": "prettier . --write"
   },
@@ -92,7 +92,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "globals": "^15.9.0",
-    "husky": "^9.1.5",
     "js-yaml": "^4.1.0",
     "lint-staged": "^15.2.10",
     "markdown-it": "^14.1.0",
