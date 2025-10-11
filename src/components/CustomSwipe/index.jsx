@@ -18,7 +18,7 @@ const CustomSwipe = (props) => {
   return (
     <div
       className={`
-        fixed left-0 top-0
+        fixed top-0 left-0
         flex h-dvh w-dvw
         flex-row items-center justify-between px-6
         transition-all duration-0
@@ -32,7 +32,7 @@ const CustomSwipe = (props) => {
         return (
           <div
             key={index}
-            className='rounded-full border bg-foreground p-4 text-background'
+            className='bg-foreground text-background rounded-full border p-4'
             style={{
               opacity: (
                 (isLeftArrow && opacityPercent) ||

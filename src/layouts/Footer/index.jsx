@@ -15,7 +15,7 @@ const Footer = () => {
 
   return (
     <footer
-      className='flex-none border-t bg-background'
+      className='bg-background flex-none border-t'
     >
       <div className='container mx-auto px-4 py-6'>
         <div className='flex flex-col items-center justify-center md:flex-row'>

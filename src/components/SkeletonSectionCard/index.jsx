@@ -5,17 +5,15 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-// import { usePageLoaded } from '@/contexts/pageLoading'
 
 const SkeletonSectionCard = (props) => {
   const { article: { data = {} } = {}, isContentExist, isArticle } = props
   const { title, description } = data
-  // const { loading: isPageLoading } = usePageLoaded()
   return (
     <Card className='flex grow flex-col'>
       {isArticle && (
         <LazyImage
-          className='absolute top-0 h-56 w-full rounded-b-none rounded-t-lg md:h-96'
+          className='absolute top-0 h-56 w-full rounded-t-lg rounded-b-none md:h-96'
           isLoading
         />
       )}

@@ -1,7 +1,7 @@
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import autoprefixer from 'autoprefixer'
 import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import mdPlugin from 'vite-plugin-markdown'
 import sitemapPlugin from 'vite-plugin-sitemap'

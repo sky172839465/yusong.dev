@@ -79,7 +79,7 @@ const CommandItemContent = (props) => {
           )
         })}
       </div>
-      <p className='max-w-80 truncate text-xs text-secondary-foreground md:max-w-96'>
+      <p className='text-secondary-foreground max-w-80 truncate text-xs md:max-w-96'>
         {description}
       </p>
     </div>

@@ -3,13 +3,8 @@ import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import tailwind from 'eslint-plugin-tailwindcss'
 import globals from 'globals'
-import path from 'path'
-import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 export default [
   { ignores: ['dist', 'src/components/ui/*'] },
@@ -28,10 +23,7 @@ export default [
       }
     },
     settings: {
-      react: { version: '18.3' },
-      tailwindcss: {
-        config: path.join(__dirname, './tailwind.config.js')
-      }
+      react: { version: '18.3' }
     },
     plugins: {
       react,
@@ -80,6 +72,7 @@ export default [
       'tailwindcss/no-custom-classname': 'off'
     }
   },
+  // ...tailwind.configs['flat/recommended'],
   {
     plugins: {
       'simple-import-sort': simpleImportSort
@@ -88,6 +81,5 @@ export default [
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error'
     }
-  },
-  ...tailwind.configs['flat/recommended']
+  }
 ]

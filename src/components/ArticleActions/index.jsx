@@ -14,8 +14,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { usePageLoading } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
+import { usePageLoading } from '@/stores/pageLoading'
 
 const i18nMapping = {
   [LANG.EN]: {
@@ -103,11 +103,11 @@ const ArticleActions = (props) => {
       >
         <div
           className={`
+            [&_button:not(:last-child)]:border-r-background
             inline-flex
+            [&_button]:rounded-none
             [&_button:first-child]:rounded-l-lg
             [&_button:last-child]:rounded-r-lg
-            [&_button:not(:last-child)]:border-r-background
-            [&_button]:rounded-none
           `}
         >
           {!isEmpty(series) && (
