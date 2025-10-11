@@ -66,11 +66,11 @@ const ChildElement = (props) => {
     meta
   } = route
   return (
-    <FadeIn key={pathname}>
-      <Suspense
-        fallback={null}
-      >
-        <Layout>
+    <Suspense
+      fallback={null}
+    >
+      <Layout>
+        <FadeIn key={pathname}>
           {isMarkdown && (
             <Suspense fallback={<LazySkeletonArticle />}>
               <LazyArticle {...route} />
@@ -84,9 +84,9 @@ const ChildElement = (props) => {
               <ChildRouteMounted />
             </>
           )}
-        </Layout>
-      </Suspense>
-    </FadeIn>
+        </FadeIn>
+      </Layout>
+    </Suspense>
   )
 }
 
