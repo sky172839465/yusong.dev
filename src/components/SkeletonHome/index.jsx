@@ -1,8 +1,15 @@
+import clx from 'classnames'
+
 import FadeIn from '@/components/FadeIn'
 
-const SkeletonHome = () => {
+const SkeletonHome = (props) => {
+  const { className } = props
   return (
-    <FadeIn className='bg-background flex min-h-dvh w-dvw items-center justify-center'>
+    <FadeIn
+      className={clx('bg-background flex min-h-dvh w-dvw items-center justify-center', {
+        [className]: className
+      })}
+    >
       <div className='text-center'>
         <div className='max-w-md space-y-4'>
           <h1 className='text-5xl font-bold'>

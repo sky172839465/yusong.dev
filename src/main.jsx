@@ -42,7 +42,7 @@ const RootLoadingScreen = () => {
   }
 
   return (
-    <SkeletonHome className='fixed top-0 z-0' />
+    <SkeletonHome className='fixed top-0 opacity-100!' />
   )
 }
 
