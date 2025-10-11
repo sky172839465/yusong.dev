@@ -7,6 +7,7 @@ import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 
 import { mainStore } from './stores/main.js'
 import { useRootLoading } from './stores/rootLoading.js'
+import { changeTheme } from './stores/theme.js'
 
 const LazyRouter = lazy(() => import('@/components/Router'))
 
@@ -31,6 +32,7 @@ const registerServiceWorker = () => {
 }
 
 window.addEventListener('load', registerServiceWorker)
+changeTheme()
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RootLoadingScreen = () => {

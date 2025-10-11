@@ -47,7 +47,8 @@ export default ({ mode }) => {
       }
     },
     define: {
-      'window.IS_PROD': `${isProd}`
+      'window.IS_PROD': `${isProd}`,
+      'window.THEME_KEY': '"dark-mode"'
     },
     resolve: {
       alias: {

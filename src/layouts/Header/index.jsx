@@ -7,7 +7,7 @@ import TriggerButton from '@/components/SearchCommand/TriggerButton'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import useI18N, { LANG } from '@/hooks/useI18N'
-import useTheme from '@/hooks/useTheme'
+import { useTheme } from '@/stores/theme'
 
 const LazySearchCommand = lazy(() => import('@/components/SearchCommand'))
 

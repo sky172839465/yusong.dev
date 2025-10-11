@@ -5,7 +5,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import useI18N, { LANG } from '@/hooks/useI18N'
-import useTheme from '@/hooks/useTheme'
+import { useTheme } from '@/stores/theme'
 
 import FadeIn from '../FadeIn'
 
