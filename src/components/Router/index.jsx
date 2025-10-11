@@ -3,7 +3,8 @@ import { sleep } from 'radash'
 import { lazy, Suspense, useEffect } from 'react'
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider,
+  useLocation
 } from 'react-router-dom'
 
 // import Root from '@/components/Root/index.jsx'
@@ -50,6 +51,13 @@ const DefaultLayout = (props) => {
   return props.children
 }
 
+const ChildRouteMounted = () => {
+  const { pathname } = useLocation()
+  return (
+    <ChildMounted key={pathname} />
+  )
+}
+
 const ChildElement = (props) => {
   const { route = {}, layout: Layout = DefaultLayout } = props
   const {
@@ -65,14 +73,14 @@ const ChildElement = (props) => {
         {isMarkdown && (
           <Suspense fallback={<LazySkeletonArticle />}>
             <LazyArticle {...route} />
-            <ChildMounted />
+            <ChildRouteMounted />
           </Suspense>
         )}
         {!isMarkdown && (
           <>
             <Comp />
             <LazyMeta fetchMetaData={meta} />
-            <ChildMounted />
+            <ChildRouteMounted />
           </>
         )}
       </Layout>
@@ -125,7 +133,7 @@ const Router = () => {
       errorElement: (
         <>
           <ErrorElement />
-          <ChildMounted />
+          <ChildRouteMounted />
         </>
       ),
       children: [
@@ -135,7 +143,7 @@ const Router = () => {
           element: (
             <>
               <SkeletonHome />
-              <ChildMounted />
+              <ChildRouteMounted />
             </>
           )
         },
@@ -144,7 +152,7 @@ const Router = () => {
           element: (
             <>
               <ErrorElement />
-              <ChildMounted />
+              <ChildRouteMounted />
             </>
           )
         }

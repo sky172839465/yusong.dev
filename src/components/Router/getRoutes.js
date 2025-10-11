@@ -1,5 +1,4 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size } from 'lodash-es'
-import { sleep } from 'radash'
 import { lazy } from 'react'
 
 import { updatePageLoading } from '@/stores/pageLoading'
@@ -76,7 +75,6 @@ export const loaderHandler = loader => async (...args) => {
   const isSamePath = nextPathname === window.location.pathname
   if (!isSamePath) {
     updatePageLoading(true)
-    sleep(400).then(() => updatePageLoading(false))
   }
 
   if (!loader) {
