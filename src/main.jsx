@@ -1,10 +1,14 @@
 import './index.css'
 
+import { Provider } from 'jotai'
 import { tryit } from 'radash'
 import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
+
+import { mainStore } from './stores/main.js'
+import { useRootLoading } from './stores/rootLoading.js'
 
 const LazyRouter = lazy(() => import('@/components/Router'))
 
@@ -30,14 +34,25 @@ const registerServiceWorker = () => {
 
 window.addEventListener('load', registerServiceWorker)
 
+// eslint-disable-next-line react-refresh/only-export-components
+const RootLoadingScreen = () => {
+  const { loading } = useRootLoading()
+  if (!loading) {
+    return null
+  }
+
+  return (
+    <SkeletonHome className='fixed top-0 z-0' />
+  )
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Suspense
-      fallback={(
-        <SkeletonHome className='fixed top-0 z-0' />
-      )}
-    >
-      <LazyRouter />
-    </Suspense>
+    <Provider store={mainStore}>
+      <Suspense fallback={null}>
+        <LazyRouter />
+      </Suspense>
+      <RootLoadingScreen />
+    </Provider>
   </StrictMode>
 )

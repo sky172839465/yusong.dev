@@ -36,7 +36,7 @@ const LazyImagePreview = (props) => {
           </DialogDescription>
         </DialogHeader>
         <div
-          className={`cursor-pointer bg-secondary ${className || ''}`}
+          className={`bg-secondary cursor-pointer ${className || ''}`}
           onClick={() => setOpen(false)}
         >
           <LazyImage

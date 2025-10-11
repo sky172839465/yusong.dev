@@ -4,7 +4,6 @@ import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-// import { usePageLoaded } from '@/contexts/pageLoading'
 
 const RANDOM = {
   TAGS: times(random(1, 3)),
@@ -13,17 +12,16 @@ const RANDOM = {
 }
 
 const SkeletonArticle = () => {
-  // const { loading: isPageLoading } = usePageLoaded()
   return (
-    <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
-      <h1 className='!mb-4 text-4xl font-bold text-gray-900 dark:text-white'>
+    <div className='prose prose-lg dark:prose-invert mx-auto flex flex-col gap-2'>
+      <h1 className='mb-4! text-4xl font-bold text-gray-900 dark:text-white'>
         <Skeleton className='h-10 w-full text-transparent'>
           This is a skeleton title
         </Skeleton>
       </h1>
       <div className='flex flex-row items-center justify-between'>
         <div className='flex flex-wrap gap-2'>
-          <Skeleton className='flex [&_*]:invisible'>
+          <Skeleton className='flex **:invisible'>
             <Badge variant='secondary' className='h-9'>
               <div className='mr-1 size-4' />
               {new Date().toLocaleDateString()}
@@ -34,7 +32,7 @@ const SkeletonArticle = () => {
           </div>
           {RANDOM.TAGS.map((tag, index) => {
             return (
-              <Skeleton className='flex [&_*]:invisible' key={index}>
+              <Skeleton className='flex **:invisible' key={index}>
                 <Badge className='h-9'>
                   {`tags ${index}`}
                 </Badge>
@@ -49,7 +47,7 @@ const SkeletonArticle = () => {
         isLoading
       />
       <div
-        className='prose prose-lg max-w-none !bg-background !text-transparent dark:prose-invert'
+        className='prose prose-lg bg-background! dark:prose-invert max-w-none text-transparent!'
       >
         {RANDOM.PARAGRAPHS.map((index => {
           return (

@@ -93,11 +93,11 @@ const ReloadPrompt = () => {
 
   return (
     needRefresh && (
-      <div className='fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 pwa:bottom-8'>
+      <div className='pwa:bottom-8 fixed bottom-4 left-1/2 z-50 w-full max-w-sm -translate-x-1/2'>
         <Alert
           className={`
-            flex items-center justify-between gap-2
-            rounded-xl border border-foreground bg-background/50 p-4 text-foreground shadow-xl backdrop-blur-md
+            border-foreground bg-background/50 text-foreground flex
+            items-center justify-between gap-2 rounded-xl border p-4 shadow-xl backdrop-blur-md
             ${needRefresh && 'cursor-pointer'}
           `}
         >

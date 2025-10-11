@@ -15,7 +15,6 @@ import LazyImagePreview from '@/components/LazyImage/Dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-// import { usePageLoaded } from '@/contexts/pageLoading'
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 import FadeIn from '../FadeIn'
@@ -80,7 +79,7 @@ const useArticleHtml = (html) => {
             <Button
               variant='outline'
               size='icon'
-              className='absolute right-2 top-2 rounded-md border bg-background p-2 text-foreground [&[disabled]]:pointer-events-none [&[disabled]]:opacity-50'
+              className='bg-background text-foreground absolute top-2 right-2 rounded-md border p-2 [&[disabled]]:pointer-events-none [&[disabled]]:opacity-50'
               onClick={onCopy(code)}
               disabled={copied}
             >
@@ -212,10 +211,10 @@ const Article = (props) => {
         <meta property='og:title' content={displayTitle} />
         <meta property='og:description' content={description} />
       </Helmet>
-      <div className='prose prose-lg mx-auto flex flex-col gap-2 dark:prose-invert'>
+      <div className='prose prose-lg dark:prose-invert mx-auto flex flex-col gap-2'>
         <h2
           ref={topRef}
-          className='!mb-4 select-text text-4xl font-bold text-gray-900 dark:text-white'
+          className='mb-4! text-4xl font-bold text-gray-900 select-text dark:text-white'
           onClick={increment}
         >
           {title}
@@ -285,7 +284,7 @@ const Article = (props) => {
         <div
           key={pathname}
           ref={articleRef}
-          className='max-w-none !bg-background !text-foreground [&_*]:select-text'
+          className='bg-background! text-foreground! max-w-none **:select-text'
         >
           {articleHtml}
         </div>

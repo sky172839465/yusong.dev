@@ -3,14 +3,13 @@ import { AnimatePresence, LazyMotion } from 'motion/react'
 import { lazy, useRef } from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import toast, { Toaster } from 'react-hot-toast'
-import { Outlet } from 'react-router-dom'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import CustomSwipe from '@/components/CustomSwipe'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import fetcher from '@/utils/fetcher'
 
-const LazyBlurScrollRestoration = lazy(() => import('@/components/BlurScrollRestoration'))
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
 const loadFeatures = () => import('@/components/Root/motionFeatures.js').then(res => res.default)
 
@@ -51,20 +50,19 @@ const Root = () => {
             strict
           >
             <AnimatePresence>
-              <LazyBlurScrollRestoration>
-                <Outlet />
-              </LazyBlurScrollRestoration>
+              <Outlet />
             </AnimatePresence>
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
       <Toaster
         toastOptions={{
-          className: '!bg-background/50 !text-foreground !border-foreground !border !backdrop-blur-md'
+          className: 'bg-background/50! text-foreground! border-foreground! border! backdrop-blur-md!'
         }}
       />
       <CustomSwipe />
       <LazyReloadPrompt />
+      <ScrollRestoration />
     </ThemeProvider>
   )
 }

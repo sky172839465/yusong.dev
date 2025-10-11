@@ -7,7 +7,6 @@ import LazyImage from '@/components/LazyImage'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-// import { usePageLoaded } from '@/contexts/pageLoading'
 import getI18N from '@/utils/getI18N'
 
 const DEFAULT_IMAGE_SIZES = `

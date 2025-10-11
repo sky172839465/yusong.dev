@@ -1,5 +1,5 @@
 import aspectRatio from '@tailwindcss/aspect-ratio'
-import typography from '@tailwindcss/typography'
+// import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -69,7 +69,7 @@ export default {
   	}
   },
   plugins: [
-    typography,
+    // typography,
     aspectRatio,
     require('tailwindcss-animate')
   ]

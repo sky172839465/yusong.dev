@@ -53,7 +53,7 @@ const ErrorElement = () => {
         </title>
       </Helmet>
       <LazyMainLayout isFullScreen>
-        <div className='flex w-full justify-center text-center text-foreground'>
+        <div className='text-foreground flex w-full justify-center text-center'>
           <div className='max-w-md'>
             <h1 className='text-5xl font-bold'>
               <RouteOff

@@ -26,7 +26,7 @@ export default function ArticlesSection() {
 
   return (
     <section id='articles'>
-      <h2 className='mb-6 text-3xl font-bold text-foreground'>
+      <h2 className='text-foreground mb-6 text-3xl font-bold'>
         {label.NEW_ARTICLES}
       </h2>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>

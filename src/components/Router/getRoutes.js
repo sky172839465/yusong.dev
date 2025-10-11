@@ -1,5 +1,8 @@
 import { find, flow, get, isEmpty, keys, map, orderBy, reduce, size } from 'lodash-es'
+import { sleep } from 'radash'
 import { lazy } from 'react'
+
+import { updatePageLoading } from '@/stores/pageLoading'
 
 const pages = import.meta.glob('/src/pages/**/index.jsx')
 const metaes = import.meta.glob('/src/pages/**/index.meta.js')
@@ -55,6 +58,34 @@ const getConvertedPosts = (posts) => {
   return convertedPosts
 }
 
+const getNextPathname = (args) => {
+  const requestUrl = get(args, '[0].request.url')
+  let nextPathname
+  try {
+    const pathname = new URL(requestUrl).pathname
+    nextPathname = pathname
+  } catch (error) {
+    console.log('getNextPathname error', error)
+    nextPathname = new URL(window.location.href).pathname
+  }
+  return nextPathname
+}
+
+export const loaderHandler = loader => async (...args) => {
+  const nextPathname = getNextPathname(args)
+  const isSamePath = nextPathname === window.location.pathname
+  if (!isSamePath) {
+    updatePageLoading(true)
+    sleep(400).then(() => updatePageLoading(false))
+  }
+
+  if (!loader) {
+    return null
+  }
+
+  return loader(...args)
+}
+
 const getRoutes = () => {
   const convertedPosts = getConvertedPosts(posts)
   const getClosestLayoutFromGlob = getClosestLayout(layouts)
@@ -92,6 +123,9 @@ const getRoutes = () => {
           return { default: module.default({ filePath, markdown: page }) }
         })
         : get(loaders, loaderPath)
+      const loader = pageLoader
+        ? (...args) => pageLoader().then((module) => module.default(...args))
+        : null
       collect.push({
         isMarkdown,
         markdown: isMarkdown ? page : undefined,
@@ -102,9 +136,7 @@ const getRoutes = () => {
         meta: (isMarkdown || !pageMeta)
           ? undefined
           : () => pageMeta().then((module) => module.default),
-        loader: pageLoader
-          ? (...args) => pageLoader().then((module) => module.default(...args))
-          : null
+        loader: loaderHandler(loader)
       })
       return collect
     }, [])

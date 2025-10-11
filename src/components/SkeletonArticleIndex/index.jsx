@@ -18,7 +18,7 @@ const SkeletonArticleIndex = (props) => {
   const { label } = props
   return (
     <div className='m-auto w-full space-y-2 md:max-w-2xl'>
-      <div className='prose prose-lg max-w-none text-transparent dark:prose-invert'>
+      <div className='prose prose-lg dark:prose-invert max-w-none text-transparent'>
         <h3 className='text-transparent'>
           <Skeleton className='inline'>
             {'This is index title'.repeat(RANDOM.INDEX_TITLE)}
