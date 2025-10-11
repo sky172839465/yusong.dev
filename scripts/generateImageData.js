@@ -43,7 +43,7 @@ async function getImageDimensions(filePath) {
 // Process images: Resize & Get dimensions
 async function processImages() {
   const imagePaths = await glob([`${inputFolder}/**/*.{jpg,jpeg,png}`], {
-    ignore: ['**/*.gen.{jpg,jpeg,png,webp}', '**/og.jpg', '**/x.jpg']
+    ignore: ['**/*.gen.{jpg,jpeg,png,webp}', '**/x.jpg']
   })
   const transformImageMap = keyBy(
     IS_MODIFIED_FILES_EXIST
@@ -58,6 +58,24 @@ async function processImages() {
   const getResizeImage = async (filePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
+    if (fileName === 'og') {
+      const imageInfo = {
+        original: {
+          path: filePath,
+          webp: filePath,
+          route: outputDir,
+          width: 1200,
+          height: 630
+        },
+        sizes: [{
+          size: SIZE.LARGE,
+          path: filePath,
+          width: 1200,
+          height: 630
+        }]
+      }
+      return imageInfo
+    }
 
     // Get original image dimensions
     const originalDimensions = await getImageDimensions(filePath)
