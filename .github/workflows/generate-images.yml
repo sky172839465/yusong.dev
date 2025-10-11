@@ -66,8 +66,13 @@ jobs:
           token: ${{ secrets.REPO_TOKEN }}
 
       - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
-        if: ${{ needs.pre-generate-images.outputs.markdown == 'true' }}
+        if: ${{ needs.pre-generate-images.outputs.markdown == 'true' && contains(github.event.pull_request.labels.*.name, 'gen mermaid') }}
         uses: nielsvaneck/render-md-mermaid@v3
+
+      - name: Remove mermaid label if exist
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'gen mermaid') }}
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --remove-label "needs-review"
 
       - name: Generate RWD / OG / Twitter image
         env:
