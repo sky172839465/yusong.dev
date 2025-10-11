@@ -39,6 +39,7 @@ on:
       mainImage:
         description: "Article main image name"
         required: false
+        default: "og"
         type: string
 
 jobs:
