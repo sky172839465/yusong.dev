@@ -17,17 +17,16 @@ const DEFAULT_IMAGE_SIZES = `
 
 const SectionCard = (props) => {
   const { article: { file = '', path = '', data = {} } = {}, isArticle, imageSizes = DEFAULT_IMAGE_SIZES } = props
-  const { title, description, tags = [], createdAt, modifiedAt } = data
+  const { title, description, tags = [], createdAt, modifiedAt, mainImage = 'index' } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
   const { mainPathName, pathname } = getI18N(path)
-  // const { loading: isPageLoading } = usePageLoaded()
   const { isLoading, data: pathImages } = usePathImages(isArticle ? mainPathName : null)
   const fileMainPathName = file.replace(pathname, mainPathName)
   const imageData = get(
     pathImages,
-    `${fileMainPathName}`.replace('index.md', 'images/index.jpg'),
-    get(pathImages, `${fileMainPathName}`.replace('index.md', 'images/index.png'), null)
+    `${fileMainPathName}`.replace('index.md', `images/${mainImage}.jpg`),
+    get(pathImages, `${fileMainPathName}`.replace('index.md', 'images/og.jpg'), null)
   )
 
   return (
