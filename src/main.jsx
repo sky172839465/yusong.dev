@@ -1,5 +1,3 @@
-import './index.css'
-
 import { Provider } from 'jotai'
 import { tryit } from 'radash'
 import { lazy, StrictMode, Suspense } from 'react'

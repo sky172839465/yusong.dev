@@ -7,7 +7,7 @@
   "scripts": {
     "analyze": "analyze -c vite.config.js",
     "dev": "vite",
-    "build": "run-s gen:routeData gen:imageData && vite build",
+    "build": "run-s gen:routeData gen:imageData && vite build && node scripts/inline-css.js",
     "gen:data": "run-s gen:routeData gen:imageData gen:ogImageData",
     "gen:routeData": "mkdir -p src/data && mkdir -p public/data && node scripts/generateRouteData.js",
     "gen:imageData": "mkdir -p public/data && node scripts/generateImageData.js",
