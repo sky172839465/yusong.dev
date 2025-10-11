@@ -11,7 +11,7 @@ index: 0
 mainImage： og
 ---
 
-### 淡路島
+### [淡路島](#awaji-shima)
 
 買票、岩屋港租車(船務大樓) [link](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
 
@@ -25,7 +25,9 @@ mainImage： og
   - 石挽そば 丸中 map 蕎麥麵
   - 志筑八幡神社 map
 - 伊弉諾神宮 map ~0.5hr
-  --- 看海路線(長時間騎車) ---
+
+#### 看海路線(長時間騎車)
+
 - 郡家
 - 室津 ~0.5hr
   - 幸せのパンケーキ 本店 map 舒芙蕾
@@ -36,7 +38,7 @@ mainImage： og
   - 嘉のや食堂 淡路島 map 看海簡餐
 - 岩屋港 ~0.3hr
 
-### 姬路城
+### [姬路城](#himeji-castle)
 
 - 姬路城
   - はりかい 姬路城店
@@ -47,8 +49,8 @@ mainImage： og
   - 衛宮邸
   - 弓道場
 
-### 神戶
+### [神戶](#kobe-shi)
 
-### FGO 最終再臨展
+### [FGO 最終再臨展](#fgo-expo)
 
 - VS. (グラングリーン大阪内)
