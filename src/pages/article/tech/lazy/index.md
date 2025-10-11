@@ -14,20 +14,6 @@ index: 0
 
 Lazy Vite SKIP AUTO WWW UPDATED!!! AGAIN OK DONNNNEEEE GOOD FINIALLY ? WAITING PWAAA TRACEEEEE NEW AGAIN is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
 
-```js
-collect.push({
-  isMarkdown,
-  markdown: isMarkdown ? page() : undefined,
-  filePath: path,
-  path: isIndex ? "/" : `${normalizedPathName.toLowerCase()}/`,
-  element: isMarkdown ? undefined : lazy(page),
-  layout: layout ? lazy(layout) : undefined,
-  loader: pageLoader
-    ? (...args) => pageLoader().then((module) => module.default(...args))
-    : null,
-});
-```
-
 ## [I am not sure...](#test3)
 
 Lazy Vite is an opinionated web dev build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production.
@@ -55,53 +41,7 @@ It showed a lady fitted out with a fur hat and fur boa who sat upright, raising 
 - He has a drawer and a alarm clock next to his bed.
 - His mother calls him when he gets up to late.
 
-<table class="data">
-  <tr>
-    <th>Writer</th>
-    <th>Nationality</th>
-    <th>Genre</th>
-    <th>Most famous book</th>
-    <th>GHVD JKBHHFKJ</th>
-  </tr>
-  <tr>
-    <td>Franz Kafka</td>
-    <td>Leo Tolstoy</td>
-    <td>F. Scott Fitzgerald</td>
-    <td>H.G. Wells</td>
-    <td>WaFIJFI KFJN Worlds</td>
-  </tr>
-  <tr>
-    <td>Austrian</td>
-    <td>Russia</td>
-    <td>American</td>
-    <td>British</td>
-    <td>WaFIJFI KFJN Worlds</td>
-  </tr>
-  <tr>
-    <td>Literature & Fiction, Philosophy, Short Stories</td>
-    <td>Literature & Fiction, Philosophy</td>
-    <td>Literature & Fiction, Short Stories</td>
-    <td>Science Fiction</td>
-    <td>WaFIJFI KFJN Worlds</td>
-  </tr>
-  <tr>
-    <td>The Metamorphosis</td>
-    <td>War & Piece</td>
-    <td>The Great Gatsby</td>
-    <td>War of the Worlds</td>
-    <td>WaFIJFI KFJN Worlds</td>
-  </tr>
-  </table>
-
 First he wanted to stand up quietly and undisturbed, get dressed, above all have breakfast, and only then consider further action, for (he noticed this clearly) by thinking things over in bed he would not reach a reasonable conclusion. He remembered that he had already often felt a light pain or other in bed, perhaps the result of an awkward lying position, which later turned out to be purely imaginary when he stood up, and he was eager to see how his present fantasies would gradually dissipate. That the change in his voice was nothing other than the onset of a real chill, an occupational illness of commercial travelers, of that he had not the slightest doubt.
-
-```js
-function metamorphose(protagonist, author) {
-  if (protagonist.name.first === "Gregor" && author.name.last === "Kafka") {
-    protagonist.species = "insect";
-  }
-}
-```
 
 It was very easy to throw aside the blanket. He needed only to push himself up a little, and it fell by itself. But to continue was difficult, particularly because he was so unusually wide. He needed arms and hands to push himself upright. Instead of these, however, he had only many small limbs which were incessantly moving with very different motions and which, in addition, he was unable to control. If he wanted to bend one of them, then it was the first to extend itself, and if he finally succeeded doing with this limb what he wanted, in the meantime all the others, as if left free, moved around in an excessively painful agitation. "But I must not stay in bed uselessly," said Gregor to himself.
 
