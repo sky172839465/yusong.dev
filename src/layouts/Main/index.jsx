@@ -11,7 +11,7 @@ const Content = (props) => {
   const { children, isFullScreen } = props
   const { loading } = usePageLoading()
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div
         className='container mx-auto invisible h-dvh w-full'
