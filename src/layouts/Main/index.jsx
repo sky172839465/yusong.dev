@@ -1,7 +1,7 @@
 import clx from 'classnames'
 
-import { usePageLoading } from '@/stores/pageLoading'
 import FadeIn from '@/components/FadeIn'
+import { usePageLoading } from '@/stores/pageLoading'
 
 import Footer from'../Footer'
 import Header from '../Header'
