@@ -17,7 +17,7 @@ const Content = (props) => {
         'container mx-auto grow px-4 py-8',
         {
           'flex items-center': isFullScreen,
-          'invisible h-dvh': loading
+          'invisible min-h-dvh': loading
         }
       )}
     >
