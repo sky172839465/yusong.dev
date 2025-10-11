@@ -1,6 +1,8 @@
 import clx from 'classnames'
+import { AnimatePresence } from 'motion/react'
 
 import { usePageLoading } from '@/stores/pageLoading'
+import FadeIn from '@/components/FadeIn'
 
 import Footer from'../Footer'
 import Header from '../Header'
@@ -8,18 +10,26 @@ import Header from '../Header'
 const Content = (props) => {
   const { children, isFullScreen } = props
   const { loading } = usePageLoading()
+
+  if (isLoading) {
+    return (
+      <div
+        className='container mx-auto invisible h-dvh w-full'
+      />
+    )
+  }
+
   return (
-    <div
+    <FadeIn
       className={clx(
-        'container mx-auto grow px-4 py-8 opacity-100 duration-300 transition-opacity',
+        'container mx-auto grow px-4 py-8',
         {
-          'flex items-center': isFullScreen,
-          'invisible opacity-0': loading
+          'flex items-center': isFullScreen
         }
       )}
     >
       {children}
-    </div>
+    </FadeIn>
   )
 }
 
@@ -28,9 +38,11 @@ const MainLayout = (props) => {
   return (
     <div className='bg-background overscroll-y-contain flex min-h-dvh flex-col'>
       <Header />
-      <Content isFullScreen={isFullScreen}>
-        {children}
-      </Content>
+      <AnimatePresence>
+        <Content isFullScreen={isFullScreen}>
+          {children}
+        </Content>
+      </AnimatePresence>
       <Footer />
     </div>
   )
