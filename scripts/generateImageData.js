@@ -58,7 +58,7 @@ async function processImages() {
   const getResizeImage = async (filePath) => {
     const fileName = path.basename(filePath, path.extname(filePath))
     const outputDir = path.dirname(filePath)
-    if (fileName.endsWith('og.jpg') {
+    if (fileName === 'og') {
       const imageInfo = {
         original: {
           path: filePath,
