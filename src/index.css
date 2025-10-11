@@ -1,71 +1,92 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
-:root {
-  --animation-btn: 0;
+@config '../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-::view-transition-group(*) {
-  @apply delay-150 duration-300;
-}
+@layer utilities {
+  :root {
+    --animation-btn: 0;
+  }
 
-* {
-  @apply border-border select-none md:select-auto;
-}
+  ::view-transition-group(*) {
+    @apply delay-150 duration-300;
+  }
 
-html.light .shiki,
-html.light .shiki span {
-  color: var(--shiki-light) !important;
-  background-color: #f6f8fa !important;
-}
+  * {
+    @apply border-border select-none md:select-auto;
+  }
 
-html.dark .shiki,
-html.dark .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-}
+  html.light .shiki,
+  html.light .shiki span {
+    color: var(--shiki-light) !important;
+    background-color: #f6f8fa !important;
+  }
 
-.prose :not(pre) > code {
-  @apply p-1 rounded-md bg-secondary text-secondary-foreground before:!content-none after:!content-none;
-}
+  html.dark .shiki,
+  html.dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
 
-.prose pre > code {
-  @apply block mt-8;
-}
+  .prose :not(pre) > code {
+    @apply p-1 rounded-md bg-secondary text-secondary-foreground before:content-none! after:content-none!;
+  }
 
-.prose [data-component="code-area"] {
-  @apply relative;
-}
+  .prose pre > code {
+    @apply block mt-8;
+  }
 
-.prose [data-component="lang"] {
-  @apply absolute left-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
-}
+  .prose [data-component='code-area'] {
+    @apply relative;
+  }
 
-.prose [data-component="table-area"] {
-  @apply overflow-x-auto;
-}
+  .prose [data-component='lang'] {
+    @apply absolute left-2 top-2 rounded-md border bg-background text-foreground p-2 text-xs;
+  }
 
-.prose li [data-component="table-area"] table {
-  @apply m-2;
-}
+  .prose [data-component='table-area'] {
+    @apply overflow-x-auto;
+  }
 
-.prose [data-component="table-area"] table th,
-.prose [data-component="table-area"] table td {
-  @apply p-2 align-middle;
-}
+  .prose li [data-component='table-area'] table {
+    @apply m-2;
+  }
 
-.prose [data-component="table-area"] table[data-center] th,
-.prose [data-component="table-area"] table[data-center] td {
-  @apply text-center;
-}
+  .prose [data-component='table-area'] table th,
+  .prose [data-component='table-area'] table td {
+    @apply p-2 align-middle;
+  }
 
-.prose a {
-  @apply break-all;
-}
+  .prose [data-component='table-area'] table[data-center] th,
+  .prose [data-component='table-area'] table[data-center] td {
+    @apply text-center;
+  }
 
-.prose a[href^="#"] {
-  @apply no-underline;
+  .prose a {
+    @apply break-all;
+  }
+
+  .prose a[href^='#'] {
+    @apply no-underline;
+  }
 }
 
 @layer base {

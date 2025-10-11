@@ -60,7 +60,7 @@ const Root = () => {
       </SWRConfig>
       <Toaster
         toastOptions={{
-          className: '!bg-background/50 !text-foreground !border-foreground !border !backdrop-blur-md'
+          className: 'bg-background/50! text-foreground! border-foreground! border! backdrop-blur-md!'
         }}
       />
       <CustomSwipe />

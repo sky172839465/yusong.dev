@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import autoprefixer from 'autoprefixer'
 import path from 'path'
-import tailwindcss from 'tailwindcss'
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 import mdPlugin from 'vite-plugin-markdown'
 import sitemapPlugin from 'vite-plugin-sitemap'
@@ -20,6 +20,7 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [
       react(),
+      tailwindcss(),
       pwaPluginConfig,
       mdPlugin.plugin({ mode: 'html' }),
       sitemapPlugin({
@@ -29,7 +30,7 @@ export default ({ mode }) => {
     ],
     css: {
       postcss: {
-        plugins: [tailwindcss(), autoprefixer()]
+        plugins: [autoprefixer()]
       }
     },
     build: {

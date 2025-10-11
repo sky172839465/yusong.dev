@@ -72,7 +72,7 @@ export default {
           html
             .replaceAll('images', convertedImageFolder)
             .replace('<!-- __WORKER_INSERT__ -->', `
-              <h1 class="!mb-4 text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
+              <h1 class="mb-4! text-4xl font-bold text-gray-900 dark:text-white">${title}</h1>
               <img
                 src="${convertedImageFolder}/index-large.gen.webp?v=${new Date().toISOString().split('T')[0]}"
                 alt="${title}"

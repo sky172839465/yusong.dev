@@ -19,7 +19,7 @@ const SkeletonSectionCard = (props) => {
           isLoading
         />
       )}
-      <CardHeader className={`${isArticle ? 'grow' : ''} gap-2 [&_*]:text-transparent`}>
+      <CardHeader className={`${isArticle ? 'grow' : ''} gap-2 **:text-transparent`}>
         <CardTitle>
           <Skeleton className='inline'>
             {title}
@@ -29,7 +29,7 @@ const SkeletonSectionCard = (props) => {
           {description}
         </CardDescription>
         {isContentExist && (
-          <div className={isArticle ? 'flex flex-wrap gap-2 [&_*]:!text-transparent' : 'hidden'}>
+          <div className={isArticle ? 'flex flex-wrap gap-2 **:text-transparent!' : 'hidden'}>
             <Skeleton className='flex'>
               <Badge variant='secondary' className='h-7'>
                 {new Date().toLocaleDateString()}
