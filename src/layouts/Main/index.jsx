@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-import FadeIn from '@/components/FadeIn'
 import { usePageLoading } from '@/stores/pageLoading'
 
 const LazyHeader = lazy(() => import('../Header'))
@@ -11,13 +10,13 @@ const MainLayout = (props) => {
   const { loading } = usePageLoading()
 
   return (
-    <FadeIn className='bg-background flex min-h-dvh flex-col'>
+    <div className='bg-background flex min-h-dvh flex-col'>
       <LazyHeader />
-      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible opacity-0' : ''}`}>
+      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible' : ''}`}>
         {children}
       </main>
       <LazyFooter />
-    </FadeIn>
+    </div>
   )
 }
 

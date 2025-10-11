@@ -7,14 +7,13 @@ import {
   useLocation
 } from 'react-router-dom'
 
-// import Root from '@/components/Root/index.jsx'
+import FadeIn from '@/components/FadeIn/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 import { usePageLoading } from '@/stores/pageLoading.js'
 import { useRootLoading } from '@/stores/rootLoading.js'
 
 import ErrorElement from './ErrorElement.jsx'
 import getRoutes, { loaderHandler } from './getRoutes.js'
-// import loader from './index.loader'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazyRoot = lazy(() => import('@/components/Root/index.jsx'))
@@ -60,31 +59,34 @@ const ChildRouteMounted = () => {
 
 const ChildElement = (props) => {
   const { route = {}, layout: Layout = DefaultLayout } = props
+  const { pathname } = useLocation()
   const {
     element: Comp,
     isMarkdown,
     meta
   } = route
   return (
-    <Suspense
-      fallback={null}
-    >
-      <Layout>
-        {isMarkdown && (
-          <Suspense fallback={<LazySkeletonArticle />}>
-            <LazyArticle {...route} />
-            <ChildRouteMounted />
-          </Suspense>
-        )}
-        {!isMarkdown && (
-          <>
-            <Comp />
-            <LazyMeta fetchMetaData={meta} />
-            <ChildRouteMounted />
-          </>
-        )}
-      </Layout>
-    </Suspense>
+    <FadeIn key={pathname}>
+      <Suspense
+        fallback={null}
+      >
+        <Layout>
+          {isMarkdown && (
+            <Suspense fallback={<LazySkeletonArticle />}>
+              <LazyArticle {...route} />
+              <ChildRouteMounted />
+            </Suspense>
+          )}
+          {!isMarkdown && (
+            <>
+              <Comp />
+              <LazyMeta fetchMetaData={meta} />
+              <ChildRouteMounted />
+            </>
+          )}
+        </Layout>
+      </Suspense>
+    </FadeIn>
   )
 }
 
