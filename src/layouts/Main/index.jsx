@@ -1,7 +1,7 @@
 import clx from 'classnames'
 
-import { usePageLoading } from '@/stores/pageLoading'
 import FadeIn from '@/components/FadeIn'
+import { usePageLoading } from '@/stores/pageLoading'
 
 import Footer from'../Footer'
 import Header from '../Header'
@@ -11,7 +11,7 @@ const Content = (props) => {
   const { loading } = usePageLoading()
   return (
     <FadeIn
-      animation={{ opacity: loading ? 0 : 1 }}
+      animate={{ opacity: loading ? 0 : 1 }}
       className={clx(
         'container mx-auto grow px-4 py-8 opacity-100 transition-opacity',
         {
