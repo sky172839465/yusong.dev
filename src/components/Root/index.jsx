@@ -7,7 +7,6 @@ import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import CustomSwipe from '@/components/CustomSwipe'
-import { ThemeProvider } from '@/components/ThemeProvider'
 import fetcher from '@/utils/fetcher'
 
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
@@ -31,7 +30,7 @@ const Root = () => {
   }
 
   return (
-    <ThemeProvider>
+    <>
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -63,7 +62,7 @@ const Root = () => {
       <CustomSwipe />
       <LazyReloadPrompt />
       <ScrollRestoration />
-    </ThemeProvider>
+    </>
   )
 }
 
