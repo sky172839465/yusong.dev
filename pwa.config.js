@@ -5,7 +5,7 @@ export default VitePWA({
   // https://vite-pwa-org.netlify.app/guide/inject-manifest.html
   strategies: 'injectManifest',
   injectManifest: {
-    globPatterns: ['**/*.{js,css,html,png,svg,ico,json,woff2}'] // Cache only necessary files
+    globPatterns: [] // Cache only necessary files
   },
   manifest: {
     name: 'yusong.dev',
@@ -37,7 +37,10 @@ export default VitePWA({
       }
     ]
   },
+  // https://vite-pwa-org.netlify.app/guide/development.html#type-declarations
   devOptions: {
-    enabled: true
+    suppressWarnings: true,
+    enabled: true,
+    type: 'module'
   }
 })
