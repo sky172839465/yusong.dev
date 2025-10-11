@@ -1,4 +1,3 @@
-import { lazy } from 'react'
 import clx from 'classnames'
 
 import { usePageLoading } from '@/stores/pageLoading'
