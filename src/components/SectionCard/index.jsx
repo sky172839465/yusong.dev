@@ -25,7 +25,7 @@ const SectionCard = (props) => {
   const fileMainPathName = file.replace(pathname, mainPathName)
   const imageData = get(
     pathImages,
-    `${fileMainPathName}`.replace('index.md', `images/${mainImage}.jpg'),
+    `${fileMainPathName}`.replace('index.md', `images/${mainImage}.jpg`),
     get(pathImages, `${fileMainPathName}`.replace('index.md', 'images/og.jpg'), null)
   )
 
