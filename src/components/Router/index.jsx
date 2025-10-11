@@ -56,48 +56,34 @@ const ChildRouteMounted = () => {
   )
 }
 
-const ChildElement = (props) => {
-  const { route = {}, layout: Layout = DefaultLayout } = props
-  const {
-    element: Comp,
-    isMarkdown,
-    meta
-  } = route
-  return (
-    <Suspense
-      fallback={null}
-    >
-      <Layout>
-        {isMarkdown && (
-          <Suspense fallback={<LazySkeletonArticle />}>
-            <LazyArticle {...route} />
-            <ChildRouteMounted />
-          </Suspense>
-        )}
-        {!isMarkdown && (
-          <>
-            <Comp />
-            <LazyMeta fetchMetaData={meta} />
-            <ChildRouteMounted />
-          </>
-        )}
-      </Layout>
-    </Suspense>
-  )
-}
-
 const getChildRoutes = (routes) => routes.map((item) => {
   const {
-    layout,
+    layout: Layout = DefaultLayout,
+    element: Comp,
+    isMarkdown,
+    meta,
     ...route
   } = item
   return {
     ...route,
     element: (
-      <ChildElement
-        route={route}
-        layout={layout}
-      />
+      <Suspense fallback={null}>
+        <Layout>
+          {isMarkdown && (
+            <Suspense fallback={<LazySkeletonArticle />}>
+              <LazyArticle {...route} />
+              <ChildRouteMounted />
+            </Suspense>
+          )}
+          {!isMarkdown && (
+            <>
+              <Comp />
+              <LazyMeta fetchMetaData={meta} />
+              <ChildRouteMounted />
+            </>
+          )}
+        </Layout>
+      </Suspense>
     ),
     errorElement: <ErrorElement />
   }
