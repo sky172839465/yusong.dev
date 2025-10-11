@@ -2,8 +2,8 @@ import clx from 'classnames'
 
 import { usePageLoading } from '@/stores/pageLoading'
 
-import Header from '../Header'
 import Footer from'../Footer'
+import Header from '../Header'
 
 const Content = (props) => {
   const { children, isFullScreen } = props
@@ -16,7 +16,8 @@ const Content = (props) => {
           'flex items-center': isFullScreen,
           'invisible opacity-0': loading
         }
-      )}>
+      )}
+    >
       {children}
     </main>
   )
