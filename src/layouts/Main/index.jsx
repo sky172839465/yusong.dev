@@ -11,20 +11,13 @@ const Content = (props) => {
   const { children, isFullScreen } = props
   const { loading } = usePageLoading()
 
-  if (loading) {
-    return (
-      <div
-        className='container mx-auto invisible h-dvh w-full'
-      />
-    )
-  }
-
   return (
     <FadeIn
       className={clx(
         'container mx-auto grow px-4 py-8',
         {
-          'flex items-center': isFullScreen
+          'flex items-center': isFullScreen,
+          'invisible h-dvh': loading
         }
       )}
     >
