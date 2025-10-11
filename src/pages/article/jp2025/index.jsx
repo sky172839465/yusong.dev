@@ -4,7 +4,7 @@ const Index = () => {
   return (
     <ArticleIndex>
       <div>
-        testing description
+        紀錄 JP 2025 大阪去淡路島、姬路城和神戶的吃喝玩樂
       </div>
     </ArticleIndex>
   )
