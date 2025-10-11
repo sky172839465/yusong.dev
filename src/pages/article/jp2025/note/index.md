@@ -8,6 +8,7 @@ tags:
   - JP2025
   - NOTE
 index: 0
+mainImage： og
 ---
 
 ### 淡路島
