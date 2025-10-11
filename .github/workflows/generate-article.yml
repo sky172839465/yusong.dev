@@ -8,6 +8,14 @@ on:
         required: true
         default: "/src/pages/article"
         type: string
+      newSeries:
+        description: "Is article also generate new series"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
       title:
         description: "Article title"
         required: true
@@ -47,6 +55,7 @@ jobs:
         run: node ./scripts/generateArticle.js
         env:
           INPUT_PATH: ${{ github.event.inputs.path }}
+          INPUT_NEW_SERIES: ${{ github.event.inputs.newSeries }}
           INPUT_TITLE: ${{ github.event.inputs.title }}
           INPUT_DESCRIPTION: ${{ github.event.inputs.description }}
           INPUT_TAGS: ${{ github.event.inputs.tags }}
