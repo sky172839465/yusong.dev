@@ -1,6 +1,7 @@
 import clx from 'classnames'
 
 import { usePageLoading } from '@/stores/pageLoading'
+import FadeIn from '@/components/FadeIn'
 
 import Footer from'../Footer'
 import Header from '../Header'
@@ -9,17 +10,17 @@ const Content = (props) => {
   const { children, isFullScreen } = props
   const { loading } = usePageLoading()
   return (
-    <main
+    <FadeIn
+      animation={{ opacity: loading ? 0 : 1 }}
       className={clx(
         'container mx-auto grow px-4 py-8 opacity-100 transition-opacity',
         {
-          'flex items-center': isFullScreen,
-          'invisible opacity-0': loading
+          'flex items-center': isFullScreen
         }
       )}
     >
       {children}
-    </main>
+    </FadeIn>
   )
 }
 
