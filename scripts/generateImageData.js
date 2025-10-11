@@ -64,14 +64,14 @@ async function processImages() {
           path: filePath,
           webp: filePath,
           route: outputDir,
-          width: 1600,
-          height: 900
+          width: 1200,
+          height: 630
         },
         sizes: [{
           size: SIZE.LARGE,
           path: filePath,
-          width: 1600,
-          height: 900
+          width: 1200,
+          height: 630
         }]
       }
       return imageInfo
