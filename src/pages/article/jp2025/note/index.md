@@ -8,7 +8,7 @@ tags:
   - JP2025
   - NOTE
 index: 0
-mainImage： og
+mainImage: og
 ---
 
 ### [淡路島](#awaji-shima)
