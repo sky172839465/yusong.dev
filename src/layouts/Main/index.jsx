@@ -12,7 +12,7 @@ const MainLayout = (props) => {
   return (
     <div className='bg-background flex min-h-dvh flex-col'>
       <LazyHeader />
-      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible' : ''}`}>
+      <main className={`container mx-auto grow px-4 py-8 ${isFullScreen ? 'flex items-center' : ''} opacity-100 transition-opacity ${loading ? 'invisible opacity-0' : ''}`}>
         {children}
       </main>
       <LazyFooter />

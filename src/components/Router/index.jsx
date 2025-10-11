@@ -7,7 +7,6 @@ import {
   useLocation
 } from 'react-router-dom'
 
-import FadeIn from '@/components/FadeIn/index.jsx'
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
 import { usePageLoading } from '@/stores/pageLoading.js'
 import { useRootLoading } from '@/stores/rootLoading.js'
@@ -59,7 +58,6 @@ const ChildRouteMounted = () => {
 
 const ChildElement = (props) => {
   const { route = {}, layout: Layout = DefaultLayout } = props
-  const { pathname } = useLocation()
   const {
     element: Comp,
     isMarkdown,
@@ -70,21 +68,19 @@ const ChildElement = (props) => {
       fallback={null}
     >
       <Layout>
-        <FadeIn key={pathname}>
-          {isMarkdown && (
-            <Suspense fallback={<LazySkeletonArticle />}>
-              <LazyArticle {...route} />
-              <ChildRouteMounted />
-            </Suspense>
-          )}
-          {!isMarkdown && (
-            <>
-              <Comp />
-              <LazyMeta fetchMetaData={meta} />
-              <ChildRouteMounted />
-            </>
-          )}
-        </FadeIn>
+        {isMarkdown && (
+          <Suspense fallback={<LazySkeletonArticle />}>
+            <LazyArticle {...route} />
+            <ChildRouteMounted />
+          </Suspense>
+        )}
+        {!isMarkdown && (
+          <>
+            <Comp />
+            <LazyMeta fetchMetaData={meta} />
+            <ChildRouteMounted />
+          </>
+        )}
       </Layout>
     </Suspense>
   )
