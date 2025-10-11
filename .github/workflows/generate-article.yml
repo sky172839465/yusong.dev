@@ -8,6 +8,14 @@ on:
         required: true
         default: "/src/pages/article"
         type: string
+      newSeries:
+        description: "Is article also generate new series"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
       title:
         description: "Article title"
         required: true
@@ -44,9 +52,35 @@ jobs:
           token: ${{ secrets.REPO_TOKEN }}
 
       - name: Generate article
+        if: ${{ github.event.inputs.newSeries == 'true' }}
+        run: |
+          # Inputs
+          NEW_PATH="${{ github.event.inputs.path }}"
+          echo "Input series path: $NEW_PATH"
+
+          # Extract folder name (e.g. 'travel')
+          FOLDER_NAME=$(basename "$(dirname "$NEW_PATH")")
+          echo "Series folder name: $FOLDER_NAME"
+
+          # Define base paths
+          BASE_DIR="./src/pages/article"
+          TARGET_DIR="$BASE_DIR/$FOLDER_NAME"
+
+          echo "Creating series folder: $TARGET_DIR"
+          mkdir -p "$TARGET_DIR"
+
+          # Copy .js and .jsx files from tech folder
+          echo "Copying series files from tech to $TARGET_DIR"
+          cp "$BASE_DIR/tech/"*.js "$TARGET_DIR"/ 2>/dev/null || true
+          cp "$BASE_DIR/tech/"*.jsx "$TARGET_DIR"/ 2>/dev/null || true
+
+          echo "✅ Series folder created and files copied."
+
+      - name: Generate article
         run: node ./scripts/generateArticle.js
         env:
           INPUT_PATH: ${{ github.event.inputs.path }}
+          INPUT_NEW_SERIES: ${{ github.event.inputs.newSeries }}
           INPUT_TITLE: ${{ github.event.inputs.title }}
           INPUT_DESCRIPTION: ${{ github.event.inputs.description }}
           INPUT_TAGS: ${{ github.event.inputs.tags }}
