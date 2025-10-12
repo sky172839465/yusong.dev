@@ -47,13 +47,28 @@ const getFilterData = (qsObj = {}) => {
 const ALL_PAGE_TYPE = 'all'
 const ARTICLE_PAGE_TYPE = 'article'
 
+const getValidType = (type) => {
+  const isValid = [
+    'all',
+    'article',
+    'series',
+    'website'
+  ].includes(type)
+  if (!isValid) {
+    return 'article'
+  }
+
+  return type
+}
+
 const SearchResult = (props) => {
   const { searchParams = '' } = props
   const { lang } = useI18N()
   const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = getOmitQueryStringObject(searchParams)
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
-  const isAllPageType = type === ALL_PAGE_TYPE
-  const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type, lang }, {}, filterData)
+  const validType = getValidType(type)
+  const isAllPageType = validType === ALL_PAGE_TYPE
+  const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type: validType, lang }, {}, filterData)
   return (
     <div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
