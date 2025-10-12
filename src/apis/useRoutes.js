@@ -14,7 +14,7 @@ export const fetcher = async (query) => {
   if (get(query, 'type') === 'series') {
     queryData = filter(data, (item) => {
       return (
-        item.path.startsWith('/article') &&
+        item.path.includes('/article') &&
         item.file.endsWith('index.jsx')
       )
     })
