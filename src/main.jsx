@@ -4,10 +4,11 @@ import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import SkeletonHome from '@/components/SkeletonHome/index.jsx'
+import { mainStore } from '@/stores/main.js'
+import { usePageLoading } from '@/stores/pageLoading.js'
+import { useRootLoading } from '@/stores/rootLoading.js'
+import { changeTheme } from '@/stores/theme.js'
 
-import { mainStore } from './stores/main.js'
-import { useRootLoading } from './stores/rootLoading.js'
-import { changeTheme } from './stores/theme.js'
 
 const LazyRouter = lazy(() => import('@/components/Router'))
 
@@ -36,13 +37,15 @@ changeTheme()
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RootLoadingScreen = () => {
-  const { loading } = useRootLoading()
+  const { loading: rootLoading } = useRootLoading()
+  const { loading: pageLoading } = usePageLoading()
+  const loading = rootLoading || pageLoading
   if (!loading) {
     return null
   }
 
   return (
-    <SkeletonHome className='fixed top-0 opacity-100!' />
+    <SkeletonHome className='opacity-100!' />
   )
 }
 
