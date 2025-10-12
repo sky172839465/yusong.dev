@@ -11,6 +11,21 @@ const getConvertedDefaultValues = (qsObj) => {
       collect[key] = [value]
       break
     }
+    case (key === FIELD.TYPE): {
+      const isValid = [
+        'all',
+        'article',
+        'series',
+        'website'
+      ].includes(value)
+      if (!isValid) {
+        collect[key] = 'article'
+        break
+      }
+
+      collect[key] = value
+      break    
+    }
     default: {
       collect[key] = value
       break
