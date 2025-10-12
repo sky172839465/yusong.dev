@@ -43,7 +43,7 @@ const ArticleActions = (props) => {
   const isShareSupported = useIsSupported(() => !!navigator?.share)
   const { pathname } = useLocation()
   const { label } = useI18N(i18nMapping)
-  const [isPinned, setIsPinned] = useLocalStorage(PINNED_KEY, false)
+  const [isPinned, setIsPinned] = useLocalStorage(PINNED_KEY, true)
   const { seriesName, sortedSeries } = useMemo(() => {
     return {
       seriesName: get(series, '0.series'),
