@@ -1,5 +1,3 @@
-import * as m from 'motion/react-m'
-
 import useI18N, { LANG } from '@/hooks/useI18N'
 
 const i18nMapping = {
@@ -16,9 +14,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <m.footer
+    <footer
       className='bg-background flex-none border-t'
-      layout
     >
       <div className='container mx-auto px-4 py-6'>
         <div className='flex flex-col items-center justify-center md:flex-row'>
@@ -30,7 +27,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </m.footer>
+    </footer>
   )
 }
 
