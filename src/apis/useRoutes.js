@@ -1,5 +1,6 @@
 import { filter } from 'lodash-es'
 import useSWR, { preload } from 'swr'
+
 import useI18N from '@/hooks/useI18N'
 
 const SEARCH_ALL = '__SEARCH_ALL_ROUTE__'
