@@ -35,7 +35,7 @@ const ChildMounted = () => {
         return
       }
 
-      await sleep(250)
+      await sleep(150)
       setPageLoading(false)
     }
 
