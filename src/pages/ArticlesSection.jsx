@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { useArticles } from '@/apis/useArticles'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
-import useI18N, { LANG } from '@/hooks/useI18N'
 import { Button } from '@/components/ui/button'
+import useI18N, { LANG } from '@/hooks/useI18N'
 
 const RANDOM = {
   ARTICLES: times(6),
