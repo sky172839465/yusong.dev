@@ -84,10 +84,10 @@ const getOgImgComponent = (route) => {
         fontWeight: 700,
         backgroundColor: '#f8fafc',
         backgroundImage: 'url(\'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0 0 L40 40 M40 0 L0 40%22 stroke=%22%23000000%22 stroke-opacity=%220.05%22 stroke-width=%222%22/></svg>\')',
-        ...twj('w-full h-full flex flex-col justify-between p-12 text-black bg-repeat')
+        ...twj('w-full h-full flex flex-col justify-between py-12 text-black bg-repeat')
       }}
     >
-      <div style={twj('flex h-[8%] w-full items-center justify-between')}>
+      <div style={twj('flex h-[8%] w-full items-center justify-between px-12')}>
         <div
           style={{
             background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
@@ -116,22 +116,24 @@ const getOgImgComponent = (route) => {
       <div
         style={{
           fontSize: '84px',
-          ...twj('flex h-[84%] items-center justify-center px-10')
+          ...twj('flex h-[84%] items-center justify-center')
         }}
       >
         <div
           style={{
-            background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
-            boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
-            ...twj('rounded-lg p-4')
-          }}  
+            // borderTop: '2px solid rgba(0, 0, 0, 0.2)',
+            // borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
+            background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.6), #fff, rgba(255, 255, 255, 0.7))',
+            boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.8)',
+            ...twj('flex w-full px-12 py-4')
+          }}
         >
           {title}
         </div>
       </div>
       <div
         style={{
-          ...twj('flex h-[8%] w-full items-center justify-end')
+          ...twj('flex h-[8%] w-full items-center justify-end px-12')
         }}  
       >
         <div
