@@ -1,5 +1,4 @@
 import { Languages, Moon, Search, Sun } from 'lucide-react'
-import * as m from 'motion/react-m'
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -36,7 +35,7 @@ const Header = () => {
   const isSearch = pathname.replace(`/${lang}`, '') === '/search'
 
   return (
-    <m.header
+    <header
       className='bg-background/50 sticky top-0 z-10 flex-none border-b backdrop-blur-md'
       layout
     >
@@ -122,7 +121,7 @@ const Header = () => {
           </Button>
         </div>
       </div>
-    </m.header>
+    </header>
   )
 }
 
