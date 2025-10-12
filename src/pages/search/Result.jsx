@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 import { useRoutes } from '@/apis/useRoutes'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
+import useI18N from '@/hooks/useI18N'
 import getOmitQueryStringObject from '@/utils/getOmitQueryStringObject'
 
 import { FIELD } from './constants'
@@ -48,10 +49,11 @@ const ARTICLE_PAGE_TYPE = 'article'
 
 const SearchResult = (props) => {
   const { searchParams = '' } = props
+  const { lang } = useI18N()
   const { [FIELD.TYPE]: type = ARTICLE_PAGE_TYPE, ...qsObj } = getOmitQueryStringObject(searchParams)
   const filterData = useMemo(() => getFilterData(qsObj), [qsObj])
   const isAllPageType = type === ALL_PAGE_TYPE
-  const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type }, {}, filterData)
+  const { isLoading, data: routes = [] } = useRoutes(isAllPageType ? null : { type, lang }, {}, filterData)
   return (
     <div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
