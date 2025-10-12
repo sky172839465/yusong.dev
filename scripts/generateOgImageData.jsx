@@ -127,7 +127,7 @@ const getOgImgComponent = (route) => {
             // borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
             background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.6), #fff, rgba(255, 255, 255, 0.7))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.8)',
-            ...twj('flex w-full px-12 py-2')
+            ...twj('flex w-full px-12 py-4')
           }}
         >
           {title}
