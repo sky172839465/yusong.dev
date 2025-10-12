@@ -1,7 +1,7 @@
 import { Languages, Moon, Search, Sun } from 'lucide-react'
+import * as m from 'motion/react-m'
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
-import * as m from 'motion/react-m'
 
 import LazyImage from '@/components/LazyImage'
 import TriggerButton from '@/components/SearchCommand/TriggerButton'
