@@ -8,7 +8,8 @@ import sharp from 'sharp'
 import { twj } from 'tw-to-css'
 
 const MODIFIED_FILES = (process.env.MODIFIED_FILES || '').split('\n').filter(Boolean)
-const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
+// const IS_MODIFIED_FILES_EXIST = !isEmpty(MODIFIED_FILES)
+const IS_MODIFIED_FILES_EXIST = false
 const MODIFIED_FILE_MAP = keyBy(MODIFIED_FILES)
 
 const routes = JSON.parse(fs.readFileSync('src/data/routes.json', 'utf-8'))
