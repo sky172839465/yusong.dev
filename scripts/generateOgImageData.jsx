@@ -118,7 +118,7 @@ const getOgImgComponent = (route) => {
       <div
         style={{
           fontSize: '84px',
-          ...twj('flex h-[84%] items-center justify-center px-10')
+          ...twj('flex h-[84%] items-center justify-center')
         }}
       >
         <div
