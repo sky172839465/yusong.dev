@@ -1,4 +1,4 @@
-import { filter, get, omit } from 'lodash-es'
+import { filter } from 'lodash-es'
 import useSWR, { preload } from 'swr'
 
 const SEARCH_ALL = '__SEARCH_ALL_ROUTE__'
@@ -9,18 +9,7 @@ export const fetcher = async (query) => {
     return data
   }
 
-  let queryData = [...data]
-  let omitQuery = query
-  if (get(query, 'type') === 'series') {
-    queryData = filter(data, (item) => {
-      return (
-        item.path.includes('/article') &&
-        item.file.endsWith('index.jsx')
-      )
-    })
-    omitQuery = omit(query, ['type'])
-  }
-  return filter(queryData, omitQuery)
+  return filter(data, query)
 }
 
 const defaultFilter = v => v
