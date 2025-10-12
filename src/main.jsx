@@ -37,8 +37,8 @@ changeTheme()
 
 // eslint-disable-next-line react-refresh/only-export-components
 const RootLoadingScreen = () => {
-  const { loading: rootLoading, setLoading: setRootLoading } = useRootLoading()
-  const { loading: pageLoading, setLoading: setPageLoading } = usePageLoading()
+  const { loading: rootLoading } = useRootLoading()
+  const { loading: pageLoading } = usePageLoading()
   const loading = rootLoading || pageLoading
   if (!loading) {
     return null
