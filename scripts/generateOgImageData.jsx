@@ -127,12 +127,12 @@ const getOgImgComponent = (route) => {
             // borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
             background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
-            ...twj('flex w-full')
+            ...twj('flex w-full h-fit justify-center m-auto')
           }}
         >
           <p
             style={{
-              ...twj('flex w-full px-12 py-0 text-center')
+              ...twj('flex w-full px-12 py-2 text-center justify-center')
             }}  
           >
             {title}
