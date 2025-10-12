@@ -18,7 +18,6 @@ const Footer = () => {
   return (
     <m.footer
       className='bg-background flex-none border-t'
-      layoutId='footer'
       layout
     >
       <div className='container mx-auto px-4 py-6'>

@@ -38,7 +38,6 @@ const Header = () => {
   return (
     <m.header
       className='bg-background/50 sticky top-0 z-10 flex-none border-b backdrop-blur-md'
-      layoutId='header'
       layout
     >
       <div className='container mx-auto flex items-center justify-between p-4'>

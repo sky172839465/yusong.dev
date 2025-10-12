@@ -7,6 +7,8 @@ import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import CustomSwipe from '@/components/CustomSwipe'
+import Footer from '@/layouts/Footer'
+import Header from '@/layouts/Header'
 import fetcher from '@/utils/fetcher'
 
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
@@ -30,7 +32,7 @@ const Root = () => {
   }
 
   return (
-    <>
+    <div className='bg-background overscroll-y-contain flex min-h-dvh flex-col'>
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -48,9 +50,11 @@ const Root = () => {
             features={loadFeatures}
             strict
           >
+            <Header />
             <AnimatePresence>
               <Outlet />
             </AnimatePresence>
+            <Footer />
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
@@ -62,7 +66,7 @@ const Root = () => {
       <CustomSwipe />
       <LazyReloadPrompt />
       <ScrollRestoration />
-    </>
+    </div>
   )
 }
 
