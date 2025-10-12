@@ -16,7 +16,7 @@ const RANDOM = {
 const i18nMapping = {
   [LANG.EN]: {
     NEW_SERIES: 'New series',
-    MORE: 'more...'
+    MORE: 'Read more'
   },
   [LANG.ZH_TW]: {
     NEW_SERIES: '新系列文章',
