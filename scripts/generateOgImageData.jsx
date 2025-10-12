@@ -117,7 +117,6 @@ const getOgImgComponent = (route) => {
       </div>
       <div
         style={{
-          background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
           fontSize: '84px',
           ...twj('flex h-[84%] items-center justify-center px-10')
         }}
@@ -126,8 +125,9 @@ const getOgImgComponent = (route) => {
           style={{
             borderTop: '2px solid rgba(0, 0, 0, 0.2)',
             borderBottom: '2px solid rgba(0, 0, 0, 0.2)',
+            background: 'linear-gradient(to top right, rgba(255, 255, 255, 0.5), #fff, rgba(255, 255, 255, 0.5))',
             boxShadow: '0 25px 50px -12px rgba(255, 255, 255, 0.5)',
-            ...twj('rounded-lg p-4')
+            ...twj('rounded-lg px-14 pt-4')
           }}
         >
           {title}
