@@ -45,7 +45,7 @@ const RootLoadingScreen = () => {
   }
 
   return (
-    <SkeletonHome className='opacity-100!' />
+    <SkeletonHome className='opacity-100! fixed top-[4rem] min-h-[calc(100dvh-8rem)]' />
   )
 }
 
