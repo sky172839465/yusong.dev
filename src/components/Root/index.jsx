@@ -6,6 +6,8 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
+import Header from '@/layouts/Header'
+import Footer from '@/layouts/Footer'
 import CustomSwipe from '@/components/CustomSwipe'
 import fetcher from '@/utils/fetcher'
 
@@ -30,7 +32,7 @@ const Root = () => {
   }
 
   return (
-    <>
+    <div className='bg-background overscroll-y-contain flex min-h-dvh flex-col'>
       <SWRConfig
         value={{
           // https://swr.vercel.app/docs/api
@@ -48,9 +50,11 @@ const Root = () => {
             features={loadFeatures}
             strict
           >
+            <Header />
             <AnimatePresence>
               <Outlet />
             </AnimatePresence>
+            <Footer />
           </LazyMotion>
         </HelmetProvider>
       </SWRConfig>
@@ -62,7 +66,7 @@ const Root = () => {
       <CustomSwipe />
       <LazyReloadPrompt />
       <ScrollRestoration />
-    </>
+    </div>
   )
 }
 
