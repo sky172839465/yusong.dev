@@ -13,11 +13,12 @@ const Content = (props) => {
 
   return (
     <FadeIn
+      animate={{ opacity: loading ? 0 : 1 }}
       className={clx(
         'container mx-auto grow px-4 py-8',
         {
           'flex items-center': isFullScreen,
-          'invisible min-h-dvh': loading
+          'min-h-dvh': loading
         }
       )}
     >
