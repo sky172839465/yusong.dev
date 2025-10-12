@@ -1,6 +1,7 @@
 import { Languages, Moon, Search, Sun } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
+import * as m from 'motion/react-m'
 
 import LazyImage from '@/components/LazyImage'
 import TriggerButton from '@/components/SearchCommand/TriggerButton'
@@ -35,7 +36,11 @@ const Header = () => {
   const isSearch = pathname.replace(`/${lang}`, '') === '/search'
 
   return (
-    <header className='bg-background/50 sticky top-0 z-10 flex-none border-b backdrop-blur-md'>
+    <m.header
+      className='bg-background/50 sticky top-0 z-10 flex-none border-b backdrop-blur-md'
+      layoutId='header'
+      layout
+    >
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
           to={`/${isZhTw ? '' : lang}`}
@@ -118,7 +123,7 @@ const Header = () => {
           </Button>
         </div>
       </div>
-    </header>
+    </m.header>
   )
 }
 
