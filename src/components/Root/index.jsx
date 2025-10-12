@@ -6,9 +6,9 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
-import Header from '@/layouts/Header'
-import Footer from '@/layouts/Footer'
 import CustomSwipe from '@/components/CustomSwipe'
+import Footer from '@/layouts/Footer'
+import Header from '@/layouts/Header'
 import fetcher from '@/utils/fetcher'
 
 const LazyReloadPrompt = lazy(() => import('@/components/ReloadPrompt'))
