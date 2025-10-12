@@ -30,8 +30,8 @@ export default function ArticlesSection() {
 
   return (
     <section id='articles'>
-      <div className='flex justify-between items-center'>
-        <h2 className='text-foreground mb-6 text-3xl font-bold'>
+      <div className='flex justify-between items-center mb-6'>
+        <h2 className='text-foreground text-3xl font-bold'>
           {label.NEW_ARTICLES}
         </h2>
         <Link
