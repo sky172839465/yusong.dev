@@ -1,9 +1,11 @@
 import { random, times } from 'lodash-es'
+import { Link } from 'react-router-dom'
 
 import { useSeries } from '@/apis/useSeries'
 import SectionCard from '@/components/SectionCard'
 import SkeletonSectionCard from '@/components/SkeletonSectionCard'
 import useI18N, { LANG } from '@/hooks/useI18N'
+import { Button } from '@/components/ui/button'
 
 const RANDOM = {
   SERIES: times(6),
@@ -13,22 +15,34 @@ const RANDOM = {
 
 const i18nMapping = {
   [LANG.EN]: {
-    NEW_SERIES: 'New series'
+    NEW_SERIES: 'New series',
+    MORE: 'more...'
   },
   [LANG.ZH_TW]: {
-    NEW_SERIES: '新系列文章'
+    NEW_SERIES: '新系列文章',
+    MORE: '看更多'
   }
 }
 
 export default function SeriesSection() {
-  const { label, lang } = useI18N(i18nMapping)
+  const { label, lang, isZhTw } = useI18N(i18nMapping)
   const { isLoading, data } = useSeries({ type: 'website', lang }, { keepPreviousData: false })
 
   return (
     <section id='series'>
-      <h2 className='text-foreground mb-6 text-3xl font-bold'>
-        {label.NEW_SERIES}
-      </h2>
+      <div className='flex justify-between items-center mb-6'>
+        <h2 className='text-foreground text-3xl font-bold'>
+          {label.NEW_SERIES}
+        </h2>
+        <Link
+          to={`/${isZhTw ? '' : `${lang}/`}search?type=series`}
+          viewTransition
+        >
+          <Button type='button'>
+            {label.MORE}
+          </Button>
+        </Link>
+      </div>
       <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
         {isLoading && RANDOM.SERIES.map((index) => {
           const data = {
