@@ -37,7 +37,6 @@ const Header = () => {
   return (
     <header
       className='bg-background/50 sticky top-0 z-10 flex-none border-b backdrop-blur-md'
-      layout
     >
       <div className='container mx-auto flex items-center justify-between p-4'>
         <Link
