@@ -4,10 +4,7 @@ import { AnimatePresence } from 'motion/react'
 import FadeIn from '@/components/FadeIn'
 import { usePageLoading } from '@/stores/pageLoading'
 
-import Footer from'../Footer'
-import Header from '../Header'
-
-const Content = (props) => {
+const MainLayout = (props) => {
   const { children, isFullScreen } = props
   const { loading } = usePageLoading()
 
@@ -24,21 +21,6 @@ const Content = (props) => {
     >
       {children}
     </FadeIn>
-  )
-}
-
-const MainLayout = (props) => {
-  const { children, isFullScreen } = props
-  return (
-    <div className='bg-background overscroll-y-contain flex min-h-dvh flex-col'>
-      <Header />
-      <AnimatePresence>
-        <Content isFullScreen={isFullScreen}>
-          {children}
-        </Content>
-      </AnimatePresence>
-      <Footer />
-    </div>
   )
 }
 
