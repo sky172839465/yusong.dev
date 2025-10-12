@@ -11,7 +11,7 @@ const MainLayout = (props) => {
     <FadeIn
       animate={{ opacity: loading ? 0 : 1 }}
       className={clx(
-        'container min-h-[calc(100dvh-142px)] mx-auto grow px-4 py-8',
+        'container mx-auto grow px-4 py-8',
         {
           'flex items-center': isFullScreen,
           'invisible opacity-0 min-h-dvh': loading

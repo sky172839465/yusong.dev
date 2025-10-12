@@ -1,4 +1,7 @@
+import clx from 'classnames'
+
 import useI18N, { LANG } from '@/hooks/useI18N'
+import { usePageLoading } from '@/stores/pageLoading'
 
 const i18nMapping = {
   [LANG.EN]: {
@@ -11,11 +14,14 @@ const i18nMapping = {
 
 const Footer = () => {
   const { label } = useI18N(i18nMapping)
+  const { loading } = usePageLoading()
   const currentYear = new Date().getFullYear()
 
   return (
     <footer
-      className='bg-background flex-none border-t'
+      className={clx('bg-background flex-none border-t', {
+        'text-transparent': loading
+      })}
     >
       <div className='container mx-auto px-4 py-6'>
         <div className='flex flex-col items-center justify-center md:flex-row'>
