@@ -11,7 +11,8 @@ import { ARTICLE_PATH_NAME, DATA_FOLDER, DRAFT_ARTICLE_PATH_NAME, PAGE_FILE_NAME
 
 const TYPE = {
   WEBSITE: 'website',
-  ARTICLE: 'article'
+  ARTICLE: 'article',
+  SERIES: 'series'
 }
 
 const LANG = {
@@ -39,10 +40,14 @@ const pages = await Promise.all(
       const isMetaExist = (pageMetaFilePath in pageMetaFilePathMap)
       const metaData = isMetaExist ? await import(`../${pageMetaFilePath}`).then(module => module.default) : {}
       const pagePath = pageFilePath.replace(ROUTE_FOLDER, '').replace(PAGE_FILE_NAME, '')
+      const isSeries = (
+        pagePath.includes('/article') &&
+        pageFilePath.endsWith('index.jsx')
+      )
       return {
         file: pageFilePath,
         path: pagePath,
-        type: TYPE.WEBSITE,
+        type: isSeries ? TYPE.SERIES : TYPE.WEBSITE,
         lang: getLang(pagePath),
         data: {
           ...metaData,
