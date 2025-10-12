@@ -42,6 +42,7 @@ const i18nMapping = {
     TYPE_PLACEHOLDER: 'Select page type',
     ALL_PAGE_TYPE: 'All pages',
     ARTICLE_PAGE_TYPE: 'Articles',
+    ARTICLE_SERIES_TYPE: 'Series',
     OTHER_PAGE_TYPE: 'Other pages',
     RESET: 'Reset',
     SUBMIT: 'Submit',
@@ -60,6 +61,7 @@ const i18nMapping = {
     TYPE_PLACEHOLDER: '選擇頁面類型',
     ALL_PAGE_TYPE: '全部頁面',
     ARTICLE_PAGE_TYPE: '文章',
+    ARTICLE_SERIES_TYPE: '系列',
     OTHER_PAGE_TYPE: '其他頁面',
     RESET: '重置',
     SUBMIT: '送出',
@@ -198,6 +200,9 @@ const SearchForm = (props) => {
                       </SelectItem>
                       <SelectItem value='article'>
                         {label.ARTICLE_PAGE_TYPE}
+                      </SelectItem>
+                      <SelectItem value='series'>
+                        {label.ARTICLE_SERIES_TYPE}
                       </SelectItem>
                       <SelectItem value='website'>
                         {label.OTHER_PAGE_TYPE}
