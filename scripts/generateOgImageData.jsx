@@ -132,7 +132,7 @@ const getOgImgComponent = (route) => {
         >
           <p
             style={{
-              ...twj('mx-12 my-4 text-center')
+              ...twj('flex px-12 py-4 text-center')
             }}  
           >
             {title}
