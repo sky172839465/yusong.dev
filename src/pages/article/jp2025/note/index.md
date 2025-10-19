@@ -187,7 +187,7 @@ mainImage: og
 
 - eplus
   - 7‑Eleven 取票
-    > 2025/10/11(周六) 14:00 ~ 2025/10/27(周一) 21:00之間領取。 
+    > 2025/10/11(周六) 14:00 ~ 2025/10/27(周一) 21:00之間領取。
   - [eplus login](https://member.eplus.tickets/zh-CHT/guestauth/member/guestAuth?op=displayGuestAuth)
 - [VS. (グラングリーン大阪内)](https://maps.app.goo.gl/qDNwJGBqBace1hqu7)
 
