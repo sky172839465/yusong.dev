@@ -74,7 +74,7 @@
   }
 
   .prose [data-component="table-area"] table th,
-  .prose [data-component="table-area"] table tr:first-child td{
+  .prose [data-component="table-area"] table tr:first-child td {
     @apply whitespace-nowrap;
   }
 
