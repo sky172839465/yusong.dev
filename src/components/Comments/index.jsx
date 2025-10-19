@@ -1,5 +1,6 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
 import { lazy, Suspense } from 'react'
+import { AnimatePresence } from 'motion/react'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { Button } from '@/components/ui/button'
@@ -32,7 +33,7 @@ const i18nMapping = {
 
 const Comments = () => {
   const { isDarkMode } = useTheme()
-  const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, false)
+  const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, true)
   const toggleVisible = () => setVisible(!visible)
   const { label, lang } = useI18N(i18nMapping)
 
@@ -53,6 +54,7 @@ const Comments = () => {
         )}
         
       </Button>
+      <AnimatePresence>
       {visible && (
         <Suspense fallback={<GiscusSkeleton />}>
           <FadeIn className='**:select-text'>
@@ -72,6 +74,7 @@ const Comments = () => {
           </FadeIn>
         </Suspense>
       )}
+      </AnimatePresence>
     </>
   )
 }
