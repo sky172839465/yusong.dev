@@ -110,10 +110,11 @@ mainImage: og
 ### [姬路城](#himeji-castle)
 
 - 姬路城
-  - はりかい 姬路城店
+  - [はりかい 姬路城店](https://maps.app.goo.gl/AdN3CX6jibxYYy3X9)
+    - 牡蠣
 - 好古園
 - 明石
-  - 魚之棚商店街
+  - [魚之棚商店街](https://maps.app.goo.gl/Uh4HyKwRXZF7K5QVA)
     - 明石燒
   - 衛宮邸
   - 弓道場
@@ -184,4 +185,15 @@ mainImage: og
 
 ### [FGO 最終再臨展](#fgo-expo)
 
-- VS. (グラングリーン大阪内)
+- eplus
+  - 7‑Eleven 取票
+    > 2025/10/11(周六) 14:00 ~ 2025/10/27(周一) 21:00之間領取。 
+  - [eplus login](https://member.eplus.tickets/zh-CHT/guestauth/member/guestAuth?op=displayGuestAuth)
+- [VS. (グラングリーン大阪内)](https://maps.app.goo.gl/qDNwJGBqBace1hqu7)
+
+### 住宿附近
+
+- [木津市場](https://maps.app.goo.gl/fjnsfpKrCuMUBDVV9)
+  - 川上商店(蒲燒鰻)
+- [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
+- [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
