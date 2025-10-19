@@ -62,7 +62,16 @@ jobs:
           // 🧠 Improve each markdown file
           for (const file of changedFiles) {
             const content = fs.readFileSync(file, 'utf8');
-            const prompt = `Improve this markdown file for clarity, grammar, and readability:\n\n${content}`;
+            const prompt = `
+            You are an editor that improves Markdown text **without changing its original language**.
+            Keep the content’s main language intact.
+            Improve clarity, structure, and grammar while preserving tone, style, and code formatting.
+            If the Markdown is written in Chinese, Japanese, or any other language, keep using that language.
+            
+            --- Original Markdown ---
+            ${content}
+            `;
+            # const prompt = `Improve this markdown file for clarity, grammar, and readability:\n\n${content}`;
             const res = await openai.chat.completions.create({
               model: "gpt-4o",
               messages: [{ role: "user", content: prompt }],
