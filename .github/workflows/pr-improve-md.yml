@@ -1,8 +1,8 @@
 name: AI Improve Markdown Files
 
 on:
-  issue_comment:
-    types: [created]
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
 
 concurrency:
   group: "pr-improve"
@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   improve-md:
-    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/improve') }}
+    if: contains(github.event.pull_request.labels.*.name, 'improve md') == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
