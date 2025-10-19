@@ -57,8 +57,6 @@ mainImage: og
   </tbody>
 </table>
 
-- ref: [淡路島 blog](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
-
 #### 看海路線(長時間騎車)
 
 <table border="1" cellspacing="0" cellpadding="6">
@@ -105,7 +103,9 @@ mainImage: og
   </tbody>
 </table>
 
-- ref: [fate聖地巡礼で兵庫・神戸旅行に行ってきました](https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0)
+- ref
+  - [淡路島 伊耶那岐路線](https://www.awajishima-kanko.jp/cycling/ch/modelcourse_3.html)
+  - [淡路島 blog](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
 
 ### [姬路城](#himeji-castle)
 
@@ -120,9 +120,7 @@ mainImage: og
 
 ### [神戶 Fate 聖地巡禮](#kobe-shi)
 
-#### 預估 8-9 小時
-
-<table>
+<table border="1" cellspacing="0" cellpadding="6">
   <thead>
     <tr>
       <th>地點</th>
@@ -131,60 +129,58 @@ mainImage: og
     </tr>
   </thead>
   <tbody>
+    <tr><td colspan="3"><b>北野異人館付近</b></td></tr>
     <tr>
-      <td colspan="3"><b>北野異人館付近</b></td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/qkqDnD7pFuE8JoYRA" target="_blank">三北野通り（言峰教会に続く道）</a></td>
-      <td>約 5-10 分鐘</td>
-      <td>北野山坡上的小路，步行即可，能感受教會街區氛圍。建議 09:00～11:30 參觀北野區，總計約 2 小時 10 分（含大國町出發至北野交通及區內步行）。</td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/sE4E6eibB7z7z5hK8" target="_blank">不動坂（間桐邸に続く坂道）</a></td>
-      <td>約 8-12 分鐘</td>
-      <td>較陡的上坡路，沿途可取景拍照。</td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/1p4kSvth1f7Ew9BA7" target="_blank">うろこの家（間桐邸外見・遠坂邸の部屋）</a></td>
-      <td>約 5-8 分鐘</td>
-      <td>館內外與作品場景相似。</td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/FYAX9E7b7bFGjq1B6" target="_blank">風見鶏の館（遠坂邸）</a></td>
-      <td>約 2-5 分鐘</td>
-      <td>與うろこの家相距極近，可順路參觀。</td>
-    </tr>
-    <tr>
-      <td colspan="3"><b>明石公園付近</b></td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/1U3hM9h7eC4eTfr28" target="_blank">織田家長屋門（衛宮邸）</a></td>
-      <td>約 10-15 分鐘</td>
-      <td>位於明石公園內，作為衛宮邸外觀原型地。建議 12:00～14:00 參觀明石區，含午餐，總計約 1 小時 35 分（含北野→明石交通）。</td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/BZ92XTYL1EhvQxRr9" target="_blank">兵庫県立弓道場（穂群原学園の弓道場）</a></td>
-      <td>約 10 分鐘</td>
-      <td>可從公園步行抵達，為弓道場場景取材地。</td>
-    </tr>
-    <tr>
-      <td colspan="3"><b>神戸大橋付近</b></td>
-    </tr>
-    <tr>
-      <td><a href="https://maps.app.goo.gl/tGkJkHqQ9wzyrANF8" target="_blank">神戸ベイクルーズ船（fateコラボ名残＆神戸大橋の真下を通過）</a></td>
-      <td>約 45-60 分鐘</td>
+      <td><a href="https://maps.app.goo.gl/qkqDnD7pFuE8JoYRA" target="_blank">三北野通り</a></td>
+      <td>5-10 分鐘</td>
       <td>
-        可搭乘遊船觀賞港景，航程經過神戶大橋下方。建議 15:00～17:00 安排港口遊船，總計約 1 小時 55 分（含明石→神戶港交通及步行）。
-        <a href="https://www.tkc-rs1.com/reserve/" target="_blank">神戸ベイクルーズ 遊船</a>
+        北野山坡上的小路，步行即可。<br>這條小路即「言峰教会に続く道」。<br>
+        建議 09:00～11:30 參觀北野區，總計約 2 小時 10 分（含大國町出發及區內步行）。
       </td>
     </tr>
     <tr>
-      <td><a href="https://maps.app.goo.gl/Xv9ddhKhmS8WmJ6P6" target="_blank">神戸大橋＆海浜公園（冬木大橋）</a></td>
-      <td>約 10-15 分鐘</td>
-      <td>建議傍晚至夜晚前往，欣賞橋下夜景與燈光。建議 17:30～19:00，作為行程收尾。</td>
+      <td><a href="https://maps.app.goo.gl/sE4E6eibB7z7z5hK8" target="_blank">不動坂</a></td>
+      <td>8-12 分鐘</td>
+      <td>
+        較陡的上坡路，沿途可拍照。<br>此坂道即「間桐邸に続く坂道」。
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/1p4kSvth1f7Ew9BA7" target="_blank">うろこの家</a></td>
+      <td>5-8 分鐘</td>
+      <td>館內外與作品場景相似，位於間桐邸及遠坂邸附近。</td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/FYAX9E7b7bFGjq1B6" target="_blank">風見鶏の館</a></td>
+      <td>2-5 分鐘</td>
+      <td>與うろこの家距離近，可順路參觀，為遠坂邸原型。</td>
+    </tr>
+    <tr><td colspan="3"><b>明石公園付近</b></td></tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/1U3hM9h7eC4eTfr28" target="_blank">織田家長屋門</a></td>
+      <td>10-15 分鐘</td>
+      <td>位於明石公園內，衛宮邸外觀原型。<br>建議 12:00～14:00 參觀明石區，含午餐。<br>總計約 1 小時 35 分（含北野→明石交通）。</td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/BZ92XTYL1EhvQxRr9" target="_blank">兵庫県立弓道場</a></td>
+      <td>10 分鐘</td>
+      <td>可從公園步行抵達，為穂群原学園的弓道場取材地。</td>
+    </tr>
+    <tr><td colspan="3"><b>神戸大橋付近</b></td></tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/tGkJkHqQ9wzyrANF8" target="_blank">神戸ベイクルーズ船</a></td>
+      <td>45-60 分鐘</td>
+      <td>搭乘遊船觀賞港景，航程經過神戶大橋下方。<br>建議 15:00～17:00 安排港口遊船，總計約 1 小時 55 分（含明石→神戶港交通及步行）。<br><a href="https://www.tkc-rs1.com/reserve/" target="_blank">神戸ベイクルーズ 遊船預約</a></td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/Xv9ddhKhmS8WmJ6P6" target="_blank">神戸大橋＆海浜公園</a></td>
+      <td>10-15 分鐘</td>
+      <td>傍晚至夜晚前往，欣賞橋下夜景與燈光。<br>建議 17:30～19:00 作為行程收尾。</td>
     </tr>
   </tbody>
 </table>
+
+- ref: [fate聖地巡礼で兵庫・神戸旅行に行ってきました](https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0)
 
 ### [FGO 最終再臨展](#fgo-expo)
 
