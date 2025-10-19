@@ -71,7 +71,6 @@ jobs:
             --- Original Markdown ---
             ${content}
             `;
-            # const prompt = `Improve this markdown file for clarity, grammar, and readability:\n\n${content}`;
             const res = await openai.chat.completions.create({
               model: "gpt-4o",
               messages: [{ role: "user", content: prompt }],
