@@ -25,4 +25,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           PR_NUMBER: ${{ github.event.issue.number }}
-        run: node ./scripts/updateArticleFrontmatter.js
+        run: node ./scripts/prImproveMd.js
