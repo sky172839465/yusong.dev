@@ -57,7 +57,7 @@ mainImage: og
   </tbody>
 </table>
 
-- ref: https://matcha-jp.com/tw/15476](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm
+- ref: [淡路島 blog](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
 
 #### 看海路線(長時間騎車)
 
@@ -105,7 +105,7 @@ mainImage: og
   </tbody>
 </table>
 
-- ref: https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0
+- ref: [fate聖地巡礼で兵庫・神戸旅行に行ってきました](https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0)
 
 ### [姬路城](#himeji-castle)
 
