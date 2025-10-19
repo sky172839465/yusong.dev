@@ -6,7 +6,8 @@ on:
 
 jobs:
   improve-md:
-    if: contains(github.event.comment.body, 'improve md')
+    # if: contains(github.event.comment.body, 'improve md')
+    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/improve') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
