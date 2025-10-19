@@ -90,9 +90,9 @@ mainImage: og
   </tbody>
 </table>
 
-- ref
+- 參考資料:
   - [淡路島 伊耶那岐路線](https://www.awajishima-kanko.jp/cycling/ch/modelcourse_3.html)
-  - [淡路島 blog](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
+  - [淡路島部落格](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
 
 ### [姬路城](#himeji-castle)
 
@@ -168,7 +168,7 @@ mainImage: og
   </tbody>
 </table>
 
-- ref: [fate聖地巡礼で兵庫・神戸旅行に行ってきました](https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0)
+- 參考資料: [fate聖地巡礼で兵庫・神戸旅行に行ってきました](https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0)
 
 ### [FGO 最終再臨展](#fgo-expo)
 
@@ -180,6 +180,6 @@ mainImage: og
 ### [住宿附近](#nearby)
 
 - [木津市場](https://maps.app.goo.gl/fjnsfpKrCuMUBDVV9)
-  - 川上商店(蒲燒鰻)
+  - 川上商店 (蒲燒鰻)
 - [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
 - [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
