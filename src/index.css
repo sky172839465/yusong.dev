@@ -74,6 +74,11 @@
   }
 
   .prose [data-component="table-area"] table th,
+  .prose [data-component="table-area"] table tr:first-child td {
+    @apply whitespace-nowrap;
+  }
+
+  .prose [data-component="table-area"] table th,
   .prose [data-component="table-area"] table td {
     @apply p-2 align-middle;
   }
