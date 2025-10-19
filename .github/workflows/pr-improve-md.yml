@@ -38,6 +38,7 @@ jobs:
         run: |
           node <<'EOF'
           import fs from 'fs-extra';
+          import { execSync } from 'child_process';
           import OpenAI from 'openai';
 
           const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
