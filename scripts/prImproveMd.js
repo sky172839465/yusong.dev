@@ -1,6 +1,5 @@
 import { execSync } from 'child_process';
 import fs from 'fs-extra';
-import { glob } from 'glob';
 import OpenAI from 'openai';
 import { Octokit } from "@octokit/rest";
 
