@@ -1,5 +1,4 @@
 import { Octokit } from '@octokit/rest'
-import { execSync } from 'child_process'
 import fs from 'fs-extra'
 import OpenAI from 'openai'
 
@@ -39,11 +38,3 @@ for (const file of mdFiles) {
   fs.writeFileSync(file, improved, 'utf-8')
   console.log(`Improved ${file}`)
 }
-
-// 3. Commit and push changes
-execSync('git config user.name "github-actions[bot]"')
-execSync('git config user.email "github-actions[bot]@users.noreply.github.com"')
-execSync('git add .')
-execSync('git commit -m "docs: AI improved markdown files via comment" || echo "docs: No changes to commit"')
-execSync('git push')
-execSync('gh pr comment ${{ env.PR_NUMBER }} --body "🤖 docs: AI improved markdown files via comment, commit: $(git rev-parse --short HEAD)."')
