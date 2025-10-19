@@ -59,7 +59,7 @@ mainImage: og
 
 #### 看海路線(長時間騎車)
 
-<table border="1" cellspacing="0" cellpadding="6">
+<table>
   <thead>
     <tr>
       <th>地點</th>
@@ -121,7 +121,7 @@ mainImage: og
 
 ### [神戶 Fate 聖地巡禮](#kobe-shi)
 
-<table border="1" cellspacing="0" cellpadding="6">
+<table>
   <thead>
     <tr>
       <th>地點</th>
