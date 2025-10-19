@@ -1,4 +1,5 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
+import { AnimatePresence } from 'motion/react'
 import { lazy, Suspense } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
@@ -32,7 +33,7 @@ const i18nMapping = {
 
 const Comments = () => {
   const { isDarkMode } = useTheme()
-  const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, false)
+  const [visible, setVisible] = useLocalStorage(COMMENTS_VISIBLE_KEY, true)
   const toggleVisible = () => setVisible(!visible)
   const { label, lang } = useI18N(i18nMapping)
 
@@ -53,25 +54,27 @@ const Comments = () => {
         )}
         
       </Button>
-      {visible && (
-        <Suspense fallback={<GiscusSkeleton />}>
-          <FadeIn className='**:select-text'>
-            <LazyGiscus
-              id='comments'
-              repo='sky172839465/yusong.dev'
-              repoId='R_kgDONva8Tw'
-              category='Announcements'
-              categoryId='DIC_kwDONva8T84Cmdvk'
-              mapping='pathname'
-              reactionsEnabled='1'
-              emitMetadata='0'
-              inputPosition='top'
-              theme={isDarkMode ? 'dark' : 'light'}
-              lang={lang}
-            />
-          </FadeIn>
-        </Suspense>
-      )}
+      <AnimatePresence>
+        {visible && (
+          <Suspense fallback={<GiscusSkeleton />}>
+            <FadeIn className='**:select-text'>
+              <LazyGiscus
+                id='comments'
+                repo='sky172839465/yusong.dev'
+                repoId='R_kgDONva8Tw'
+                category='Announcements'
+                categoryId='DIC_kwDONva8T84Cmdvk'
+                mapping='pathname'
+                reactionsEnabled='1'
+                emitMetadata='0'
+                inputPosition='top'
+                theme={isDarkMode ? 'dark' : 'light'}
+                lang={lang}
+              />
+            </FadeIn>
+          </Suspense>
+        )}
+      </AnimatePresence>
     </>
   )
 }
