@@ -30,17 +30,49 @@ jobs:
       - name: Install dependencies
         run: npm install openai fs-extra @octokit/rest
 
-      - name: Improve Markdown files via Open AI
+
+      - name: Improve Markdown files via AI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          PR_NUMBER: ${{ github.event.issue.number }}
-        run: node ./scripts/prImproveMd.js
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          node <<'EOF'
+          import fs from 'fs-extra';
+          import OpenAI from 'openai';
 
-      - name: Commit to pr
+          const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+          const prNumber = process.env.PR_NUMBER;
+
+          // 📝 Get changed markdown files from PR diff
+          const changedFiles = execSync(`gh pr diff ${prNumber} --name-only`, { encoding: 'utf8' })
+            .split('\n')
+            .filter(f => f.endsWith('.md') && fs.existsSync(f));
+
+          if (changedFiles.length === 0) {
+            console.log("No markdown files changed.");
+            process.exit(0);
+          }
+
+          // 🧠 Improve each markdown file
+          for (const file of changedFiles) {
+            const content = fs.readFileSync(file, 'utf8');
+            const prompt = `Improve this markdown file for clarity, grammar, and readability:\n\n${content}`;
+            const res = await openai.chat.completions.create({
+              model: "gpt-4o",
+              messages: [{ role: "user", content: prompt }],
+            });
+            const improved = res.choices[0].message.content;
+            fs.writeFileSync(file, improved, 'utf8');
+            console.log(`✅ Improved ${file}`);
+          }
+
+          EOF
+
+      - name: Add completion comment
         env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR_ID}+${GITHUB_ACTOR}@users.noreply.github.com"
@@ -48,3 +80,4 @@ jobs:
           git commit -m "docs: improve markdown by open ai"
           git push
           gh pr comment ${{ env.PR_NUMBER }} --body "🤖 Improve markdown, commit: $(git rev-parse --short HEAD)."
+          gh pr edit ${{ env.PR_NUMBER }} --remove-label "improve md"
