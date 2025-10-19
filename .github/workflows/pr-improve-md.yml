@@ -30,7 +30,6 @@ jobs:
       - name: Install dependencies
         run: npm install openai fs-extra @octokit/rest
 
-
       - name: Improve Markdown files via AI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
