@@ -17,7 +17,7 @@ mainImage: og
   <thead>
     <tr>
       <th>地點</th>
-      <th>預估時間</th>
+      <th>時間</th>
       <th>備註</th>
     </tr>
   </thead>
@@ -112,7 +112,7 @@ mainImage: og
   <thead>
     <tr>
       <th>地點</th>
-      <th>預估時間</th>
+      <th>時間</th>
       <th>備註</th>
     </tr>
   </thead>
