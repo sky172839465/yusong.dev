@@ -13,31 +13,6 @@ mainImage: og
 
 ### [淡路島](#awaji-shima)
 
-買票、岩屋港租車(船務大樓) [link](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm)
-
-- 浦(東浦) `約 30 分`
-  - Aquaignis淡路島 [link](https://matcha-jp.com/tw/15476) 溫泉、輕食
-  - 浦縣民陽光沙灘 [link](https://matcha-jp.com/tw/20192)
-- 久留麻
-  -️ 生穂
-- 志筑 `約 60 分`
-  - いづも庵 [map](https://maps.app.goo.gl/scJrCBti18cgCfLb9) 炸洋蔥沾麵 ⭐️
-  - 石挽そば 丸中 [map](https://maps.app.goo.gl/TV4EpUtXWvdCP8C88) 蕎麥麵
-  - 志筑八幡神社 [map](https://maps.app.goo.gl/NPP5avdzJBc3YBoF9)
-- 伊弉諾神宮 [map](https://maps.app.goo.gl/SWJxob98J2XUJdq68) `約 30 分`
-
-#### 看海路線(長時間騎車)
-
-- 郡家
-- 室津 `約 30 分`
-  - 幸せのパンケーキ 本店 [map](https://maps.app.goo.gl/QmSQ247zZLP6Sx5eA) 舒芙蕾
-- 育波橋 `約 10 分`
-  - 淡路島チーズ工房 [map](https://maps.app.goo.gl/3xPteyHCC6BNQshd8) 起司漢堡排、甜點
-  - 大瀬 [map](https://maps.app.goo.gl/kYJgovPCz8KLZuoY8) 星鰻 海鮮餐廳 ⭐️
-- 野島江崎 `約 60 分`
-  - 嘉のや食堂 淡路島 [map](https://maps.app.goo.gl/eK9dcf2vs66Wty8E7) 看海簡餐
-- 岩屋港 `約 20 分`
-
 <table>
   <thead>
     <tr>
@@ -81,6 +56,8 @@ mainImage: og
     </tr>
   </tbody>
 </table>
+
+- ref: https://matcha-jp.com/tw/15476](https://www.wayfarer.idv.tw/Japan/Japan2016/0411.htm
 
 #### 看海路線(長時間騎車)
 
@@ -128,6 +105,8 @@ mainImage: og
   </tbody>
 </table>
 
+- ref: https://note.com/0zeroccc/n/nf80744128ac2#18389ce4-0245-4449-8405-d981fdb1b5d0
+
 ### [姬路城](#himeji-castle)
 
 - 姬路城
@@ -139,7 +118,9 @@ mainImage: og
   - 衛宮邸
   - 弓道場
 
-### [神戶](#kobe-shi)
+### [神戶 Fate 聖地巡禮](#kobe-shi)
+
+#### 預估 8-9 小時
 
 <table>
   <thead>
@@ -151,44 +132,56 @@ mainImage: og
   </thead>
   <tbody>
     <tr>
-      <td>北野異人館區（北野町付近）</td>
-      <td>約 30-45 分鐘</td>
-      <td>搭地鐵／電車約 20-30 分鐘＋步行約 10-15 分鐘。建議先搭車到三宮或新神戸，再步行上北野町。</td>
+      <td colspan="3"><b>北野異人館付近</b></td>
     </tr>
     <tr>
-      <td>三北野通り（言峰教会に続く道）</td>
+      <td><a href="https://maps.app.goo.gl/qkqDnD7pFuE8JoYRA" target="_blank">三北野通り（言峰教会に続く道）</a></td>
       <td>約 5-10 分鐘</td>
-      <td>山坡區內散步即可。</td>
+      <td>北野山坡上的小路，步行即可，能感受教會街區氛圍。建議 09:00～11:30 參觀北野區，總計約 2 小時 10 分（含大國町出發至北野交通及區內步行）。</td>
     </tr>
     <tr>
-      <td>不動坂（間桐邸に続く坂道）</td>
+      <td><a href="https://maps.app.goo.gl/sE4E6eibB7z7z5hK8" target="_blank">不動坂（間桐邸に続く坂道）</a></td>
       <td>約 8-12 分鐘</td>
-      <td>坡道較陡，走時稍留時間拍照休息。</td>
+      <td>較陡的上坡路，沿途可取景拍照。</td>
     </tr>
     <tr>
-      <td>うろこの家（間桐邸外見・遠坂邸の部屋）</td>
+      <td><a href="https://maps.app.goo.gl/1p4kSvth1f7Ew9BA7" target="_blank">うろこの家（間桐邸外見・遠坂邸の部屋）</a></td>
       <td>約 5-8 分鐘</td>
-      <td>邊走邊看建築。</td>
+      <td>館內外與作品場景相似。</td>
     </tr>
     <tr>
-      <td>風見鶏の館（遠坂邸）</td>
+      <td><a href="https://maps.app.goo.gl/FYAX9E7b7bFGjq1B6" target="_blank">風見鶏の館（遠坂邸）</a></td>
       <td>約 2-5 分鐘</td>
-      <td>兩點距離非常近。</td>
+      <td>與うろこの家相距極近，可順路參觀。</td>
     </tr>
     <tr>
-      <td>市中心或港邊地區</td>
-      <td>約 20-30 分鐘</td>
-      <td>可走回三宮或搭車前往港口區。</td>
+      <td colspan="3"><b>明石公園付近</b></td>
     </tr>
     <tr>
-      <td><a href="https://www.tkc-rs1.com/reserve/" target="_blank">神戸ベイクルーズ 遊船</a></td>
-      <td>約 45-60 分鐘</td>
-      <td>搭船約 40-45 分鐘（＋上下船步行）。遊船路線會通過神戶大橋下方。</td>
-    </tr>
-    <tr>
-      <td>神戸大橋＆海浜公園（冬木大橋）</td>
+      <td><a href="https://maps.app.goo.gl/1U3hM9h7eC4eTfr28" target="_blank">織田家長屋門（衛宮邸）</a></td>
       <td>約 10-15 分鐘</td>
-      <td>建議傍晚至夜晚前往觀賞夜景。</td>
+      <td>位於明石公園內，作為衛宮邸外觀原型地。建議 12:00～14:00 參觀明石區，含午餐，總計約 1 小時 35 分（含北野→明石交通）。</td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/BZ92XTYL1EhvQxRr9" target="_blank">兵庫県立弓道場（穂群原学園の弓道場）</a></td>
+      <td>約 10 分鐘</td>
+      <td>可從公園步行抵達，為弓道場場景取材地。</td>
+    </tr>
+    <tr>
+      <td colspan="3"><b>神戸大橋付近</b></td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/tGkJkHqQ9wzyrANF8" target="_blank">神戸ベイクルーズ船（fateコラボ名残＆神戸大橋の真下を通過）</a></td>
+      <td>約 45-60 分鐘</td>
+      <td>
+        可搭乘遊船觀賞港景，航程經過神戶大橋下方。建議 15:00～17:00 安排港口遊船，總計約 1 小時 55 分（含明石→神戶港交通及步行）。
+        <a href="https://www.tkc-rs1.com/reserve/" target="_blank">神戸ベイクルーズ 遊船</a>
+      </td>
+    </tr>
+    <tr>
+      <td><a href="https://maps.app.goo.gl/Xv9ddhKhmS8WmJ6P6" target="_blank">神戸大橋＆海浜公園（冬木大橋）</a></td>
+      <td>約 10-15 分鐘</td>
+      <td>建議傍晚至夜晚前往，欣賞橋下夜景與燈光。建議 17:30～19:00，作為行程收尾。</td>
     </tr>
   </tbody>
 </table>
