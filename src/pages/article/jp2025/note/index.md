@@ -54,20 +54,7 @@ mainImage: og
       <td>約 30 分</td>
       <td><a href="https://maps.app.goo.gl/SWJxob98J2XUJdq68" target="_blank">地圖連結</a></td>
     </tr>
-  </tbody>
-</table>
-
-#### 看海路線(長時間騎車)
-
-<table>
-  <thead>
-    <tr>
-      <th>地點</th>
-      <th>預估時間</th>
-      <th>備註</th>
-    </tr>
-  </thead>
-  <tbody>
+    <tr><td colspan="3"><b>看海路線(長時間騎車)</b></td></tr>
     <tr>
       <td>郡家</td>
       <td>—</td>
