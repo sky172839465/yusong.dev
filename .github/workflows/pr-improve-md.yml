@@ -19,7 +19,7 @@ jobs:
           node-version: latest
 
       - name: Install dependencies
-        run: npm install openai glob fs-extra
+        run: npm install openai glob fs-extra @octokit/rest
 
       - name: Improve Markdown files via Open AI
         env:
