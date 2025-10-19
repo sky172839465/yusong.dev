@@ -1,6 +1,6 @@
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react'
-import { lazy, Suspense } from 'react'
 import { AnimatePresence } from 'motion/react'
+import { lazy, Suspense } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
 import { Button } from '@/components/ui/button'
@@ -55,25 +55,25 @@ const Comments = () => {
         
       </Button>
       <AnimatePresence>
-      {visible && (
-        <Suspense fallback={<GiscusSkeleton />}>
-          <FadeIn className='**:select-text'>
-            <LazyGiscus
-              id='comments'
-              repo='sky172839465/yusong.dev'
-              repoId='R_kgDONva8Tw'
-              category='Announcements'
-              categoryId='DIC_kwDONva8T84Cmdvk'
-              mapping='pathname'
-              reactionsEnabled='1'
-              emitMetadata='0'
-              inputPosition='top'
-              theme={isDarkMode ? 'dark' : 'light'}
-              lang={lang}
-            />
-          </FadeIn>
-        </Suspense>
-      )}
+        {visible && (
+          <Suspense fallback={<GiscusSkeleton />}>
+            <FadeIn className='**:select-text'>
+              <LazyGiscus
+                id='comments'
+                repo='sky172839465/yusong.dev'
+                repoId='R_kgDONva8Tw'
+                category='Announcements'
+                categoryId='DIC_kwDONva8T84Cmdvk'
+                mapping='pathname'
+                reactionsEnabled='1'
+                emitMetadata='0'
+                inputPosition='top'
+                theme={isDarkMode ? 'dark' : 'light'}
+                lang={lang}
+              />
+            </FadeIn>
+          </Suspense>
+        )}
       </AnimatePresence>
     </>
   )
