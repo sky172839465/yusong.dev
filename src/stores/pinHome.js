@@ -64,7 +64,7 @@ export const usePinHome = () => {
   
   const togglePinHome = () => {
     toast.dismiss()
-    if (isEmpty(pinHome)) {
+    if (isEmpty(pinHome) || !isPinnedHome) {
       setPinHome(pathname)
       toast.success(label.PINNED_HOME)
       return
