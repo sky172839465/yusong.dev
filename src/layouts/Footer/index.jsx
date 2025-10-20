@@ -1,5 +1,6 @@
 import clx from 'classnames'
 
+import PinHome from '@/components/PinHome'
 import useI18N, { LANG } from '@/hooks/useI18N'
 import { usePageLoading } from '@/stores/pageLoading'
 
@@ -23,14 +24,18 @@ const Footer = () => {
         'text-transparent': loading
       })}
     >
-      <div className='container mx-auto px-4 py-6'>
-        <div className='flex flex-col items-center justify-center md:flex-row'>
-          <p>
+      <div className='container mx-auto px-4 py-6 relative'>
+        <div className='flex items-center justify-between'>
+          <div />
+          <p className='flex-1 text-center'>
             &copy;
             {currentYear}
             {' '}
             {label.COPYRIGHT}
           </p>
+          <div className='absolute right-4'>
+            <PinHome />
+          </div>
         </div>
       </div>
     </footer>

@@ -11,8 +11,10 @@ export const pinHomeAtom = atom(defaultPinHome)
 
 mainStore.set(pinHomeAtom, defaultPinHome)
 
+const getStringifyPinHome = v => toString(v).replaceAll('"', '')
+
 export const getPinHome = () => {
-  const stringifyPinHome = toString(mainStore.get(pinHomeAtom))
+  const stringifyPinHome = getStringifyPinHome(mainStore.get(pinHomeAtom))
   if (!stringifyPinHome.startsWith('/')) {
     return
   }
@@ -24,6 +26,7 @@ export const usePinHome = () => {
   const { pathname } = useLocation()
   const [pinHome, updatePinHome] = useAtom(pinHomeAtom)
   const [, updateStoragePinHome, removeStoragePinHome] = useLocalStorage(PINNED_KEY, pinHome)
+  const isPinnedHome = getStringifyPinHome(pinHome) === pathname
 
   const setPinHome = (nextPinHome) => {
     updatePinHome(nextPinHome)
@@ -44,5 +47,5 @@ export const usePinHome = () => {
     setPinHome()
   }
 
-  return { pinHome, setPinHome, togglePinHome }
+  return { isPinnedHome, setPinHome, togglePinHome }
 }
