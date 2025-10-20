@@ -1,5 +1,6 @@
 import { atom, useAtom } from 'jotai'
 import { isEmpty, toString } from 'lodash-es'
+import { toast } from 'react-hot-toast'
 import { useLocation } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 
@@ -39,11 +40,14 @@ export const usePinHome = () => {
   }
   
   const togglePinHome = () => {
+    toast.dismiss()
     if (isEmpty(pinHome)) {
       setPinHome(pathname)
+      toast.success('釘為首頁')
       return
     }
 
+    toast.success('取消釘為首頁')
     setPinHome()
   }
 
