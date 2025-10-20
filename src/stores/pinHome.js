@@ -20,6 +20,8 @@ export const getPinHome = () => {
     return
   }
 
+  // 只有第一次 loader 需要 redirect、之後停留在網站期間 root loader 再次觸發也不要再導向 pin home
+  mainStore.set(pinHomeAtom)
   return stringifyPinHome
 }
 
