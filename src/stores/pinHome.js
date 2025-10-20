@@ -21,7 +21,7 @@ export const getPinHome = () => {
   }
 
   if (!stringifyPinHome.startsWith('/')) {
-    localStorage.removeItem(PINNED_KEY)
+    // localStorage.removeItem(PINNED_KEY)
     return
   }
 
