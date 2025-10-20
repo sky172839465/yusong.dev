@@ -7,12 +7,12 @@ import { usePinHome } from '@/stores/pinHome'
 
 const i18nMapping = {
   [LANG.EN]: {
-    PINNED_HOME: 'Pinned as home',
-    UNPINNED_HOME: 'Pin as home'
+    PINNED_HOME: 'Pinned start page',
+    UNPINNED_HOME: 'Pin to start page'
   },
   [LANG.ZH_TW]: {
-    PINNED_HOME: '已釘為首頁',
-    UNPINNED_HOME: '釘為首頁'
+    PINNED_HOME: '已釘為起始頁',
+    UNPINNED_HOME: '釘為起始頁'
   }
 }
 
