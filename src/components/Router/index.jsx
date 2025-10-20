@@ -13,6 +13,7 @@ import { useRootLoading } from '@/stores/rootLoading.js'
 
 import ErrorElement from './ErrorElement.jsx'
 import getRoutes, { loaderHandler } from './getRoutes.js'
+import loader from './index.loader.js'
 
 const LazyArticle = lazy(() => import('@/components/Article/index.jsx'))
 const LazyRoot = lazy(() => import('@/components/Root/index.jsx'))
@@ -113,7 +114,7 @@ const Router = () => {
           <LazyRoot />
         </Suspense>
       ),
-      loader: loaderHandler(),
+      loader: loaderHandler(loader),
       errorElement: (
         <>
           <ErrorElement />
