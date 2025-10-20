@@ -9,19 +9,26 @@ import { mainStore } from './main.js'
 const PINNED_KEY = 'PIN_HOME_KEY'
 const defaultPinHome = localStorage.getItem(PINNED_KEY)
 export const pinHomeAtom = atom(defaultPinHome)
+const tmpPinHomeAtom = atom(defaultPinHome)
 
 mainStore.set(pinHomeAtom, defaultPinHome)
+mainStore.set(tmpPinHomeAtom, defaultPinHome)
 
 const getStringifyPinHome = (v) => toString(v).replaceAll('"', '')
 
 export const getPinHome = () => {
   const stringifyPinHome = getStringifyPinHome(mainStore.get(pinHomeAtom))
+  const stringifyTmpPinHome = getStringifyPinHome(mainStore.get(tmpPinHomeAtom))
+  if (stringifyPinHome !== stringifyTmpPinHome) {
+    return
+  }
+
   if (!stringifyPinHome.startsWith('/')) {
     return
   }
 
   // 只有第一次 loader 需要 redirect、之後停留在網站期間 root loader 再次觸發也不要再導向 pin home
-  mainStore.set(pinHomeAtom)
+  mainStore.set(tmpPinHomeAtom)
   return stringifyPinHome
 }
 
