@@ -12,16 +12,11 @@ export const pinHomeAtom = atom(defaultPinHome)
 
 mainStore.set(pinHomeAtom, defaultPinHome)
 
-const getStringifyPinHome = (v = '') => toString(v).replaceAll('"', '')
+const getStringifyPinHome = (v) => toString(v).replaceAll('"', '')
 
 export const getPinHome = () => {
   const stringifyPinHome = getStringifyPinHome(mainStore.get(pinHomeAtom))
-  if (isEmpty(stringifyPinHome)) {
-    return
-  }
-
   if (!stringifyPinHome.startsWith('/')) {
-    // localStorage.removeItem(PINNED_KEY)
     return
   }
 
