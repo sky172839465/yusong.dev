@@ -4,7 +4,20 @@ import { toast } from 'react-hot-toast'
 import { useLocation } from 'react-router-dom'
 import { useLocalStorage } from 'usehooks-ts'
 
+import useI18N, { LANG } from '@/hooks/useI18N'
+
 import { mainStore } from './main.js'
+
+const i18nMapping = {
+  [LANG.EN]: {
+    PINNED_HOME: 'Pinned start page',
+    UNPINNED_HOME: 'Cancel pin to start page'
+  },
+  [LANG.ZH_TW]: {
+    PINNED_HOME: '已釘為起始頁',
+    UNPINNED_HOME: '取消釘為起始頁'
+  }
+}
 
 const PINNED_KEY = 'PIN_HOME_KEY'
 const defaultPinHome = localStorage.getItem(PINNED_KEY)
@@ -33,6 +46,7 @@ export const getPinHome = () => {
 }
 
 export const usePinHome = () => {
+  const { label } = useI18N(i18nMapping)
   const { pathname } = useLocation()
   const [pinHome, updatePinHome] = useAtom(pinHomeAtom)
   const [, updateStoragePinHome, removeStoragePinHome] = useLocalStorage(PINNED_KEY, pinHome)
@@ -52,11 +66,11 @@ export const usePinHome = () => {
     toast.dismiss()
     if (isEmpty(pinHome)) {
       setPinHome(pathname)
-      toast.success('釘為首頁')
+      toast.success(label.PINNED_HOME)
       return
     }
 
-    toast.success('取消釘為首頁')
+    toast.success(label.UNPINNED_HOME)
     setPinHome()
   }
 
