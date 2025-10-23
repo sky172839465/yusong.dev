@@ -2,10 +2,10 @@
 title: 2025 JP 旅行前紀錄
 description: 2025 日本大阪行紀錄地點、行程的筆記
 createdAt: "2025-10-11T07:16:14.007Z"
-modifiedAt: "2025-10-19T02:59:46.656Z"
+modifiedAt: "2025-10-23T12:50:44.100Z"
 tags:
   - TRAVEL
-  - JP2025
+  - JAPAN
   - NOTE
 index: 0
 mainImage: og
