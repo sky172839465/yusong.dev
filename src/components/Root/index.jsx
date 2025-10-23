@@ -6,7 +6,6 @@ import toast, { Toaster } from 'react-hot-toast'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
-import CustomSwipe from '@/components/CustomSwipe'
 import Footer from '@/layouts/Footer'
 import Header from '@/layouts/Header'
 import fetcher from '@/utils/fetcher'
@@ -63,7 +62,6 @@ const Root = () => {
           className: 'bg-background/50! text-foreground! border-border! border! backdrop-blur-md!'
         }}
       />
-      <CustomSwipe />
       <LazyReloadPrompt />
       <ScrollRestoration />
     </div>
