@@ -16,6 +16,8 @@ mainImage: og
 - [大國町站](https://maps.app.goo.gl/Hu3nnU4UXjJXimFbA)
 - [西梅田](https://maps.app.goo.gl/Pki3y1AX7TTaRYTC8)
 - [日本橋](https://maps.app.goo.gl/a4ejAdmvZQSrUUfj7)
+- [明石港](https://maps.app.goo.gl/j8mcrqyer3nVyh2L9)
+  > Jenova 快艇往淡路島
 
 ### [淡路島](#awaji-shima)
 
