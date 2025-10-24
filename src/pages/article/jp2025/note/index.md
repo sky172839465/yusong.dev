@@ -29,7 +29,7 @@ mainImage: og
 ### [淡路島](#awaji-shima)
 
 > 預計 8 點出門
-> 
+>
 > 大國 > 大阪 > 明石 (約一小時)
 
 [高速船航班](https://japantravel.navitime.com/zh-tw/area/jp/timetable/00009325/00003389)
