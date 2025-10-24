@@ -8,6 +8,7 @@ tags:
   - JAPAN
   - NOTE
 index: 0
+mainImage: og
 ---
 
 ### [Main Locations](#main-map)
