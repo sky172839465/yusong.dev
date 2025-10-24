@@ -43,7 +43,7 @@ const useMainImageData = (mainImageName = 'index') => {
       return null
     }
 
-    const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : `/`)}`
+    const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : '/')}`
     const imagePathFromSrc = `/src/pages${convertedPathname}images/${mainImageName}`
     const mainImageUrl = imagePathFromSrc.replace('/', '')
     const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
