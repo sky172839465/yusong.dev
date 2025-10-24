@@ -2,7 +2,7 @@
 title: 2025 Japan Trip Pre-Travel Notes
 description: Notes on locations and itinerary for the 2025 trip to Osaka, Japan
 createdAt: October 11, 2025
-modifiedAt: October 24, 2025
+modifiedAt: "2025-10-24T08:25:38.259Z"
 tags:
   - TRAVEL
   - JAPAN
