@@ -37,18 +37,18 @@ const i18nMapping = {
 
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
-  const { pathName, isZhTw, lang } = useI18N(i18nMapping)
+  const { pathname, isZhTw, lang } = useI18N(i18nMapping)
   const imageData = useMemo(() => {
     if (isLoading || isEmpty(pageImages)) {
       return null
     }
 
-    const convertedPathName = `${pathName}${(pathName.endsWith('/') ? '' : `/`)}`
-    const imagePathFromSrc = `/src/pages${convertedPathName}images/${mainImageName}`
+    const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : `/`)}`
+    const imagePathFromSrc = `/src/pages${convertedPathname}images/${mainImageName}`
     const mainImageUrl = imagePathFromSrc.replace('/', '')
     const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
     return mainImageData
-  }, [isLoading, pathName, mainImageName, pageImages])
+  }, [isLoading, pathname, mainImageName, pageImages])
   return imageData
 }
 
