@@ -37,7 +37,7 @@ const i18nMapping = {
 
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
-  const { pathname, isZhTw, lang } = useI18N(i18nMapping)
+  const { pathname } = useI18N(i18nMapping)
   const imageData = useMemo(() => {
     if (isLoading || isEmpty(pageImages)) {
       return null
