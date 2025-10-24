@@ -1,11 +1,11 @@
 import ArticleIndex from '@/components/ArticleIndex'
 
+import { html } from './content.md'
+
 const Index = () => {
   return (
     <ArticleIndex>
-      <div>
-        testing description
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </ArticleIndex>
   )
 }
