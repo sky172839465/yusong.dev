@@ -2,7 +2,7 @@ import ArticleIndex from '@/components/ArticleIndex'
 
 import { html } from './content.md'
 
-const Index = () => {
+const Page = () => {
   return (
     <ArticleIndex>
       <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -10,4 +10,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Page
