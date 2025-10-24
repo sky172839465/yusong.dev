@@ -35,7 +35,7 @@ const i18nMapping = {
   }
 }
 
-const getImageDataByName = (pathname, imageName) => {
+const getImageDataByName = (pathname, imageName, pageImages) => {
   const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : '/')}`
   const imagePathFromSrc = `/src/pages${convertedPathname}images/${imageName}`
   const mainImageUrl = imagePathFromSrc.replace('/', '')
@@ -51,8 +51,8 @@ const useMainImageData = (mainImageName = 'index') => {
     }
 
     const mainImageData = (
-      getImageDataByName(pathname, mainImageName) ||
-      getImageDataByName(pathname, 'og') 
+      getImageDataByName(pathname, mainImageName, pageImages) ||
+      getImageDataByName(pathname, 'og', pageImages) 
     )
     return mainImageData
   }, [isLoading, pathname, mainImageName, pageImages])
