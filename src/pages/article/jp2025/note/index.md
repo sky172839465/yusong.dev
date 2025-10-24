@@ -198,7 +198,7 @@ mainImage: og
       <td>11:00 - 21:00</td>
     </tr>
     <tr>
-      <td><a href="https://maps.app.goo.gl/fDZK3DrVmgc9JYw89">神戶大橋</a></td>
+      <td><a href="https://maps.app.goo.gl/939V4VsM5DtBe6kg7">神戶大橋</a></td>
       <td>
         從三宮站轉搭港灣線（Port Liner）至港灣終點站下車<br>
         人工島北公園
