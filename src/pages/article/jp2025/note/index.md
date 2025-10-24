@@ -19,9 +19,18 @@ mainImage: og
 - [明石港](https://maps.app.goo.gl/j8mcrqyer3nVyh2L9)
   > Jenova 快艇往淡路島
 
+### [住宿附近](#nearby)
+
+- [木津市場](https://maps.app.goo.gl/fjnsfpKrCuMUBDVV9)
+  - 川上商店 (蒲燒鰻)
+- [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
+- [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
+
 ### [淡路島](#awaji-shima)
 
 > 預計 8 點出門
+> 
+> 大國 > 大阪 > 明石 (約一小時)
 
 [高速船航班](https://japantravel.navitime.com/zh-tw/area/jp/timetable/00009325/00003389)
 
@@ -108,19 +117,27 @@ mainImage: og
 
 ### [姬路城](#himeji-castle)
 
+> 預計 9 點出門
+>
+> 大國 > 姬路 (約一個半小時)
+
 - 姬路城
   - [はりかい 姬路城店](https://maps.app.goo.gl/AdN3CX6jibxYYy3X9)
     - 牡蠣
-- 好古園
+- [好古園](https://maps.app.goo.gl/kTCmtcKqCk5EGwhVA)
 - 明石
   - [魚之棚商店街](https://maps.app.goo.gl/Uh4HyKwRXZF7K5QVA)
     - 明石燒
-  - 衛宮邸
-  - 弓道場
+  - [織田家長屋門](https://maps.app.goo.gl/M67beLSsdpweQ2jF9)
+    > 衛宮邸
+  - [兵庫県立弓道場](https://maps.app.goo.gl/ph5oXugkDshvuPa48)
+    > 弓道場
 
 ### [神戶](#kobe-shi)
 
 > 預計 10 點出門
+>
+> 大國 > 神戶 (約一個小時)
 
 <table>
   <thead>
@@ -274,16 +291,13 @@ mainImage: og
 
 ### [FGO 最終再臨展](#fgo-expo)
 
+> 預計 11 點出門
+>
+> 大國 > 大阪梅田[阪急] (約 20 分)、先拿整理券
+
 - eplus
   - 7‑Eleven 取票
     > 2025/10/11(周六) 14:00 ~ 2025/10/27(周一) 21:00之間領取。
 - [VS. (グラングリーン大阪内)](https://maps.app.goo.gl/qDNwJGBqBace1hqu7)
 - [串揚げキッチンだん 梅田店](https://maps.app.goo.gl/WWo7z82s3ctUt47X8)
 - [hololive production official shop](https://maps.app.goo.gl/GJnwHFV27yLSqrHHA)
-
-### [住宿附近](#nearby)
-
-- [木津市場](https://maps.app.goo.gl/fjnsfpKrCuMUBDVV9)
-  - 川上商店 (蒲燒鰻)
-- [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
-- [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
