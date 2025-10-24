@@ -21,6 +21,10 @@ mainImage: og
 
 ### [淡路島](#awaji-shima)
 
+> 預計 8 點出門
+
+[高速船航班](https://japantravel.navitime.com/zh-tw/area/jp/timetable/00009325/00003389)
+
 <table>
   <thead>
     <tr>
@@ -116,6 +120,8 @@ mainImage: og
 
 ### [神戶](#kobe-shi)
 
+> 預計 10 點出門
+
 <table>
   <thead>
     <tr>
@@ -156,7 +162,7 @@ mainImage: og
         裏社<br>
         天狗山
       </td>
-      <td>開放時間 7:00 - 17:00</td>
+      <td>開放時間 07:00 - 17:00</td>
     </tr>
     <tr>
       <td><a href="https://maps.app.goo.gl/j5XEwvqK4rfiBx1h6" target="_blank">風見鶏の館</a></td>
