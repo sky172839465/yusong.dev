@@ -37,23 +37,24 @@ const i18nMapping = {
 
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
-  const { mainPathName, isZhTw, lang } = useI18N(i18nMapping)
+  const { pathName, isZhTw, lang } = useI18N(i18nMapping)
   const imageData = useMemo(() => {
     if (isLoading || isEmpty(pageImages)) {
       return null
     }
 
-    const imagePathFromSrc = `/src/pages${isZhTw ? '' : lang}${(mainPathName.endsWith('/') ? mainPathName : `${mainPathName}/`)}images/${mainImageName}`
+    const convertedPathName = `${pathName}${(pathName.endsWith('/') ? '' : `/`)}`
+    const imagePathFromSrc = `/src/pages${convertedPathName}images/${mainImageName}`
     const mainImageUrl = imagePathFromSrc.replace('/', '')
     const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
     return mainImageData
-  }, [isLoading, mainPathName, mainImageName, isZhTw, lang, pageImages])
+  }, [isLoading, pathName, mainImageName, pageImages])
   return imageData
 }
 
 const useArticleHtml = (html) => {
   const { pathname, mainPathName } = useI18N()
-  const { isLoading, data: pageImages = {} } = usePageImages()
+  const { isLoading, data: pageImages = {} } = usePageImages(mainPathName)
   const [, copy] = useCopyToClipboard()
   const [copied, setCopied] = useState(false)
   const [articleHtml, articleSections] = useMemo(() => {
