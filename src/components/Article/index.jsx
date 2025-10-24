@@ -40,6 +40,7 @@ const getImageDataByName = (pathname, imageName, pageImages) => {
   const imagePathFromSrc = `/src/pages${convertedPathname}images/${imageName}`
   const mainImageUrl = imagePathFromSrc.replace('/', '')
   const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+  return mainImageData
 }
 
 const useMainImageData = (mainImageName = 'index') => {
