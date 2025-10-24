@@ -20,13 +20,12 @@ const SectionCard = (props) => {
   const { title, description, tags = [], createdAt, modifiedAt, mainImage = 'index' } = data
   const isModified = modifiedAt !== createdAt
   const isTagExist = !isEmpty(tags) && tags[0] !== false
-  const { mainPathName, pathname } = getI18N(path)
-  const { isLoading, data: pathImages } = usePathImages(isArticle ? mainPathName : null)
-  const fileMainPathName = file.replace(pathname, mainPathName)
+  const { pathname } = getI18N(path)
+  const { isLoading, data: pathImages } = usePathImages(isArticle ? pathname : null)
   const imageData = get(
     pathImages,
-    `${fileMainPathName}`.replace('index.md', `images/${mainImage}.jpg`),
-    get(pathImages, `${fileMainPathName}`.replace('index.md', 'images/og.jpg'), null)
+    `${file}`.replace('index.md', `images/${mainImage}.jpg`),
+    get(pathImages, `${file}`.replace('index.md', 'images/og.jpg'), null)
   )
 
   return (
