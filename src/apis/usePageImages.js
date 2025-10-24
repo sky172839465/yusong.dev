@@ -21,8 +21,8 @@ export const usePathImages = (pathname = null, options = {}) => {
 }
 
 export const usePageImages = (options = {}) => {
-  const { mainPathName } = useI18N()
-  const result = usePathImages(mainPathName, options)
+  const { pathName } = useI18N()
+  const result = usePathImages(pathName, options)
   return result
 }
 
