@@ -272,6 +272,8 @@ mainImage: og
   - 7‑Eleven 取票
     > 2025/10/11(周六) 14:00 ~ 2025/10/27(周一) 21:00之間領取。
 - [VS. (グラングリーン大阪内)](https://maps.app.goo.gl/qDNwJGBqBace1hqu7)
+- [串揚げキッチンだん 梅田店](https://maps.app.goo.gl/WWo7z82s3ctUt47X8)
+- [hololive production official shop](https://maps.app.goo.gl/GJnwHFV27yLSqrHHA)
 
 ### [住宿附近](#nearby)
 
