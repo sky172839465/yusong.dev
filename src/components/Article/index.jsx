@@ -35,6 +35,14 @@ const i18nMapping = {
   }
 }
 
+const getImageDataByName = (pathname, imageName, pageImages) => {
+  const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : '/')}`
+  const imagePathFromSrc = `/src/pages${convertedPathname}images/${imageName}`
+  const mainImageUrl = imagePathFromSrc.replace('/', '')
+  const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+  return mainImageData
+}
+
 const useMainImageData = (mainImageName = 'index') => {
   const { isLoading, data: pageImages } = usePageImages()
   const { pathname } = useI18N(i18nMapping)
@@ -43,10 +51,10 @@ const useMainImageData = (mainImageName = 'index') => {
       return null
     }
 
-    const convertedPathname = `${pathname}${(pathname.endsWith('/') ? '' : '/')}`
-    const imagePathFromSrc = `/src/pages${convertedPathname}images/${mainImageName}`
-    const mainImageUrl = imagePathFromSrc.replace('/', '')
-    const mainImageData = pageImages[`${mainImageUrl}.jpg`] || pageImages[`${mainImageUrl}.png`]
+    const mainImageData = (
+      getImageDataByName(pathname, mainImageName, pageImages) ||
+      getImageDataByName(pathname, 'og', pageImages) 
+    )
     return mainImageData
   }, [isLoading, pathname, mainImageName, pageImages])
   return imageData
@@ -94,7 +102,10 @@ const useArticleHtml = (html) => {
 
         if (domNode.type === 'tag' && domNode.name === 'img') {
           const { src, alt } = domNode.attribs
-          const pageImageData = pageImages[src.replace(pathname, mainPathName).replace('/', '')]
+          const pageImageData = (
+            pageImages[src.replace('/', '')] ||
+            pageImages[src.replace(pathname, mainPathName).replace('/', '')]
+          )
           return (
             <LazyImagePreview
               imageData={pageImageData}
