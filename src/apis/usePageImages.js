@@ -20,9 +20,9 @@ export const usePathImages = (pathname = null, options = {}) => {
   return { ...restProps, isLoading: isLoading || isValidating }
 }
 
-export const usePageImages = (customPathname, options = {}) => {
+export const usePageImages = (options = {}) => {
   const { pathname } = useI18N()
-  const result = usePathImages(customPathname || pathname, options)
+  const result = usePathImages(pathname, options)
   return result
 }
 
