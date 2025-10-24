@@ -1,11 +1,11 @@
 import ArticleIndex from '@/components/ArticleIndex'
 
+import { html } from './content.md'
+
 const Index = () => {
   return (
     <ArticleIndex>
-      <div>
-        2025 大阪去淡路島、姬路城、明石和神戶的紀錄
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </ArticleIndex>
   )
 }
