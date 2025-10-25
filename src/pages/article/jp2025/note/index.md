@@ -2,7 +2,7 @@
 title: 2025 JP 旅行前紀錄
 description: 2025 日本大阪行紀錄地點、行程的筆記
 createdAt: "2025-10-11T07:16:14.007Z"
-modifiedAt: "2025-10-24T01:48:07.693Z"
+modifiedAt: "2025-10-25T11:50:33.879Z"
 tags:
   - TRAVEL
   - JAPAN
@@ -25,6 +25,7 @@ mainImage: og
   - 川上商店 (蒲燒鰻)
 - [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
 - [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
+- [Life 超市](https://maps.app.goo.gl/rLU6kQ7RXqQvUc1f9?g_st=ipc)
 
 ### [淡路島](#awaji-shima)
 
