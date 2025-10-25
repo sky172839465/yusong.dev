@@ -25,6 +25,7 @@ mainImage: og
   - 川上商店 (蒲燒鰻)
 - [湯源郷 太平之湯 難波店](https://maps.app.goo.gl/y4D5VY8nzm4wuCML6)
 - [ラーメン荘 歴史を刻め 大阪日本橋店](https://maps.app.goo.gl/X6hMfxpriTWh8soF6)
+- [Life 超市](https://maps.app.goo.gl/rLU6kQ7RXqQvUc1f9?g_st=ipc)
 
 ### [淡路島](#awaji-shima)
 
