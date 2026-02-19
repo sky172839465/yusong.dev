@@ -9,11 +9,11 @@
 		"build": "cp ../../src/data/routes.json ./src/routes.json"
 	},
 	"devDependencies": {
-		"@cloudflare/vitest-pool-workers": "^0.8.71",
-		"wrangler": "^4.13.2"
+		"@cloudflare/vitest-pool-workers": "^0.12.14",
+		"wrangler": "^4.67.0"
 	},
 	"dependencies": {
 		"@cloudflare/pages-plugin-vercel-og": "^0.1.2",
-		"lodash-es": "^4.17.21"
+		"lodash-es": "^4.17.23"
 	}
 }
